@@ -360,8 +360,8 @@ def index_page():
 {cards}
       </ul>
 
-      <h2 id="spickzettel">Spickzettel und Trainer-Handouts</h2>
-      <p>Die Spickzettel fassen alle Funktionen eines Lernpfads auf einer Seite zusammen. Die Trainer-Handouts enthalten einen fertigen Ablauf für eine 45-Minuten-Session mit Musterlösungen. Gib deine E-Mail-Adresse ein, dann erscheinen die Downloads sofort.</p>
+      <h2 id="spickzettel">Spickzettel pro Lernpfad</h2>
+      <p>Die Spickzettel fassen alle Funktionen eines Lernpfads auf einer Seite zusammen. Gib deine E-Mail-Adresse ein, dann erscheinen die Downloads sofort.</p>
 
       <!-- E-Mail-Gate einrichten (Formspree):
            1. Auf https://formspree.io ein Konto und ein neues Formular anlegen.
@@ -398,11 +398,25 @@ def index_page():
         <ul>
 {cheats}
         </ul>
-        <p>Für Trainerinnen und Trainer:</p>
+        <p class="fill-note">Die Freigabe bleibt in diesem Browser gespeichert.</p>
+      </div>
+
+      <h2 id="trainer">Trainer-Handouts (Premium)</h2>
+      <p>Für Teamleiterinnen, Ausbildner und Trainer: ein fertiger Ablauf für eine 45-Minuten-Session pro Lernpfad, mit Übungsplan, Diskussionsfragen und Musterlösungen. Enthalten in Premium und in jeder Teamlizenz. Schulen und Ausbildungsbetriebe erhalten den Code gratis, siehe <a href="../premium.html">Preise</a>.</p>
+      <form id="trainer-form" class="gate-form" aria-describedby="trainer-hint">
+        <div class="gate-field">
+          <label for="trainer-code">Premium-Code</label>
+          <input id="trainer-code" name="code" type="text" autocomplete="off" spellcheck="false" placeholder="XX-XXXX-XXXX-XXXX">
+        </div>
+        <p id="trainer-hint" class="fill-note">Den Code findest du nach dem Kauf im Profil der App unter «Dein Zugangscode» und in der Rechnungs-Mail.</p>
+        <p><button class="btn" type="submit" id="trainer-submit">Trainer-Handouts freischalten</button></p>
+        <p id="trainer-status" class="fill-note" role="status" aria-live="polite"></p>
+      </form>
+      <div id="trainer-downloads" class="gate-downloads" hidden>
+        <h3 id="trainer-downloads-heading" tabindex="-1">Trainer-Handouts</h3>
         <ul>
 {trainers}
         </ul>
-        <p class="fill-note">Die Freigabe bleibt in diesem Browser gespeichert. Für Teams und Schulen gibt es Premium gratis, siehe <a href="../premium.html">Preise</a>.</p>
       </div>
 
       <aside class="practice-box" aria-labelledby="practice-heading">
@@ -414,6 +428,7 @@ def index_page():
   </main>
 
 {footer("../")}
+  <script src="../app/keys.js" defer></script>
   <script src="gate.js" defer></script>
 </body>
 </html>

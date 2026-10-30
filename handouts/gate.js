@@ -63,3 +63,42 @@
     });
   });
 })();
+
+/* Trainer-Handouts: nur mit gültigem Premium-Code (gleiche Prüfung wie in der App, app/keys.js).
+   Der Code aus der App (localStorage excelDrillsKey) schaltet direkt frei. */
+(function () {
+  'use strict';
+  var form = document.getElementById('trainer-form');
+  var box = document.getElementById('trainer-downloads');
+  var status = document.getElementById('trainer-status');
+  var input = document.getElementById('trainer-code');
+  if (!form || !box || !input) return;
+  var Keys = window.ExcelDrillsKeys;
+  function stored() { try { return window.localStorage.getItem('excelDrillsKey') || ''; } catch (e) { return ''; } }
+  function remember(k) { try { window.localStorage.setItem('excelDrillsKey', k); } catch (e) { /* privater Modus */ } }
+  function show() {
+    form.hidden = true;
+    box.hidden = false;
+    var h = document.getElementById('trainer-downloads-heading');
+    if (h && h.focus) h.focus();
+  }
+  function fromLink(v) {
+    var m = /[?&]key=([^&#]+)/.exec(String(v || ''));
+    return m ? decodeURIComponent(m[1]) : v;
+  }
+  if (Keys && Keys.isValid(stored())) { show(); return; }
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var code = Keys ? Keys.normalize(fromLink(input.value)) : '';
+    if (Keys && code && Keys.isValid(code)) {
+      remember(code);
+      status.textContent = '';
+      show();
+      if (window.plausible) window.plausible('trainer_handout', { props: { status: 'ok' } });
+    } else {
+      status.textContent = 'Dieser Code ist nicht gültig. Prüfe die Schreibweise oder öffne den Link aus deiner Rechnungs-Mail.';
+      input.setAttribute('aria-invalid', 'true');
+      input.focus();
+    }
+  });
+})();
