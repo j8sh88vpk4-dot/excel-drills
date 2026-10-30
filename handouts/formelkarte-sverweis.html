@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Formelkarte SVERWEIS | Excel-Drills</title>
+  <link rel="stylesheet" href="handout.css">
+</head>
+<body class="">
+  <nav class="screen-bar" aria-label="Handout">
+    <a href="./">Zur Übersicht: Handouts und Spickzettel</a>
+    <span>Drucken: A4 hoch, Ränder «Standard», Kopf- und Fusszeilen aus</span>
+  </nav>
+  <main>
+  <article class="sheet card">
+    <header class="hd">
+      <span class="brand"><span class="mark" aria-hidden="true">X</span>Excel-Drills</span>
+      <div class="hd-text">
+        <p class="kicker">Formelkarte</p>
+        <h1>SVERWEIS</h1>
+        <p class="sub">Schweizer Schreibweise: Semikolon, Punkt als Dezimalzeichen, Hochkomma als Tausender</p>
+      </div>
+    </header>
+    <p class="lead">Sucht einen Wert in der ersten Spalte einer Tabelle und gibt den Wert aus einer anderen Spalte derselben Zeile zurück.</p>
+    <section class="box syntax-box" aria-labelledby="syn-h">
+      <h2 class="sec-title" id="syn-h">Syntax</h2>
+      <code class="formula"><span class="nb">=SVERWEIS(Suchkriterium;</span><wbr><span class="nb">Matrix;</span><wbr><span class="nb">Spaltenindex;</span><wbr><span class="nb">Bereich_Verweis)</span></code>
+      <dl>
+          <dt>Suchkriterium</dt><dd>Gesuchter Wert, meist ein Zellbezug wie E2 oder ein Text in Anführungszeichen.</dd>
+          <dt>Matrix</dt><dd>Tabellenbereich, z. B. $A$2:$C$6. Gesucht wird nur in der ersten Spalte.</dd>
+          <dt>Spaltenindex</dt><dd>Spaltennummer innerhalb der Matrix (erste Spalte = 1), nicht ab Spalte A des Blatts.</dd>
+          <dt>Bereich_Verweis</dt><dd>FALSCH = exakte Suche. WAHR = ungefähre Suche für Staffeln (erste Spalte aufsteigend). Fehlt das Argument, gilt WAHR.</dd>
+      </dl>
+    </section>
+    <section aria-labelledby="ex-h">
+      <h2 class="sec-title" id="ex-h">Drei Beispiele</h2>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th><th scope="col">F</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Art.-Nr.</td><td>Bezeichnung</td><td>Preis CHF</td><td></td><td>Gesucht</td><td>Preis CHF</td></tr><tr><th scope="row">2</th><td>B-110</td><td>Ordner A4</td><td class="num">4.90</td><td></td><td>B-130</td><td class="hl num">89.00</td></tr><tr><th scope="row">3</th><td>B-120</td><td>Kopierpapier</td><td class="num">6.50</td><td></td><td></td><td></td></tr><tr><th scope="row">4</th><td>B-130</td><td>Toner schwarz</td><td class="num">89.00</td><td></td><td></td><td></td></tr><tr><th scope="row">5</th><td>B-140</td><td>Haftnotizen</td><td class="num">3.20</td><td></td><td></td><td></td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">1</span>Preis zu einer Artikelnummer</h3>
+          <p><span class="lbl">Formel in F2</span></p>
+          <code class="formula"><span class="nb">=SVERWEIS(E2;$A$2:$C$5;3;FALSCH)</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">89.00</span></p>
+          <p class="note">Preis steht in der 3. Spalte der Matrix A:C, deshalb Spaltenindex 3.</p>
+        </div>
+      </div>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Police</td><td>Prämie CHF</td><td></td><td>Police</td><td>Prämie CHF</td></tr><tr><th scope="row">2</th><td>P-4101</td><td class="num">2'340.00</td><td></td><td>P-4103</td><td class="hl num">890.00</td></tr><tr><th scope="row">3</th><td>P-4102</td><td class="num">5'120.00</td><td></td><td>P-4199</td><td class="hl">Police fehlt</td></tr><tr><th scope="row">4</th><td>P-4103</td><td class="num">890.00</td><td></td><td></td><td></td></tr><tr><th scope="row">5</th><td>P-4104</td><td class="num">7'460.00</td><td></td><td></td><td></td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">2</span>Prämie zur Police, fehlende Police abfangen</h3>
+          <p><span class="lbl">Formel in E2:E3</span></p>
+          <code class="formula"><span class="nb">=WENNFEHLER(SVERWEIS(D2;</span><wbr><span class="nb">$A$2:$B$5;</span><wbr><span class="nb">2;</span><wbr><span class="nb">FALSCH);</span><wbr><span class="nb">"Police fehlt")</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">890.00 / Police fehlt</span></p>
+          <p class="note">Ohne WENNFEHLER liefert P-4199 #NV: ein Hinweis, dass die Police im Bestand fehlt.</p>
+        </div>
+      </div>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Bestellwert CHF</td><td>Rabatt</td><td></td><td>Ab CHF</td><td>Rabatt</td></tr><tr><th scope="row">2</th><td class="num">7'350.00</td><td class="hl num">5 %</td><td></td><td class="num">0</td><td class="num">0 %</td></tr><tr><th scope="row">3</th><td></td><td></td><td></td><td class="num">1'000</td><td class="num">2 %</td></tr><tr><th scope="row">4</th><td></td><td></td><td></td><td class="num">5'000</td><td class="num">5 %</td></tr><tr><th scope="row">5</th><td></td><td></td><td></td><td class="num">10'000</td><td class="num">8 %</td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">3</span>Rabatt aus einer Staffel (ungefähre Suche)</h3>
+          <p><span class="lbl">Formel in B2</span></p>
+          <code class="formula"><span class="nb">=SVERWEIS(A2;$D$2:$E$5;2;WAHR)</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">5 %</span></p>
+          <p class="note">WAHR nimmt den grössten Wert ≤ 7'350, also die Stufe ab 5'000.</p>
+        </div>
+      </div>
+    </section>
+    <section aria-labelledby="err-h">
+      <h2 class="sec-title" id="err-h">Fehlercodes und Ursachen</h2>
+      <table class="err-table">
+        <tbody>
+          <tr><th scope="row">#NV</th><td>Suchkriterium kommt in der ersten Spalte nicht vor: Tippfehler, Leerzeichen, Zahl als Text oder Matrix ohne $ verrutscht.</td></tr>
+          <tr><th scope="row">#NAME?</th><td>Englischer Funktionsname (VLOOKUP), Tippfehler (SVERWEISS) oder FALSE statt FALSCH.</td></tr>
+          <tr><th scope="row">#WERT!</th><td>Spaltenindex kleiner als 1, z. B. 0. Ist er grösser als die Spaltenzahl der Matrix, folgt #BEZUG!.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <div class="card-bottom">
+      <section class="box en-de" aria-labelledby="en-h">
+        <h2 class="sec-title" id="en-h">Englisch – Deutsch</h2>
+        <p><span>VLOOKUP = SVERWEIS</span> <span>FALSE / TRUE = FALSCH / WAHR</span> <span>IFERROR = WENNFEHLER</span> <span>XLOOKUP = XVERWEIS</span> <span>Komma , = Semikolon ;</span></p>
+        <p class="small" style="margin-top:1.2mm">Formeln aus englischen Foren übersetzen: Funktionsnamen ersetzen, Komma durch Semikolon ersetzen; der Dezimalpunkt bleibt.</p>
+      </section>
+      <!-- QR-Code-Platzhalter: hier einen QR-Code (SVG, ca. 24 x 24 mm) auf https://excel-drills.ch/artikel/sverweis.html einsetzen,
+           z. B. als <img src="qr-sverweis.svg" alt="QR-Code zum Artikel"> anstelle von .qr-slot. -->
+      <div class="qr">
+        <div class="qr-slot">QR-Code</div>
+        <p>Artikel und Gratis-Übung:<br>excel-drills.ch/<br>artikel/sverweis.html</p>
+      </div>
+    </div>
+    <footer class="ft">
+      <span><strong>excel-drills.ch</strong></span>
+      <span>Mehr Übungen direkt im Browser: <strong>excel-drills.ch/app/</strong></span>
+    </footer>
+  </article>
+  </main>
+</body>
+</html>

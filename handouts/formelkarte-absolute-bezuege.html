@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Formelkarte Absolute Bezüge ($) | Excel-Drills</title>
+  <link rel="stylesheet" href="handout.css">
+</head>
+<body class="">
+  <nav class="screen-bar" aria-label="Handout">
+    <a href="./">Zur Übersicht: Handouts und Spickzettel</a>
+    <span>Drucken: A4 hoch, Ränder «Standard», Kopf- und Fusszeilen aus</span>
+  </nav>
+  <main>
+  <article class="sheet card">
+    <header class="hd">
+      <span class="brand"><span class="mark" aria-hidden="true">X</span>Excel-Drills</span>
+      <div class="hd-text">
+        <p class="kicker">Formelkarte</p>
+        <h1>Absolute Bezüge ($)</h1>
+        <p class="sub">Schweizer Schreibweise: Semikolon, Punkt als Dezimalzeichen, Hochkomma als Tausender</p>
+      </div>
+    </header>
+    <p class="lead">Das Dollarzeichen fixiert Spalte, Zeile oder beides, damit sich ein Bezug beim Kopieren der Formel nicht verschiebt.</p>
+    <section class="box syntax-box" aria-labelledby="syn-h">
+      <h2 class="sec-title" id="syn-h">Syntax</h2>
+      <code class="formula"><span class="nb">$Spalte$Zeile  ·  zum Beispiel $F$1, F$1, $F1</span></code>
+      <dl>
+          <dt>F1 (relativ)</dt><dd>Wandert beim Kopieren mit: nach unten F2, F3 …, nach rechts G1, H1 …</dd>
+          <dt>$F$1 (absolut)</dt><dd>Bleibt immer F1. Für feste Werte wie MwSt-Satz, Total oder Wechselkurs.</dd>
+          <dt>F$1 / $F1 (gemischt)</dt><dd>Nur die Zeile bzw. nur die Spalte ist fixiert. Für Tabellen, die nach rechts und unten kopiert werden.</dd>
+          <dt>Taste F4</dt><dd>Schaltet beim Bearbeiten durch F1 → $F$1 → F$1 → $F1 (Mac: cmd + T).</dd>
+      </dl>
+    </section>
+    <section aria-labelledby="ex-h">
+      <h2 class="sec-title" id="ex-h">Drei Beispiele</h2>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th><th scope="col">F</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Position</td><td>Netto CHF</td><td>MwSt CHF</td><td></td><td>MwSt-Satz</td><td>8.1 %</td></tr><tr><th scope="row">2</th><td>Workshop</td><td class="num">3'200.00</td><td class="hl num">259.20</td><td></td><td></td><td></td></tr><tr><th scope="row">3</th><td>Reisekosten</td><td class="num">640.00</td><td class="hl num">51.84</td><td></td><td></td><td></td></tr><tr><th scope="row">4</th><td>Unterlagen</td><td class="num">180.00</td><td class="hl num">14.58</td><td></td><td></td><td></td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">1</span>MwSt mit festem Satz</h3>
+          <p><span class="lbl">Formel in C2, nach unten kopiert</span></p>
+          <code class="formula"><span class="nb">=B2*$F$1</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">259.20</span></p>
+          <p class="note">Ohne $ würde C3 mit F2 (leer) rechnen und 0.00 liefern.</p>
+        </div>
+      </div>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Region</td><td>Umsatz CHF</td><td>Anteil</td></tr><tr><th scope="row">2</th><td>Zürich</td><td class="num">412'000</td><td class="hl num">41.2 %</td></tr><tr><th scope="row">3</th><td>Bern</td><td class="num">268'000</td><td class="hl num">26.8 %</td></tr><tr><th scope="row">4</th><td>Basel</td><td class="num">195'000</td><td class="hl num">19.5 %</td></tr><tr><th scope="row">5</th><td>Luzern</td><td class="num">125'000</td><td class="hl num">12.5 %</td></tr><tr><th scope="row">6</th><td>Total</td><td class="num">1'000'000</td><td class="num">100.0 %</td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">2</span>Anteil am Total</h3>
+          <p><span class="lbl">Formel in C2, nach unten kopiert</span></p>
+          <code class="formula"><span class="nb">=B2/$B$6</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">41.2 %</span></p>
+          <p class="note">Ohne $ rutscht das Total nach B7 (leer) und die Formel liefert #DIV/0!.</p>
+        </div>
+      </div>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Fahrzeugklasse</td><td>Grundprämie CHF</td><td>100 %</td><td>80 %</td><td>60 %</td></tr><tr><th scope="row">2</th><td>Kleinwagen</td><td class="num">900</td><td class="hl num">900</td><td class="hl num">720</td><td class="hl num">540</td></tr><tr><th scope="row">3</th><td>Mittelklasse</td><td class="num">1'200</td><td class="hl num">1'200</td><td class="hl num">960</td><td class="hl num">720</td></tr><tr><th scope="row">4</th><td>SUV</td><td class="num">1'650</td><td class="hl num">1'650</td><td class="hl num">1'320</td><td class="hl num">990</td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">3</span>Prämientabelle mit gemischten Bezügen</h3>
+          <p><span class="lbl">Formel in C2, nach rechts und unten kopiert</span></p>
+          <code class="formula"><span class="nb">=$B2*C$1</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">900</span></p>
+          <p class="note">$B2: Spalte B bleibt, Zeile wandert. C$1: Zeile 1 bleibt, Spalte wandert.</p>
+        </div>
+      </div>
+    </section>
+    <section aria-labelledby="err-h">
+      <h2 class="sec-title" id="err-h">Fehlercodes und Ursachen</h2>
+      <table class="err-table">
+        <tbody>
+          <tr><th scope="row">#NV</th><td>Entsteht nicht durch $ selbst, aber oft in SVERWEIS-Formeln, deren Matrix ohne $ beim Kopieren verrutscht ist.</td></tr>
+          <tr><th scope="row">#NAME?</th><td>Statt $F$1 ein Name verwendet (z. B. =B2*MwSt), der im Namens-Manager nicht definiert ist.</td></tr>
+          <tr><th scope="row">#WERT!</th><td>Der kopierte Bezug zeigt auf eine Textzelle (z. B. die Kopfzeile) statt auf eine Zahl. #DIV/0!: Bezug zeigt auf eine leere Zelle.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <div class="card-bottom">
+      <section class="box en-de" aria-labelledby="en-h">
+        <h2 class="sec-title" id="en-h">Englisch – Deutsch</h2>
+        <p><span>absolute reference = absoluter Bezug</span> <span>relative reference = relativer Bezug</span> <span>mixed reference = gemischter Bezug</span> <span>#REF! = #BEZUG!</span> <span>Komma , = Semikolon ;</span></p>
+        <p class="small" style="margin-top:1.2mm">Formeln aus englischen Foren übersetzen: Funktionsnamen ersetzen, Komma durch Semikolon ersetzen; der Dezimalpunkt bleibt.</p>
+      </section>
+      <!-- QR-Code-Platzhalter: hier einen QR-Code (SVG, ca. 24 x 24 mm) auf https://excel-drills.ch/artikel/absolute-bezuege.html einsetzen,
+           z. B. als <img src="qr-absolute-bezuege.svg" alt="QR-Code zum Artikel"> anstelle von .qr-slot. -->
+      <div class="qr">
+        <div class="qr-slot">QR-Code</div>
+        <p>Artikel und Gratis-Übung:<br>excel-drills.ch/<br>artikel/absolute-bezuege.html</p>
+      </div>
+    </div>
+    <footer class="ft">
+      <span><strong>excel-drills.ch</strong></span>
+      <span>Mehr Übungen direkt im Browser: <strong>excel-drills.ch/app/</strong></span>
+    </footer>
+  </article>
+  </main>
+</body>
+</html>

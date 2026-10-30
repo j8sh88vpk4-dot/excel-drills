@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Formelkarte WENN | Excel-Drills</title>
+  <link rel="stylesheet" href="handout.css">
+</head>
+<body class="">
+  <nav class="screen-bar" aria-label="Handout">
+    <a href="./">Zur Übersicht: Handouts und Spickzettel</a>
+    <span>Drucken: A4 hoch, Ränder «Standard», Kopf- und Fusszeilen aus</span>
+  </nav>
+  <main>
+  <article class="sheet card">
+    <header class="hd">
+      <span class="brand"><span class="mark" aria-hidden="true">X</span>Excel-Drills</span>
+      <div class="hd-text">
+        <p class="kicker">Formelkarte</p>
+        <h1>WENN</h1>
+        <p class="sub">Schweizer Schreibweise: Semikolon, Punkt als Dezimalzeichen, Hochkomma als Tausender</p>
+      </div>
+    </header>
+    <p class="lead">Prüft eine Bedingung und gibt je nach Ergebnis den einen oder den anderen Wert zurück.</p>
+    <section class="box syntax-box" aria-labelledby="syn-h">
+      <h2 class="sec-title" id="syn-h">Syntax</h2>
+      <code class="formula"><span class="nb">=WENN(Prüfung;</span><wbr><span class="nb">Dann_Wert;</span><wbr><span class="nb">Sonst_Wert)</span></code>
+      <dl>
+          <dt>Prüfung</dt><dd>Vergleich, der WAHR oder FALSCH ergibt, z. B. C2&lt;=B2. Operatoren: = &lt;&gt; &gt; &lt; &gt;= &lt;=.</dd>
+          <dt>Dann_Wert</dt><dd>Ergebnis, wenn die Prüfung WAHR ist: Text in Anführungszeichen, Zahl oder Formel.</dd>
+          <dt>Sonst_Wert</dt><dd>Ergebnis, wenn die Prüfung FALSCH ist. "" ergibt eine leer wirkende Zelle.</dd>
+          <dt>UND / ODER</dt><dd>Mehrere Bedingungen: =WENN(UND(B2&gt;=1;C2&gt;=4);"Bonus";"").</dd>
+      </dl>
+    </section>
+    <section aria-labelledby="ex-h">
+      <h2 class="sec-title" id="ex-h">Drei Beispiele</h2>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Kostenart</td><td>Budget CHF</td><td>Ist CHF</td><td>Status</td></tr><tr><th scope="row">2</th><td>Personal</td><td class="num">480'000</td><td class="num">471'300</td><td class="hl">OK</td></tr><tr><th scope="row">3</th><td>Marketing</td><td class="num">60'000</td><td class="num">64'250</td><td class="hl">Überzogen</td></tr><tr><th scope="row">4</th><td>IT</td><td class="num">95'000</td><td class="num">95'000</td><td class="hl">OK</td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">1</span>Budgetkontrolle</h3>
+          <p><span class="lbl">Formel in D2, nach unten kopiert</span></p>
+          <code class="formula"><span class="nb">=WENN(C2&lt;=B2;"OK";"Überzogen")</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">OK / Überzogen</span></p>
+          <p class="note">&lt;= sorgt dafür, dass eine Punktlandung (IT) als OK gilt.</p>
+        </div>
+      </div>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Schaden-Nr.</td><td>Schaden CHF</td><td>Selbstbehalt CHF</td><td>Auszahlung CHF</td></tr><tr><th scope="row">2</th><td>S-301</td><td class="num">4'800</td><td class="num">500</td><td class="hl num">4'300</td></tr><tr><th scope="row">3</th><td>S-302</td><td class="num">350</td><td class="num">500</td><td class="hl num">0</td></tr><tr><th scope="row">4</th><td>S-303</td><td class="num">12'600</td><td class="num">1'000</td><td class="hl num">11'600</td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">2</span>Auszahlung nach Selbstbehalt</h3>
+          <p><span class="lbl">Formel in D2</span></p>
+          <code class="formula"><span class="nb">=WENN(B2&gt;C2;B2-C2;0)</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">4'300</span></p>
+          <p class="note">Dann_Wert darf eine Rechnung sein; negative Auszahlungen werden zu 0.</p>
+        </div>
+      </div>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Rechnung</td><td>Tage überfällig</td><td>Mahnstufe</td></tr><tr><th scope="row">2</th><td>R-11</td><td class="num">5</td><td class="hl">keine</td></tr><tr><th scope="row">3</th><td>R-12</td><td class="num">18</td><td class="hl">Mahnstufe 1</td></tr><tr><th scope="row">4</th><td>R-13</td><td class="num">45</td><td class="hl">Mahnstufe 2</td></tr><tr><th scope="row">5</th><td>R-14</td><td class="num">73</td><td class="hl">Mahnstufe 3</td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">3</span>Mahnstufen (verschachtelt)</h3>
+          <p><span class="lbl">Formel in C2</span></p>
+          <code class="formula"><span class="nb">=WENN(B2&gt;60;</span><wbr><span class="nb">"Mahnstufe 3";</span><wbr><span class="nb">WENN(B2&gt;30;</span><wbr><span class="nb">"Mahnstufe 2";</span><wbr><span class="nb">WENN(B2&gt;10;</span><wbr><span class="nb">"Mahnstufe 1";</span><wbr><span class="nb">"keine")))</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">keine</span></p>
+          <p class="note">Von der höchsten Schwelle her prüfen; jede WENN-Klammer am Schluss schliessen.</p>
+        </div>
+      </div>
+    </section>
+    <section aria-labelledby="err-h">
+      <h2 class="sec-title" id="err-h">Fehlercodes und Ursachen</h2>
+      <table class="err-table">
+        <tbody>
+          <tr><th scope="row">#NV</th><td>Kommt aus einer verschachtelten Suche (z. B. SVERWEIS in der Prüfung), die keinen Treffer findet.</td></tr>
+          <tr><th scope="row">#NAME?</th><td>Text ohne Anführungszeichen (OK statt "OK"), englischer Name IF oder typografische Anführungszeichen «».</td></tr>
+          <tr><th scope="row">#WERT!</th><td>Rechnung mit Text in der Prüfung oder im Dann_Wert, z. B. B2-C2, wenn B2 «n/a» enthält.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <div class="card-bottom">
+      <section class="box en-de" aria-labelledby="en-h">
+        <h2 class="sec-title" id="en-h">Englisch – Deutsch</h2>
+        <p><span>IF = WENN</span> <span>AND / OR = UND / ODER</span> <span>TRUE / FALSE = WAHR / FALSCH</span> <span>IFS = WENNS</span> <span>Komma , = Semikolon ;</span></p>
+        <p class="small" style="margin-top:1.2mm">Formeln aus englischen Foren übersetzen: Funktionsnamen ersetzen, Komma durch Semikolon ersetzen; der Dezimalpunkt bleibt.</p>
+      </section>
+      <!-- QR-Code-Platzhalter: hier einen QR-Code (SVG, ca. 24 x 24 mm) auf https://excel-drills.ch/artikel/wenn-funktion.html einsetzen,
+           z. B. als <img src="qr-wenn.svg" alt="QR-Code zum Artikel"> anstelle von .qr-slot. -->
+      <div class="qr">
+        <div class="qr-slot">QR-Code</div>
+        <p>Artikel und Gratis-Übung:<br>excel-drills.ch/<br>artikel/wenn-funktion.html</p>
+      </div>
+    </div>
+    <footer class="ft">
+      <span><strong>excel-drills.ch</strong></span>
+      <span>Mehr Übungen direkt im Browser: <strong>excel-drills.ch/app/</strong></span>
+    </footer>
+  </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Formelkarte ZÄHLENWENN | Excel-Drills</title>
+  <link rel="stylesheet" href="handout.css">
+</head>
+<body class="">
+  <nav class="screen-bar" aria-label="Handout">
+    <a href="./">Zur Übersicht: Handouts und Spickzettel</a>
+    <span>Drucken: A4 hoch, Ränder «Standard», Kopf- und Fusszeilen aus</span>
+  </nav>
+  <main>
+  <article class="sheet card">
+    <header class="hd">
+      <span class="brand"><span class="mark" aria-hidden="true">X</span>Excel-Drills</span>
+      <div class="hd-text">
+        <p class="kicker">Formelkarte</p>
+        <h1>ZÄHLENWENN</h1>
+        <p class="sub">Schweizer Schreibweise: Semikolon, Punkt als Dezimalzeichen, Hochkomma als Tausender</p>
+      </div>
+    </header>
+    <p class="lead">Zählt die Zellen eines Bereichs, die eine Bedingung erfüllen. Für mehrere Bedingungen: ZÄHLENWENNS.</p>
+    <section class="box syntax-box" aria-labelledby="syn-h">
+      <h2 class="sec-title" id="syn-h">Syntax</h2>
+      <code class="formula"><span class="nb">=ZÄHLENWENN(Bereich;Suchkriterien)</span></code>
+      <dl>
+          <dt>Bereich</dt><dd>Zellen, die geprüft und gezählt werden, z. B. C2:C8.</dd>
+          <dt>Suchkriterien</dt><dd>Bedingung: "offen", "&gt;=10000", "*AG", "&lt;&gt;" (nicht leer) oder ein Zellbezug wie E2.</dd>
+          <dt>Gross/klein</dt><dd>ZÄHLENWENN unterscheidet nicht zwischen «Offen» und «offen».</dd>
+          <dt>ZÄHLENWENNS</dt><dd>=ZÄHLENWENNS(Kriterien_Bereich1;Kriterien1;Kriterien_Bereich2;Kriterien2;…).</dd>
+      </dl>
+    </section>
+    <section aria-labelledby="ex-h">
+      <h2 class="sec-title" id="ex-h">Drei Beispiele</h2>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Pendenz</td><td>Verantwortlich</td><td>Status</td><td></td><td>Anzahl offen</td></tr><tr><th scope="row">2</th><td>P-01</td><td>Gerber</td><td>offen</td><td></td><td class="hl num">3</td></tr><tr><th scope="row">3</th><td>P-02</td><td>Steiner</td><td>erledigt</td><td></td><td></td></tr><tr><th scope="row">4</th><td>P-03</td><td>Gerber</td><td>in Arbeit</td><td></td><td></td></tr><tr><th scope="row">5</th><td>P-04</td><td>Weber</td><td>offen</td><td></td><td></td></tr><tr><th scope="row">6</th><td>P-05</td><td>Steiner</td><td>offen</td><td></td><td></td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">1</span>Offene Pendenzen</h3>
+          <p><span class="lbl">Formel in E2</span></p>
+          <code class="formula"><span class="nb">=ZÄHLENWENN(C2:C6;"offen")</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">3</span></p>
+          <p class="note">Text-Kriterium in Anführungszeichen; «in Arbeit» zählt nicht.</p>
+        </div>
+      </div>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Schaden-Nr.</td><td>Betrag CHF</td><td></td><td>Anzahl ≥ 10'000</td></tr><tr><th scope="row">2</th><td>S-401</td><td class="num">3'400</td><td></td><td class="hl num">3</td></tr><tr><th scope="row">3</th><td>S-402</td><td class="num">18'750</td><td></td><td></td></tr><tr><th scope="row">4</th><td>S-403</td><td class="num">9'990</td><td></td><td></td></tr><tr><th scope="row">5</th><td>S-404</td><td class="num">42'300</td><td></td><td></td></tr><tr><th scope="row">6</th><td>S-405</td><td class="num">10'000</td><td></td><td></td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">2</span>Schäden ab einer Schwelle</h3>
+          <p><span class="lbl">Formel in D2</span></p>
+          <code class="formula"><span class="nb">=ZÄHLENWENN(B2:B6;"&gt;=10000")</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">3</span></p>
+          <p class="note">Mit "&gt;10000" statt "&gt;=10000" fehlt der Fall S-405 genau auf der Grenze.</p>
+        </div>
+      </div>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Kunden-Nr.</td><td>Vorkommen</td><td>Prüfung</td></tr><tr><th scope="row">2</th><td>K-1001</td><td class="num">1</td><td></td></tr><tr><th scope="row">3</th><td>K-1002</td><td class="hl num">2</td><td class="hl">Duplikat</td></tr><tr><th scope="row">4</th><td>K-1003</td><td class="num">1</td><td></td></tr><tr><th scope="row">5</th><td>K-1002</td><td class="hl num">2</td><td class="hl">Duplikat</td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">3</span>Doppelte Kundennummern</h3>
+          <p><span class="lbl">Formel in C2, nach unten kopiert</span></p>
+          <code class="formula"><span class="nb">=WENN(ZÄHLENWENN($A$2:$A$5;</span><wbr><span class="nb">A2)&gt;1;</span><wbr><span class="nb">"Duplikat";</span><wbr><span class="nb">"")</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">Duplikat</span></p>
+          <p class="note">Bereich mit $ fixiert, Kriterium A2 relativ: so prüft jede Zeile ihren eigenen Wert.</p>
+        </div>
+      </div>
+    </section>
+    <section aria-labelledby="err-h">
+      <h2 class="sec-title" id="err-h">Fehlercodes und Ursachen</h2>
+      <table class="err-table">
+        <tbody>
+          <tr><th scope="row">#NV</th><td>Tritt in ZÄHLENWENN selbst nicht auf; Fehlerwerte im Bereich werden einfach nicht gezählt.</td></tr>
+          <tr><th scope="row">#NAME?</th><td>Englischer Name (COUNTIF), Tippfehler wie ZAEHLENWENN statt ZÄHLENWENN oder Text-Kriterium ohne Anführungszeichen.</td></tr>
+          <tr><th scope="row">#WERT!</th><td>Bei ZÄHLENWENNS sind die Kriterienbereiche unterschiedlich gross, oder das Kriterium ist länger als 255 Zeichen.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <div class="card-bottom">
+      <section class="box en-de" aria-labelledby="en-h">
+        <h2 class="sec-title" id="en-h">Englisch – Deutsch</h2>
+        <p><span>COUNTIF = ZÄHLENWENN</span> <span>COUNTIFS = ZÄHLENWENNS</span> <span>COUNT = ANZAHL</span> <span>COUNTA = ANZAHL2</span> <span>Komma , = Semikolon ;</span></p>
+        <p class="small" style="margin-top:1.2mm">Formeln aus englischen Foren übersetzen: Funktionsnamen ersetzen, Komma durch Semikolon ersetzen; der Dezimalpunkt bleibt.</p>
+      </section>
+      <!-- QR-Code-Platzhalter: hier einen QR-Code (SVG, ca. 24 x 24 mm) auf https://excel-drills.ch/artikel/zaehlenwenn.html einsetzen,
+           z. B. als <img src="qr-zaehlenwenn.svg" alt="QR-Code zum Artikel"> anstelle von .qr-slot. -->
+      <div class="qr">
+        <div class="qr-slot">QR-Code</div>
+        <p>Artikel und Gratis-Übung:<br>excel-drills.ch/<br>artikel/zaehlenwenn.html</p>
+      </div>
+    </div>
+    <footer class="ft">
+      <span><strong>excel-drills.ch</strong></span>
+      <span>Mehr Übungen direkt im Browser: <strong>excel-drills.ch/app/</strong></span>
+    </footer>
+  </article>
+  </main>
+</body>
+</html>

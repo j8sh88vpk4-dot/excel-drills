@@ -1,0 +1,136 @@
+/* Excel-Drills – Handouts (Spickzettel, Formelkarten, Trainer-Handouts)
+   Druckoptimiert für A4 hoch. Excel-Grün nur für Kopf, Linien und Hervorhebung, sonst Schwarz auf Weiss.
+   Keine Hintergrundflächen (Toner sparen), nur System-Fonts. Bildschirm: zentriertes Blatt mit Schatten. */
+@page { size: A4; margin: 12mm; }
+
+:root {
+  --green: #107C41;
+  --ink: #000;
+  --muted: #3d3d3d;
+  --grid: #8c918e;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { background: #e6e9e7; }
+body { margin: 0; color: var(--ink); font: 9pt/1.34 var(--font); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+a { color: inherit; text-decoration: none; }
+code, .mono { font-family: var(--mono); font-size: 0.94em; }
+h1, h2, h3, p, ul, ol, dl, dd, table { margin: 0; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.nb { white-space: nowrap; }
+:focus-visible { outline: 2px solid #0a64c2; outline-offset: 2px; }
+
+/* ---------- Blatt */
+.sheet {
+  width: 210mm; min-height: 297mm; margin: 8mm auto; padding: 12mm;
+  background: #fff; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  display: flex; flex-direction: column; gap: 3mm;
+}
+.screen-bar { max-width: 210mm; margin: 6mm auto 0; font: 10.5pt/1.4 var(--font); display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; justify-content: space-between; }
+.screen-bar a { color: #0b5c30; text-decoration: underline; text-underline-offset: 2px; }
+@media print {
+  html, body { background: none; }
+  .sheet { width: auto; min-height: 270mm; margin: 0; padding: 0; box-shadow: none; }
+  .sheet + .sheet { break-before: page; }
+  .screen-bar { display: none; }
+}
+
+/* ---------- Kopf */
+.hd { display: flex; align-items: flex-end; justify-content: space-between; gap: 6mm; padding-bottom: 2.2mm; border-bottom: 1.6pt solid var(--green); }
+.brand { display: inline-flex; align-items: center; gap: 2mm; font-weight: 800; font-size: 12pt; letter-spacing: -0.01em; color: var(--green); white-space: nowrap; }
+.brand .mark { display: inline-grid; place-items: center; width: 6mm; height: 6mm; border: 1.2pt solid var(--green); border-radius: 1.2mm; font-size: 9pt; }
+.hd-text { text-align: right; }
+.kicker { font-size: 7.5pt; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); }
+.hd h1 { font-size: 16pt; line-height: 1.15; letter-spacing: -0.01em; }
+.hd .sub { font-size: 8pt; color: var(--muted); margin-top: 0.6mm; }
+
+/* ---------- Fuss */
+.ft { margin-top: auto; padding-top: 1.6mm; border-top: 0.8pt solid var(--green); display: flex; justify-content: space-between; gap: 4mm; font-size: 7.5pt; color: var(--muted); }
+.ft strong { color: var(--ink); }
+
+/* ---------- Gemeinsame Bausteine */
+.sec-title { font-size: 9.5pt; font-weight: 800; color: var(--green); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.2mm; }
+.lbl { font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-right: 1mm; }
+.res { font-weight: 800; }
+.res::before { content: "→ "; font-weight: 400; color: var(--green); }
+.box { border: 0.8pt solid var(--green); border-radius: 1.5mm; padding: 2.4mm 3mm; }
+.formula { display: block; font-family: var(--mono); font-weight: 700; border-left: 1.6pt solid var(--green); padding: 0.6mm 0 0.6mm 2.2mm; overflow-wrap: anywhere; }
+
+/* ---------- Tabellen in Excel-Optik (Spaltenbuchstaben, Zeilennummern, ohne Füllung) */
+table.xl { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 7.6pt; line-height: 1.2; }
+.xl caption { caption-side: top; text-align: left; font-size: 7pt; color: var(--muted); padding-bottom: 0.6mm; }
+.xl th, .xl td { border: 0.5pt solid var(--grid); padding: 0.45mm 1.4mm; white-space: nowrap; text-align: left; }
+.xl thead th, .xl tbody th { color: var(--muted); font-weight: 400; font-size: 6.6pt; text-align: center; border-color: var(--grid); }
+.xl thead th { border-bottom: 0.9pt solid var(--green); }
+.xl tbody th { border-right: 0.9pt solid var(--green); min-width: 4.5mm; }
+.xl td.num { text-align: right; }
+.xl tr.hr td { font-weight: 700; }
+.xl td.hl { border: 1.4pt solid var(--green); font-weight: 800; }
+
+/* ---------- A. Spickzettel */
+.cheat .cols { column-count: 2; column-gap: 6mm; column-rule: 0.5pt solid var(--green); }
+.fn { break-inside: avoid; padding: 0 0 1.3mm; margin-bottom: 1.3mm; border-bottom: 0.5pt solid #c9cdca; }
+.fn h2 { font-size: 10pt; color: var(--green); display: flex; align-items: baseline; gap: 1.5mm; }
+.fn h2 .n { font-size: 7pt; color: var(--muted); font-weight: 600; min-width: 3.5mm; }
+.fn .syn { font-family: var(--mono); font-weight: 700; font-size: 8.5pt; margin-top: 0.5mm; }
+.fn .syn + .syn { margin-top: 0; }
+.fn p { margin-top: 0.4mm; }
+.cheat { font-size: 8.6pt; line-height: 1.3; }
+.cheat .fn .ex code { font-size: 8.5pt; }
+.cheat .lbl { font-size: 7.4pt; }
+.cheat .fn h2 { font-size: 9.5pt; }
+.fn .err { color: var(--ink); }
+.fn .err .lbl { color: var(--green); }
+.cheat-intro { display: flex; gap: 5mm; justify-content: space-between; font-size: 7.8pt; color: var(--muted); }
+.cheat-intro span:last-child { white-space: nowrap; }
+
+/* ---------- B. Formelkarte */
+.card .lead { font-size: 10pt; }
+.card .syntax-box .formula { font-size: 11pt; margin-bottom: 1.6mm; }
+.card dl { display: grid; grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr); gap: 1.2mm 3mm; align-items: baseline; }
+.card dt { font-family: var(--mono); font-weight: 700; color: var(--green); font-size: 8.4pt; }
+.card dd { font-size: 8.4pt; }
+.ex-row { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr); gap: 4mm; align-items: start; padding: 2mm 0; border-top: 0.5pt solid #c9cdca; break-inside: avoid; }
+.ex-row:first-of-type { border-top: 0; padding-top: 0; }
+.ex-row h3 { font-size: 9.5pt; margin-bottom: 1mm; }
+.ex-row h3 .n { color: var(--green); margin-right: 1mm; }
+.ex-row .formula { font-size: 8.4pt; margin: 0.8mm 0; }
+.ex-row .note { font-size: 8.2pt; margin-top: 0.8mm; }
+.card-bottom { display: grid; grid-template-columns: minmax(0, 1fr) 34mm; gap: 4mm; align-items: stretch; }
+.en-de { font-size: 8.4pt; }
+.en-de span { white-space: nowrap; }
+.en-de span:not(:last-child)::after { content: " ·"; color: var(--green); }
+table.err-table { border-collapse: collapse; width: 100%; font-size: 8.4pt; }
+.err-table th, .err-table td { text-align: left; vertical-align: top; padding: 0.8mm 2mm 0.8mm 0; border-bottom: 0.5pt solid #c9cdca; }
+.err-table th { font-family: var(--mono); color: var(--green); white-space: nowrap; width: 17mm; }
+.qr { border: 1pt dashed var(--green); border-radius: 1.5mm; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2mm; gap: 1mm; }
+.qr .qr-slot { width: 24mm; height: 24mm; border: 0.6pt solid var(--grid); display: grid; place-items: center; font-size: 6.5pt; color: var(--muted); }
+.qr p { font-size: 6.8pt; color: var(--muted); overflow-wrap: anywhere; }
+
+/* ---------- C. Trainer-Handout */
+.trainer { font-size: 8.6pt; }
+.trainer table.plan { border-collapse: collapse; width: 100%; font-size: 8.4pt; }
+.plan th, .plan td { text-align: left; vertical-align: baseline; line-height: 1.25; padding: 0.45mm 2mm 0.45mm 0; border-bottom: 0.5pt solid #c9cdca; }
+.plan thead th { font-size: 7pt; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); border-bottom: 0.9pt solid var(--green); }
+.plan .t { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 700; width: 19mm; }
+.plan .m { white-space: nowrap; width: 9mm; }
+.plan .ph { font-weight: 700; width: 30mm; }
+.plan tr.block td { padding-top: 1.2mm; font-weight: 800; color: var(--green); font-size: 7.6pt; text-transform: uppercase; letter-spacing: 0.05em; }
+.plan .id { font-family: var(--mono); font-size: 7pt; color: var(--muted); white-space: nowrap; margin-left: 1mm; }
+.plan .acc { font-size: 7.4pt; white-space: nowrap; color: var(--muted); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.qlist { padding-left: 4.5mm; display: grid; gap: 0.8mm; }
+.check { list-style: none; padding: 0; display: grid; gap: 0.8mm; }
+.check li { position: relative; padding-left: 5mm; }
+.check li::before { content: ""; position: absolute; left: 0; top: 0.4mm; width: 2.8mm; height: 2.8mm; border: 0.8pt solid var(--green); border-radius: 0.4mm; }
+.trainer-only { border: 1.4pt solid var(--green); border-radius: 2mm; padding: 3mm 3.5mm; }
+.trainer-only .badge { display: inline-block; border: 1pt solid var(--green); color: var(--green); font-weight: 800; font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.3mm 2mm; border-radius: 4mm; margin-bottom: 1.2mm; }
+.sol { border-collapse: collapse; width: 100%; font-size: 8.2pt; }
+.sol th, .sol td { text-align: left; vertical-align: top; padding: 1mm 2mm 1mm 0; border-bottom: 0.5pt solid #c9cdca; }
+.sol thead th { font-size: 7pt; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); border-bottom: 0.9pt solid var(--green); }
+.sol code { font-weight: 700; overflow-wrap: anywhere; }
+.sol .r { white-space: nowrap; font-weight: 700; font-variant-numeric: tabular-nums; }
+.sol tr.block td { padding-top: 1.6mm; font-weight: 800; color: var(--green); font-size: 7.6pt; text-transform: uppercase; letter-spacing: 0.05em; }
+.small { font-size: 7.6pt; color: var(--muted); }

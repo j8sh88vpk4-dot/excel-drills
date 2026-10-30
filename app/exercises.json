@@ -1,0 +1,3012 @@
+{
+  "config": {
+    "functionArgSeparator": ";",
+    "decimalSeparator": ".",
+    "thousandSeparator": "'",
+    "language": "deDE"
+  },
+  "exercises": [
+    {
+      "id": "summe-1",
+      "free": true,
+      "topic": "SUMME",
+      "title": "Monatsumsatz addieren",
+      "task": "Berechne in Zelle B7 die Summe aller Umsätze in B2:B6.",
+      "data": [
+        [
+          "Filiale",
+          "Umsatz CHF"
+        ],
+        [
+          "Zürich",
+          12500
+        ],
+        [
+          "Bern",
+          8300
+        ],
+        [
+          "Basel",
+          9100
+        ],
+        [
+          "Luzern",
+          4700
+        ],
+        [
+          "Lugano",
+          3900
+        ],
+        [
+          "Total",
+          null
+        ]
+      ],
+      "target": "B7",
+      "solution": "=SUMME(B2:B6)",
+      "mustUse": [
+        "SUMME"
+      ],
+      "hints": {
+        "noRange": "Tipp: Verwende einen Bereich wie B2:B6 statt einzelne Zellen.",
+        "generic": "Die Funktion heisst SUMME. Schreibweise: =SUMME(Bereich)."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "mittelwert-1",
+      "free": true,
+      "topic": "MITTELWERT",
+      "title": "Durchschnittliche Schadenhöhe",
+      "task": "Berechne in B8 die durchschnittliche Schadenhöhe der Fälle in B2:B7.",
+      "data": [
+        [
+          "Schaden-Nr.",
+          "Betrag CHF"
+        ],
+        [
+          "S-1001",
+          2400
+        ],
+        [
+          "S-1002",
+          780
+        ],
+        [
+          "S-1003",
+          15200
+        ],
+        [
+          "S-1004",
+          3100
+        ],
+        [
+          "S-1005",
+          560
+        ],
+        [
+          "S-1006",
+          9900
+        ],
+        [
+          "Durchschnitt",
+          null
+        ]
+      ],
+      "target": "B8",
+      "solution": "=MITTELWERT(B2:B7)",
+      "mustUse": [
+        "MITTELWERT"
+      ],
+      "hints": {
+        "generic": "Der Durchschnitt heisst in Excel MITTELWERT, nicht DURCHSCHNITT."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "max-1",
+      "free": true,
+      "topic": "MAX / MIN",
+      "title": "Höchster Monatsumsatz",
+      "task": "Gib in B14 den höchsten Monatswert aus B2:B13 aus.",
+      "data": [
+        [
+          "Monat",
+          "Umsatz"
+        ],
+        [
+          "Jan",
+          41000
+        ],
+        [
+          "Feb",
+          38500
+        ],
+        [
+          "Mär",
+          45200
+        ],
+        [
+          "Apr",
+          39900
+        ],
+        [
+          "Mai",
+          47300
+        ],
+        [
+          "Jun",
+          51800
+        ],
+        [
+          "Jul",
+          44100
+        ],
+        [
+          "Aug",
+          42600
+        ],
+        [
+          "Sep",
+          49700
+        ],
+        [
+          "Okt",
+          53200
+        ],
+        [
+          "Nov",
+          50100
+        ],
+        [
+          "Dez",
+          58400
+        ],
+        [
+          "Maximum",
+          null
+        ]
+      ],
+      "target": "B14",
+      "solution": "=MAX(B2:B13)",
+      "mustUse": [
+        "MAX"
+      ],
+      "hints": {
+        "generic": "MAX liefert den grössten Wert eines Bereichs: =MAX(B2:B13)."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "wenn-1",
+      "free": true,
+      "topic": "WENN",
+      "title": "Budget eingehalten?",
+      "task": "Schreibe in C2 eine Formel, die \"OK\" ausgibt, wenn die Ist-Kosten (B2) kleiner oder gleich dem Budget (A2) sind, sonst \"Überzogen\".",
+      "data": [
+        [
+          "Budget",
+          "Ist",
+          "Status"
+        ],
+        [
+          50000,
+          47200,
+          null
+        ]
+      ],
+      "target": "C2",
+      "solution": "=WENN(B2<=A2;\"OK\";\"Überzogen\")",
+      "mustUse": [
+        "WENN"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Budget",
+              "Ist",
+              "Status"
+            ],
+            [
+              50000,
+              52900,
+              null
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "quotes": "Text in Formeln muss in Anführungszeichen stehen: \"OK\".",
+        "generic": "Aufbau: =WENN(Bedingung;Wert_wenn_wahr;Wert_wenn_falsch)."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "zaehlenwenn-1",
+      "free": true,
+      "topic": "ZÄHLENWENN",
+      "title": "Offene Rechnungen zählen",
+      "task": "Zähle in B9, wie viele Rechnungen in B2:B8 den Status \"offen\" haben.",
+      "data": [
+        [
+          "Rechnung",
+          "Status"
+        ],
+        [
+          "R-01",
+          "bezahlt"
+        ],
+        [
+          "R-02",
+          "offen"
+        ],
+        [
+          "R-03",
+          "offen"
+        ],
+        [
+          "R-04",
+          "bezahlt"
+        ],
+        [
+          "R-05",
+          "offen"
+        ],
+        [
+          "R-06",
+          "storniert"
+        ],
+        [
+          "R-07",
+          "offen"
+        ],
+        [
+          "Anzahl offen",
+          null
+        ]
+      ],
+      "target": "B9",
+      "solution": "=ZÄHLENWENN(B2:B8;\"offen\")",
+      "mustUse": [
+        "ZÄHLENWENN"
+      ],
+      "hints": {
+        "quotes": "Das Kriterium ist Text und braucht Anführungszeichen: \"offen\".",
+        "generic": "Aufbau: =ZÄHLENWENN(Bereich;Kriterium)."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "summewenn-1",
+      "free": true,
+      "topic": "SUMMEWENN",
+      "title": "Umsatz einer Region",
+      "task": "Berechne in E2 den gesamten Umsatz der Region \"Ost\" aus der Tabelle A2:B9.",
+      "data": [
+        [
+          "Region",
+          "Umsatz",
+          "",
+          "Region",
+          "Total"
+        ],
+        [
+          "Ost",
+          1200,
+          "",
+          "Ost",
+          null
+        ],
+        [
+          "West",
+          900
+        ],
+        [
+          "Ost",
+          1500
+        ],
+        [
+          "Süd",
+          700
+        ],
+        [
+          "West",
+          1100
+        ],
+        [
+          "Ost",
+          800
+        ],
+        [
+          "Süd",
+          1300
+        ],
+        [
+          "West",
+          600
+        ]
+      ],
+      "target": "E2",
+      "solution": "=SUMMEWENN(A2:A9;\"Ost\";B2:B9)",
+      "mustUse": [
+        "SUMMEWENN"
+      ],
+      "accept": [
+        "=SUMMEWENN(A2:A9;D2;B2:B9)"
+      ],
+      "hints": {
+        "quotes": "Das Kriterium \"Ost\" braucht Anführungszeichen, oder du verweist auf D2.",
+        "generic": "Aufbau: =SUMMEWENN(Kriterienbereich;Kriterium;Summenbereich)."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "summewenn-2",
+      "free": true,
+      "topic": "SUMMEWENN",
+      "title": "Bestellungen über 3 Stück",
+      "task": "Summiere in C8 den Betrag aller Bestellungen, bei denen die Menge (Spalte A) grösser als 3 ist.",
+      "data": [
+        [
+          "Menge",
+          "Artikel",
+          "Betrag"
+        ],
+        [
+          2,
+          "Ordner",
+          18
+        ],
+        [
+          5,
+          "Toner",
+          245
+        ],
+        [
+          1,
+          "Papier",
+          9
+        ],
+        [
+          4,
+          "Stifte",
+          32
+        ],
+        [
+          7,
+          "Toner",
+          343
+        ],
+        [
+          3,
+          "Ordner",
+          27
+        ],
+        [
+          "Total >3",
+          null,
+          null
+        ]
+      ],
+      "target": "C8",
+      "solution": "=SUMMEWENN(A2:A7;\">3\";C2:C7)",
+      "mustUse": [
+        "SUMMEWENN"
+      ],
+      "hints": {
+        "quotes": "Vergleichskriterien wie >3 müssen als Text stehen: \">3\".",
+        "generic": "Aufbau: =SUMMEWENN(Kriterienbereich;\">3\";Summenbereich)."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "sverweis-1",
+      "free": true,
+      "topic": "SVERWEIS",
+      "title": "Preis nachschlagen",
+      "task": "Hole in E2 mit SVERWEIS den Preis des Artikels in D2 aus der Preisliste A2:B6. Exakte Übereinstimmung.",
+      "data": [
+        [
+          "Artikel",
+          "Preis",
+          "",
+          "Gesucht",
+          "Preis"
+        ],
+        [
+          "A-100",
+          12.5,
+          "",
+          "A-300",
+          null
+        ],
+        [
+          "A-200",
+          8.9
+        ],
+        [
+          "A-300",
+          21
+        ],
+        [
+          "A-400",
+          4.75
+        ],
+        [
+          "A-500",
+          15.2
+        ]
+      ],
+      "target": "E2",
+      "solution": "=SVERWEIS(D2;A2:B6;2;FALSCH)",
+      "mustUse": [
+        "SVERWEIS"
+      ],
+      "accept": [
+        "=SVERWEIS(D2;A2:B6;2;0)",
+        "=SVERWEIS(D2;A:B;2;FALSCH)",
+        "=SVERWEIS(D2;A:B;2;0)"
+      ],
+      "hints": {
+        "generic": "Aufbau: =SVERWEIS(Suchkriterium;Matrix;Spaltenindex;FALSCH). FALSCH erzwingt exakte Treffer."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "runden-1",
+      "free": true,
+      "topic": "RUNDEN",
+      "title": "Auf Rappen runden",
+      "task": "Runde in B2 den Betrag aus A2 kaufmännisch auf 2 Nachkommastellen.",
+      "data": [
+        [
+          "Betrag",
+          "Gerundet"
+        ],
+        [
+          1234.5678,
+          null
+        ]
+      ],
+      "target": "B2",
+      "solution": "=RUNDEN(A2;2)",
+      "mustUse": [
+        "RUNDEN"
+      ],
+      "hints": {
+        "generic": "Aufbau: =RUNDEN(Zahl;Anzahl_Stellen)."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "absolut-1",
+      "free": true,
+      "topic": "Absoluter Bezug",
+      "title": "MwSt mit festem Satz",
+      "task": "Berechne in C2 die MwSt des Betrags B2 mit dem Satz in F1. Die Formel muss so gebaut sein, dass sie nach unten kopiert werden kann: Fixiere F1 mit $-Zeichen.",
+      "data": [
+        [
+          "Position",
+          "Netto",
+          "MwSt",
+          "",
+          "Satz",
+          0.081
+        ],
+        [
+          "Beratung",
+          2000,
+          null
+        ],
+        [
+          "Lizenz",
+          450,
+          null
+        ],
+        [
+          "Support",
+          300,
+          null
+        ]
+      ],
+      "target": "C2",
+      "solution": "=B2*$F$1",
+      "mustContain": [
+        "$F$1"
+      ],
+      "fillDown": "C2:C4",
+      "hints": {
+        "dollar": "Ohne $ verschiebt sich der Bezug auf F1 beim Kopieren. Schreibe $F$1.",
+        "generic": "Ein absoluter Bezug sieht so aus: $F$1."
+      },
+      "track": "basis",
+      "locale": {
+        "de": {
+          "data": [
+            [
+              "Position",
+              "Netto",
+              "MwSt",
+              "",
+              "Satz",
+              0.19
+            ],
+            [
+              "Beratung",
+              2000,
+              null
+            ],
+            [
+              "Lizenz",
+              450,
+              null
+            ],
+            [
+              "Support",
+              300,
+              null
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "wennfehler-1",
+      "free": false,
+      "topic": "WENNFEHLER",
+      "title": "Fehler abfangen",
+      "task": "Teile in C2 den Umsatz A2 durch die Stückzahl B2 und gib \"n/a\" aus, falls ein Fehler entsteht.",
+      "data": [
+        [
+          "Umsatz",
+          "Stück",
+          "Preis/Stück"
+        ],
+        [
+          1500,
+          0,
+          null
+        ]
+      ],
+      "target": "C2",
+      "solution": "=WENNFEHLER(A2/B2;\"n/a\")",
+      "mustUse": [
+        "WENNFEHLER"
+      ],
+      "hints": {
+        "generic": "Aufbau: =WENNFEHLER(Wert;Wert_falls_Fehler)."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "sverweis-2",
+      "free": false,
+      "topic": "SVERWEIS",
+      "title": "Provisionssatz nach Stufe",
+      "task": "Bestimme in B2 den Provisionssatz für den Umsatz in A2 anhand der Staffel D2:E5 (ungefähre Übereinstimmung).",
+      "data": [
+        [
+          "Umsatz",
+          "Satz",
+          "",
+          "Ab Umsatz",
+          "Satz"
+        ],
+        [
+          72000,
+          null,
+          "",
+          0,
+          0.02
+        ],
+        [
+          "",
+          "",
+          "",
+          25000,
+          0.03
+        ],
+        [
+          "",
+          "",
+          "",
+          50000,
+          0.04
+        ],
+        [
+          "",
+          "",
+          "",
+          100000,
+          0.05
+        ]
+      ],
+      "target": "B2",
+      "solution": "=SVERWEIS(A2;D2:E5;2;WAHR)",
+      "mustUse": [
+        "SVERWEIS"
+      ],
+      "accept": [
+        "=SVERWEIS(A2;D2:E5;2)",
+        "=SVERWEIS(A2;D2:E5;2;1)"
+      ],
+      "hints": {
+        "generic": "Für Staffeln nutzt du WAHR (ungefähre Übereinstimmung) und eine aufsteigend sortierte erste Spalte."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "textkette-1",
+      "free": false,
+      "topic": "TEXTKETTE",
+      "title": "Vor- und Nachname verbinden",
+      "task": "Verbinde in C2 Vorname (A2) und Nachname (B2) mit einem Leerzeichen dazwischen.",
+      "data": [
+        [
+          "Vorname",
+          "Nachname",
+          "Vollständig"
+        ],
+        [
+          "Anna",
+          "Keller",
+          null
+        ]
+      ],
+      "target": "C2",
+      "solution": "=A2&\" \"&B2",
+      "accept": [
+        "=TEXTKETTE(A2;\" \";B2)",
+        "=VERKETTEN(A2;\" \";B2)"
+      ],
+      "hints": {
+        "generic": "Entweder mit & verketten oder mit TEXTKETTE(A2;\" \";B2)."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "summenprodukt-1",
+      "free": false,
+      "topic": "SUMMENPRODUKT",
+      "title": "Gesamtwert des Lagers",
+      "task": "Berechne in B7 den Gesamtwert: Summe aus Menge mal Preis für alle Zeilen A2:B6, in einer Formel.",
+      "data": [
+        [
+          "Menge",
+          "Preis"
+        ],
+        [
+          10,
+          2.5
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          25,
+          0.8
+        ],
+        [
+          3,
+          45
+        ],
+        [
+          8,
+          6.25
+        ],
+        [
+          "Lagerwert",
+          null
+        ]
+      ],
+      "target": "B7",
+      "solution": "=SUMMENPRODUKT(A2:A6;B2:B6)",
+      "mustUse": [
+        "SUMMENPRODUKT"
+      ],
+      "hints": {
+        "generic": "SUMMENPRODUKT multipliziert zwei Bereiche zeilenweise und summiert: =SUMMENPRODUKT(A2:A6;B2:B6)."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "wenn-verschachtelt-1",
+      "free": false,
+      "topic": "WENN verschachtelt",
+      "title": "Risikoklasse zuordnen",
+      "task": "Gib in B2 \"hoch\" aus, wenn die Schadenquote A2 über 0.8 liegt, \"mittel\" bei über 0.5, sonst \"tief\".",
+      "data": [
+        [
+          "Schadenquote",
+          "Klasse"
+        ],
+        [
+          0.67,
+          null
+        ]
+      ],
+      "target": "B2",
+      "solution": "=WENN(A2>0.8;\"hoch\";WENN(A2>0.5;\"mittel\";\"tief\"))",
+      "mustUse": [
+        "WENN"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Schadenquote",
+              "Klasse"
+            ],
+            [
+              0.91,
+              null
+            ]
+          ]
+        },
+        {
+          "data": [
+            [
+              "Schadenquote",
+              "Klasse"
+            ],
+            [
+              0.12,
+              null
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Verschachtle: =WENN(Bed1;\"hoch\";WENN(Bed2;\"mittel\";\"tief\"))."
+      },
+      "track": "basis"
+    },
+    {
+      "id": "acc-abweichung-1",
+      "free": true,
+      "topic": "Budget-Ist-Abweichung",
+      "title": "Abweichung in CHF",
+      "task": "Berechne in D2 die Abweichung des Kontos Büromaterial: Ist (C2) minus Budget (B2). Ein positiver Wert heisst, das Budget wurde überschritten.",
+      "data": [
+        [
+          "Konto",
+          "Budget CHF",
+          "Ist CHF",
+          "Abweichung CHF"
+        ],
+        [
+          "Büromaterial",
+          12000,
+          13450,
+          null
+        ],
+        [
+          "Reisespesen",
+          28000,
+          24600
+        ],
+        [
+          "Weiterbildung",
+          15000,
+          15900
+        ]
+      ],
+      "target": "D2",
+      "solution": "=C2-B2",
+      "accept": [
+        "=-(B2-C2)",
+        "=-B2+C2"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Konto",
+              "Budget CHF",
+              "Ist CHF",
+              "Abweichung CHF"
+            ],
+            [
+              "Büromaterial",
+              12000,
+              11200,
+              null
+            ],
+            [
+              "Reisespesen",
+              28000,
+              24600
+            ],
+            [
+              "Weiterbildung",
+              15000,
+              15900
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Abweichung = Ist − Budget, also =C2-B2. Mit =B2-C2 kehrst du das Vorzeichen um."
+      },
+      "track": "accounting"
+    },
+    {
+      "id": "acc-abweichung-2",
+      "free": true,
+      "topic": "Budget-Ist-Abweichung",
+      "title": "Abweichung in Prozent",
+      "task": "Berechne in E2 die Abweichung der Reisespesen in Prozent des Budgets: (Ist C2 − Budget B2) / Budget B2. Gib das Ergebnis als Dezimalzahl aus (−0.12 entspricht −12 %), ohne mal 100. Das Prozentformat setzt du in Excel danach.",
+      "data": [
+        [
+          "Konto",
+          "Budget CHF",
+          "Ist CHF",
+          "Abw. CHF",
+          "Abw. %"
+        ],
+        [
+          "Reisespesen",
+          28000,
+          24600,
+          -3400,
+          null
+        ],
+        [
+          "Büromaterial",
+          12000,
+          13450,
+          1450
+        ],
+        [
+          "Weiterbildung",
+          15000,
+          15900,
+          900
+        ]
+      ],
+      "target": "E2",
+      "solution": "=(C2-B2)/B2",
+      "accept": [
+        "=D2/B2",
+        "=C2/B2-1"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Konto",
+              "Budget CHF",
+              "Ist CHF",
+              "Abw. CHF",
+              "Abw. %"
+            ],
+            [
+              "Reisespesen",
+              20000,
+              23000,
+              3000,
+              null
+            ],
+            [
+              "Büromaterial",
+              12000,
+              13450,
+              1450
+            ],
+            [
+              "Weiterbildung",
+              15000,
+              15900,
+              900
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Teile die Abweichung durchs Budget: =(C2-B2)/B2. Nicht mit 100 multiplizieren, das erledigt das Prozentformat."
+      },
+      "track": "accounting"
+    },
+    {
+      "id": "acc-anteil-1",
+      "free": true,
+      "topic": "Anteil am Total",
+      "title": "Anteil einer Sparte am Total",
+      "task": "Berechne in C2 den Anteil der Sparte Motorfahrzeug am Prämientotal in B6. Fixiere das Total mit einem absoluten Bezug ($B$6), damit du die Formel nach unten kopieren könntest. Ergebnis als Dezimalzahl.",
+      "data": [
+        [
+          "Sparte",
+          "Prämien CHF",
+          "Anteil"
+        ],
+        [
+          "Motorfahrzeug",
+          4250000,
+          null
+        ],
+        [
+          "Hausrat",
+          1870000
+        ],
+        [
+          "Haftpflicht",
+          2380000
+        ],
+        [
+          "Gebäude",
+          1500000
+        ],
+        [
+          "Total",
+          10000000
+        ]
+      ],
+      "target": "C2",
+      "solution": "=B2/$B$6",
+      "mustContain": [
+        "$6"
+      ],
+      "accept": [
+        "=B2/B$6"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Sparte",
+              "Prämien CHF",
+              "Anteil"
+            ],
+            [
+              "Motorfahrzeug",
+              3800000,
+              null
+            ],
+            [
+              "Hausrat",
+              1870000
+            ],
+            [
+              "Haftpflicht",
+              2380000
+            ],
+            [
+              "Gebäude",
+              1500000
+            ],
+            [
+              "Total",
+              9550000
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "dollar": "Fixiere das Total mit $B$6 (mindestens B$6), sonst rutscht der Bezug beim Herunterkopieren mit.",
+        "generic": "Anteil = Wert / Total, z. B. =B2/$B$6."
+      },
+      "track": "accounting"
+    },
+    {
+      "id": "acc-mwst-1",
+      "free": false,
+      "topic": "MwSt netto/brutto",
+      "title": "Netto aus Brutto",
+      "task": "Der MwSt-Satz steht in F1. Berechne in C2 den Nettobetrag der Rechnung aus dem Bruttobetrag B2. Verwende für den Satz einen absoluten Bezug ($F$1). Zur Erinnerung: brutto = netto × (1 + Satz).",
+      "data": [
+        [
+          "Rechnung",
+          "Brutto CHF",
+          "Netto CHF",
+          "",
+          "MwSt-Satz",
+          0.081
+        ],
+        [
+          "R-2026-0412",
+          1081,
+          null
+        ],
+        [
+          "R-2026-0413",
+          540.5
+        ],
+        [
+          "R-2026-0414",
+          2162
+        ]
+      ],
+      "target": "C2",
+      "solution": "=B2/(1+$F$1)",
+      "mustContain": [
+        "$1"
+      ],
+      "accept": [
+        "=B2/(1+F$1)",
+        "=B2-B2/(1+$F$1)*$F$1"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Rechnung",
+              "Brutto CHF",
+              "Netto CHF",
+              "",
+              "MwSt-Satz",
+              0.026
+            ],
+            [
+              "R-2026-0412",
+              513,
+              null
+            ],
+            [
+              "R-2026-0413",
+              540.5
+            ],
+            [
+              "R-2026-0414",
+              2162
+            ]
+          ]
+        },
+        {
+          "data": [
+            [
+              "Rechnung",
+              "Brutto CHF",
+              "Netto CHF",
+              "",
+              "MwSt-Satz",
+              0.081
+            ],
+            [
+              "R-2026-0412",
+              3243,
+              null
+            ],
+            [
+              "R-2026-0413",
+              540.5
+            ],
+            [
+              "R-2026-0414",
+              2162
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "dollar": "Fixiere den Satz mit $F$1, damit er beim Kopieren stehen bleibt.",
+        "generic": "Netto aus brutto: durch (1 + Satz) teilen, also =B2/(1+$F$1). Brutto × (1 − Satz) ergibt nicht den Nettobetrag."
+      },
+      "track": "accounting",
+      "locale": {
+        "de": {
+          "data": [
+            [
+              "Rechnung",
+              "Brutto CHF",
+              "Netto CHF",
+              "",
+              "MwSt-Satz",
+              0.19
+            ],
+            [
+              "R-2026-0412",
+              1190,
+              null
+            ],
+            [
+              "R-2026-0413",
+              595
+            ],
+            [
+              "R-2026-0414",
+              2380
+            ]
+          ],
+          "alt": [
+            {
+              "data": [
+                [
+                  "Rechnung",
+                  "Brutto CHF",
+                  "Netto CHF",
+                  "",
+                  "MwSt-Satz",
+                  0.07
+                ],
+                [
+                  "R-2026-0412",
+                  535,
+                  null
+                ],
+                [
+                  "R-2026-0413",
+                  595
+                ],
+                [
+                  "R-2026-0414",
+                  2380
+                ]
+              ]
+            },
+            {
+              "data": [
+                [
+                  "Rechnung",
+                  "Brutto CHF",
+                  "Netto CHF",
+                  "",
+                  "MwSt-Satz",
+                  0.19
+                ],
+                [
+                  "R-2026-0412",
+                  3570,
+                  null
+                ],
+                [
+                  "R-2026-0413",
+                  595
+                ],
+                [
+                  "R-2026-0414",
+                  2380
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "acc-rundung-1",
+      "free": false,
+      "topic": "Rundung 5 Rappen",
+      "title": "Auf 5 Rappen runden",
+      "task": "Runde in C2 den Betrag B2 kaufmännisch auf 5 Rappen (z. B. 47.33 → 47.35, 47.32 → 47.30).",
+      "data": [
+        [
+          "Beleg",
+          "Betrag CHF",
+          "Gerundet CHF"
+        ],
+        [
+          "Spesen Taxi",
+          47.33,
+          null
+        ],
+        [
+          "Parkgebühr",
+          12.68
+        ],
+        [
+          "Kaffee Kunde",
+          8.42
+        ]
+      ],
+      "target": "C2",
+      "solution": "=RUNDEN(B2/0.05;0)*0.05",
+      "accept": [
+        "=VRUNDEN(B2;0.05)",
+        "=RUNDEN(B2*20;0)/20"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Beleg",
+              "Betrag CHF",
+              "Gerundet CHF"
+            ],
+            [
+              "Spesen Taxi",
+              47.32,
+              null
+            ]
+          ]
+        },
+        {
+          "data": [
+            [
+              "Beleg",
+              "Betrag CHF",
+              "Gerundet CHF"
+            ],
+            [
+              "Spesen Taxi",
+              8.68,
+              null
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Teile durch 0.05, runde auf 0 Stellen und multipliziere wieder mit 0.05: =RUNDEN(B2/0.05;0)*0.05. Alternativ =VRUNDEN(B2;0.05)."
+      },
+      "track": "accounting",
+      "locale": {
+        "de": {
+          "task": "Runde in C2 den Betrag B2 kaufmännisch auf 5 Cent, wie bei der Bargeldrundung, die mehrere Euro-Länder an der Kasse anwenden (z. B. 47.33 → 47.35, 47.32 → 47.30)."
+        }
+      }
+    },
+    {
+      "id": "acc-summewenns-1",
+      "free": false,
+      "topic": "SUMMEWENNS",
+      "title": "Kosten nach Kostenstelle und Monat",
+      "task": "Berechne in G2 die Summe der Beträge (C2:C9) der Kostenstelle in E2 (\"Marketing\") im Monat in F2 (\"Feb\"). Beide Bedingungen müssen gleichzeitig erfüllt sein.",
+      "data": [
+        [
+          "Kostenstelle",
+          "Monat",
+          "Betrag CHF",
+          "",
+          "Kostenstelle",
+          "Monat",
+          "Total CHF"
+        ],
+        [
+          "Marketing",
+          "Jan",
+          4200,
+          "",
+          "Marketing",
+          "Feb",
+          null
+        ],
+        [
+          "IT",
+          "Jan",
+          3100
+        ],
+        [
+          "Marketing",
+          "Feb",
+          2750
+        ],
+        [
+          "IT",
+          "Feb",
+          5400
+        ],
+        [
+          "Marketing",
+          "Feb",
+          1980
+        ],
+        [
+          "HR",
+          "Feb",
+          900
+        ],
+        [
+          "Marketing",
+          "Mär",
+          3300
+        ],
+        [
+          "IT",
+          "Feb",
+          1200
+        ]
+      ],
+      "target": "G2",
+      "solution": "=SUMMEWENNS(C2:C9;A2:A9;\"Marketing\";B2:B9;\"Feb\")",
+      "mustUse": [
+        "SUMMEWENNS"
+      ],
+      "accept": [
+        "=SUMMEWENNS(C2:C9;A2:A9;E2;B2:B9;F2)",
+        "=SUMMEWENNS(C2:C9;B2:B9;F2;A2:A9;E2)"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Kostenstelle",
+              "Monat",
+              "Betrag CHF",
+              "",
+              "Kostenstelle",
+              "Monat",
+              "Total CHF"
+            ],
+            [
+              "Marketing",
+              "Jan",
+              1500,
+              "",
+              "Marketing",
+              "Feb",
+              null
+            ],
+            [
+              "IT",
+              "Jan",
+              3100
+            ],
+            [
+              "Marketing",
+              "Feb",
+              620
+            ],
+            [
+              "IT",
+              "Feb",
+              5400
+            ],
+            [
+              "Marketing",
+              "Feb",
+              4100
+            ],
+            [
+              "HR",
+              "Feb",
+              900
+            ],
+            [
+              "Marketing",
+              "Mär",
+              3300
+            ],
+            [
+              "IT",
+              "Feb",
+              1200
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "quotes": "Texte als Kriterium brauchen Anführungszeichen (\"Marketing\"), oder du verweist auf E2 und F2.",
+        "generic": "Aufbau: =SUMMEWENNS(Summenbereich;Kriterienbereich1;Kriterium1;Kriterienbereich2;Kriterium2). Der Summenbereich kommt hier zuerst."
+      },
+      "track": "accounting"
+    },
+    {
+      "id": "acc-duplikate-1",
+      "free": false,
+      "topic": "Duplikate finden",
+      "title": "Doppelte Belegnummern markieren",
+      "task": "Gib in C2 \"Duplikat\" aus, wenn die Belegnummer A2 im Bereich A2:A7 mehr als einmal vorkommt, sonst einen leeren Text (\"\"). Fixiere den Bereich mit $, damit die Formel kopierbar ist.",
+      "data": [
+        [
+          "Beleg-Nr.",
+          "Betrag CHF",
+          "Prüfung"
+        ],
+        [
+          "B-1041",
+          320,
+          null
+        ],
+        [
+          "B-1042",
+          1250
+        ],
+        [
+          "B-1043",
+          89.9
+        ],
+        [
+          "B-1041",
+          320
+        ],
+        [
+          "B-1044",
+          455
+        ],
+        [
+          "B-1045",
+          1250
+        ]
+      ],
+      "target": "C2",
+      "solution": "=WENN(ZÄHLENWENN($A$2:$A$7;A2)>1;\"Duplikat\";\"\")",
+      "mustUse": [
+        "WENN"
+      ],
+      "mustContain": [
+        "ZÄHLENWENN"
+      ],
+      "accept": [
+        "=WENN(ZÄHLENWENN(A2:A7;A2)>1;\"Duplikat\";\"\")",
+        "=WENN(ZÄHLENWENN($A$2:$A$7;A2)>=2;\"Duplikat\";\"\")",
+        "=WENN(ZÄHLENWENN($A$2:$A$7;A2)=1;\"\";\"Duplikat\")"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Beleg-Nr.",
+              "Betrag CHF",
+              "Prüfung"
+            ],
+            [
+              "B-1040",
+              320,
+              null
+            ],
+            [
+              "B-1042",
+              1250
+            ],
+            [
+              "B-1043",
+              89.9
+            ],
+            [
+              "B-1041",
+              320
+            ],
+            [
+              "B-1044",
+              455
+            ],
+            [
+              "B-1045",
+              1250
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Zähle, wie oft A2 im Bereich vorkommt: =WENN(ZÄHLENWENN($A$2:$A$7;A2)>1;\"Duplikat\";\"\")."
+      },
+      "track": "accounting"
+    },
+    {
+      "id": "acc-sollhaben-1",
+      "free": false,
+      "topic": "Plausibilitätscheck",
+      "title": "Soll = Haben prüfen",
+      "task": "Prüfe in E2, ob die Summe Soll (B2:B6) der Summe Haben (C2:C6) entspricht. Runde beide Summen mit RUNDEN auf 2 Stellen, damit Rundungsdifferenzen der Gleitkommarechnung nicht stören. Ausgabe: \"OK\" oder \"Differenz\".",
+      "data": [
+        [
+          "Konto",
+          "Soll CHF",
+          "Haben CHF",
+          "",
+          "Prüfung"
+        ],
+        [
+          "1020 Bank",
+          12500.4,
+          3150.25,
+          "",
+          null
+        ],
+        [
+          "1100 Debitoren",
+          4300.1,
+          12500.4
+        ],
+        [
+          "2000 Kreditoren",
+          3150.25,
+          980.55
+        ],
+        [
+          "3200 Warenertrag",
+          0,
+          5719.55
+        ],
+        [
+          "6000 Mietaufwand",
+          2400,
+          0
+        ]
+      ],
+      "target": "E2",
+      "solution": "=WENN(RUNDEN(SUMME(B2:B6);2)=RUNDEN(SUMME(C2:C6);2);\"OK\";\"Differenz\")",
+      "mustUse": [
+        "WENN"
+      ],
+      "mustContain": [
+        "RUNDEN",
+        "SUMME"
+      ],
+      "accept": [
+        "=WENN(RUNDEN(SUMME(B2:B6)-SUMME(C2:C6);2)=0;\"OK\";\"Differenz\")",
+        "=WENN(RUNDEN(SUMME(B2:B6);2)<>RUNDEN(SUMME(C2:C6);2);\"Differenz\";\"OK\")"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Konto",
+              "Soll CHF",
+              "Haben CHF",
+              "",
+              "Prüfung"
+            ],
+            [
+              "1020 Bank",
+              12500.4,
+              3150.25,
+              "",
+              null
+            ],
+            [
+              "1100 Debitoren",
+              4300.1,
+              12500.4
+            ],
+            [
+              "2000 Kreditoren",
+              3150.25,
+              980.55
+            ],
+            [
+              "3200 Warenertrag",
+              0,
+              5719.5
+            ],
+            [
+              "6000 Mietaufwand",
+              2400,
+              0
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "quotes": "Die Ausgaben \"OK\" und \"Differenz\" brauchen Anführungszeichen.",
+        "generic": "Vergleiche die gerundeten Summen: =WENN(RUNDEN(SUMME(B2:B6);2)=RUNDEN(SUMME(C2:C6);2);\"OK\";\"Differenz\")."
+      },
+      "track": "accounting"
+    },
+    {
+      "id": "acc-abstimmung-1",
+      "free": false,
+      "topic": "Kontenabstimmung",
+      "title": "Fehlende Buchung finden",
+      "task": "Suche in C2 die Bank-Referenz A2 in der Hauptbuchliste E2:F7 und gib den gebuchten Betrag aus Spalte F zurück (exakte Suche). Fehlt die Referenz im Hauptbuch, soll \"fehlt\" erscheinen.",
+      "data": [
+        [
+          "Bank Ref.",
+          "Betrag CHF",
+          "Hauptbuch CHF",
+          "",
+          "Hauptbuch Ref.",
+          "Betrag CHF"
+        ],
+        [
+          "ZA-7781",
+          1450,
+          null,
+          "",
+          "ZA-7779",
+          880
+        ],
+        [
+          "ZA-7782",
+          2300,
+          null,
+          "",
+          "ZA-7780",
+          3125.5
+        ],
+        [
+          "ZA-7783",
+          640,
+          null,
+          "",
+          "ZA-7782",
+          2300
+        ],
+        [
+          null,
+          null,
+          null,
+          "",
+          "ZA-7783",
+          640
+        ],
+        [
+          null,
+          null,
+          null,
+          "",
+          "ZA-7784",
+          1920
+        ],
+        [
+          null,
+          null,
+          null,
+          "",
+          "ZA-7785",
+          415
+        ]
+      ],
+      "target": "C2",
+      "solution": "=WENNFEHLER(SVERWEIS(A2;$E$2:$F$7;2;FALSCH);\"fehlt\")",
+      "mustUse": [
+        "WENNFEHLER"
+      ],
+      "mustContain": [
+        "SVERWEIS"
+      ],
+      "accept": [
+        "=WENNFEHLER(SVERWEIS(A2;E2:F7;2;0);\"fehlt\")",
+        "=WENNFEHLER(SVERWEIS(A2;$E$2:$F$7;2;FALSCH());\"fehlt\")"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Bank Ref.",
+              "Betrag CHF",
+              "Hauptbuch CHF",
+              "",
+              "Hauptbuch Ref.",
+              "Betrag CHF"
+            ],
+            [
+              "ZA-7780",
+              1450,
+              null,
+              "",
+              "ZA-7779",
+              880
+            ],
+            [
+              "ZA-7782",
+              2300,
+              null,
+              "",
+              "ZA-7780",
+              3125.5
+            ],
+            [
+              "ZA-7783",
+              640,
+              null,
+              "",
+              "ZA-7782",
+              2300
+            ],
+            [
+              null,
+              null,
+              null,
+              "",
+              "ZA-7783",
+              640
+            ],
+            [
+              null,
+              null,
+              null,
+              "",
+              "ZA-7784",
+              1920
+            ],
+            [
+              null,
+              null,
+              null,
+              "",
+              "ZA-7785",
+              415
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Verschachtle: =WENNFEHLER(SVERWEIS(A2;$E$2:$F$7;2;FALSCH);\"fehlt\"). Ohne FALSCH sucht SVERWEIS ungefähr und findet falsche Treffer."
+      },
+      "track": "accounting"
+    },
+    {
+      "id": "acc-alterung-1",
+      "free": false,
+      "topic": "Alterung offener Posten",
+      "title": "Offene Posten nach Alter einteilen",
+      "task": "Der Stichtag steht in H1 (nicht HEUTE() verwenden, sonst ändert sich das Ergebnis täglich). Berechne in D2 die Tage seit Fälligkeit (Stichtag minus B2) und teile ein: bis 30 Tage \"0-30\", bis 60 Tage \"31-60\", darüber \">60\". Verwende einen Bindestrich ohne Leerzeichen.",
+      "data": [
+        [
+          "Rechnung",
+          "Fällig am",
+          "Betrag CHF",
+          "Klasse",
+          "",
+          "",
+          "Stichtag",
+          "31.10.2026"
+        ],
+        [
+          "RE-3307",
+          "12.09.2026",
+          2480,
+          null
+        ],
+        [
+          "RE-3311",
+          "05.10.2026",
+          915
+        ],
+        [
+          "RE-3290",
+          "14.07.2026",
+          3600
+        ]
+      ],
+      "target": "D2",
+      "solution": "=WENN($H$1-B2<=30;\"0-30\";WENN($H$1-B2<=60;\"31-60\";\">60\"))",
+      "mustUse": [
+        "WENN"
+      ],
+      "accept": [
+        "=WENN(H1-B2>60;\">60\";WENN(H1-B2>30;\"31-60\";\"0-30\"))",
+        "=WENN(TAGE($H$1;B2)<=30;\"0-30\";WENN(TAGE($H$1;B2)<=60;\"31-60\";\">60\"))"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Rechnung",
+              "Fällig am",
+              "Betrag CHF",
+              "Klasse",
+              "",
+              "",
+              "Stichtag",
+              "31.10.2026"
+            ],
+            [
+              "RE-3307",
+              "20.10.2026",
+              2480,
+              null
+            ],
+            [
+              "RE-3311",
+              "05.10.2026",
+              915
+            ],
+            [
+              "RE-3290",
+              "14.07.2026",
+              3600
+            ]
+          ]
+        },
+        {
+          "data": [
+            [
+              "Rechnung",
+              "Fällig am",
+              "Betrag CHF",
+              "Klasse",
+              "",
+              "",
+              "Stichtag",
+              "31.10.2026"
+            ],
+            [
+              "RE-3307",
+              "15.07.2026",
+              2480,
+              null
+            ],
+            [
+              "RE-3311",
+              "05.10.2026",
+              915
+            ],
+            [
+              "RE-3290",
+              "14.07.2026",
+              3600
+            ]
+          ]
+        },
+        {
+          "data": [
+            [
+              "Rechnung",
+              "Fällig am",
+              "Betrag CHF",
+              "Klasse",
+              "",
+              "",
+              "Stichtag",
+              "31.10.2026"
+            ],
+            [
+              "RE-3307",
+              "01.10.2026",
+              2480,
+              null
+            ],
+            [
+              "RE-3311",
+              "05.10.2026",
+              915
+            ],
+            [
+              "RE-3290",
+              "14.07.2026",
+              3600
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Tage = $H$1-B2. Verschachtle: =WENN(Tage<=30;\"0-30\";WENN(Tage<=60;\"31-60\";\">60\")). Achte auf <= bei den Grenzen 30 und 60."
+      },
+      "track": "accounting"
+    },
+    {
+      "id": "acc-abgrenzung-1",
+      "free": false,
+      "topic": "MONATSENDE und EDATUM",
+      "title": "Ablauf auf Monatsende",
+      "task": "Die Police beginnt am B2 und läuft C2 Monate. Berechne in D2 das Monatsende des Ablaufmonats: zuerst mit EDATUM das Ablaufdatum (Beginn plus Laufzeit), dann mit MONATSENDE das Monatsende. Excel zeigt das Ergebnis als Datumszahl, bis du die Zelle als Datum formatierst.",
+      "data": [
+        [
+          "Police",
+          "Beginn",
+          "Laufzeit Mte",
+          "Ablauf Monatsende"
+        ],
+        [
+          "P-55012",
+          "15.11.2026",
+          3,
+          null
+        ],
+        [
+          "P-55013",
+          "01.12.2026",
+          12
+        ],
+        [
+          "P-55014",
+          "31.01.2027",
+          6
+        ]
+      ],
+      "target": "D2",
+      "solution": "=MONATSENDE(EDATUM(B2;C2);0)",
+      "mustUse": [
+        "MONATSENDE"
+      ],
+      "accept": [
+        "=MONATSENDE(B2;C2)"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Police",
+              "Beginn",
+              "Laufzeit Mte",
+              "Ablauf Monatsende"
+            ],
+            [
+              "P-55012",
+              "31.01.2026",
+              1,
+              null
+            ],
+            [
+              "P-55013",
+              "01.12.2026",
+              12
+            ],
+            [
+              "P-55014",
+              "31.01.2027",
+              6
+            ]
+          ]
+        },
+        {
+          "data": [
+            [
+              "Police",
+              "Beginn",
+              "Laufzeit Mte",
+              "Ablauf Monatsende"
+            ],
+            [
+              "P-55012",
+              "10.06.2026",
+              18,
+              null
+            ],
+            [
+              "P-55013",
+              "01.12.2026",
+              12
+            ],
+            [
+              "P-55014",
+              "31.01.2027",
+              6
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "EDATUM(B2;C2) verschiebt um C2 Monate, MONATSENDE(Datum;0) springt ans Monatsende: =MONATSENDE(EDATUM(B2;C2);0)."
+      },
+      "track": "accounting"
+    },
+    {
+      "id": "fin-zins-1",
+      "free": true,
+      "topic": "Einfacher Zins",
+      "title": "Zins für ein Festgeld",
+      "task": "Berechne in D2 den Zins für das Festgeld: Kapital A2 × Zinssatz B2 × Tage C2 / 360 (Schweizer Bankusanz, 360 Tage pro Jahr).",
+      "data": [
+        [
+          "Kapital CHF",
+          "Zins p.a.",
+          "Tage",
+          "Zins CHF"
+        ],
+        [
+          50000,
+          0.0125,
+          90,
+          null
+        ]
+      ],
+      "target": "D2",
+      "solution": "=A2*B2*C2/360",
+      "accept": [
+        "=A2*B2*(C2/360)",
+        "=A2*B2/360*C2"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Kapital CHF",
+              "Zins p.a.",
+              "Tage",
+              "Zins CHF"
+            ],
+            [
+              20000,
+              0.02,
+              180,
+              null
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Zins = Kapital × Satz × Tage / 360, also =A2*B2*C2/360."
+      },
+      "track": "finance",
+      "locale": {
+        "de": {
+          "task": "Berechne in D2 den Zins für das Festgeld: Kapital A2 × Zinssatz B2 × Tage C2 / 360 (Eurozins-Methode act/360: tatsächliche Tage, 360 Tage pro Jahr)."
+        }
+      }
+    },
+    {
+      "id": "fin-zinseszins-1",
+      "free": true,
+      "topic": "Zinseszins",
+      "title": "Endkapital mit Zinseszins",
+      "task": "Berechne in D2 das Endkapital nach C2 Jahren, wenn A2 jährlich zum Satz B2 verzinst wird und die Zinsen stehen bleiben (Zinseszins). Formel: Kapital × (1 + Zins) ^ Jahre.",
+      "data": [
+        [
+          "Kapital CHF",
+          "Zins p.a.",
+          "Jahre",
+          "Endkapital CHF"
+        ],
+        [
+          25000,
+          0.015,
+          8,
+          null
+        ]
+      ],
+      "target": "D2",
+      "solution": "=A2*(1+B2)^C2",
+      "accept": [
+        "=A2*POTENZ(1+B2;C2)"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Kapital CHF",
+              "Zins p.a.",
+              "Jahre",
+              "Endkapital CHF"
+            ],
+            [
+              10000,
+              0.03,
+              5,
+              null
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Potenz mit ^: =A2*(1+B2)^C2. Klammern um (1+B2) nicht vergessen."
+      },
+      "track": "finance"
+    },
+    {
+      "id": "fin-cashflow-1",
+      "free": true,
+      "topic": "Cashflow-Tabelle",
+      "title": "Kumulierter Saldo",
+      "task": "Berechne in C3 den Saldo Ende Januar: Saldo der Vorzeile (C2) plus Cashflow des Monats (B3). So aufgebaut, kannst du die Formel nach unten kopieren.",
+      "data": [
+        [
+          "Monat",
+          "Cashflow CHF",
+          "Saldo CHF"
+        ],
+        [
+          "Anfangssaldo",
+          null,
+          50000
+        ],
+        [
+          "Jan",
+          12000,
+          null
+        ],
+        [
+          "Feb",
+          -18500
+        ],
+        [
+          "Mär",
+          7300
+        ],
+        [
+          "Apr",
+          -2100
+        ]
+      ],
+      "target": "C3",
+      "solution": "=C2+B3",
+      "accept": [
+        "=B3+C2",
+        "=SUMME(C2;B3)"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Monat",
+              "Cashflow CHF",
+              "Saldo CHF"
+            ],
+            [
+              "Anfangssaldo",
+              null,
+              35000
+            ],
+            [
+              "Jan",
+              -4200,
+              null
+            ],
+            [
+              "Feb",
+              -18500
+            ],
+            [
+              "Mär",
+              7300
+            ],
+            [
+              "Apr",
+              -2100
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Laufender Saldo = Saldo davor + Cashflow: =C2+B3."
+      },
+      "track": "finance"
+    },
+    {
+      "id": "fin-schadenquote-1",
+      "free": false,
+      "topic": "Schadenquote",
+      "title": "Schadenquote gesamt",
+      "task": "Berechne in D6 die Schadenquote über alle Sparten: Summe der Schäden (C2:C5) geteilt durch Summe der Prämien (B2:B5). Ergebnis als Dezimalzahl (0.71 = 71 %), das Prozentformat setzt du danach. Achtung: Der Durchschnitt der einzelnen Quoten wäre falsch.",
+      "data": [
+        [
+          "Sparte",
+          "Prämien CHF",
+          "Schäden CHF",
+          "Schadenquote"
+        ],
+        [
+          "Motorfahrzeug",
+          4250000,
+          3017500
+        ],
+        [
+          "Hausrat",
+          1870000,
+          1046000
+        ],
+        [
+          "Haftpflicht",
+          2380000,
+          1690000
+        ],
+        [
+          "Gebäude",
+          1500000,
+          1355000
+        ],
+        [
+          "Total",
+          null,
+          null,
+          null
+        ]
+      ],
+      "target": "D6",
+      "solution": "=SUMME(C2:C5)/SUMME(B2:B5)",
+      "mustUse": [
+        "SUMME"
+      ],
+      "accept": [
+        "=SUMME(C2:C5)/SUMME(B2:B5)*1"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Sparte",
+              "Prämien CHF",
+              "Schäden CHF",
+              "Schadenquote"
+            ],
+            [
+              "Motorfahrzeug",
+              6100000,
+              5200000
+            ],
+            [
+              "Hausrat",
+              1870000,
+              1046000
+            ],
+            [
+              "Haftpflicht",
+              2380000,
+              1690000
+            ],
+            [
+              "Gebäude",
+              1500000,
+              1355000
+            ],
+            [
+              "Total",
+              null,
+              null,
+              null
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Gesamtquote = Total Schäden / Total Prämien: =SUMME(C2:C5)/SUMME(B2:B5). Nicht den Mittelwert der Einzelquoten nehmen."
+      },
+      "track": "finance"
+    },
+    {
+      "id": "fin-cagr-1",
+      "free": false,
+      "topic": "CAGR",
+      "title": "Durchschnittliches Wachstum pro Jahr",
+      "task": "Berechne in D2 die durchschnittliche jährliche Wachstumsrate (CAGR) der Prämien von B2 (erstes Jahr) bis B7 (letztes Jahr). Formel: (Endwert / Startwert) ^ (1 / Anzahl Jahre) − 1, Anzahl Jahre = A7 − A2. Ergebnis als Dezimalzahl.",
+      "data": [
+        [
+          "Jahr",
+          "Prämien Mio. CHF",
+          "",
+          "CAGR"
+        ],
+        [
+          2020,
+          84.2,
+          "",
+          null
+        ],
+        [
+          2021,
+          88.9
+        ],
+        [
+          2022,
+          91.5
+        ],
+        [
+          2023,
+          95
+        ],
+        [
+          2024,
+          99.8
+        ],
+        [
+          2025,
+          103.6
+        ]
+      ],
+      "target": "D2",
+      "solution": "=(B7/B2)^(1/(A7-A2))-1",
+      "accept": [
+        "=POTENZ(B7/B2;1/(A7-A2))-1",
+        "=(B7/B2)^(1/5)-1"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Jahr",
+              "Prämien Mio. CHF",
+              "",
+              "CAGR"
+            ],
+            [
+              2020,
+              84.2,
+              "",
+              null
+            ],
+            [
+              2021,
+              88.9
+            ],
+            [
+              2022,
+              91.5
+            ],
+            [
+              2023,
+              95
+            ],
+            [
+              2024,
+              99.8
+            ],
+            [
+              2025,
+              92.4
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "=(B7/B2)^(1/(A7-A2))-1. Der Exponent braucht eigene Klammern: 1/(A7-A2)."
+      },
+      "track": "finance"
+    },
+    {
+      "id": "fin-praemienstaffel-1",
+      "free": false,
+      "topic": "SVERWEIS ungefähr",
+      "title": "Prämie aus Staffel",
+      "task": "Die Prämienstaffel A2:B6 gilt jeweils ab der genannten Versicherungssumme. Suche in F2 mit SVERWEIS und ungefährer Übereinstimmung (WAHR) den Satz für die Summe E2 und multipliziere ihn mit E2.",
+      "data": [
+        [
+          "Summe ab CHF",
+          "Prämiensatz",
+          "",
+          "Police",
+          "Summe CHF",
+          "Prämie CHF"
+        ],
+        [
+          0,
+          0.0045,
+          "",
+          "P-1001",
+          385000,
+          null
+        ],
+        [
+          100000,
+          0.0038
+        ],
+        [
+          250000,
+          0.0032
+        ],
+        [
+          500000,
+          0.0027
+        ],
+        [
+          1000000,
+          0.0022
+        ]
+      ],
+      "target": "F2",
+      "solution": "=E2*SVERWEIS(E2;$A$2:$B$6;2;WAHR)",
+      "mustUse": [
+        "SVERWEIS"
+      ],
+      "accept": [
+        "=SVERWEIS(E2;A2:B6;2;WAHR)*E2",
+        "=E2*SVERWEIS(E2;$A$2:$B$6;2;1)",
+        "=E2*SVERWEIS(E2;$A$2:$B$6;2)"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Summe ab CHF",
+              "Prämiensatz",
+              "",
+              "Police",
+              "Summe CHF",
+              "Prämie CHF"
+            ],
+            [
+              0,
+              0.0045,
+              "",
+              "P-1001",
+              1200000,
+              null
+            ],
+            [
+              100000,
+              0.0038
+            ],
+            [
+              250000,
+              0.0032
+            ],
+            [
+              500000,
+              0.0027
+            ],
+            [
+              1000000,
+              0.0022
+            ]
+          ]
+        },
+        {
+          "data": [
+            [
+              "Summe ab CHF",
+              "Prämiensatz",
+              "",
+              "Police",
+              "Summe CHF",
+              "Prämie CHF"
+            ],
+            [
+              0,
+              0.0045,
+              "",
+              "P-1001",
+              99999,
+              null
+            ],
+            [
+              100000,
+              0.0038
+            ],
+            [
+              250000,
+              0.0032
+            ],
+            [
+              500000,
+              0.0027
+            ],
+            [
+              1000000,
+              0.0022
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "Ungefähre Suche: =E2*SVERWEIS(E2;$A$2:$B$6;2;WAHR). Die erste Spalte der Staffel muss aufsteigend sortiert sein. Mit FALSCH findest du nur exakte Treffer."
+      },
+      "track": "finance"
+    },
+    {
+      "id": "fin-portfolio-1",
+      "free": false,
+      "topic": "SUMMENPRODUKT",
+      "title": "Gewichtete Portfoliorendite",
+      "task": "Berechne in C6 die gewichtete Rendite des Portfolios: Summe aus Betrag × Rendite (SUMMENPRODUKT über B2:B5 und C2:C5) geteilt durch die Summe der Beträge.",
+      "data": [
+        [
+          "Anlage",
+          "Betrag CHF",
+          "Rendite"
+        ],
+        [
+          "CH-Aktien",
+          120000,
+          0.064
+        ],
+        [
+          "Obligationen CHF",
+          180000,
+          0.012
+        ],
+        [
+          "Immobilienfonds",
+          60000,
+          0.038
+        ],
+        [
+          "Geldmarkt",
+          40000,
+          0.009
+        ],
+        [
+          "Portfolio",
+          null,
+          null
+        ]
+      ],
+      "target": "C6",
+      "solution": "=SUMMENPRODUKT(B2:B5;C2:C5)/SUMME(B2:B5)",
+      "mustUse": [
+        "SUMMENPRODUKT",
+        "SUMME"
+      ],
+      "accept": [
+        "=SUMMENPRODUKT(C2:C5;B2:B5)/SUMME(B2:B5)"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Anlage",
+              "Betrag CHF",
+              "Rendite"
+            ],
+            [
+              "CH-Aktien",
+              250000,
+              0.064
+            ],
+            [
+              "Obligationen CHF",
+              50000,
+              0.012
+            ],
+            [
+              "Immobilienfonds",
+              60000,
+              0.038
+            ],
+            [
+              "Geldmarkt",
+              40000,
+              0.009
+            ],
+            [
+              "Portfolio",
+              null,
+              null
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "=SUMMENPRODUKT(B2:B5;C2:C5)/SUMME(B2:B5). Der einfache Mittelwert der Renditen ignoriert die Gewichte."
+      },
+      "track": "finance"
+    },
+    {
+      "id": "fin-breakeven-1",
+      "free": false,
+      "topic": "Break-even",
+      "title": "Break-even-Menge",
+      "task": "Berechne in D2 die Break-even-Menge: Fixkosten A2 / (Preis B2 − variable Kosten C2). Runde mit AUFRUNDEN auf ganze Stück auf, denn halbe Stücke lassen sich nicht verkaufen.",
+      "data": [
+        [
+          "Fixkosten CHF",
+          "Preis/Stück CHF",
+          "Var. Kosten/Stück CHF",
+          "Break-even Stück"
+        ],
+        [
+          185000,
+          49,
+          27.5,
+          null
+        ]
+      ],
+      "target": "D2",
+      "solution": "=AUFRUNDEN(A2/(B2-C2);0)",
+      "mustUse": [
+        "AUFRUNDEN"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Fixkosten CHF",
+              "Preis/Stück CHF",
+              "Var. Kosten/Stück CHF",
+              "Break-even Stück"
+            ],
+            [
+              90000,
+              120,
+              72,
+              null
+            ]
+          ]
+        },
+        {
+          "data": [
+            [
+              "Fixkosten CHF",
+              "Preis/Stück CHF",
+              "Var. Kosten/Stück CHF",
+              "Break-even Stück"
+            ],
+            [
+              42000,
+              35,
+              19,
+              null
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "=AUFRUNDEN(A2/(B2-C2);0). Die Klammer um (B2-C2) ist nötig, sonst teilst du nur durch B2."
+      },
+      "track": "finance"
+    },
+    {
+      "id": "fin-rmz-1",
+      "free": false,
+      "topic": "RMZ",
+      "title": "Monatsrate eines Leasings",
+      "task": "Berechne in D2 die monatliche Rate für den Betrag A2 bei Jahreszins B2 und Laufzeit C2 Jahre. Rechne Zins und Laufzeit auf Monate um. Die Rate soll positiv erscheinen (RMZ liefert Zahlungen negativ).",
+      "data": [
+        [
+          "Betrag CHF",
+          "Zins p.a.",
+          "Laufzeit Jahre",
+          "Rate/Monat CHF"
+        ],
+        [
+          30000,
+          0.049,
+          5,
+          null
+        ]
+      ],
+      "target": "D2",
+      "solution": "=-RMZ(B2/12;C2*12;A2)",
+      "mustUse": [
+        "RMZ"
+      ],
+      "accept": [
+        "=RMZ(B2/12;C2*12;-A2)",
+        "=RMZ(B2/12;C2*12;-A2;0;0)"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Betrag CHF",
+              "Zins p.a.",
+              "Laufzeit Jahre",
+              "Rate/Monat CHF"
+            ],
+            [
+              42000,
+              0.039,
+              4,
+              null
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "=-RMZ(B2/12;C2*12;A2) oder =RMZ(B2/12;C2*12;-A2). Monatszins = B2/12, Anzahl Raten = C2*12."
+      },
+      "track": "finance"
+    },
+    {
+      "id": "fin-bw-1",
+      "free": false,
+      "topic": "BW",
+      "title": "Barwert einer Rente",
+      "task": "Berechne in D2 den Barwert einer jährlichen Rente A2, die C2 Jahre lang nachschüssig bezahlt wird, abgezinst mit B2. Das Ergebnis soll positiv sein.",
+      "data": [
+        [
+          "Rente/Jahr CHF",
+          "Diskontsatz",
+          "Jahre",
+          "Barwert CHF"
+        ],
+        [
+          24000,
+          0.02,
+          15,
+          null
+        ]
+      ],
+      "target": "D2",
+      "solution": "=BW(B2;C2;-A2)",
+      "mustUse": [
+        "BW"
+      ],
+      "accept": [
+        "=-BW(B2;C2;A2)"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Rente/Jahr CHF",
+              "Diskontsatz",
+              "Jahre",
+              "Barwert CHF"
+            ],
+            [
+              18000,
+              0.035,
+              20,
+              null
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "=BW(Zins;Perioden;Zahlung): =BW(B2;C2;-A2). Die Zahlung negativ eingeben, dann ist der Barwert positiv."
+      },
+      "track": "finance"
+    },
+    {
+      "id": "fin-zw-1",
+      "free": false,
+      "topic": "ZW",
+      "title": "Endwert Säule 3a",
+      "task": "Du zahlst jedes Jahr A2 in die Säule 3a ein (jeweils Ende Jahr), Zins B2, während C2 Jahren. Berechne in D2 mit ZW den Endwert. Das Ergebnis soll positiv sein.",
+      "data": [
+        [
+          "Einzahlung/Jahr CHF",
+          "Zins p.a.",
+          "Jahre",
+          "Endwert CHF"
+        ],
+        [
+          7258,
+          0.015,
+          25,
+          null
+        ]
+      ],
+      "target": "D2",
+      "solution": "=ZW(B2;C2;-A2)",
+      "mustUse": [
+        "ZW"
+      ],
+      "accept": [
+        "=-ZW(B2;C2;A2)",
+        "=ZW(B2;C2;-A2;0;0)"
+      ],
+      "alt": [
+        {
+          "data": [
+            [
+              "Einzahlung/Jahr CHF",
+              "Zins p.a.",
+              "Jahre",
+              "Endwert CHF"
+            ],
+            [
+              5000,
+              0.02,
+              30,
+              null
+            ]
+          ]
+        }
+      ],
+      "hints": {
+        "generic": "=ZW(Zins;Perioden;Zahlung): =ZW(B2;C2;-A2). Einzahlungen sind aus deiner Sicht negativ, deshalb -A2."
+      },
+      "track": "finance",
+      "locale": {
+        "de": {
+          "title": "Endwert Sparplan",
+          "task": "Du zahlst jedes Jahr am Jahresende A2 in einen Sparplan ein, Zins B2, C2 Jahre lang. Berechne in D2 mit ZW den Endwert. Das Ergebnis soll positiv sein."
+        }
+      }
+    },
+    {
+      "id": "pivot-1",
+      "type": "project",
+      "free": true,
+      "topic": "Pivot",
+      "title": "Umsatz nach Region und Quartal",
+      "intro": "Die Alpenbüro AG hat dir den Verkaufsexport 2025 ihrer sechs Filialen geschickt, eine Zeile pro Bestellung. Baue daraus eine Pivot-Tabelle mit dem Umsatz nach Region und Quartal. Mit der fertigen Pivot beantwortest du die Kontrollfragen in wenigen Sekunden.",
+      "file": "files/pivot-1-umsatz.xlsx",
+      "steps": [
+        "Öffne die Datei in Excel und klicke im Blatt «Daten» in eine beliebige Zelle der Tabelle.",
+        "Wähle im Register «Einfügen» › «PivotTable» › «Aus Tabelle/Bereich». Lass «Neues Arbeitsblatt» ausgewählt und klicke auf «OK».",
+        "Ziehe in der Feldliste «Region» in den Bereich «Zeilen» und «Quartal» in den Bereich «Spalten».",
+        "Ziehe «Umsatz CHF» in den Bereich «Werte». Excel zeigt «Summe von Umsatz CHF».",
+        "Für die Anzahl Bestellungen: Ziehe «Bestell-Nr.» zusätzlich in «Werte». Weil das Feld Text enthält, zählt Excel automatisch («Anzahl von Bestell-Nr.»).",
+        "Lies die Werte in der Pivot ab und trage sie unten ein. Rappen darfst du weglassen."
+      ],
+      "questions": [
+        {
+          "q": "Wie hoch ist der Umsatz der Region Ost im Quartal Q3 (CHF)?",
+          "answer": 4402.6,
+          "tolerance": 1,
+          "unit": "CHF",
+          "hint": "Suche die Zeile «Ost» und die Spalte «Q3». Prüfe, ob im Wertebereich wirklich «Summe von Umsatz CHF» steht und nicht «Anzahl»."
+        },
+        {
+          "q": "Wie hoch ist der Jahresumsatz der umsatzstärksten Region (CHF)?",
+          "answer": 46793.35,
+          "tolerance": 1,
+          "unit": "CHF",
+          "hint": "Schau in die Spalte «Gesamtergebnis» ganz rechts und nimm den grössten Wert unter den Regionen."
+        },
+        {
+          "q": "Wie hoch ist der Gesamtumsatz 2025 über alle Regionen (CHF)?",
+          "answer": 128309.75,
+          "tolerance": 1,
+          "unit": "CHF",
+          "hint": "Das ist die Zelle unten rechts in der Pivot: Zeile «Gesamtergebnis», Spalte «Gesamtergebnis»."
+        },
+        {
+          "q": "Wie viele Bestellungen (Datenzeilen) enthält die Tabelle?",
+          "answer": 240,
+          "unit": "Zeilen",
+          "hint": "Ziehe «Bestell-Nr.» in den Bereich «Werte» (Anzahl) und lies das Gesamtergebnis ab. Die Überschriftenzeile zählt nicht."
+        }
+      ],
+      "hints": {
+        "generic": "Zeilen: Region, Spalten: Quartal, Werte: Summe von Umsatz CHF. Das Gesamtergebnis steht unten und rechts in der Pivot."
+      },
+      "track": "data"
+    },
+    {
+      "id": "pivot-2",
+      "type": "project",
+      "free": true,
+      "topic": "Pivot · Datum",
+      "title": "Bestellungen nach Monat",
+      "intro": "Diesmal enthält der Export ein echtes Bestelldatum statt eines Quartals. Gruppiere die Daten in der Pivot nach Monaten und Quartalen und lass dir neben der Summe auch den Durchschnitt pro Bestellung anzeigen. So findest du den besten Monat und typische Bestellgrössen.",
+      "file": "files/pivot-2-monate.xlsx",
+      "steps": [
+        "Klicke im Blatt «Daten» in die Tabelle und wähle «Einfügen» › «PivotTable» › «Aus Tabelle/Bereich» › «OK».",
+        "Ziehe «Datum» in den Bereich «Zeilen». Excel 365 gruppiert meist automatisch nach Quartalen und Monaten. Falls nicht: Rechtsklick auf ein Datum in der Pivot › «Gruppieren» › «Monate» und «Quartale» markieren › «OK».",
+        "Ziehe «Umsatz CHF» in den Bereich «Werte» («Summe von Umsatz CHF»).",
+        "Ziehe «Umsatz CHF» ein zweites Mal in «Werte». Klicke darauf › «Wertfeldeinstellungen» › «Mittelwert» › «OK».",
+        "Ziehe «Bestell-Nr.» in «Werte», um die Anzahl Bestellungen pro Monat und Quartal zu sehen.",
+        "Mit dem Plus- und Minuszeichen vor den Quartalen klappst du die Monate auf und zu."
+      ],
+      "questions": [
+        {
+          "q": "In welchem Monat war der Umsatz (Summe) am höchsten? Gib die Monatszahl ein (1 = Januar, 12 = Dezember).",
+          "answer": 11,
+          "unit": "",
+          "hint": "Sortiere oder vergleiche die Summe pro Monat, nicht den Mittelwert. Gib den Monat als Zahl ein, zum Beispiel 4 für April."
+        },
+        {
+          "q": "Wie hoch ist der durchschnittliche Umsatz pro Bestellung im März (CHF)?",
+          "answer": 569.54,
+          "tolerance": 1,
+          "unit": "CHF",
+          "hint": "Du brauchst «Mittelwert von Umsatz CHF» (Wertfeldeinstellungen), nicht die Summe. Lies den Wert in der Zeile «Mrz» ab."
+        },
+        {
+          "q": "Wie viele Bestellungen gab es im zweiten Quartal (Q2)?",
+          "answer": 63,
+          "unit": "Zeilen",
+          "hint": "Zähle mit «Anzahl von Bestell-Nr.» und lies die Zeile «Qrtl2» ab (April bis Juni zusammen)."
+        }
+      ],
+      "hints": {
+        "generic": "Datum in die Zeilen, nach Monaten und Quartalen gruppieren. Umsatz zweimal in die Werte: einmal Summe, einmal Mittelwert."
+      },
+      "track": "data"
+    },
+    {
+      "id": "pivot-3",
+      "type": "project",
+      "free": false,
+      "topic": "Pivot · Anteile",
+      "title": "Anteile und Rangliste",
+      "intro": "Die Geschäftsleitung will nicht nur Franken sehen, sondern Anteile: Welcher Teil des Umsatzes kommt aus welcher Produktgruppe und welche Filiale liegt auf welchem Rang? Mit «Werte anzeigen als» rechnet die Pivot das für dich, ganz ohne Formeln.",
+      "file": "files/pivot-3-anteile.xlsx",
+      "steps": [
+        "Erstelle aus der Tabelle im Blatt «Daten» eine PivotTable: «Einfügen» › «PivotTable» › «Aus Tabelle/Bereich» › «OK».",
+        "Ziehe «Produktgruppe» in «Zeilen» und «Umsatz CHF» in «Werte».",
+        "Rechtsklick auf einen Wert › «Werte anzeigen als» › «% des Gesamtergebnisses». Jetzt siehst du die Anteile in Prozent.",
+        "Ersetze in «Zeilen» die «Produktgruppe» durch «Filiale» und lies die Anteile der Filialen ab.",
+        "Ziehe «Umsatz CHF» ein zweites Mal in «Werte». Rechtsklick › «Werte anzeigen als» › «Rangfolge nach Grösstem» › Basisfeld «Filiale» › «OK».",
+        "Tipp: Mit Rechtsklick › «Sortieren» › «Nach Grösse sortieren (absteigend)» steht die stärkste Filiale oben."
+      ],
+      "questions": [
+        {
+          "q": "Welchen Anteil am Gesamtumsatz hat die Produktgruppe «Service» (in %)?",
+          "answer": 14.32,
+          "tolerance": 0.1,
+          "unit": "%",
+          "hint": "«Werte anzeigen als» › «% des Gesamtergebnisses», Zeilen nach Produktgruppe. Gib den Prozentwert ein, z. B. 12.3."
+        },
+        {
+          "q": "Welchen Anteil am Gesamtumsatz hat die Filiale Lugano (in %)?",
+          "answer": 17.27,
+          "tolerance": 0.1,
+          "unit": "%",
+          "hint": "Dieselbe Prozentansicht, aber mit «Filiale» in den Zeilen statt «Produktgruppe»."
+        },
+        {
+          "q": "Auf welchem Rang liegt die Filiale Basel nach Umsatz (1 = höchster Umsatz)?",
+          "answer": 3,
+          "unit": "",
+          "hint": "«Werte anzeigen als» › «Rangfolge nach Grösstem» mit Basisfeld «Filiale». Oder sortiere die Filialen absteigend nach Umsatz und zähle."
+        }
+      ],
+      "hints": {
+        "generic": "Rechtsklick auf einen Wert in der Pivot › «Werte anzeigen als». Dort findest du «% des Gesamtergebnisses» und «Rangfolge nach Grösstem»."
+      },
+      "track": "data"
+    },
+    {
+      "id": "pivot-4",
+      "type": "project",
+      "free": false,
+      "topic": "Pivot · Berechnetes Feld",
+      "title": "Marge pro Filiale mit Datenschnitt",
+      "intro": "Der Export enthält Umsatz und Kosten für 2024 und 2025 (Beträge in CHF). Berechne die Marge direkt in der Pivot mit einem berechneten Feld, filtere auf das Jahr 2025 und steuere die Quartale mit einem Datenschnitt. So entsteht ein kleiner Report, den du jeden Monat wiederverwenden kannst.",
+      "file": "files/pivot-4-marge.xlsx",
+      "steps": [
+        "Erstelle aus der Tabelle im Blatt «Daten» eine PivotTable («Einfügen» › «PivotTable» › «Aus Tabelle/Bereich»).",
+        "Ziehe «Filiale» in «Zeilen» und «Jahr» in «Filter». Wähle im Filter oberhalb der Pivot das Jahr 2025.",
+        "Klicke in die Pivot › Register «PivotTable-Analyse» › «Felder, Elemente und Gruppen» › «Berechnetes Feld». Name: Marge, Formel: =Umsatz-Kosten › «Hinzufügen» › «OK».",
+        "Lege ein zweites berechnetes Feld an: Name: Margenquote, Formel: =(Umsatz-Kosten)/Umsatz. Formatiere es über «Wertfeldeinstellungen» › «Zahlenformat» als Prozent.",
+        "«PivotTable-Analyse» › «Datenschnitt einfügen» › «Quartal» › «OK». Ein Klick auf eine Schaltfläche im Datenschnitt filtert die Pivot auf dieses Quartal.",
+        "Für Fragen über das ganze Jahr setzt du den Datenschnitt zurück (Filtersymbol mit dem roten Kreuz oben rechts im Datenschnitt)."
+      ],
+      "questions": [
+        {
+          "q": "Wie hoch ist die Marge (Umsatz − Kosten) der Filiale Luzern im Jahr 2025 (CHF)?",
+          "answer": 5026.95,
+          "tolerance": 1,
+          "unit": "CHF",
+          "hint": "Prüfe, ob im Filter «Jahr» wirklich 2025 gewählt ist und der Datenschnitt alle Quartale zeigt."
+        },
+        {
+          "q": "Wie hoch ist die Margenquote 2025 über alle Filialen (Marge / Umsatz, in %)?",
+          "answer": 48.35,
+          "tolerance": 0.1,
+          "unit": "%",
+          "hint": "Das berechnete Feld =(Umsatz-Kosten)/Umsatz rechnet mit den Summen. Lies die Zeile «Gesamtergebnis» ab, nicht den Durchschnitt der Filialen."
+        },
+        {
+          "q": "Wie hoch ist die Marge der Filiale Zürich im vierten Quartal 2025 (CHF)?",
+          "answer": 2835.3,
+          "tolerance": 1,
+          "unit": "CHF",
+          "hint": "Jahr 2025 im Filter, im Datenschnitt «Q4» anklicken, dann die Zeile «Zürich» ablesen."
+        }
+      ],
+      "hints": {
+        "generic": "Berechnetes Feld: «PivotTable-Analyse» › «Felder, Elemente und Gruppen» › «Berechnetes Feld», Formel =Umsatz-Kosten. Vergiss den Filter auf 2025 nicht."
+      },
+      "track": "data"
+    },
+    {
+      "id": "pq-1",
+      "type": "project",
+      "free": false,
+      "topic": "Power Query",
+      "title": "Bestellungen mit Kundensegment zusammenführen",
+      "intro": "Zwei Exporte, die nicht ganz sauber sind: Im Blatt «Bestellungen» steht pro Bestellung nur die Kundennummer, das Segment (Privat, KMU, Grosskunde) steht im Blatt «Kunden». Führe beides mit Power Query zusammen und räume dabei auf. Achtung: Im Export verstecken sich Fehler, die eine einfache Pivot verfälschen würden.",
+      "file": "files/pq-1-kunden.xlsx",
+      "steps": [
+        "Klicke in die Tabelle im Blatt «Bestellungen» und wähle «Daten» › «Aus Tabelle/Bereich». Der Power-Query-Editor öffnet sich.",
+        "Markiere die Spalte «Kundennr.» › Register «Transformieren» › «Format» › «Kürzen». Damit verschwinden Leerzeichen am Anfang und Ende.",
+        "Markiere alle Spalten (Klick in die Tabelle, dann Ctrl+A) › «Start» › «Zeilen entfernen» › «Duplikate entfernen». Unten links siehst du die Anzahl Zeilen.",
+        "«Start» › «Schliessen & laden» › «Schliessen & laden in…» › «Nur Verbindung erstellen». Mach dasselbe für die Tabelle im Blatt «Kunden» («Daten» › «Aus Tabelle/Bereich», dann «Nur Verbindung erstellen»).",
+        "«Daten» › «Daten abrufen» › «Abfragen kombinieren» › «Zusammenführen»: oben «Bestellungen», unten «Kunden», in beiden die Spalte «Kundennr.» anklicken, Join-Art «Linker äusserer» › «OK». Die neue Spalte erweitern (Pfeilsymbol) und nur «Segment» auswählen.",
+        "«Start» › «Gruppieren nach»: Gruppieren nach «Segment», neue Spalte «Umsatz» mit Vorgang «Summe» der Spalte «Betrag CHF» › «OK».",
+        "Kunden ohne Bestellung: nochmals «Zusammenführen», diesmal oben «Kunden» und unten «Bestellungen», Join-Art «Linker Anti (nur Zeilen in der ersten Tabelle)». Die Anzahl Zeilen ist die Antwort."
+      ],
+      "questions": [
+        {
+          "q": "Wie viele Bestellungen (Zeilen) bleiben nach dem Entfernen der Duplikate übrig?",
+          "answer": 182,
+          "unit": "Zeilen",
+          "hint": "Markiere vor «Duplikate entfernen» alle Spalten. Sonst entfernt Power Query nur Duplikate in einer Spalte, zum Beispiel jede zweite Bestellung desselben Kunden."
+        },
+        {
+          "q": "Wie hoch ist der Umsatz des Segments «KMU» (CHF)?",
+          "answer": 89798.2,
+          "tolerance": 1,
+          "unit": "CHF",
+          "hint": "Zu wenig? Dann fehlen Bestellungen, deren Kundennummer ein Leerzeichen am Ende hat («Format» › «Kürzen» vor dem Zusammenführen). Zu viel? Dann sind die doppelten Zeilen noch drin."
+        },
+        {
+          "q": "Wie viele Kunden haben keine einzige Bestellung?",
+          "answer": 1,
+          "unit": "",
+          "hint": "Join-Art «Linker Anti» mit «Kunden» oben. Kommt mehr heraus, wurden Kundennummern mit Leerzeichen nicht gekürzt und finden keinen Partner."
+        }
+      ],
+      "hints": {
+        "generic": "Reihenfolge in Power Query: zuerst «Kundennr.» kürzen, dann Duplikate über alle Spalten entfernen, dann mit «Kunden» zusammenführen und nach Segment gruppieren."
+      },
+      "track": "data"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "basis",
+      "name": "Basis",
+      "claim": "Die Funktionen, die jeder Excel-Test abfragt",
+      "audience": "Berufseinstieg, Stellenwechsel, Einstellungstest",
+      "order": 1
+    },
+    {
+      "id": "accounting",
+      "name": "Accounting & Controlling",
+      "claim": "Abschluss, Abstimmung, Abweichungen",
+      "audience": "Sachbearbeitung Finanzen, Treuhand, Controlling",
+      "order": 2
+    },
+    {
+      "id": "finance",
+      "name": "Banking & Finance",
+      "claim": "Zins, Cashflow, Prämien, Szenarien",
+      "audience": "Einstieg Bank und Versicherung, Analysten",
+      "order": 3
+    },
+    {
+      "id": "consulting",
+      "name": "Consulting",
+      "claim": "Saubere Modelle, schnelle Analysen",
+      "audience": "Praktikum, Analyst, Case-Interview",
+      "order": 4,
+      "comingSoon": true
+    },
+    {
+      "id": "data",
+      "name": "Data & Reporting",
+      "claim": "Daten bereinigen, Reports bauen",
+      "audience": "Reporting, Analysten",
+      "order": 5,
+      "comingSoon": false
+    }
+  ]
+}

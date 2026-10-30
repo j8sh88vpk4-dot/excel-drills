@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Spickzettel Basis | Excel-Drills</title>
+  <link rel="stylesheet" href="handout.css">
+</head>
+<body class="">
+  <nav class="screen-bar" aria-label="Handout">
+    <a href="./">Zur Übersicht: Handouts und Spickzettel</a>
+    <span>Drucken: A4 hoch, Ränder «Standard», Kopf- und Fusszeilen aus</span>
+  </nav>
+  <main>
+  <article class="sheet cheat">
+    <header class="hd">
+      <span class="brand"><span class="mark" aria-hidden="true">X</span>Excel-Drills</span>
+      <div class="hd-text">
+        <p class="kicker">Spickzettel</p>
+        <h1>Pfad Basis</h1>
+        <p class="sub">Schweizer Schreibweise: Semikolon, Punkt als Dezimalzeichen, Hochkomma als Tausender</p>
+      </div>
+    </header>
+    <p class="cheat-intro"><span>13 Themen in der Reihenfolge des Lernpfads. Formel beginnt mit =, Argumente mit ; trennen, Text in "Anführungszeichen".</span><span>[ ] = optionales Argument</span></p>
+    <div class="cols">
+      <section class="fn">
+        <h2><span class="n">01</span>SUMME</h2>
+        <p class="syn"><span class="nb">=SUMME(Zahl1;[Zahl2];…)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A2:A4 = 120 | 80 | 50: <code><span class="nb">=SUMME(A2:A4)</span></code> <span class="res">250</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Neue Zeilen unterhalb des Bereichs werden nicht mitgezählt: Bereich nach dem Einfügen prüfen.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">02</span>MITTELWERT</h2>
+        <p class="syn"><span class="nb">=MITTELWERT(Zahl1;[Zahl2];…)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A2:A5 = 2'400 | 780 | 3'100 | 560: <code><span class="nb">=MITTELWERT(A2:A5)</span></code> <span class="res">1'710</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Die Funktion heisst MITTELWERT, nicht DURCHSCHNITT; leere Zellen zählen nicht, Nullen schon.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">03</span>MAX / MIN</h2>
+        <p class="syn"><span class="nb">=MAX(Zahl1;[Zahl2];…)</span></p>
+        <p class="syn"><span class="nb">=MIN(Zahl1;[Zahl2];…)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>B2:B5 = 41'000 | 58'400 | 38'500 | 47'300: <code><span class="nb">=MAX(B2:B5)  /  =MIN(B2:B5)</span></code> <span class="res">58'400  /  38'500</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Als Text gespeicherte Zahlen (linksbündig, grünes Dreieck) werden stillschweigend ignoriert.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">04</span>WENN</h2>
+        <p class="syn"><span class="nb">=WENN(Prüfung;</span><wbr><span class="nb">Dann_Wert;</span><wbr><span class="nb">Sonst_Wert)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A2 = 50'000 (Budget), B2 = 47'200 (Ist): <code><span class="nb">=WENN(B2&lt;=A2;"OK";"Überzogen")</span></code> <span class="res">OK</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Text ohne Anführungszeichen (OK statt "OK") ergibt #NAME?.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">05</span>ZÄHLENWENN</h2>
+        <p class="syn"><span class="nb">=ZÄHLENWENN(Bereich;Suchkriterien)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>B2:B8 = Status, viermal «offen»: <code><span class="nb">=ZÄHLENWENN(B2:B8;"offen")</span></code> <span class="res">4</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Vergleiche gehören in Anführungszeichen: "&gt;1000", nicht &gt;1000.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">06</span>SUMMEWENN</h2>
+        <p class="syn"><span class="nb">=SUMMEWENN(Bereich;</span><wbr><span class="nb">Suchkriterien;</span><wbr><span class="nb">[Summe_Bereich])</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A2:A9 = Region, B2:B9 = Umsatz; Ost: 1'200 + 1'500 + 800: <code><span class="nb">=SUMMEWENN(A2:A9;"Ost";B2:B9)</span></code> <span class="res">3'500</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Der Summenbereich steht bei SUMMEWENN zuletzt, bei SUMMEWENNS zuerst.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">07</span>SVERWEIS</h2>
+        <p class="syn"><span class="nb">=SVERWEIS(Suchkriterium;</span><wbr><span class="nb">Matrix;</span><wbr><span class="nb">Spaltenindex;</span><wbr><span class="nb">[Bereich_Verweis])</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>Preisliste A2:B6, D2 = «A-300»: <code><span class="nb">=SVERWEIS(D2;A2:B6;2;FALSCH)</span></code> <span class="res">21.00</span></p>
+        <p class="small">Staffel: WAHR statt FALSCH, erste Spalte aufsteigend sortiert (Umsatz 72'000 → Satz 0.04).</p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Ohne FALSCH sucht Excel ungefähr und liefert bei unsortierten Listen falsche Treffer ohne Fehlermeldung.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">08</span>RUNDEN</h2>
+        <p class="syn"><span class="nb">=RUNDEN(Zahl;Anzahl_Stellen)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A2 = 1'234.5678: <code><span class="nb">=RUNDEN(A2;2)</span></code> <span class="res">1'234.57</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Das Zahlenformat rundet nur die Anzeige; weitergerechnet wird mit dem ungerundeten Wert.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">09</span>Absoluter Bezug</h2>
+        <p class="syn"><span class="nb">$F$1 Spalte und Zeile fix · F$1 Zeile fix</span></p>
+        <p class="syn"><span class="nb">$F1 Spalte fix · F4 schaltet um (Mac: cmd + T)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>B2 = 2'000, F1 = 0.081 (MwSt-Satz): <code><span class="nb">=B2*$F$1</span></code> <span class="res">162.00</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Ohne $ wird aus F1 beim Kopieren F2, F3 … und die Formel rechnet mit leeren Zellen (Ergebnis 0).</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">10</span>WENNFEHLER</h2>
+        <p class="syn"><span class="nb">=WENNFEHLER(Wert;</span><wbr><span class="nb">Wert_falls_Fehler)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A2 = 1'500, B2 = 0: <code><span class="nb">=WENNFEHLER(A2/B2;"n/a")</span></code> <span class="res">n/a</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>WENNFEHLER verdeckt jeden Fehler, auch einen falschen Bezug: Formel zuerst ohne WENNFEHLER testen.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">11</span>TEXTKETTE</h2>
+        <p class="syn"><span class="nb">=TEXTKETTE(Text1;[Text2];…)</span></p>
+        <p class="syn"><span class="nb">oder mit &amp;: =A2&amp;" "&amp;B2</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A2 = Anna, B2 = Keller: <code><span class="nb">=TEXTKETTE(A2;" ";B2)</span></code> <span class="res">Anna Keller</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Leerzeichen vergessen: =A2&amp;B2 ergibt «AnnaKeller».</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">12</span>SUMMENPRODUKT</h2>
+        <p class="syn"><span class="nb">=SUMMENPRODUKT(Array1;[Array2];…)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A2:A3 = 10 | 4 (Menge), B2:B3 = 2.50 | 12.00 (Preis): <code><span class="nb">=SUMMENPRODUKT(A2:A3;B2:B3)</span></code> <span class="res">73.00</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Bereiche unterschiedlicher Grösse (A2:A3 und B2:B4) ergeben #WERT!.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">13</span>WENN verschachtelt</h2>
+        <p class="syn"><span class="nb">=WENN(Prüfung1;</span><wbr><span class="nb">Wert1;</span><wbr><span class="nb">WENN(Prüfung2;</span><wbr><span class="nb">Wert2;</span><wbr><span class="nb">Sonst_Wert))</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A2 = 0.67 (Schadenquote): <code><span class="nb">=WENN(A2&gt;0.8;</span><wbr><span class="nb">"hoch";</span><wbr><span class="nb">WENN(A2&gt;0.5;</span><wbr><span class="nb">"mittel";</span><wbr><span class="nb">"tief"))</span></code> <span class="res">mittel</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Falsche Reihenfolge (zuerst &gt;0.5) liefert nie «hoch»: immer von der strengsten Schwelle her prüfen.</p>
+      </section>
+    </div>
+    <footer class="ft">
+      <span><strong>excel-drills.ch</strong></span>
+      <span>Übung direkt im Browser: <strong>excel-drills.ch/app/?pfad=basis</strong></span>
+    </footer>
+  </article>
+  </main>
+</body>
+</html>

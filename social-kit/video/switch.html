@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Excel-Drills Sprach-Switch</title>
+<!--
+  Excel-Drills – Reel 2 «Eine Übung, vier Sprachen» (15 s, ohne Ton).
+  switch.html?t=7000&w=1080&h=1920  -> rendert exakt den Zustand bei t = 7000 ms (für die Frame-Ausgabe)
+  switch.html?w=1080&h=1080         -> läuft als Endlos-Vorschau (requestAnimationFrame)
+  Alle Texte stehen im Objekt TEXT (allgemein) und LANGS (pro Sprache) weiter unten.
+-->
+<style>
+  :root {
+    --accent: #107C41; --accent-strong: #0b5c30; --accent-soft: #e7f3ec;
+    --bg: #fbfbf9; --surface: #fff; --text: #1d1f1e; --muted: #565b58; --border: #d9ddda;
+    --grid-head: #f1f3f2; --target: #fff6cc; --target-border: #c99a00;
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; overflow: hidden; background: var(--bg); }
+  body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: antialiased; }
+  #stage { position: relative; overflow: hidden; background: var(--bg); }
+  #bggrid { position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(16,124,65,.06) 2px, transparent 2px), linear-gradient(90deg, rgba(16,124,65,.06) 2px, transparent 2px);
+    background-size: 90px 90px; }
+  #bgglow { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(16,124,65,.10), transparent 60%); }
+  #content { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; transform-origin: 0 0; }
+  .abs { position: absolute; }
+
+  /* Intro */
+  #intro { left: 0; top: 0; width: 1080px; height: 1350px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  #wm { display: flex; align-items: center; gap: 34px; }
+  .logo { width: 150px; height: 150px; border-radius: 30px; background: var(--accent); color: #fff; font: 800 104px/150px Arial, sans-serif; text-align: center; box-shadow: 0 18px 40px rgba(16,124,65,.28); }
+  #wmText { font-size: 128px; font-weight: 800; letter-spacing: -3px; }
+  #wmText span { color: var(--accent); }
+  #claim { margin-top: 56px; font-size: 72px; line-height: 1.22; font-weight: 700; max-width: 960px; }
+  #claim em { font-style: normal; color: var(--accent); }
+  #introLangs { margin-top: 48px; display: flex; gap: 18px; }
+  #introLangs span { font-size: 40px; font-weight: 800; padding: 10px 26px; border-radius: 999px; border: 3px solid var(--border); background: var(--surface); color: var(--muted); }
+
+  /* HUD mit Sprach-Schalter */
+  #hud { left: 60px; top: 14px; width: 960px; height: 84px; display: flex; align-items: center; justify-content: space-between; }
+  #hudBrand { display: flex; align-items: center; gap: 18px; font-size: 44px; font-weight: 800; letter-spacing: -1px; }
+  #hudBrand .logo { width: 68px; height: 68px; border-radius: 14px; font-size: 46px; line-height: 68px; box-shadow: none; }
+  #seg { position: relative; display: flex; height: 76px; padding: 6px; border-radius: 38px; background: var(--surface); border: 3px solid var(--border); transform-origin: 100% 50%; }
+  #segInd { position: absolute; top: 6px; height: 58px; border-radius: 29px; background: var(--accent); box-shadow: 0 6px 14px rgba(16,124,65,.3); }
+  .sg { position: relative; z-index: 1; height: 58px; padding: 0 24px; display: flex; align-items: center; font-size: 34px; font-weight: 800; color: var(--muted); white-space: nowrap; }
+  .sgSep { position: relative; z-index: 0; width: 2px; margin: 14px 0; background: var(--border); }
+
+  /* Aufgabe */
+  #task { left: 60px; top: 122px; width: 960px; height: 124px; border-radius: 22px; background: var(--surface); border: 3px solid var(--border); display: flex; align-items: center; gap: 26px; padding: 0 34px; box-shadow: 0 10px 30px rgba(0,0,0,.06); }
+  #task .tag { font-size: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #fff; background: var(--accent); padding: 10px 18px; border-radius: 12px; white-space: nowrap; }
+  #task .q { font-size: 50px; font-weight: 700; white-space: nowrap; }
+  #task .q b { font-family: var(--mono); background: var(--target); border: 3px solid var(--target-border); border-radius: 10px; padding: 0 12px; }
+
+  /* Formelleiste */
+  #fbar { left: 60px; top: 270px; width: 960px; height: 96px; border: 3px solid var(--border); border-bottom: 0; border-radius: 18px 18px 0 0; background: var(--surface); display: flex; align-items: center; }
+  #fbar .nm { width: 130px; height: 100%; display: flex; align-items: center; justify-content: center; border-right: 3px solid var(--border); font: 700 40px var(--mono); color: var(--muted); }
+  #fbar .fx { width: 90px; text-align: center; font: italic 700 42px Georgia, serif; color: var(--muted); }
+  #ftext { font: 700 52px var(--mono); white-space: pre; display: flex; align-items: center; }
+  #fnw { position: relative; display: inline-block; height: 1.2em; overflow: hidden; vertical-align: bottom; }
+  #fnw span { position: absolute; left: 0; top: 0; line-height: 1.2em; }
+  #check { position: absolute; right: 22px; top: 14px; width: 66px; height: 66px; }
+
+  /* Tabelle */
+  #grid { left: 60px; top: 366px; width: 960px; height: 568px; background: var(--surface); border: 3px solid var(--border); border-radius: 0 0 18px 18px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,.08); }
+  .cell { position: absolute; display: flex; align-items: center; padding: 0 26px; font-size: 50px; border-right: 2px solid var(--border); border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .cell > span { display: inline-block; }
+  .hd { background: var(--grid-head); color: var(--muted); font-size: 36px; font-weight: 700; justify-content: center; padding: 0; }
+  .num { justify-content: flex-end; font-variant-numeric: tabular-nums; }
+  .bold { font-weight: 800; }
+  .h1 { font-size: 42px; }
+  #b6 { background: var(--target); }
+  #b6sel { position: absolute; border: 6px solid var(--accent); pointer-events: none; }
+  #refR { position: absolute; border: 5px dashed #1f6fd1; background: rgba(31,111,209,.08); border-radius: 4px; pointer-events: none; }
+  #wipe { position: absolute; top: 0; left: 0; width: 360px; height: 100%; pointer-events: none;
+    background: linear-gradient(90deg, rgba(16,124,65,0), rgba(16,124,65,.16) 50%, rgba(16,124,65,0)); }
+  .caret { display: inline-block; width: 5px; height: 1.05em; background: var(--text); margin-left: 3px; }
+  .fn { color: var(--accent-strong); }
+  .r1 { color: #1f6fd1; }
+
+  /* Datei-Karte */
+  #fileCard { left: 60px; top: 966px; width: 960px; height: 236px; border-radius: 24px; background: var(--surface); border: 3px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,.06); }
+  #chip { position: absolute; left: 34px; top: 30px; height: 104px; display: flex; align-items: center; gap: 22px; padding: 0 30px 0 20px; border-radius: 52px; background: var(--accent-soft); border: 3px solid var(--accent); }
+  #chip .xl { width: 66px; height: 76px; flex: none; }
+  #fname { font: 700 42px var(--mono); color: var(--accent-strong); white-space: pre; display: flex; }
+  #fsuf { display: inline-block; overflow: hidden; border-radius: 8px; }
+  #chip .dl { width: 52px; height: 52px; flex: none; }
+  .hint { position: absolute; left: 40px; top: 156px; width: 880px; font-size: 40px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+  .hint b { color: var(--accent-strong); }
+
+  /* Untertitel */
+  #caption { left: 60px; top: 1232px; width: 960px; height: 104px; display: flex; align-items: center; justify-content: center; }
+  .cap { position: absolute; display: flex; align-items: center; gap: 20px; padding: 14px 34px; border-radius: 18px; background: #1d1f1e; color: #fff; font-size: 46px; font-weight: 700; white-space: nowrap; }
+  .cap svg { width: 54px; height: 54px; border-radius: 8px; flex: none; }
+
+  /* Outro */
+  #outroBg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: var(--accent); }
+  #outro { left: 0; top: 0; width: 1080px; height: 1350px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff; }
+  #outro .logo { background: #fff; color: var(--accent); box-shadow: 0 18px 40px rgba(0,0,0,.18); }
+  #oWm { font-size: 104px; font-weight: 800; letter-spacing: -3px; margin-top: 30px; }
+  #oFacts { margin-top: 54px; font-size: 58px; font-weight: 700; line-height: 1.5; }
+  #oFacts span { display: inline-block; }
+  #oUrl { margin-top: 64px; font-size: 66px; font-weight: 800; background: #fff; color: var(--accent-strong); padding: 22px 48px; border-radius: 999px; box-shadow: 0 14px 34px rgba(0,0,0,.2); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bggrid"></div><div id="bgglow"></div>
+  <div id="content">
+    <!-- HUD -->
+    <div id="hud" class="abs">
+      <div id="hudBrand"><div class="logo">X</div>Excel-Drills</div>
+      <div id="seg"><div id="segInd"></div></div>
+    </div>
+
+    <!-- Aufgabe -->
+    <div id="task" class="abs"><div class="tag" id="taskTag"></div><div class="q" id="taskQ"></div></div>
+
+    <!-- Formelleiste + Tabelle -->
+    <div id="fbar" class="abs"><div class="nm">B6</div><div class="fx">fx</div><div id="ftext"></div>
+      <svg id="check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#107C41"/><path d="M6.5 12.4l3.6 3.6 7.4-7.6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div id="grid" class="abs"></div>
+
+    <!-- Übungsdatei -->
+    <div id="fileCard" class="abs">
+      <div id="chip">
+        <svg class="xl" viewBox="0 0 22 26"><path d="M2 1h12l6 6v17a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" fill="#fff" stroke="#107C41" stroke-width="1.6"/><path d="M14 1v6h6" fill="#e7f3ec" stroke="#107C41" stroke-width="1.6" stroke-linejoin="round"/><rect x="3.5" y="11" width="11" height="10" rx="1.5" fill="#107C41"/><path d="M6.4 13.3l5.2 5.4M11.6 13.3l-5.2 5.4" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <div id="fname"><span id="fbase"></span><span id="fsuf"></span><span id="fext"></span></div>
+        <svg class="dl" viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14" fill="none" stroke="#0b5c30" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <!-- Untertitel -->
+    <div id="caption" class="abs"></div>
+
+    <!-- Intro -->
+    <div id="intro" class="abs">
+      <div id="wm"><div class="logo">X</div><div id="wmText"></div></div>
+      <div id="claim"></div>
+      <div id="introLangs"></div>
+    </div>
+  </div>
+  <div id="outroBg"></div>
+  <div id="outroWrap" style="position:absolute;left:0;top:0;width:1080px;height:1350px;transform-origin:0 0">
+    <div id="outro" class="abs">
+      <div class="logo">X</div>
+      <div id="oWm"></div>
+      <div id="oFacts"></div>
+      <div id="oUrl"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---------- Texte (hier anpassen) ----------
+var TEXT = {
+  wordmark: 'Excel-<span>Drills</span>',
+  claim: 'Eine Übung.<br><em>Vier Sprachen.</em>',
+  introLangs: ['DE', 'FR', 'IT', 'DE-DE'],
+  segments: ['DE', 'FR', 'IT', 'DE-DE'],
+  file: { base: 'pivot-1-umsatz', suffix: '-de', ext: '.xlsx' },
+  hints: [ // [ab ms, Text] – Zeile unter dem Download-Chip
+    [4700, 'Übungsdatei zum Mitmachen inklusive.'],
+    [5800, "Zahlenformat CH bleibt gleich: <b>34'600</b>"],
+    [11750, '<b>Auch die Übungsdateien wechseln mit.</b>']
+  ],
+  outroWm: 'Excel-Drills',
+  outroFacts: '<span>42 Übungen</span> · <span>18 gratis</span><br><span>DE · FR · IT</span>',
+  url: 'excel-drills.ch'
+};
+// Pro Sprache: Untertitel (cap, mit Flagge), Aufgabe, Funktionsname, Kopfzeilen, Städte, Zahlenformat.
+var LANGS = [
+  { cap: 'Deutsch (Schweiz)', flag: 'ch', tag: 'Aufgabe', task: 'Berechne in <b>B6</b> die Summe', fn: 'SUMME',
+    hA: 'Filiale', hB: 'Umsatz CHF', cities: ['Zürich', 'Bern', 'Basel', 'Luzern'], total: 'Total', sep: "'" },
+  { cap: 'Français (Suisse)', flag: 'ch', tag: 'Exercice', task: 'Calcule la somme en <b>B6</b>', fn: 'SOMME',
+    hA: 'Succursale', hB: "Chiffre d'affaires CHF", cities: ['Zürich', 'Bern', 'Basel', 'Luzern'], total: 'Total', sep: "'" },
+  { cap: 'Italiano (Svizzera)', flag: 'ch', tag: 'Esercizio', task: 'Calcola la somma in <b>B6</b>', fn: 'SOMMA',
+    hA: 'Filiale', hB: 'Fatturato CHF', cities: ['Zürich', 'Bern', 'Basel', 'Luzern'], total: 'Totale', sep: "'" },
+  { cap: 'Deutsch (Deutschland)', flag: 'de', tag: 'Aufgabe', task: 'Berechne in <b>B6</b> die Summe', fn: 'SUMME',
+    hA: 'Filiale', hB: 'Umsatz EUR', cities: ['München', 'Hamburg', 'Köln', 'Frankfurt'], total: 'Gesamt', sep: '.' }
+];
+var VALUES = [12500, 8300, 9100, 4700];   // Summe 34'600 wird berechnet
+var ARGS = '(B2:B5)';
+var DURATION = 15000;
+
+// ---------- Timing ----------
+var SWITCH = [5000, 8000, 11000];          // Umschaltzeitpunkte FR, IT, DE-DE
+var SWAP = 250, FADE_IN = 350;              // Zellen: ausblenden 250 ms, Inhalt tauschen, einblenden 350 ms
+var T_TYPE = 3100, STEP = 95;               // =SUMME(B2:B5) tippen
+var T_ENTER = T_TYPE + STEP * ('=' + LANGS[0].fn + ARGS).length + 250; // ~4585
+var T_FILE = 11600;                         // Dateiname bekommt «-de»
+var T_OUTRO = 12950;
+
+// ---------- Setup ----------
+var q = new URLSearchParams(location.search);
+var W = +q.get('w') || 1080, H = +q.get('h') || 1920;
+var $ = function (id) { return document.getElementById(id); };
+var stage = $('stage'); stage.style.width = W + 'px'; stage.style.height = H + 'px';
+document.body.style.width = W + 'px'; document.body.style.height = H + 'px';
+// Inhaltsbox 1080x1350. Hochformat: Safe-Zones oben 250 / unten 320 px (bei 1920 Höhe).
+var sc, ox, oy;
+if (H / W > 1.5) { sc = W / 1080; var avail = H - (250 + 320) * sc; sc = Math.min(sc, avail / 1350); ox = (W - 1080 * sc) / 2; oy = 250 * (W / 1080) + (avail - 1350 * sc) / 2; }
+else { sc = Math.min((W - 40) / 1080, (H - 40) / 1350); ox = (W - 1080 * sc) / 2; oy = (H - 1350 * sc) / 2; }
+['content', 'outroWrap'].forEach(function (id) { $(id).style.transform = 'translate(' + ox + 'px,' + oy + 'px) scale(' + sc + ')'; });
+
+$('wmText').innerHTML = TEXT.wordmark; $('claim').innerHTML = TEXT.claim;
+TEXT.introLangs.forEach(function (l) { var s = document.createElement('span'); s.textContent = l; $('introLangs').appendChild(s); });
+$('oWm').textContent = TEXT.outroWm; $('oFacts').innerHTML = TEXT.outroFacts; $('oUrl').textContent = TEXT.url;
+$('fbase').textContent = TEXT.file.base; $('fsuf').textContent = TEXT.file.suffix; $('fext').textContent = TEXT.file.ext;
+
+// Segment-Schalter
+var segEls = [];
+TEXT.segments.forEach(function (s, i) {
+  if (i) { var sp = document.createElement('div'); sp.className = 'sgSep'; $('seg').appendChild(sp); }
+  var d = document.createElement('div'); d.className = 'sg'; d.textContent = s; $('seg').appendChild(d); segEls.push(d);
+});
+
+// Untertitel mit Flaggen
+var FLAGS = {
+  ch: '<svg viewBox="0 0 32 32"><rect width="32" height="32" fill="#da291c"/><path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" fill="#fff"/></svg>',
+  de: '<svg viewBox="0 0 32 32"><rect width="32" height="11" fill="#000"/><rect y="10.6" width="32" height="10.8" fill="#dd0000"/><rect y="21.3" width="32" height="10.7" fill="#ffce00"/></svg>'
+};
+var CAPT = [[2400, 5000], [5000, 8000], [8000, 11000], [11000, T_OUTRO]];
+LANGS.forEach(function (L, i) { var d = document.createElement('div'); d.className = 'cap'; d.id = 'cap' + i; d.innerHTML = FLAGS[L.flag] + '<span>' + L.cap + '</span>'; $('caption').appendChild(d); });
+
+// Hinweiszeilen
+TEXT.hints.forEach(function (h, i) { var d = document.createElement('div'); d.className = 'hint'; d.id = 'hint' + i; d.innerHTML = h[1]; $('fileCard').appendChild(d); });
+
+// Raster
+var COLX = [0, 110, 420], COLW = [110, 310, 540], HEADH = 64, ROWH = 84;
+function cellRect(c, r) { return { x: COLX[c], y: HEADH + (r - 1) * ROWH, w: COLW[c], h: ROWH }; }
+var grid = $('grid');
+function mk(cls, x, y, w, h, html, id) { var d = document.createElement('div'); d.className = 'cell ' + cls; d.style.cssText = 'left:' + x + 'px;top:' + y + 'px;width:' + w + 'px;height:' + h + 'px'; d.innerHTML = html; if (id) d.id = id; grid.appendChild(d); return d; }
+mk('hd', 0, 0, 110, HEADH, ''); mk('hd', 110, 0, 310, HEADH, 'A'); mk('hd', 420, 0, 540, HEADH, 'B');
+var rowEls = [], txtA = [], txtB = [];
+for (var i = 0; i < 6; i++) {
+  var y = HEADH + i * ROWH, els = [];
+  els.push(mk('hd', 0, y, 110, ROWH, String(i + 1)));
+  els.push(mk(i === 0 ? 'bold h1' : (i === 5 ? 'bold' : ''), 110, y, 310, ROWH, '<span></span>'));
+  els.push(mk('num' + (i === 0 ? ' bold h1' : ''), 420, y, 540, ROWH, '<span></span>', i === 5 ? 'b6' : null));
+  rowEls.push(els); txtA.push(els[1].firstChild); txtB.push(els[2].firstChild);
+}
+var refR = document.createElement('div'); refR.id = 'refR'; grid.appendChild(refR);
+var sel = document.createElement('div'); sel.id = 'b6sel'; grid.appendChild(sel);
+var wipe = document.createElement('div'); wipe.id = 'wipe'; grid.appendChild(wipe);
+function place(el, rc, inset) { el.style.left = (rc.x + inset) + 'px'; el.style.top = (rc.y + inset) + 'px'; el.style.width = (rc.w - 2 * inset) + 'px'; el.style.height = (rc.h - 2 * inset) + 'px'; }
+var r2 = cellRect(2, 2), r5 = cellRect(2, 5); place(refR, { x: r2.x, y: r2.y, w: r2.w, h: r5.y + r5.h - r2.y }, 4);
+place(sel, cellRect(2, 6), -2);
+
+function fmt(n, sep) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, sep); }
+var SUM = VALUES.reduce(function (a, b) { return a + b; }, 0);
+
+// ---------- Easing ----------
+function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+function p(t, a, b) { return clamp((t - a) / (b - a), 0, 1); }
+function lerp(a, b, k) { return a + (b - a) * k; }
+var eOut = function (k) { return 1 - Math.pow(1 - k, 3); };
+var eInOut = function (k) { return k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; };
+var eBack = function (k) { var c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
+function css(el, o, tf) { el.style.opacity = o; el.style.transform = tf || ''; el.style.visibility = o <= 0.001 ? 'hidden' : 'visible'; }
+function inOut(t, a, b, c, d) { return eOut(p(t, a, b)) * (1 - eInOut(p(t, c, d))); }
+
+// Sprache, deren Inhalt bei t sichtbar ist (Tausch in der Mitte des Fades)
+function langAt(t) { var n = 0; SWITCH.forEach(function (s) { if (t >= s + SWAP) n++; }); return n; }
+// Sprache des Schalters (springt sofort)
+function segAt(t) { var n = 0; SWITCH.forEach(function (s) { if (t >= s) n++; }); return n; }
+// Fade-Faktor der Zellen: 1 = sichtbar. onlyIdx: nur bei diesen Umschaltungen faden.
+function cellFade(t, onlyIdx) {
+  var k = 1;
+  SWITCH.forEach(function (s, i) {
+    if (onlyIdx && onlyIdx.indexOf(i) < 0) return;
+    if (t >= s && t < s + SWAP) k = 1 - eInOut(p(t, s, s + SWAP));
+    else if (t >= s + SWAP && t < s + SWAP + FADE_IN) k = eOut(p(t, s + SWAP, s + SWAP + FADE_IN));
+  });
+  return k;
+}
+function lastSwitch(t) { var r = -1; SWITCH.forEach(function (s, i) { if (t >= s) r = i; }); return r; }
+
+// ---------- Render ----------
+function render(t) {
+  var li = langAt(t), L = LANGS[li];
+
+  // Intro
+  var introIn = p(t, 0, 700), introOut = eInOut(p(t, 1750, 2250));
+  css($('wm'), eOut(introIn) * (1 - introOut), 'translateY(' + (lerp(40, 0, eOut(introIn)) - 80 * introOut) + 'px) scale(' + lerp(.86, 1, eBack(introIn)) + ')');
+  var cIn = p(t, 350, 1050);
+  css($('claim'), eOut(cIn) * (1 - introOut), 'translateY(' + (lerp(40, 0, eOut(cIn)) - 60 * introOut) + 'px)');
+  var langSp = $('introLangs').children;
+  for (var j = 0; j < langSp.length; j++) {
+    var kk = p(t, 800 + j * 120, 1200 + j * 120);
+    css(langSp[j], eOut(kk) * (1 - introOut), 'translateY(' + (lerp(24, 0, eOut(kk)) - 40 * introOut) + 'px) scale(' + lerp(.7, 1, eBack(kk)) + ')');
+  }
+  $('intro').style.visibility = t > 2300 ? 'hidden' : 'visible';
+
+  // HUD + Schalter
+  var hud = eOut(p(t, 2050, 2550));
+  css($('hud'), hud, 'translateY(' + lerp(-30, 0, hud) + 'px)');
+  var si = segAt(t), ls = lastSwitch(t), pos = si;
+  if (ls >= 0) pos = lerp(ls, ls + 1, eInOut(p(t, SWITCH[ls], SWITCH[ls] + 420)));
+  var a = Math.floor(pos), b = Math.min(a + 1, segEls.length - 1), fr = pos - a;
+  var ea = segEls[a], eb = segEls[b];
+  var segL = lerp(ea.offsetLeft, eb.offsetLeft, fr), segW = lerp(ea.offsetWidth, eb.offsetWidth, fr);
+  // leichtes «Strecken» des Indikators während des Wischers
+  var stretch = Math.sin(Math.PI * fr) * 18;
+  $('segInd').style.left = (segL - stretch / 2) + 'px'; $('segInd').style.width = (segW + stretch) + 'px';
+  segEls.forEach(function (e, i) { var on = 1 - clamp(Math.abs(pos - i), 0, 1); e.style.color = on > .5 ? '#fff' : 'var(--muted)'; });
+  var pulse = ls >= 0 ? p(t, SWITCH[ls], SWITCH[ls] + 500) : 0;
+  var pk = Math.sin(Math.PI * pulse);
+  $('seg').style.transform = 'scale(' + (1 + .12 * pk) + ')';
+  $('seg').style.borderColor = pk > .05 ? 'var(--accent)' : 'var(--border)';
+  $('seg').style.boxShadow = '0 0 0 ' + (pulse * 22) + 'px rgba(16,124,65,' + (.28 * (1 - pulse) * (pulse > 0 && pulse < 1 ? 1 : 0)) + ')';
+
+  // Aufgabe
+  var tk = eOut(p(t, 2500, 3050));
+  css($('task'), tk, 'translateY(' + lerp(30, 0, tk) + 'px)');
+  var tf = cellFade(t);
+  $('taskTag').textContent = L.tag; $('taskQ').innerHTML = L.task;
+  var pv = ls >= 0 ? LANGS[ls] : L, nx = ls >= 0 ? LANGS[ls + 1] : L; // gleicher Text -> nicht faden
+  $('taskTag').style.opacity = pv.tag === nx.tag ? 1 : tf;
+  $('taskQ').style.opacity = pv.task === nx.task ? 1 : tf;
+
+  // Formelleiste + Tabelle
+  var g = eOut(p(t, 2150, 2700));
+  css($('fbar'), g, 'translateY(' + lerp(50, 0, g) + 'px)');
+  css($('grid'), g, 'translateY(' + lerp(50, 0, g) + 'px)');
+  var fadeTxt = cellFade(t), fadeNum = cellFade(t, [2]);
+  for (var r = 0; r < 6; r++) {
+    var k = eOut(p(t, 2400 + r * 110, 2800 + r * 110));
+    rowEls[r].forEach(function (e) { e.style.opacity = k; });
+    rowEls[r][1].style.transform = rowEls[r][2].style.transform = 'translateX(' + lerp(24, 0, k) + 'px)';
+    // Inhalte
+    var aTxt, bTxt;
+    if (r === 0) { aTxt = L.hA; bTxt = L.hB; }
+    else if (r < 5) { aTxt = L.cities[r - 1]; bTxt = fmt(VALUES[r - 1], L.sep); }
+    else { aTxt = L.total; bTxt = ''; }
+    txtA[r].textContent = aTxt;
+    if (r < 5) txtB[r].textContent = bTxt;
+    // nur faden, was sich ändert
+    var prev = ls >= 0 ? LANGS[ls] : L, next = ls >= 0 ? LANGS[ls + 1] : L;
+    var aPrev = r === 0 ? prev.hA : r < 5 ? prev.cities[r - 1] : prev.total;
+    var aNext = r === 0 ? next.hA : r < 5 ? next.cities[r - 1] : next.total;
+    txtA[r].style.opacity = aPrev === aNext ? 1 : fadeTxt;
+    if (r === 0) txtB[r].style.opacity = prev.hB === next.hB ? 1 : fadeTxt;
+    else if (r < 5) txtB[r].style.opacity = fadeNum;
+  }
+  // Wischer über die Tabelle bei jeder Umschaltung
+  var wk = ls >= 0 ? p(t, SWITCH[ls], SWITCH[ls] + 650) : 0;
+  wipe.style.opacity = wk > 0 && wk < 1 ? 1 : 0;
+  wipe.style.transform = 'translateX(' + lerp(-380, 980, eInOut(wk)) + 'px)';
+
+  // Auswahl B6
+  sel.style.opacity = t > 2950 ? eOut(p(t, 2950, 3150)) : 0;
+
+  // Formel
+  var full = '=' + LANGS[0].fn + ARGS;
+  var editing = t >= 2950 && t < T_ENTER;
+  var html = '';
+  if (t < T_ENTER) {
+    var n = clamp(Math.floor((t - T_TYPE) / STEP) + 1, 0, full.length);
+    var s = t >= T_TYPE ? full.slice(0, n) : '';
+    var last = T_TYPE + (n - 1) * STEP;
+    var eh = s.replace(/^=([A-Z]+)/, '=<span class="fn">$1</span>').replace('B2', '<span class="r1">B2</span>').replace('B5', '<span class="r1">B5</span>');
+    var caretOn = editing && ((t - last) < 450 || Math.floor((t - last) / 500) % 2 === 1);
+    html = eh + (editing ? '<span class="caret" style="opacity:' + (caretOn ? 1 : 0) + '"></span>' : '');
+    refR.style.opacity = s.indexOf('B2:B5') >= 0 ? 1 : 0;
+    $('ftext').innerHTML = html;
+    var b6 = $('b6');
+    b6.innerHTML = editing ? '<span style="font-family:var(--mono);font-weight:700;font-size:44px">' + eh + '</span>' : '';
+    b6.style.justifyContent = 'flex-start';
+  } else {
+    refR.style.opacity = 0;
+    // Funktionsname morpht: alter Name nach oben raus, neuer von unten rein
+    var mk0 = ls >= 0 ? eInOut(p(t, SWITCH[ls] + 150, SWITCH[ls] + 650)) : 1;
+    var oldFn = ls >= 0 ? LANGS[ls].fn : LANGS[0].fn, newFn = ls >= 0 ? LANGS[ls + 1].fn : LANGS[0].fn;
+    var wch = lerp(oldFn.length, newFn.length, mk0);
+    $('ftext').innerHTML = '=<span id="fnw" style="width:' + wch + 'ch"><span class="fn" style="transform:translateY(' + (-110 * mk0) + '%);opacity:' + (1 - mk0) + '">' + oldFn + '</span>' +
+      '<span class="fn" style="transform:translateY(' + (110 * (1 - mk0)) + '%);opacity:' + mk0 + '">' + newFn + '</span></span>' +
+      '(<span class="r1">B2</span>:<span class="r1">B5</span>)';
+    var b6e = $('b6');
+    b6e.innerHTML = '<span class="bold">' + fmt(SUM, L.sep) + '</span>';
+    b6e.style.justifyContent = 'flex-end';
+    b6e.firstChild.style.opacity = fadeNum;
+  }
+  // B6 Farbe + Pop
+  var done = t >= T_ENTER;
+  var b6x = $('b6');
+  b6x.style.background = done ? 'rgba(16,124,65,' + (0.18 + .1 * eOut(p(t, T_ENTER, T_ENTER + 300))) + ')' : 'var(--target)';
+  b6x.style.color = done ? 'var(--accent-strong)' : '';
+  var popT = ls >= 0 ? SWITCH[ls] + 650 : T_ENTER;
+  var pop = done ? 1 + .12 * Math.sin(Math.PI * p(t, popT, popT + 380)) : 1;
+  b6x.style.transform = 'scale(' + pop + ')';
+
+  // Häkchen: erscheint nach Enter, verschwindet kurz beim Umschalten und poppt wieder
+  var ck;
+  if (!done) ck = 0;
+  else if (ls < 0) ck = eBack(p(t, T_ENTER, T_ENTER + 450));
+  else {
+    var sw = SWITCH[ls];
+    ck = t < sw + 150 ? 1 - eInOut(p(t, sw, sw + 150)) : eBack(p(t, sw + 600, sw + 1000));
+  }
+  css($('check'), clamp(ck, 0, 1), 'scale(' + Math.max(ck, 0) + ') rotate(' + lerp(-40, 0, clamp(ck, 0, 1)) + 'deg)');
+
+  // Datei-Karte
+  var fc = eOut(p(t, 4550, 5000));
+  css($('fileCard'), fc, 'translateY(' + lerp(40, 0, fc) + 'px)');
+  var fs = eInOut(p(t, T_FILE, T_FILE + 450));
+  var suf = $('fsuf');
+  suf.style.width = (fs * TEXT.file.suffix.length) + 'ch';
+  suf.style.opacity = fs;
+  suf.style.background = 'rgba(16,124,65,' + (.22 * fs) + ')';
+  suf.style.color = 'var(--accent)';
+  var cp = p(t, T_FILE, T_FILE + 500);
+  $('chip').style.transform = 'scale(' + (1 + .08 * Math.sin(Math.PI * cp)) + ')';
+  $('chip').style.transformOrigin = '0 50%';
+  TEXT.hints.forEach(function (h, i) {
+    var nextT = i + 1 < TEXT.hints.length ? TEXT.hints[i + 1][0] : 1e9;
+    var k = inOut(t, h[0], h[0] + 300, nextT - 250, nextT);
+    css($('hint' + i), k, 'translateY(' + lerp(14, 0, eOut(p(t, h[0], h[0] + 300))) + 'px)');
+  });
+
+  // Untertitel
+  LANGS.forEach(function (Lx, i) {
+    var c = CAPT[i];
+    var k = inOut(t, c[0] + 100, c[0] + 400, c[1] - 200, c[1] + 50);
+    css($('cap' + i), k, 'translateY(' + lerp(16, 0, eOut(p(t, c[0] + 100, c[0] + 400))) + 'px)');
+  });
+
+  // Outro
+  var ob = eInOut(p(t, T_OUTRO, T_OUTRO + 450));
+  $('outroBg').style.clipPath = 'circle(' + (ob * 150) + '% at 50% 100%)';
+  $('outroBg').style.visibility = ob > 0 ? 'visible' : 'hidden';
+  var ol = p(t, T_OUTRO + 250, T_OUTRO + 700);
+  css($('outro').querySelector('.logo'), eOut(ol), 'scale(' + lerp(.6, 1, eBack(ol)) + ')');
+  var ow = eOut(p(t, T_OUTRO + 350, T_OUTRO + 800));
+  css($('oWm'), ow, 'translateY(' + lerp(30, 0, ow) + 'px)');
+  var of = eOut(p(t, T_OUTRO + 500, T_OUTRO + 950));
+  css($('oFacts'), of, 'translateY(' + lerp(30, 0, of) + 'px)');
+  var ou = p(t, T_OUTRO + 650, T_OUTRO + 1100);
+  css($('oUrl'), eOut(ou), 'scale(' + lerp(.7, 1, eBack(ou)) + ')');
+}
+
+var tParam = q.get('t');
+if (tParam !== null) { render(+tParam); }
+else {
+  var t0 = null;
+  (function loop(now) { if (t0 === null) t0 = now; render((now - t0) % DURATION); requestAnimationFrame(loop); })(performance.now());
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+node_modules/
+.DS_Store
+social-kit/video/frames/
+social-kit/video/frames-switch/

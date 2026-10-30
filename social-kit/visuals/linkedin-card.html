@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<title>Excel-Drills LinkedIn-Karte 1200x627 (?v=1..5)</title>
+<!--
+  Varianten über Query-Parameter: linkedin-card.html?v=1 … ?v=5
+  1 Launch · 2 SVERWEIS-Fehler · 3 Semikolon · 4 Accounting · 5 Finance
+  Ohne Parameter wird v=1 gezeigt. Inhalt der Varianten unten im <script> anpassen.
+-->
+<style>
+  :root { --g:#107C41; --gd:#0B5A2E; --gl:#E7F2EB; --red:#C42B1C; --redl:#FBEAE8; --ink:#1B1F1D; --mut:#5A635E; --line:#D5DDD8; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { width:1200px; height:627px; overflow:hidden; }
+  body { margin:0; background:#fff; color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .mono { font-family:"SF Mono", Menlo, Consolas, monospace; }
+  .wrap { position:relative; width:1200px; height:627px; display:flex; }
+  .bar { position:absolute; left:0; top:0; bottom:0; width:16px; background:var(--g); }
+  .left { width:600px; padding:58px 36px 50px 76px; display:flex; flex-direction:column; }
+  .kicker { display:inline-block; align-self:flex-start; font-size:18px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:var(--gd); background:var(--gl); padding:8px 14px; border-radius:6px; }
+  h1 { margin-top:28px; font-size:54px; line-height:1.07; letter-spacing:-1.4px; font-weight:800; }
+  h1 em { font-style:normal; color:var(--g); }
+  .sub { margin-top:22px; font-size:24px; line-height:1.42; color:var(--mut); }
+  ol.list { margin-top:24px; list-style:none; display:flex; flex-direction:column; gap:14px; }
+  ol.list li { display:flex; gap:14px; align-items:center; font-size:25px; font-weight:600; }
+  ol.list li b { flex:none; width:40px; height:40px; border-radius:50%; background:var(--g); color:#fff; display:flex; align-items:center; justify-content:center; font-size:21px; }
+  .foot { margin-top:auto; display:flex; align-items:center; gap:12px; font-weight:700; font-size:22px; }
+  .logo { width:36px; height:36px; border-radius:7px; background:var(--g); display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:2px; padding:7px; }
+  .logo i { background:rgba(255,255,255,.92); border-radius:1px; }
+  .logo i:nth-child(4) { background:rgba(255,255,255,.45); }
+  .foot span { color:var(--mut); font-weight:500; }
+  .right { flex:1; padding:58px 60px 58px 12px; display:flex; flex-direction:column; justify-content:center; gap:18px; }
+  .sheet { width:100%; border:2px solid var(--line); border-radius:14px; overflow:hidden; background:#fff; box-shadow:0 18px 40px rgba(16,124,65,.12); }
+  .fx { display:flex; align-items:center; border-bottom:2px solid var(--line); background:#F7F9F8; min-height:54px; }
+  .fx b { flex:none; width:58px; text-align:center; font-size:16px; color:var(--mut); border-right:2px solid var(--line); line-height:54px; }
+  .fx span { padding:0 14px; font-size:18px; white-space:nowrap; }
+  table { border-collapse:collapse; width:100%; font-size:19px; }
+  th, td { border:1px solid var(--line); height:46px; padding:0 11px; white-space:nowrap; }
+  th { background:#F0F3F1; color:var(--mut); font-weight:600; font-size:15px; text-align:center; }
+  th.r { width:40px; }
+  td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  td.h { font-weight:700; }
+  td.sel { outline:3px solid var(--g); outline-offset:-3px; background:var(--gl); font-weight:700; color:var(--gd); }
+  .ok { display:flex; align-items:center; gap:10px; padding:13px 16px; background:var(--g); color:#fff; font-weight:700; font-size:19px; }
+  .ok .c, .bad .c { flex:none; width:26px; height:26px; border-radius:50%; background:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:17px; }
+  .ok .c { color:var(--g); }
+  .cmp { border:2px solid var(--line); border-radius:14px; overflow:hidden; }
+  .cmp .lab { display:flex; align-items:center; gap:10px; padding:10px 16px; font-size:17px; font-weight:700; }
+  .cmp .code { padding:18px 16px 20px; font-size:21px; line-height:1.4; word-break:break-all; }
+  .cmp.badc .lab { background:var(--redl); color:var(--red); }
+  .cmp.badc .code { background:#fff; }
+  .cmp.goodc { border-color:var(--g); }
+  .cmp.goodc .lab { background:var(--g); color:#fff; }
+  .cmp.goodc .code { background:var(--gl); }
+  .hl { color:#fff; background:var(--red); border-radius:4px; padding:0 4px; }
+  .hg { color:#fff; background:var(--g); border-radius:4px; padding:0 4px; }
+  .neg { color:var(--red); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar"></div>
+  <div class="left" id="left"></div>
+  <div class="right" id="right"></div>
+</div>
+<script>
+(function () {
+  var foot = '<div class="foot"><div class="logo"><i></i><i></i><i></i><i></i></div>Excel-Drills <span>· Excel üben auf Deutsch</span></div>';
+  function sheet(fx, rows, ok) {
+    var h = '<div class="sheet"><div class="fx"><b class="mono">fx</b><span class="mono">' + fx + '</span></div><table>';
+    rows.forEach(function (r, i) {
+      h += '<tr>' + (i === 0 ? '<th class="r"></th>' : '<th class="r">' + i + '</th>');
+      r.forEach(function (c) {
+        if (i === 0) { h += '<th>' + c + '</th>'; return; }
+        var cls = '', v = c;
+        if (typeof c === 'object' && c) { cls = c.c; v = c.v; }
+        h += '<td class="' + cls + '">' + (v == null ? '' : v) + '</td>';
+      });
+      h += '</tr>';
+    });
+    h += '</table>' + (ok ? '<div class="ok"><span class="c">✓</span>' + ok + '</div>' : '') + '</div>';
+    return h;
+  }
+  function H(c) { return { c: 'h', v: c }; }
+  function N(c) { return { c: 'n', v: c }; }
+  function S(c) { return { c: 'n sel', v: c }; }
+
+  var V = {
+    1: {
+      left: '<span class="kicker">Neu · gebaut in der Schweiz</span>' +
+        '<h1>Excel üben wie <em>Vokabeln</em>.</h1>' +
+        '<p class="sub">Kleine Tabelle, klare Aufgabe, Formel selbst tippen. Die Prüfung zeigt sofort, ob sie stimmt.</p>' +
+        '<p class="sub"><b style="color:#1B1F1D">42 Übungen · 18 gratis · ohne Anmeldung</b></p>' + foot,
+      right: sheet('=SUMME(B2:B5)', [
+        ['A', 'B', 'C'],
+        [H('Filiale'), H('Umsatz CHF'), ''],
+        ['Bern', N("48'200"), ''],
+        ['Basel', N("39'750"), ''],
+        ['Luzern', N("27'400"), ''],
+        ['Zürich', N("61'900"), ''],
+        [H('Total'), S("177'250"), '']
+      ], 'Richtig. Weiter zur nächsten Übung.')
+    },
+    2: {
+      left: '<span class="kicker">SVERWEIS</span>' +
+        '<h1>3 Fehler, die <em>jeder</em> in SVERWEIS macht</h1>' +
+        '<ol class="list"><li><b>1</b>FALSCH vergessen</li><li><b>2</b>Matrix nicht mit $ fixiert</li><li><b>3</b>Spaltenindex falsch gezählt</li></ol>' + foot,
+      right: '<div class="cmp badc"><div class="lab">✗ Sucht ungefähr, liefert falschen Wert</div><div class="code mono">=SVERWEIS(D2;A2:B6;2<span class="hl">&nbsp;</span>)</div></div>' +
+        '<div class="cmp goodc"><div class="lab">✓ Exakt und kopierbar</div><div class="code mono">=SVERWEIS(D2;<span class="hg">$A$2:$B$6</span>;2;<span class="hg">FALSCH</span>)</div></div>' +
+        '<p class="sub" style="margin-top:4px;font-size:20px">Das Tückische: Keiner der drei Fehler zeigt #NV. Die Zahl sieht plausibel aus.</p>'
+    },
+    3: {
+      left: '<span class="kicker">Excel auf Deutsch</span>' +
+        '<h1>Komma oder <em>Semikolon</em>?</h1>' +
+        '<p class="sub">Englische Tutorials trennen Argumente mit Komma. In deutschsprachigem Excel brauchst du Semikolon und deutsche Funktionsnamen, auch in der Schweiz.</p>' + foot,
+      right: '<div class="cmp badc"><div class="lab">Englisches Tutorial</div><div class="code mono">=SUMIF(A2:A10<span class="hl">,</span>"Zürich"<span class="hl">,</span>B2:B10)</div></div>' +
+        '<div class="cmp goodc"><div class="lab">Dein Excel auf Deutsch</div><div class="code mono">=<span class="hg">SUMMEWENN</span>(A2:A10<span class="hg">;</span>"Zürich"<span class="hg">;</span>B2:B10)</div></div>' +
+        '<p class="sub" style="margin-top:4px;font-size:20px">SUM → SUMME · IF → WENN · VLOOKUP → SVERWEIS</p>'
+    },
+    4: {
+      left: '<span class="kicker">Lernpfad</span>' +
+        '<h1>Excel für <em>Accounting</em> &amp; Controlling</h1>' +
+        '<p class="sub">11 Übungen aus dem Monatsabschluss: Budget/Ist, MwSt, 5-Rappen-Rundung, SUMMEWENNS, Abstimmung, offene Posten.</p>' + foot,
+      right: sheet('=(C2-B2)/B2', [
+        ['A', 'B', 'C', 'D'],
+        [H('Konto'), H('Budget'), H('Ist'), H('Abw. %')],
+        ['Reisespesen', N("28'000"), N("24'600"), S('<span class="neg">−12.1 %</span>')],
+        ['Büromaterial', N("12'000"), N("13'450"), N('12.1 %')],
+        ['Weiterbildung', N("15'000"), N("15'900"), N('6.0 %')]
+      ], 'Richtig. Auch mit anderen Beträgen geprüft.')
+    },
+    5: {
+      left: '<span class="kicker">Lernpfad</span>' +
+        '<h1>Excel für <em>Banking</em> &amp; Finance</h1>' +
+        '<p class="sub">11 Übungen: Zinseszins, Cashflow, Schadenquote, CAGR, Prämienstaffel, RMZ, Barwert, Endwert Säule 3a.</p>' + foot,
+      right: sheet('=-RMZ(B2/12;C2*12;A2)', [
+        ['A', 'B', 'C', 'D'],
+        [H('Betrag CHF'), H('Zins p.a.'), H('Jahre'), H('Rate/Monat')],
+        [N("30'000"), N('4.9 %'), N('5'), S('564.76')],
+        ['', '', '', ''],
+        [H('Rente/Jahr'), H('Diskont'), H('Jahre'), H('Barwert')],
+        [N("24'000"), N('2.0 %'), N('15'), N("308'382")]
+      ], 'Zins und Laufzeit in derselben Zeiteinheit.')
+    }
+  };
+  var v = parseInt(new URLSearchParams(location.search).get('v'), 10);
+  if (!V[v]) v = 1;
+  document.getElementById('left').innerHTML = V[v].left;
+  document.getElementById('right').innerHTML = V[v].right;
+  document.title = 'Excel-Drills LinkedIn-Karte v' + v;
+})();
+</script>
+</body>
+</html>

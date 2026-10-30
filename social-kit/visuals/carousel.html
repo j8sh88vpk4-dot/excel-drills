@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<title>Excel-Drills Instagram-Karussell 1080x1350 (?c=1..6&s=1..n)</title>
+<!--
+  Instagram-Karussells (Hochformat 4:5, 1080×1350), Konzepte aus ../instagram-tiktok.md (IG-K1 … IG-K6).
+  Aufruf: carousel.html?c=1&s=1   c = Karussell 1..6, s = Slide 1..n (ohne Parameter: c=1, s=1)
+  1 SVERWEIS-Fehler (7) · 2 Übersetzungen (7) · 3 Einstellungstest (8) · 4 Monatsabschluss (7)
+  5 Schweizer Eigenheiten (7) · 6 Warum Videos nicht reichen (7)
+  Gerendert von render-instagram.sh nach png/instagram/c<nr>-s<nr>.png.
+  Design wie linkedin-card.html: grüner Balken, Wortmarke, Zellraster, grosse Typo. Letzte Slide = CTA (grün).
+  Formeln in code(): [[…]] = grün markiert, {{…}} = rot markiert.
+  Passt der Inhalt nicht in die Slide, verkleinert das Skript unten die Typo schrittweise (--k).
+-->
+<style>
+  :root { --g:#107C41; --gd:#0B5A2E; --gl:#E7F2EB; --red:#C42B1C; --redl:#FBEAE8; --ink:#1B1F1D; --mut:#5A635E; --line:#D5DDD8; --k:1; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { width:1080px; height:1350px; overflow:hidden; }
+  body { background:#fff; color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .mono { font-family:"SF Mono", Menlo, Consolas, monospace; }
+  .slide { position:relative; width:1080px; height:1350px; display:flex; flex-direction:column; padding:66px 84px 64px 108px;
+    background-color:#fff;
+    background-image:linear-gradient(rgba(16,124,65,.055) 2px, transparent 2px), linear-gradient(90deg, rgba(16,124,65,.055) 2px, transparent 2px);
+    background-size:120px 60px; background-position:-2px -2px; }
+  .bar { position:absolute; left:0; top:0; bottom:0; width:20px; background:var(--g); }
+
+  header { display:flex; align-items:center; justify-content:space-between; flex:none; }
+  .brand { display:flex; align-items:center; gap:16px; font-weight:800; font-size:32px; letter-spacing:-.3px; }
+  .logo { width:52px; height:52px; border-radius:10px; background:var(--g); display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:3px; padding:10px; }
+  .logo i { background:rgba(255,255,255,.92); border-radius:2px; }
+  .logo i:nth-child(4) { background:rgba(255,255,255,.45); }
+  .count { font-size:26px; font-weight:700; color:var(--mut); background:#fff; border:2px solid var(--line); border-radius:999px; padding:8px 20px; font-variant-numeric:tabular-nums; }
+  .count b { color:var(--g); }
+
+  main { flex:1; min-height:0; display:flex; flex-direction:column; justify-content:center; gap:calc(34px*var(--k)); padding:30px 0; }
+  .kicker { display:inline-block; align-self:flex-start; font-size:calc(26px*var(--k)); font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--gd); background:var(--gl); padding:10px 18px; border-radius:8px; }
+  .kicker.red { color:var(--red); background:var(--redl); }
+  h1 { font-size:calc(98px*var(--k)); line-height:1.03; letter-spacing:-2.6px; font-weight:800; }
+  h2 { font-size:calc(74px*var(--k)); line-height:1.06; letter-spacing:-1.8px; font-weight:800; }
+  h1 em, h2 em { font-style:normal; color:var(--g); }
+  .sub { font-size:calc(38px*var(--k)); line-height:1.38; color:var(--mut); }
+  .sub b { color:var(--ink); }
+  .sub .mono { font-size:.9em; color:var(--ink); }
+
+  .cmp { border:2px solid var(--line); border-radius:18px; overflow:hidden; background:#fff; }
+  .cmp .lab { display:flex; align-items:center; gap:12px; padding:14px 22px; font-size:calc(27px*var(--k)); font-weight:700; }
+  .cmp .code { padding:22px 22px 26px; font-size:calc(38px*var(--k)); line-height:1.38; word-break:normal; overflow-wrap:anywhere; }
+  .cmp.bad .lab { background:var(--redl); color:var(--red); }
+  .cmp.good { border-color:var(--g); }
+  .cmp.good .lab { background:var(--g); color:#fff; }
+  .cmp.good .code { background:var(--gl); }
+  .cmp.plain .lab { background:#F0F3F1; color:var(--mut); }
+  .hl { color:#fff; background:var(--red); border-radius:5px; padding:0 5px; }
+  .hg { color:#fff; background:var(--g); border-radius:5px; padding:0 5px; }
+
+  .sheet { border:2px solid var(--line); border-radius:18px; overflow:hidden; background:#fff; box-shadow:0 18px 40px rgba(16,124,65,.12); }
+  .fx { display:flex; align-items:center; border-bottom:2px solid var(--line); background:#F7F9F8; min-height:72px; }
+  .fx b { flex:none; width:76px; text-align:center; font-size:22px; color:var(--mut); border-right:2px solid var(--line); line-height:72px; }
+  .fx span { padding:0 18px; font-size:calc(30px*var(--k)); white-space:nowrap; }
+  table { border-collapse:collapse; width:100%; font-size:calc(30px*var(--k)); }
+  th, td { border:1px solid var(--line); height:calc(64px*var(--k)); padding:0 16px; white-space:nowrap; }
+  th { background:#F0F3F1; color:var(--mut); font-weight:600; font-size:calc(22px*var(--k)); text-align:center; }
+  th.r { width:56px; }
+  td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  td.c { text-align:center; }
+  td.h { font-weight:700; }
+  td.sel { outline:4px solid var(--g); outline-offset:-4px; background:var(--gl); font-weight:700; color:var(--gd); }
+  td.err { outline:4px solid var(--red); outline-offset:-4px; background:var(--redl); font-weight:700; color:var(--red); }
+  td.idx { background:var(--g); color:#fff; font-weight:800; text-align:center; height:calc(52px*var(--k)); font-size:.9em; }
+  .ok, .no { display:flex; align-items:center; gap:14px; padding:18px 22px; font-weight:700; font-size:calc(28px*var(--k)); }
+  .ok { background:var(--g); color:#fff; }
+  .no { background:var(--red); color:#fff; }
+  .ok .c, .no .c { flex:none; width:36px; height:36px; border-radius:50%; background:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:22px; }
+  .ok .c { color:var(--g); } .no .c { color:var(--red); }
+
+  .pairs { display:flex; flex-direction:column; gap:calc(26px*var(--k)); }
+  .pair { display:flex; align-items:center; gap:28px; background:#fff; border:2px solid var(--line); border-radius:18px; padding:calc(26px*var(--k)) 30px; }
+  .pair .en { flex:none; width:300px; font-size:calc(40px*var(--k)); color:var(--mut); }
+  .pair .ar { flex:none; font-size:44px; color:var(--g); font-weight:800; }
+  .pair .de { font-size:calc(58px*var(--k)); font-weight:800; color:var(--gd); letter-spacing:-.5px; }
+
+  ul.check, ol.steps { list-style:none; display:flex; flex-direction:column; gap:calc(20px*var(--k)); }
+  ul.check li, ol.steps li { display:flex; align-items:center; gap:22px; font-size:calc(40px*var(--k)); font-weight:650; }
+  ul.check li i { flex:none; width:46px; height:46px; border:4px solid var(--g); border-radius:8px; background:#fff; }
+  ol.steps li b { flex:none; width:62px; height:62px; border-radius:50%; background:var(--g); color:#fff; display:flex; align-items:center; justify-content:center; font-size:32px; }
+  ol.steps li small { display:block; font-size:.72em; color:var(--mut); font-weight:500; margin-top:4px; }
+
+  .big { font-size:calc(170px*var(--k)); line-height:1; font-weight:800; letter-spacing:-5px; color:var(--g); font-variant-numeric:tabular-nums; }
+  .note { background:#fff; border-left:8px solid var(--g); border-radius:6px; padding:22px 26px; font-size:calc(32px*var(--k)); line-height:1.4; color:var(--ink); box-shadow:0 8px 24px rgba(0,0,0,.05); }
+  .chips { display:flex; flex-wrap:wrap; gap:16px; }
+  .chip { font-size:calc(32px*var(--k)); font-weight:700; padding:14px 24px; border-radius:999px; background:#fff; border:3px solid var(--g); color:var(--gd); }
+  .chip.f { background:var(--g); color:#fff; }
+  .refs { display:grid; grid-template-columns:auto 1fr; gap:calc(18px*var(--k)) 28px; align-items:center; background:#fff; border:2px solid var(--line); border-radius:18px; padding:28px 30px; }
+  .refs .mono { font-size:calc(48px*var(--k)); font-weight:800; }
+  .refs span { font-size:calc(32px*var(--k)); color:var(--mut); }
+  .refs .on { color:var(--g); }
+
+  footer { flex:none; display:flex; align-items:center; gap:28px; }
+  .prog { flex:1; display:flex; gap:10px; }
+  .prog i { flex:1; height:10px; border-radius:5px; background:var(--line); }
+  .prog i.on { background:var(--g); }
+  .swipe { font-size:26px; font-weight:700; color:var(--gd); white-space:nowrap; }
+
+  /* CTA-Slide (letzte), grün wie story.html */
+  .slide.cta { background-color:var(--g); color:#fff;
+    background-image:linear-gradient(rgba(255,255,255,.07) 2px, transparent 2px), linear-gradient(90deg, rgba(255,255,255,.07) 2px, transparent 2px); }
+  .slide.cta .bar { background:var(--gd); }
+  .slide.cta .logo { background:#fff; }
+  .slide.cta .logo i { background:var(--g); }
+  .slide.cta .logo i:nth-child(4) { background:rgba(16,124,65,.4); }
+  .slide.cta .count { background:transparent; border-color:rgba(255,255,255,.4); color:rgba(255,255,255,.8); }
+  .slide.cta .count b { color:#fff; }
+  .slide.cta h1 em, .slide.cta h2 em { color:#B9E5C9; }
+  .slide.cta .sub { color:rgba(255,255,255,.88); }
+  .slide.cta .sub b { color:#fff; }
+  .slide.cta .kicker { background:rgba(255,255,255,.16); color:#fff; }
+  .slide.cta .prog i { background:rgba(255,255,255,.3); }
+  .slide.cta .prog i.on { background:#fff; }
+  .slide.cta .swipe { color:#fff; }
+  .pill { align-self:flex-start; background:#fff; color:var(--gd); font-size:calc(50px*var(--k)); font-weight:800; padding:30px 56px; border-radius:999px; box-shadow:0 20px 40px rgba(0,0,0,.18); }
+  .facts { display:flex; flex-direction:column; gap:14px; font-size:calc(34px*var(--k)); font-weight:600; }
+  .facts div::before { content:"✓"; display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; margin-right:18px; border-radius:50%; background:rgba(255,255,255,.18); font-size:24px; vertical-align:middle; }
+  .indep { font-size:22px; color:rgba(255,255,255,.7); }
+</style>
+</head>
+<body>
+<div class="slide" id="slide">
+  <div class="bar"></div>
+  <header>
+    <div class="brand"><div class="logo"><i></i><i></i><i></i><i></i></div>Excel-Drills</div>
+    <div class="count" id="count"></div>
+  </header>
+  <main id="main"></main>
+  <footer id="foot"></footer>
+</div>
+<script>
+(function () {
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function fm(s) { // Formel mit Markierungen [[grün]] und {{rot}}
+    return esc(s).replace(/\[\[(.+?)\]\]/g, '<span class="hg">$1</span>').replace(/\{\{(.+?)\}\}/g, '<span class="hl">$1</span>')
+      .replace(/;(?![^<]*<\/span>)/g, ';<wbr>'); // Umbruch bevorzugt nach Semikolon
+  }
+  function K(t, red) { return '<span class="kicker' + (red ? ' red' : '') + '">' + t + '</span>'; }
+  function H1(t) { return '<h1>' + t + '</h1>'; }
+  function H2(t) { return '<h2>' + t + '</h2>'; }
+  function P(t) { return '<p class="sub">' + t + '</p>'; }
+  function NOTE(t) { return '<div class="note">' + t + '</div>'; }
+  function C(kind, label, code) { // kind: good | bad | plain
+    var ic = kind === 'good' ? '✓ ' : kind === 'bad' ? '✗ ' : '';
+    return '<div class="cmp ' + kind + '"><div class="lab">' + ic + label + '</div><div class="code mono">' + fm(code) + '</div></div>';
+  }
+  function SHEET(fx, rows, foot) {
+    var h = '<div class="sheet">' + (fx ? '<div class="fx"><b class="mono">fx</b><span class="mono">' + fm(fx) + '</span></div>' : '') + '<table>';
+    var rn = 0;
+    rows.forEach(function (r, i) {
+      var isIdx = i > 0 && r.every(function (c) { return c && c.c === 'idx'; }); // Index-Zeile ohne Zeilennummer
+      if (i > 0 && !isIdx) rn++;
+      h += '<tr>' + (i === 0 || isIdx ? '<th class="r"></th>' : '<th class="r">' + rn + '</th>');
+      r.forEach(function (c) {
+        if (i === 0) { h += '<th>' + c + '</th>'; return; }
+        var cls = '', v = c;
+        if (c && typeof c === 'object') { cls = c.c; v = c.v; }
+        h += '<td class="' + cls + '">' + (v == null ? '' : v) + '</td>';
+      });
+      h += '</tr>';
+    });
+    h += '</table>';
+    if (foot) h += foot.ok ? '<div class="ok"><span class="c">✓</span>' + foot.ok + '</div>' : '<div class="no"><span class="c">✗</span>' + foot.no + '</div>';
+    return h + '</div>';
+  }
+  function Hd(v) { return { c: 'h', v: v }; }
+  function N(v) { return { c: 'n', v: v }; }
+  function S(v) { return { c: 'n sel', v: v }; }
+  function E(v) { return { c: 'n err', v: v }; }
+  function I(v) { return { c: 'idx', v: v }; }
+  function PAIRS(list) {
+    return '<div class="pairs">' + list.map(function (p) {
+      return '<div class="pair"><span class="en mono">' + p[0] + '</span><span class="ar">→</span><span class="de mono">' + p[1] + '</span></div>';
+    }).join('') + '</div>';
+  }
+  function CHECK(list) { return '<ul class="check">' + list.map(function (t) { return '<li><i></i>' + t + '</li>'; }).join('') + '</ul>'; }
+  function STEPS(list) { return '<ol class="steps">' + list.map(function (t, i) { return '<li><b>' + (i + 1) + '</b><span>' + t + '</span></li>'; }).join('') + '</ol>'; }
+  function CTA(o) {
+    return { cta: true, html: (o.kicker ? K(o.kicker) : '') + H1(o.h) + (o.sub ? P(o.sub) : '') +
+      '<div class="pill">' + (o.pill || 'Link in Bio') + '</div>' +
+      '<div class="facts">' + o.facts.map(function (f) { return '<div>' + f + '</div>'; }).join('') + '</div>' +
+      '<p class="indep">Unabhängiges Projekt, nicht mit Microsoft verbunden.</p>' };
+  }
+
+  var CAR = {
+    /* IG-K1 «3 Fehler, die jeder in SVERWEIS macht» */
+    1: [
+      K('SVERWEIS') + H1('3 Fehler, die <em>jeder</em> in SVERWEIS macht') +
+        P('Und keiner gibt eine Fehlermeldung. Die Zahl sieht plausibel aus.') +
+        C('bad', 'Sieht richtig aus, ist es aber nicht', '=SVERWEIS(D2;A2:B6;2{{ }})'),
+      K('Fehler 1', true) + H2('<em>FALSCH</em> vergessen') +
+        C('bad', 'Sucht nur ungefähr', '=SVERWEIS(D2;A2:B6;2)') +
+        P('Ohne viertes Argument sucht SVERWEIS die <b>nächstkleinere</b> Übereinstimmung. Bei einer unsortierten Preisliste holt er den falschen Preis, ohne #NV.'),
+      K('So richtig') + H2('Viertes Argument: <em>FALSCH</em>') +
+        C('good', 'Exakte Suche', '=SVERWEIS(D2;A2:B6;2;[[FALSCH]])') +
+        P('FALSCH (oder 0) heisst: nur exakte Treffer. Fast immer das, was du willst.') +
+        NOTE('Findet er nichts, kommt <b>#NV</b>. Das ist gut: Ein sichtbarer Fehler ist besser als eine falsche Zahl.'),
+      K('Fehler 2', true) + H2('Matrix nicht <em>fixiert</em>') +
+        C('bad', 'Nach dem Runterziehen in Zeile 3', '=SVERWEIS(D3;{{A3:B7}};2;FALSCH)') +
+        C('good', 'Mit $ bleibt die Matrix stehen', '=SVERWEIS(D2;[[$A$2:$B$6]];2;FALSCH)') +
+        P('Tipp: Bezug markieren und <b>F4</b> drücken, Excel setzt die $-Zeichen.'),
+      K('Fehler 3', true) + H2('Spaltenindex falsch <em>gezählt</em>') +
+        SHEET('=SVERWEIS(H2;$C$2:$F$9;[[2]];FALSCH)', [
+          ['C', 'D', 'E', 'F'],
+          [I('1'), I('2'), I('3'), I('4')],
+          [Hd('Art.-Nr.'), Hd('Preis'), Hd('Lager'), Hd('Lieferant')],
+          ['A-100', S('12.50'), N('48'), 'Muster AG'],
+          ['A-200', N('8.90'), N('120'), 'Beispiel GmbH']
+        ]) +
+        P('Gezählt wird ab der <b>ersten Spalte der Matrix</b>, nicht ab Spalte A. Matrix C:F → C = 1, D = 2.'),
+      K('Bonus') + H2('Suchspalte muss <em>links</em> stehen') +
+        P('SVERWEIS sucht nur in der ersten Spalte der Matrix und liest nach rechts. Steht die Suchspalte rechts davon:') +
+        C('good', 'XVERWEIS (neuere Excel-Versionen)', '=XVERWEIS(D2;B2:B6;A2:A6)') +
+        C('plain', 'oder INDEX/VERGLEICH (alle Versionen)', '=INDEX(A2:A6;VERGLEICH(D2;B2:B6;0))'),
+      CTA({ kicker: 'Lesen ≠ können', h: 'Jetzt selbst <em>tippen</em>.', sub: 'Übe SVERWEIS gratis, mit Sofort-Prüfung im Browser.',
+        facts: ['18 Übungen gratis, ohne Anmeldung', 'Deutsche Funktionsnamen, Semikolon', 'Bronze, Silber, Gold pro Übung'] })
+    ],
+
+    /* IG-K2 «Excel auf Deutsch: Die 8 wichtigsten Übersetzungen» */
+    2: [
+      K('Excel auf Deutsch') + H1('SUM heisst bei dir <em>SUMME</em>?') +
+        P('Die 8 Übersetzungen, die du für englische Tutorials brauchst.') +
+        SHEET('=SUM(B2:B4)', [
+          ['A', 'B'],
+          [Hd('Filiale'), Hd('Umsatz CHF')],
+          ['Bern', N("48'200")],
+          ['Basel', N("39'750")],
+          ['Luzern', N("27'400")],
+          [Hd('Total'), E('#NAME?')]
+        ]),
+      K('Übersetzung 1 und 2') + H2('Summe und <em>Durchschnitt</em>') +
+        PAIRS([['SUM', 'SUMME'], ['AVERAGE', 'MITTELWERT']]) +
+        C('good', 'Beispiel', '=MITTELWERT(B2:B13)'),
+      K('Übersetzung 3 und 4') + H2('Bedingungen und <em>Fehler</em>') +
+        PAIRS([['IF', 'WENN'], ['IFERROR', 'WENNFEHLER']]) +
+        C('good', 'Beispiel: Division durch 0 abfangen', '=WENNFEHLER(B2/C2;0)'),
+      K('Übersetzung 5 und 6') + H2('Nachschlagen') +
+        PAIRS([['VLOOKUP', 'SVERWEIS'], ['XLOOKUP', 'XVERWEIS']]) +
+        C('good', 'Beispiel', '=SVERWEIS(D2;$A$2:$B$6;2;FALSCH)'),
+      K('Übersetzung 7 und 8') + H2('Summieren und zählen mit <em>Bedingung</em>') +
+        PAIRS([['SUMIF', 'SUMMEWENN'], ['COUNTIF', 'ZÄHLENWENN']]) +
+        C('good', 'Beispiel', '=ZÄHLENWENN(A:A;"Zürich")'),
+      K('Und das Komma?') + H2('Wird zum <em>Semikolon</em>.') +
+        C('bad', 'Englisches Tutorial', '=IF(A2>100{{,}}"hoch"{{,}}"tief")') +
+        C('good', 'Dein Excel auf Deutsch', '=[[WENN]](A2>100[[;]]"hoch"[[;]]"tief")') +
+        P('Gilt auch in der Schweiz, obwohl dort der Punkt das Dezimalzeichen ist.'),
+      CTA({ kicker: 'Speichern für später', h: 'Und dann selbst <em>tippen</em>.', sub: 'Excel-Übungen auf Deutsch, mit Sofort-Prüfung. Tippst du SUM, sagt dir die Übung: SUMME.',
+        facts: ['18 Übungen gratis, ohne Anmeldung', 'Läuft im Browser, kein Excel nötig'] })
+    ],
+
+    /* IG-K3 «Excel-Einstellungstest: Das wird geprüft» */
+    3: [
+      K('Bewerbung') + H1('Excel-Test im <em>Bewerbungs&shy;prozess</em>?') +
+        P('Das kommt fast immer dran:') +
+        CHECK(['SUMME, MITTELWERT, MAX', 'WENN', 'SVERWEIS', 'SUMMEWENN / ZÄHLENWENN', '$-Bezüge']),
+      K('Aufwärmrunde') + H2('SUMME, MITTELWERT, <em>MAX</em>') +
+        SHEET('=MAX(B2:B5)', [
+          ['A', 'B'],
+          [Hd('Monat'), Hd('Umsatz CHF')],
+          ['Jan', N("12'400")],
+          ['Feb', N("10'950")],
+          ['Mär', N("14'300")],
+          ['Apr', N("11'800")],
+          [Hd('Max'), S("14'300")]
+        ]) +
+        P('Bereich mit Doppelpunkt: <span class="mono">B2:B5</span>. Gleich aufgebaut: <span class="mono">=SUMME(B2:B5)</span>, <span class="mono">=MITTELWERT(B2:B5)</span>.'),
+      K('WENN') + H2('Eine Bedingung, <em>zwei</em> Antworten') +
+        C('good', 'Ist kleiner oder gleich Budget?', '=WENN(B2<=C2;"ok";"über Budget")') +
+        SHEET('', [
+          ['A', 'B', 'C', 'D'],
+          [Hd('Konto'), Hd('Ist'), Hd('Budget'), Hd('Status')],
+          ['Reisen', N("4'800"), N("5'000"), S('ok')],
+          ['IT', N("5'300"), N("5'000"), { c: 'err', v: 'über Budget' }]
+        ]),
+      K('SVERWEIS') + H2('Mit FALSCH. <em>Immer.</em>') +
+        C('good', 'Preis zur Artikelnummer holen', '=SVERWEIS(D2;$A$2:$B$6;2;[[FALSCH]])') +
+        P('Ohne FALSCH sucht SVERWEIS ungefähr und kann still einen falschen Wert liefern. Das ist die häufigste Falle im Test.'),
+      K('SUMMEWENN / ZÄHLENWENN') + H2('Summieren und zählen mit <em>Bedingung</em>') +
+        C('good', 'Umsatz aller Zeilen mit «Zürich»', '=SUMMEWENN(A:A;"Zürich";B:B)') +
+        C('good', 'Anzahl Zeilen mit «Zürich»', '=ZÄHLENWENN(A:A;"Zürich")') +
+        P('Reihenfolge bei SUMMEWENN: wo suchen, was suchen, was summieren.'),
+      K('$-Bezüge') + H2('<em>$A$1</em> bleibt beim Kopieren fix') +
+        '<div class="refs">' +
+          '<span class="mono">A1</span><span>wandert in beide Richtungen mit</span>' +
+          '<span class="mono">$A1</span><span>Spalte fix, Zeile wandert</span>' +
+          '<span class="mono">A$1</span><span>Zeile fix, Spalte wandert</span>' +
+          '<span class="mono on">$A$1</span><span>bleibt immer auf A1</span>' +
+        '</div>' +
+        P('<b>F4</b> wechselt der Reihe nach durch alle vier Varianten.'),
+      K('Tipp') + H2('Nicht Videos schauen. Jede Funktion <em>3× selbst</em> tippen.') +
+        P('Beim dritten Mal ohne Spick. Erst dann sitzt sie auch unter Zeitdruck.') +
+        NOTE('In Excel-Drills: <b>Bronze</b> beim ersten Mal, <b>Silber</b> beim zweiten, <b>Gold</b> beim dritten Mal, auch mit anderen Zahlen.'),
+      CTA({ kicker: 'Lernpfad Basis', h: '<em>10 Übungen</em> dazu gratis.', sub: 'Genau die Funktionen, die typische Einstellungstests abfragen. Selbst tippen, sofort prüfen.',
+        facts: ['Ohne Anmeldung, im Browser', 'Deutsche Funktionsnamen, Semikolon'] })
+    ],
+
+    /* IG-K4 «Monatsabschluss: 5 Formeln fürs Controlling» */
+    4: [
+      K('Controlling') + H1('5 Excel-Formeln für den <em>Monats&shy;abschluss</em>') +
+        SHEET('=(C2-B2)/B2', [
+          ['A', 'B', 'C', 'D'],
+          [Hd('Konto'), Hd('Budget'), Hd('Ist'), Hd('Abw. %')],
+          ['Reisespesen', N("28'000"), N("24'600"), S('−12.1 %')],
+          ['Büromaterial', N("12'000"), N("13'450"), N('12.1 %')],
+          ['Weiterbildung', N("15'000"), N("15'900"), N('6.0 %')]
+        ]),
+      K('1 · Abweichung CHF') + H2('Ist minus <em>Budget</em>') +
+        C('good', 'Abweichung in CHF', '=C2-B2') +
+        SHEET('', [
+          ['A', 'B', 'C', 'D'],
+          [Hd('Konto'), Hd('Budget'), Hd('Ist'), Hd('Abw. CHF')],
+          ['Reisespesen', N("28'000"), N("24'600"), S("−3'400")]
+        ]) +
+        P('Negativ heisst: unter Budget. Vorzeichen-Konvention im Team einmal festlegen.'),
+      K('2 · Abweichung %') + H2('Ohne <em>mal 100</em>') +
+        C('good', 'Richtig', '=(C2-B2)/B2') +
+        C('bad', 'Ergibt −1\'214 % statt −12.1 %', '=(C2-B2)/B2{{*100}}') +
+        P('Das Prozentformat multipliziert schon mit 100. Doppelt gerechnet ist der häufigste Report-Fehler.'),
+      K('3 · Kosten nach KST und Monat') + H2('<em>SUMMEWENNS</em>') +
+        C('good', 'Kostenstelle 410 im März', '=SUMMEWENNS(D:D;A:A;"KST 410";B:B;"Mär")') +
+        P('Zuerst der <b>Summenbereich</b>, dann beliebig viele Paare aus Kriterienbereich und Kriterium.'),
+      K('4 · Duplikate') + H2('Doppelte Beleg&shy;nummern <em>finden</em>') +
+        C('good', 'WAHR = kommt mehrfach vor', '=ZÄHLENWENN($A$2:$A$500;A2)>1') +
+        P('In eine Hilfsspalte schreiben, runterziehen, nach WAHR filtern. Der Bereich braucht $, sonst wandert er mit.'),
+      K('5 · Monatsende') + H2('Abgrenzung auf das <em>Monatsende</em>') +
+        C('good', 'Letzter Tag des Monats', '=MONATSENDE(A2;0)') +
+        SHEET('', [
+          ['A', 'B'],
+          [Hd('Beleg'), Hd('Monatsende')],
+          [N('14.03.2026'), S('31.03.2026')]
+        ]) +
+        P('0&nbsp;=&nbsp;gleicher Monat, 1&nbsp;=&nbsp;nächster Monat, −1&nbsp;=&nbsp;Vormonat.'),
+      CTA({ kicker: 'Lernpfad Accounting & Controlling', h: '11 Übungen. <em>3&nbsp;gratis.</em>', sub: 'Budget/Ist, MwSt, 5-Rappen-Rundung, SUMMEWENNS, Abstimmung, offene Posten.',
+        facts: ['Sofort-Prüfung, auch mit anderen Beträgen', 'CHF und Schweizer Beispiele'] })
+    ],
+
+    /* IG-K5 «Schweizer Excel: 5 Eigenheiten» */
+    5: [
+      K('Schweiz') + H1('<em>1\'250.50</em> oder 1.250,50?') +
+        P('5 Eigenheiten, die Excel-Tutorials aus Deutschland und den USA nicht kennen.'),
+      K('1 · Tausendertrenner') + H2('Das <em>Hochkomma</em>') +
+        '<div class="big">1\'250\'000</div>' +
+        P('Mit Region Deutsch (Schweiz) zeigt Excel Tausender mit Hochkomma an, sobald du das Zahlenformat mit Tausendertrenner wählst.'),
+      K('2 · Dezimalzeichen') + H2('Der <em>Punkt</em>, nicht das Komma') +
+        '<div class="big">CHF 47.35</div>' +
+        P('In Deutschland wäre das 47,35. Darum landen Zahlen aus deutschen CSV-Dateien beim Import manchmal als Text in der Tabelle.'),
+      K('3 · Argumente trennen') + H2('Das <em>Semikolon</em> bleibt') +
+        C('good', 'Auch in der Schweiz', '=SUMME(A1[[;]]A5)') +
+        P('Standard unter Windows mit Region Schweiz: Dezimalpunkt, aber deutsche Funktionsnamen und Semikolon als Trennzeichen.'),
+      K('4 · 5-Rappen-Rundung') + H2('Auf <em>5 Rappen</em> runden') +
+        C('good', 'Kurz', '=VRUNDEN(B2;0.05)') +
+        C('plain', 'Klassisch', '=RUNDEN(B2/0.05;0)*0.05') +
+        SHEET('', [
+          ['A', 'B', 'C'],
+          [Hd('Beleg'), Hd('Betrag'), Hd('Gerundet')],
+          ['Kasse 3', N('47.33'), S('47.35')]
+        ]),
+      K('5 · MwSt') + H2('MwSt-Satz in eine <em>eigene Zelle</em>') +
+        C('good', 'Netto aus Brutto, Satz absolut', '=B2/(1+[[$C$1]])') +
+        SHEET('', [
+          ['A', 'B', 'C'],
+          [Hd('MwSt-Satz'), '', S('8.1 %')],
+          [Hd('Brutto / Netto'), N('108.10'), N('100.00')]
+        ]) +
+        P('Ändert der Satz, passt du eine Zelle an, nicht hundert Formeln.'),
+      CTA({ kicker: 'Excel-Übungen mit CHF und Rappen', h: 'Schweizer Excel <em>üben</em>.', sub: 'Rappenrundung, MwSt, Prämien, Säule 3a. Formel tippen, Ergebnis wird sofort geprüft.',
+        facts: ['18 Übungen gratis, ohne Anmeldung', '4 Lernpfade: Basis, Accounting, Finance'] })
+    ],
+
+    /* IG-K6 «Warum Excel-Videos nicht reichen» */
+    6: [
+      K('Lernen') + H1('10 Excel-Videos geschaut. <em>Trotzdem blockiert?</em>') +
+        '<div class="sheet"><div class="fx"><b class="mono">fx</b><span class="mono">=&#8203;<span style="display:inline-block;width:4px;height:34px;background:#1B1F1D;vertical-align:middle"></span></span></div></div>',
+      K('Das ist normal') + H2('Beim Zuschauen trainierst du <em>Wieder&shy;erkennen</em>.') +
+        P('«Ah, SVERWEIS, kenne ich.» Das fühlt sich nach Können an. Vor der leeren Zelle hilft es aber wenig.'),
+      K('Im Job') + H2('Brauchst du <em>Abrufen</em>.') +
+        P('Die Formel selbst aus dem Kopf schreiben: welche Funktion, welche Argumente, in welcher Reihenfolge.') +
+        C('plain', 'Leere Zelle, keine Vorlage', '=SVERWEIS(…'),
+      K('Testeffekt') + H2('Was du aktiv abrufst, bleibt <em>besser hängen</em>.') +
+        P('Die Lernforschung nennt das <b>Retrieval Practice</b>. Selbst testen schlägt nochmals anschauen, besonders mit etwas Abstand dazwischen.'),
+      K('So übst du richtig') + H2('Vier <em>Schritte</em>') +
+        STEPS(['Aufgabe lesen', 'Formel selbst tippen', 'Sofort prüfen', 'In ein paar Tagen wiederholen']),
+      K('Darum gibt es Excel-Drills') + H2('Tabelle, Aufgabe, Formel, <em>Prüfung</em>.') +
+        P('Keine Videos. Und damit du dranbleibst:') +
+        '<div class="chips"><span class="chip f">Tagesziel &amp; Streak</span><span class="chip">Bronze · Silber · Gold</span><span class="chip">XP und 6 Levels</span><span class="chip">Abzeichen</span></div>' +
+        NOTE('Gold gibt es erst, wenn du die Übung mehrmals richtig löst, auch mit anderen Zahlen. Genau das Wiederholen von Schritt 4.'),
+      CTA({ kicker: 'Selbst tippen statt zuschauen', h: '18 Übungen <em>gratis</em>.', sub: 'Ohne Anmeldung, direkt im Browser. Dein Fortschritt bleibt lokal bei dir.',
+        facts: ['42 Übungen in 4 Lernpfaden', 'Deutsch, Semikolon, CHF'] })
+    ]
+  };
+
+  var q = new URLSearchParams(location.search);
+  var c = parseInt(q.get('c'), 10); if (!CAR[c]) c = 1;
+  var list = CAR[c];
+  var s = parseInt(q.get('s'), 10); if (!(s >= 1 && s <= list.length)) s = 1;
+  var item = list[s - 1];
+  var isCta = typeof item === 'object';
+  var html = isCta ? item.html : item;
+
+  var slide = document.getElementById('slide');
+  if (isCta) slide.classList.add('cta');
+  document.getElementById('count').innerHTML = '<b>' + s + '</b> / ' + list.length;
+  document.getElementById('main').innerHTML = html;
+  var prog = '<div class="prog">';
+  for (var i = 1; i <= list.length; i++) prog += '<i' + (i <= s ? ' class="on"' : '') + '></i>';
+  prog += '</div>';
+  var hint = s === 1 ? 'Wischen →' : s < list.length ? 'Weiter →' : 'Speichern ↓';
+  document.getElementById('foot').innerHTML = prog + '<span class="swipe">' + hint + '</span>';
+  document.title = 'Excel-Drills Karussell ' + c + ' Slide ' + s;
+
+  // Passt nicht? Typo schrittweise verkleinern.
+  var main = document.getElementById('main'), k = 1;
+  function over() {
+    var kids = main.children; if (!kids.length) return false;
+    var top = kids[0].getBoundingClientRect().top, bottom = kids[kids.length - 1].getBoundingClientRect().bottom;
+    var wide = Array.prototype.some.call(main.querySelectorAll('*'), function (el) { return el.scrollWidth > el.clientWidth + 1 && getComputedStyle(el).overflow !== 'visible' || el.getBoundingClientRect().right > main.getBoundingClientRect().right + 1; });
+    return bottom - top > main.clientHeight - 60 || wide;
+  }
+  while (over() && k > 0.66) { k -= 0.03; document.documentElement.style.setProperty('--k', k.toFixed(2)); }
+  if (over()) document.title += ' (ÜBERLAUF)';
+})();
+</script>
+</body>
+</html>

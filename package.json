@@ -1,0 +1,15 @@
+{
+  "name": "excel-drills",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preview": "python3 -m http.server 8787",
+    "check": "node scripts/check-exercises.mjs && node scripts/data/generate-projects.mjs --check && node scripts/test-gamification.mjs",
+    "test:gamification": "node scripts/test-gamification.mjs",
+    "data:projects": "node scripts/data/generate-projects.mjs"
+  },
+  "devDependencies": {
+    "exceljs": "^4.4.0",
+    "hyperformula": "^3.0.0"
+  }
+}

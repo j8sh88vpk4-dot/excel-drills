@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<title>Excel-Drills OG-Bild 1200x630</title>
+<style>
+  :root { --g:#107C41; --gd:#0B5A2E; --gl:#E7F2EB; --ink:#1B1F1D; --mut:#5A635E; --line:#D5DDD8; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { width:1200px; height:630px; overflow:hidden; }
+  body { margin:0; background:#fff; color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .wrap { position:relative; width:1200px; height:630px; display:flex; }
+  .bar { position:absolute; left:0; top:0; bottom:0; width:16px; background:var(--g); }
+  .left { width:610px; padding:64px 40px 56px 80px; display:flex; flex-direction:column; }
+  .brand { display:flex; align-items:center; gap:14px; font-weight:700; font-size:28px; letter-spacing:-.3px; }
+  .logo { width:46px; height:46px; border-radius:9px; background:var(--g); display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:3px; padding:9px; }
+  .logo i { background:rgba(255,255,255,.92); border-radius:2px; }
+  .logo i:nth-child(4) { background:rgba(255,255,255,.45); }
+  h1 { margin-top:56px; font-size:60px; line-height:1.06; letter-spacing:-1.6px; font-weight:800; }
+  h1 em { font-style:normal; color:var(--g); }
+  .sub { margin-top:26px; font-size:25px; line-height:1.4; color:var(--mut); }
+  .chips { margin-top:auto; display:flex; gap:10px; flex-wrap:wrap; }
+  .chip { font-size:19px; font-weight:600; padding:9px 15px; border-radius:999px; background:var(--gl); color:var(--gd); }
+  .right { flex:1; padding:70px 64px 70px 10px; display:flex; align-items:center; }
+  .sheet { width:100%; border:2px solid var(--line); border-radius:14px; overflow:hidden; background:#fff; box-shadow:0 18px 40px rgba(16,124,65,.12); }
+  .fx { display:flex; align-items:center; border-bottom:2px solid var(--line); background:#F7F9F8; height:56px; }
+  .fx b { width:62px; text-align:center; font-family:"SF Mono", Menlo, Consolas, monospace; font-size:17px; color:var(--mut); border-right:2px solid var(--line); line-height:56px; }
+  .fx span { padding:0 16px; font-family:"SF Mono", Menlo, Consolas, monospace; font-size:19px; color:var(--ink); white-space:nowrap; }
+  table { border-collapse:collapse; width:100%; font-size:20px; }
+  th, td { border:1px solid var(--line); height:48px; padding:0 12px; }
+  th { background:#F0F3F1; color:var(--mut); font-weight:600; font-size:16px; text-align:center; }
+  th.r { width:42px; }
+  td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  td.h { font-weight:700; }
+  td.sel { outline:3px solid var(--g); outline-offset:-3px; background:var(--gl); font-weight:700; color:var(--gd); }
+  .ok { display:flex; align-items:center; gap:10px; padding:14px 18px; background:var(--g); color:#fff; font-weight:700; font-size:20px; }
+  .ok .c { width:28px; height:28px; border-radius:50%; background:#fff; color:var(--g); display:inline-flex; align-items:center; justify-content:center; font-size:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar"></div>
+  <div class="left">
+    <div class="brand"><div class="logo"><i></i><i></i><i></i><i></i></div>Excel-Drills</div>
+    <h1>Excel lernen durch <em>Üben</em>, nicht durch Zuschauen.</h1>
+    <p class="sub">Formel selbst tippen, sofort prüfen.<br>Im Browser, auf Deutsch.</p>
+    <div class="chips"><span class="chip">42 Übungen</span><span class="chip">18 gratis</span><span class="chip">Semikolon</span><span class="chip">CHF</span></div>
+  </div>
+  <div class="right">
+    <div class="sheet">
+      <div class="fx"><b>fx</b><span>=SVERWEIS(D2;A2:B6;2;FALSCH)</span></div>
+      <table>
+        <tr><th class="r"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+        <tr><th class="r">1</th><td class="h">Artikel</td><td class="h">Preis</td><td></td><td class="h">Gesucht</td><td class="h">Preis</td></tr>
+        <tr><th class="r">2</th><td>A-100</td><td class="n">12.50</td><td></td><td>A-300</td><td class="n sel">21.00</td></tr>
+        <tr><th class="r">3</th><td>A-200</td><td class="n">8.90</td><td></td><td></td><td></td></tr>
+        <tr><th class="r">4</th><td>A-300</td><td class="n">21.00</td><td></td><td></td><td></td></tr>
+        <tr><th class="r">5</th><td>A-400</td><td class="n">4.75</td><td></td><td></td><td></td></tr>
+      </table>
+      <div class="ok"><span class="c">✓</span>Richtig. Formel funktioniert auch mit anderen Zahlen.</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

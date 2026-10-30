@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Übungen – Excel-Drills</title>
+  <meta name="description" content="Excel-Übungen direkt im Browser lösen: Formel eintippen, sofort prüfen, mit Hinweisen auf Deutsch.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23107C41'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'%3EX%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script defer src="../assets/analytics.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#exercise" data-i18n="html.skip">Zur Übung springen</a>
+  <header class="site-header app-header">
+    <div class="wrap">
+      <a class="wordmark" href="../"><span class="mark" aria-hidden="true">X</span>Excel-Drills</a>
+      <div class="gami" id="gami" aria-label="Dein Fortschritt" data-i18n-attr="aria-label:html.gami" role="group">
+        <span class="streak-chip" id="streak-chip" title="0 Tage in Folge">
+          <svg class="flame" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5c2.2 4 6.5 6 6.5 11a6.5 6.5 0 0 1-13 0c0-3 1.8-5 3.2-6.2.1 2.2 1 3.7 2.6 4C11.6 8.2 10.4 5.6 12 2.5z"/></svg>
+          <span id="streak-value">0</span><span class="visually-hidden" id="streak-label"> Tage in Folge</span>
+        </span>
+        <div class="goal-wrap">
+          <button class="goal-chip" type="button" id="goal-btn" aria-expanded="false" aria-controls="goal-menu">
+            <svg class="goal-ring" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+              <circle class="goal-ring-bg" cx="18" cy="18" r="15"/>
+              <circle class="goal-ring-fg" id="goal-ring-fg" cx="18" cy="18" r="15" pathLength="100" stroke-dasharray="0 100"/>
+            </svg>
+            <span id="goal-text">0/2 heute</span><span class="visually-hidden" data-i18n="html.goalChange">, Tagesziel ändern</span>
+          </button>
+          <div class="goal-menu" id="goal-menu" hidden>
+            <fieldset class="goal-options" data-goal-group>
+              <legend data-i18n="html.goalLegend">Tagesziel pro Tag</legend>
+              <label><input type="radio" name="goal-menu" value="1"> <span data-i18n="html.goal1">1 Übung</span></label>
+              <label><input type="radio" name="goal-menu" value="2"> <span data-i18n="html.goal2">2 Übungen</span></label>
+              <label><input type="radio" name="goal-menu" value="5"> <span data-i18n="html.goal5">5 Übungen</span></label>
+            </fieldset>
+          </div>
+        </div>
+        <button class="level-badge" type="button" id="level-btn" aria-haspopup="dialog" aria-controls="profile">
+          <span class="level-num" id="level-num">Lv 1</span>
+          <span class="level-name" id="level-name">Anfänger</span>
+          <span class="level-bar" aria-hidden="true"><span class="level-fill" id="level-fill"></span></span>
+          <span class="visually-hidden" id="level-sr">, 0 XP. Profil öffnen</span>
+        </button>
+      </div>
+      <div class="locale-picker" id="locale-picker" hidden>
+        <div class="locale-switch" id="locale-switch" role="group" aria-label="Sprache und Land" data-i18n-attr="aria-label:html.localeGroup">
+          <button type="button" data-locale="de-CH" aria-pressed="true" lang="de-CH" title="Deutsch (Schweiz): 12'500.50, CHF">DE<span class="visually-hidden"> Deutsch, Schweiz</span></button>
+          <button type="button" data-locale="fr-CH" aria-pressed="false" lang="fr-CH" title="Français (Suisse) : 12'500.50, CHF">FR<span class="visually-hidden"> Français</span></button>
+          <button type="button" data-locale="it-CH" aria-pressed="false" lang="it-CH" title="Italiano (Svizzera): 12'500.50, CHF">IT<span class="visually-hidden"> Italiano</span></button>
+          <button type="button" data-locale="de-DE" aria-pressed="false" lang="de-DE" title="Deutsch (Deutschland): 12.500,50, EUR">DE-DE<span class="visually-hidden"> Deutsch, Deutschland</span></button>
+        </div>
+        <label class="visually-hidden" for="locale-select" data-i18n="html.localeGroup">Sprache und Land</label>
+        <select class="locale-select" id="locale-select">
+          <option value="de-CH" lang="de-CH">DE · Deutsch (CH)</option>
+          <option value="fr-CH" lang="fr-CH">FR · Français</option>
+          <option value="it-CH" lang="it-CH">IT · Italiano</option>
+          <option value="de-DE" lang="de-DE">DE-DE · Deutschland</option>
+        </select>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation" data-i18n-attr="aria-label:html.mainNav">
+        <a href="../pfad/" data-i18n="html.navTracks">Pfade</a>
+        <a href="../artikel/" data-i18n="html.navArticles">Artikel</a>
+        <a href="../handouts/" data-i18n="html.navHandouts">Handouts</a>
+        <a href="../premium.html" id="premium-link" data-i18n="html.navPremium">Premium</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div id="notice" role="status"></div>
+    <div class="app-layout">
+      <nav class="exercise-nav" aria-label="Lernpfade und Übungen" data-i18n-attr="aria-label:html.exNav">
+        <div class="track-picker" id="track-picker" hidden>
+          <h2 id="track-heading"><label for="track-select" data-i18n="html.trackLabel">Lernpfad</label></h2>
+          <select class="track-select" id="track-select"></select>
+          <ul class="track-tabs" id="track-tabs" aria-labelledby="track-heading"></ul>
+        </div>
+        <h2 id="list-heading" data-i18n="html.listHeading">Übungen</h2>
+        <p class="visually-hidden" id="list-progress" aria-live="polite"></p>
+        <ol class="exercise-list" id="exercise-list" aria-labelledby="list-heading"></ol>
+        <div class="track-empty" id="track-empty" hidden>
+          <p class="track-empty-badge" data-i18n="track.soon">Bald verfügbar</p>
+          <p id="track-empty-text"></p>
+          <p><a id="track-empty-link" href="../pfad/">Mehr zum Pfad</a> &middot; <a href="mailto:[E-Mail]" data-i18n="html.writeUs">Schreib uns</a></p>
+        </div>
+      </nav>
+
+      <main class="panel" id="exercise" tabindex="-1">
+        <p class="loading" id="loading" data-i18n="html.loading">Übungen und Formel-Engine werden geladen&hellip;</p>
+        <noscript><p class="notice err">Excel-Drills braucht JavaScript, um deine Formeln zu prüfen.</p></noscript>
+
+        <div id="exercise-view" hidden>
+          <div class="ex-head">
+            <span class="tag" id="ex-topic"></span>
+            <span class="ex-medal" id="ex-medal"></span>
+            <span class="mastery-note" id="ex-mastery"></span>
+          </div>
+          <h1 id="ex-title" tabindex="-1"></h1>
+          <p class="task" id="ex-task"></p>
+          <p class="fill-note" id="ex-fill" hidden></p>
+          <p class="variant-note" id="ex-variant" hidden></p>
+
+          <div id="formula-part">
+          <div class="grid-scroll" role="region" aria-label="Tabelle (horizontal scrollbar)" data-i18n-attr="aria-label:html.gridRegion" tabindex="0">
+            <table class="sheet" id="sheet">
+              <caption class="visually-hidden" id="sheet-caption"></caption>
+            </table>
+          </div>
+
+          <form class="formula-form" id="formula-form" novalidate>
+            <label for="formula" id="formula-label">Formel</label>
+            <div class="formula-row">
+              <span class="fx" aria-hidden="true">fx</span>
+              <input class="formula-input" id="formula" name="formula" type="text" placeholder="=…"
+                     autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false"
+                     aria-describedby="formula-help feedback">
+              <button class="btn" type="submit" id="check-btn" disabled data-i18n="html.check">Prüfen</button>
+            </div>
+            <p class="fill-note" id="formula-help">Mit Enter prüfen. Argumente trennst du mit Semikolon (;), Dezimalzahlen mit Punkt.</p>
+          </form>
+          </div>
+
+          <!-- Projekt-Übung: Datei laden, in Excel bauen, Kontrollfragen beantworten -->
+          <div class="project" id="project-part" hidden>
+            <p class="pj-download">
+              <a class="btn" id="pj-download" download>
+                <svg class="pj-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>
+                <span data-i18n="html.download">Excel-Datei herunterladen</span>
+              </a>
+              <span class="fill-note" id="pj-file"></span>
+            </p>
+            <section class="pj-section" aria-labelledby="pj-steps-h">
+              <h2 id="pj-steps-h" data-i18n="html.stepsHeading">So gehst du vor</h2>
+              <p class="fill-note" id="pj-steps-note" data-i18n="html.stepsNote">Hake erledigte Schritte ab. Die Häkchen sind nur für deine Übersicht und werden in diesem Browser gespeichert.</p>
+              <ol class="pj-steps" id="pj-steps"></ol>
+            </section>
+            <form class="pj-form" id="pj-form" novalidate aria-labelledby="pj-q-h">
+              <h2 id="pj-q-h" data-i18n="html.questionsHeading">Kontrollfragen</h2>
+              <p class="fill-note" id="pj-q-note">Gib die Zahlen ein, wie sie in deiner Pivot oder Abfrage stehen. Komma oder Punkt als Dezimaltrennzeichen, Hochkomma und % sind optional.</p>
+              <ol class="pj-questions" id="pj-questions"></ol>
+              <div class="actions">
+                <button class="btn" type="submit" id="pj-check" data-i18n="html.checkAnswers">Antworten prüfen</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-secondary" type="button" id="hint-btn" aria-controls="feedback" data-i18n="html.hint">Hinweis</button>
+            <button class="btn btn-secondary" type="button" id="again-btn" hidden>Nochmal mit anderen Zahlen</button>
+            <button class="btn" type="button" id="next-btn" hidden data-i18n="html.next">Nächste Übung &rarr;</button>
+          </div>
+
+          <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+          <div class="track-done" id="track-done" role="status" aria-live="polite" hidden></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="paywall" id="paywall" aria-labelledby="paywall-title">
+    <h2 id="paywall-title" data-i18n="html.paywallTitle">Diese Übung gehört zu Premium</h2>
+    <p id="paywall-text" data-i18n="html.paywallText">Mit Premium schaltest du alle Übungen in allen Lernpfaden frei, auch WENNFEHLER, SVERWEIS mit Staffeln, TEXTKETTE, SUMMENPRODUKT und verschachtelte WENN-Formeln. Ab CHF 4.10 pro Monat, mit 100&nbsp;% Geld-zurück-Garantie.</p>
+    <div class="actions">
+      <a class="btn" href="../premium.html" data-i18n="done.unlock">Alle Übungen freischalten</a>
+      <button class="btn btn-secondary" type="button" id="paywall-close" data-i18n="html.later">Später</button>
+    </div>
+  </dialog>
+
+  <dialog class="profile" id="profile" aria-labelledby="profile-title">
+    <div class="profile-head">
+      <h2 id="profile-title" data-i18n="html.gami">Dein Fortschritt</h2>
+      <button class="icon-btn" type="button" id="profile-close" aria-label="Schliessen">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <section class="pf-section" aria-labelledby="pf-level-h">
+      <h3 id="pf-level-h" data-i18n="html.pfLevel">Level</h3>
+      <div id="pf-level"></div>
+    </section>
+    <section class="pf-section" aria-labelledby="pf-streak-h">
+      <h3 id="pf-streak-h" data-i18n="html.pfStreak">Streak</h3>
+      <p class="pf-streak" id="pf-streak"></p>
+      <ol class="week" id="pf-week" aria-label="Letzte 7 Tage" data-i18n-attr="aria-label:html.pfWeek"></ol>
+    </section>
+    <section class="pf-section" aria-labelledby="pf-goal-h">
+      <h3 id="pf-goal-h" data-i18n="html.pfGoal">Tagesziel</h3>
+      <fieldset class="goal-options goal-options-row" data-goal-group>
+        <legend class="visually-hidden" data-i18n="html.goalLegend">Tagesziel pro Tag</legend>
+        <label><input type="radio" name="goal-pf" value="1"> <span data-i18n="html.goal1">1 Übung</span></label>
+        <label><input type="radio" name="goal-pf" value="2"> <span data-i18n="html.goal2">2 Übungen</span></label>
+        <label><input type="radio" name="goal-pf" value="5"> <span data-i18n="html.goal5">5 Übungen</span></label>
+      </fieldset>
+    </section>
+    <section class="pf-section" aria-labelledby="pf-stats-h">
+      <h3 id="pf-stats-h" data-i18n="html.pfStats">Statistik</h3>
+      <dl class="stats" id="pf-stats"></dl>
+    </section>
+    <section class="pf-section" aria-labelledby="pf-badges-h">
+      <h3 id="pf-badges-h" data-i18n="html.pfBadges">Abzeichen</h3>
+      <ul class="badge-grid" id="pf-badges"></ul>
+      <div class="share-area" id="share-area" hidden></div>
+    </section>
+    <section class="pf-section pf-foot">
+      <p class="fine" data-i18n="html.pfStorage">Dein Fortschritt ist nur in diesem Browser gespeichert. Konten folgen später.</p>
+      <button class="btn btn-secondary btn-small" type="button" id="reset-btn" data-i18n="html.reset">Fortschritt zurücksetzen</button>
+      <div class="reset-confirm" id="reset-confirm" role="group" aria-labelledby="reset-q" hidden>
+        <p id="reset-q" data-i18n="html.resetQ">Wirklich zurücksetzen? XP, Medaillen, Abzeichen und Streak werden in diesem Browser gelöscht. Das lässt sich nicht rückgängig machen.</p>
+        <div class="actions">
+          <button class="btn btn-danger btn-small" type="button" id="reset-yes" data-i18n="html.resetYes">Ja, zurücksetzen</button>
+          <button class="btn btn-secondary btn-small" type="button" id="reset-no" data-i18n="html.resetNo">Abbrechen</button>
+        </div>
+      </div>
+    </section>
+  </dialog>
+
+  <dialog class="levelup" id="levelup" aria-labelledby="levelup-title" aria-describedby="levelup-text">
+    <div class="levelup-burst" aria-hidden="true"><span class="levelup-num" id="levelup-num">2</span></div>
+    <p class="levelup-eyebrow" data-i18n="html.levelup">Level-up</p>
+    <h2 id="levelup-title">Sachbearbeiter</h2>
+    <p id="levelup-text"></p>
+    <button class="btn" type="button" id="levelup-ok" data-i18n="html.levelupOk">Weiter</button>
+  </dialog>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; 2026 Excel-Drills</span>
+      <span><a href="../artikel/" data-i18n="html.navArticles">Artikel</a> &middot; <a href="../impressum.html" data-i18n="html.imprint">Impressum</a> &middot; <a href="../datenschutz.html" data-i18n="html.privacy">Datenschutz</a></span>
+    </div>
+  </footer>
+
+  <!-- Formel-Engine: HyperFormula 3.0.0 (GPLv3). Das "full"-Bundle enthält nur enGB, die Sprachpakete
+       deDE (DE-CH, DE-DE), frFR (FR-CH) und itIT (IT-CH) werden separat geladen. SRI-Hashes aus node_modules. -->
+  <script src="https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/hyperformula.full.min.js"
+          integrity="sha384-J7i5jngggSLZ7jIxuRKLh1jM0ZzhEZOPdCX6KrBHZXyWn4WYxANOzzWioi+nEK7w" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/languages/deDE.js"
+          integrity="sha384-jWD9rgGJKCeZXZfD9IcDj4ex7PkMA3oQZbqPtUPh8VB0iQdD3DmT84VMqb2UB0nO" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/languages/frFR.js"
+          integrity="sha384-q1L6SEj5wqXtGFt3wP1YsMToQdosF2+uMVCn7LbvfVc+yhV9sjz9axE2+5xW7ldc" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/languages/itIT.js"
+          integrity="sha384-LfEYBjeJ7xWrtp8QmXQLFou81VNnMPeD5nvymC+nKrSnLNxsIGl7lxlpJkyIauK9" crossorigin="anonymous" defer></script>
+  <script src="keys.js" defer></script>
+  <script src="i18n/ui-de.js" defer></script>
+  <script src="engine.js" defer></script>
+  <script src="gamification.js" defer></script>
+  <script src="badges.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

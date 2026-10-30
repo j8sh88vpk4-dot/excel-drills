@@ -1,0 +1,6 @@
+# /app/ wird nicht gesperrt: die Seite trägt selbst <meta name="robots" content="noindex">,
+# und Crawler müssen sie abrufen können, um das noindex zu sehen.
+User-agent: *
+Allow: /
+
+Sitemap: https://excel-drills.ch/sitemap.xml

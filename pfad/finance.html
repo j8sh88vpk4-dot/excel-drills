@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Excel für Banking und Finance üben | Excel-Drills</title>
+  <meta name="description" content="Excel für Banking und Finance üben: Zinsrechnung, RMZ, BW, ZW, Cashflows, Prämienstaffeln, Schadenquote, CAGR und Szenarien direkt im Browser.">
+  <link rel="canonical" href="https://excel-drills.ch/pfad/finance.html">
+  <meta property="og:url" content="https://excel-drills.ch/pfad/finance.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:site_name" content="Excel-Drills">
+  <meta property="og:title" content="Excel für Banking und Finance üben | Excel-Drills">
+  <meta property="og:description" content="Excel für Banking und Finance üben: Zinsrechnung, RMZ, BW, ZW, Cashflows, Prämienstaffeln, Schadenquote, CAGR und Szenarien direkt im Browser.">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23107C41'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'%3EX%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script defer src="../assets/analytics.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Excel für Banking und Finance üben",
+  "description": "Excel für Banking und Finance üben: Zinsrechnung, RMZ, BW, ZW, Cashflows, Prämienstaffeln, Schadenquote, CAGR und Szenarien direkt im Browser.",
+  "inLanguage": "de-CH",
+  "provider": {
+    "@type": "Organization",
+    "name": "Excel-Drills"
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Einstieg Bank und Versicherung, Analysten"
+  },
+  "teaches": [
+    "Zinsrechnung einfach und zusammengesetzt",
+    "RMZ, BW und ZW",
+    "Cashflow-Tabelle mit kumuliertem Saldo",
+    "Prämienstaffel mit SVERWEIS/XVERWEIS",
+    "Schadenquote",
+    "Szenario mit WENN und WAHL",
+    "Wachstumsrate (CAGR)",
+    "INDEX/VERGLEICH",
+    "Portfoliogewichte mit SUMMENPRODUKT",
+    "Break-even"
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../" aria-label="Excel-Drills Startseite"><span class="mark" aria-hidden="true">X</span>Excel-Drills</a>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="../app/">Übungen</a>
+        <a href="../pfad/" aria-current="page">Pfade</a>
+        <a href="../artikel/">Artikel</a>
+        <a href="../handouts/">Handouts</a>
+        <a href="../premium.html">Preise</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inhalt" class="wrap">
+    <article class="prose article">
+      <nav class="breadcrumb" aria-label="Brotkrümelnavigation">
+        <ol>
+          <li><a href="../">Startseite</a></li>
+          <li><a href="./">Lernpfade</a></li>
+          <li aria-current="page">Banking &amp; Finance</li>
+        </ol>
+      </nav>
+      <h1>Excel für Banking und Finance üben</h1>
+      <p class="article-meta">Lernpfad «Banking &amp; Finance» &middot; Für: Einstieg Bank und Versicherung, Analysten</p>
+      <div class="summary">
+        <p>Der Lernpfad Banking &amp; Finance trainiert die Excel-Formeln, die in Banken, Versicherungen und Finanzabteilungen zum Alltag gehören: Zins und Zinseszins, Annuitäten, Cashflows, Prämien und Szenarien. Du löst jede Übung direkt im Browser, Excel-Drills prüft deine Formel sofort.</p>
+      </div>
+      <p class="cta-row"><a class="btn btn-large" href="../app/?pfad=finance">Pfad starten</a> <span class="fill-note">Ohne Anmeldung, direkt im Browser</span></p>
+
+      <h2>Für wen dieser Pfad gedacht ist</h2>
+      <p>Der Pfad richtet sich an Leute, die in einer Bank, einer Versicherung, einer Vermögensverwaltung oder in der Finanzabteilung eines Unternehmens einsteigen oder bereits dort arbeiten. Typisch sind Trainees und Berufseinsteiger nach dem Studium, Kundenberaterinnen, Mitarbeitende im Underwriting, im Risikomanagement oder im Treasury und angehende Analysten. Auch wer sich auf ein Assessment mit einer Excel-Fallstudie vorbereitet, findet hier die passenden Übungen.</p>
+      <p>Du solltest die Grundlagen kennen: SUMME, WENN, SVERWEIS und absolute Bezüge. Wenn du da noch unsicher bist, starte mit dem <a href="basis.html">Basis-Pfad</a>. Die Finanzfunktionen bauen darauf auf.</p>
+
+      <h2>Typische Aufgaben im Job</h2>
+      <p>In Banking und Finance geht es selten um eine einzelne Zahl. Gefragt ist ein Modell, das bei neuen Annahmen sofort neu rechnet. Typische Aufgaben sind:</p>
+      <ul>
+        <li>Für einen Kredit oder eine Hypothek die jährliche Rate berechnen und zeigen, wie sich ein anderer Zinssatz auswirkt.</li>
+        <li>Den heutigen Wert künftiger Zahlungen bestimmen, etwa für eine Rente oder eine Investition.</li>
+        <li>Eine Cashflow-Planung aufbauen und erkennen, in welchem Monat die Liquidität knapp wird.</li>
+        <li>In der Versicherung Prämien nach Alter oder Versicherungssumme aus einer Staffel holen und die Schadenquote eines Portefeuilles berechnen.</li>
+        <li>Wachstum über mehrere Jahre vergleichbar machen und Portfolios nach ihren Gewichten auswerten.</li>
+        <li>Für ein Produkt oder ein Projekt den Break-even bestimmen und mit Szenarien absichern.</li>
+      </ul>
+      <p>Wer diese Formeln sicher aufbaut, liefert schneller belastbare Zahlen und kann im Gespräch erklären, wie sie zustande kommen.</p>
+
+      <h2>Themen im Pfad Banking &amp; Finance</h2>
+      <p>Die Übungen reichen von der Zinsrechnung über Cashflows und Nachschlagefunktionen bis zu kleinen Modellen mit Szenarien.</p>
+      <ul class="topic-list">
+        <li><strong>Zinsrechnung einfach und zusammengesetzt</strong> Zins für eine Periode und Zinseszins über mehrere Jahre berechnen.</li>
+        <li><strong>RMZ, BW und ZW</strong> Annuität, Barwert und Endwert mit den Finanzfunktionen von Excel bestimmen.</li>
+        <li><strong>Cashflow-Tabelle mit kumuliertem Saldo</strong> Zu- und Abflüsse pro Periode erfassen und den laufenden Saldo fortschreiben.</li>
+        <li><strong>Prämienstaffel mit SVERWEIS/XVERWEIS</strong> Prämien oder Konditionen nach Alter, Summe oder Stufe nachschlagen.</li>
+        <li><strong>Schadenquote</strong> Schäden ins Verhältnis zu den Prämien setzen und sauber als Prozent ausweisen.</li>
+        <li><strong>Szenario mit WENN und WAHL</strong> Zwischen Basis-, Best- und Worst-Case umschalten, gesteuert über eine Zelle.</li>
+        <li><strong>Wachstumsrate (CAGR)</strong> Die durchschnittliche jährliche Wachstumsrate über mehrere Jahre berechnen.</li>
+        <li><strong>INDEX/VERGLEICH</strong> Flexibel nachschlagen, auch nach links und in zwei Richtungen.</li>
+        <li><strong>Portfoliogewichte mit SUMMENPRODUKT</strong> Gewichtete Rendite und Anteile eines Portfolios in einer Formel.</li>
+        <li><strong>Break-even</strong> Die Menge oder den Umsatz bestimmen, ab der ein Produkt Gewinn bringt.</li>
+      </ul>
+
+      <h2>So ist der Pfad aufgebaut</h2>
+      <p>Jede Übung zeigt eine kleine Tabelle mit realistischen Zahlen in Schweizer Franken: Zinssätze, Laufzeiten, Prämien, Schäden, Cashflows. Die Aufgabe sagt dir, was in der gelb markierten Zielzelle stehen soll. Du schreibst die Formel selbst, mit deutschen Funktionsnamen wie RMZ, BW, ZW, INDEX und VERGLEICH und dem Semikolon als Trennzeichen. Excel-Drills rechnet deine Formel mit einer echten Formel-Engine und vergleicht das Ergebnis mit der Musterlösung, bei vielen Übungen auch mit anderen Zahlen.</p>
+      <p>Gerade bei Finanzfunktionen passieren typische Fehler: ein Jahreszins, der für Monatsraten nicht durch zwölf geteilt wird, ein Vorzeichen, das falsch herum steht, eine Wachstumsrate, die als einfacher Durchschnitt statt als CAGR berechnet wird. Excel-Drills weist dich auf solche Punkte hin, damit du sie im echten Modell nicht übersiehst.</p>
+      <p>Die Szenario-Übungen zeigen, wie du ein Modell steuerbar machst: Eine einzige Zelle entscheidet, ob Basis-, Best- oder Worst-Case gerechnet wird. Das ist dasselbe Prinzip, das in Bewertungsmodellen und Business Cases verwendet wird.</p>
+
+      <h2>Gratis testen, mit Premium alles</h2>
+      <p>Einzelne Übungen kannst du gratis und ohne Anmeldung lösen. Premium schaltet alle Übungen in allen Lernpfaden frei, auch die neuen, die laufend dazukommen. Wer zusätzlich mit Abschluss und Budget zu tun hat, findet im Pfad <a href="accounting.html">Accounting &amp; Controlling</a> die passenden Übungen.</p>
+
+      <aside class="practice-box" aria-labelledby="practice-heading">
+        <h2 id="practice-heading">Bereit? Pfad starten</h2>
+        <p>Starte mit der ersten Übung im Pfad. Dein Fortschritt bleibt in deinem Browser gespeichert.</p>
+        <p><a class="btn" href="../app/?pfad=finance">Pfad starten</a></p>
+      </aside>
+      <aside class="practice-box handout-box" aria-labelledby="cheat-heading">
+        <h2 id="cheat-heading">Spickzettel zum Pfad</h2>
+        <p>Alle Funktionen aus «Banking &amp; Finance» auf einer A4-Seite: Syntax, Mini-Beispiel und der typische Fehler. Dazu gibt es ein Trainer-Handout für eine 45-Minuten-Session.</p>
+        <p><a class="btn btn-secondary" href="../handouts/index.html#spickzettel">Spickzettel als PDF holen</a></p>
+      </aside>
+
+      <nav class="read-more" aria-labelledby="read-more-heading">
+        <h2 id="read-more-heading">Weitere Lernpfade</h2>
+        <ul>
+          <li><a href="basis.html">Basis</a>: Die Funktionen, die jeder Excel-Test abfragt</li>
+          <li><a href="accounting.html">Accounting &amp; Controlling</a>: Abschluss, Abstimmung, Abweichungen</li>
+          <li><a href="consulting.html">Consulting</a>: Saubere Modelle, schnelle Analysen (bald verfügbar)</li>
+          <li><a href="data.html">Data &amp; Reporting</a>: Daten bereinigen, Reports bauen</li>
+        </ul>
+        <p><a href="./">Alle Lernpfade im Überblick</a></p>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; 2026 Excel-Drills</span>
+      <span><a href="../artikel/">Artikel</a> &middot; <a href="../handouts/">Handouts</a> &middot; <a href="../impressum.html">Impressum</a> &middot; <a href="../datenschutz.html">Datenschutz</a></span>
+    </div>
+  </footer>
+</body>
+</html>

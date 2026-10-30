@@ -1,0 +1,1075 @@
+{
+ "_info": "Excel-Drills: Übersetzung Français (Suisse). ui = Oberfläche (Schlüssel wie app/i18n/ui-de.js, html.* aus app/index.html, msg.*/pmsg.*/locale.* aus app/engine.js); exercises = Texte pro Übungs-ID (data: Zellen, terms: Texte, auf die Formeln Bezug nehmen); files = Blattnamen, Kopfzeilen und Text-Zellen der Projektdateien (files/fr/). Zahlen, Formeln und Antworten stehen nur in exercises.json.",
+ "lang": "fr",
+ "ui": {
+  "doc.title": "Exercices – Excel-Drills",
+  "notice.unlocked": "Merci ! Premium est activé. Tous les exercices de tous les parcours te sont maintenant ouverts.",
+  "notice.invalidKey": "Ce code d'activation n'est pas valable. Vérifie le lien dans ton e-mail de confirmation ou écris-nous.",
+  "notice.appFailed": "L'app n'a pas pu être chargée. Recharge la page.",
+  "notice.noExercises": "Il n'y a pas encore d'exercices.",
+  "notice.engineFailed": "Le moteur de formules n'a pas pu être chargé. Vérifie ta connexion internet (ou un bloqueur de contenu) et recharge la page. Tu peux quand même consulter les exercices.",
+  "notice.loadFailed": "Les exercices n'ont pas pu être chargés. Vérifie ta connexion internet et recharge la page.",
+  "notice.langFailed": "La traduction n'a pas pu être chargée. L'app reste en allemand.",
+  "notice.langEngine": "Le moteur de formules pour cette langue n'a pas pu être chargé. Recharge la page pour vérifier tes formules.",
+  "track.soon": "Bientôt disponible",
+  "track.progress": "{solved}/{total} résolus",
+  "track.progressGold": " · {n} or",
+  "track.basis.name": "Bases",
+  "track.basis.claim": "Les fonctions demandées dans chaque test Excel",
+  "track.basis.short": "Bases",
+  "track.accounting.name": "Comptabilité & Controlling",
+  "track.accounting.claim": "Bouclement, rapprochement, écarts",
+  "track.accounting.short": "Comptabilité",
+  "track.finance.name": "Banque & Finance",
+  "track.finance.claim": "Intérêts, cash-flow, primes, scénarios",
+  "track.finance.short": "Finance",
+  "track.consulting.name": "Consulting",
+  "track.consulting.claim": "Modèles propres, analyses rapides",
+  "track.consulting.short": "Consulting",
+  "track.data.name": "Data & Reporting",
+  "track.data.claim": "Nettoyer les données, construire des rapports",
+  "track.data.short": "Data & Reporting",
+  "list.heading": "Exercices : {track}",
+  "list.emptyText": "Le parcours «{track}» sera bientôt disponible. Écris-nous si tu veux être parmi les premiers.",
+  "list.emptyLink": "En savoir plus sur le parcours «{track}»",
+  "list.progressSoon": "Parcours {track} : bientôt disponible.",
+  "list.progress": "Parcours {track} : {solved} exercices résolus sur {total}, dont {gold} en or.",
+  "list.project": "Projet",
+  "list.projectAria": "Projet, ",
+  "list.solvedState": "résolu, {medal}",
+  "list.lockedState": "Premium, verrouillé",
+  "sheet.row": "Ligne",
+  "sheet.targetEmpty": "Cellule cible {cell}, vide",
+  "sheet.caption": "Données de l'exercice «{title}». Cellule cible : {cell}.",
+  "ex.premium": " · Premium",
+  "ex.solved": "Tu as déjà résolu cet exercice. Refais-le, ou avec d'autres chiffres, pour la médaille suivante.",
+  "ex.solvedProject": "Tu as déjà résolu ce projet. Réponds encore une fois aux questions pour la médaille suivante.",
+  "ex.fill": "Dans Excel, tu recopierais ensuite cette formule vers le bas ({range}). La formule vérifiée est celle en {cell}.",
+  "ex.formulaLabel": "Formule pour la cellule {cell}",
+  "pj.file": "{file} (Excel, {kind})",
+  "pj.free": "gratuit",
+  "pj.premium": "Premium",
+  "again.projectNote": "Répétition : réponds encore une fois aux questions de contrôle, idéalement avec un TCD ou une requête refaits à neuf. L'or s'obtient après 3 solutions correctes.",
+  "again.projectRound": "Nouvelle manche : réponds encore une fois aux questions.",
+  "again.original": "De nouveau avec les chiffres d'origine. L'énoncé reste le même.",
+  "again.other": "Autres chiffres (jeu de données {n} sur {total}). L'énoncé reste le même.",
+  "again.noAlt": "Répétition : il n'y a pas d'autres chiffres pour cet exercice. L'or s'obtient après 3 solutions correctes.",
+  "again.round": "Nouvelle manche : saisis encore une fois la formule.",
+  "again.btnAlt": "Encore une fois avec d'autres chiffres",
+  "again.btnRepeat": "Encore une fois (répétition)",
+  "mastery.repeatSuffix": " · répétition",
+  "mastery.bronze": "Résous l'exercice pour obtenir le bronze.",
+  "mastery.silver": "Encore 1 solution correcte jusqu'à l'argent.",
+  "mastery.goldRepeat": "Encore {n} répétition(s) jusqu'à l'or.",
+  "mastery.goldOther": "Résous l'exercice avec d'autres chiffres pour obtenir l'or.",
+  "mastery.goldMore": "Encore {n} solution(s) correcte(s) jusqu'à l'or.",
+  "mastery.done": "Or obtenu.",
+  "mastery.doneRepeat": "Or obtenu (répétition).",
+  "medal.1": "Bronze",
+  "medal.2": "Argent",
+  "medal.3": "Or",
+  "done.title": "Parcours «{track}» terminé !",
+  "done.all": "Bravo : tu as résolu les {n} exercices de ce parcours.",
+  "done.next": "Continuer avec «{track}» →",
+  "done.allTracks": "Voir tous les parcours",
+  "done.more": " D'autres parcours sont en préparation.",
+  "done.lastTitle": "Dernier exercice du parcours «{track}» résolu",
+  "done.count": "Tu as résolu {solved} exercices sur {total}.",
+  "done.premiumRest": " Les {n} restants font partie de Premium.",
+  "done.unlock": "Débloquer tous les exercices",
+  "done.firstOpen": "Aller au premier exercice ouvert",
+  "check.unexpected": "Une erreur inattendue est survenue pendant la vérification. Recharge la page et réessaie.",
+  "check.excelShows": "Excel afficherait ici {err}.",
+  "check.yourResult": "Ton résultat : {value}",
+  "solve.counted": "Cette manche est déjà comptée. Avec «{btn}», tu en commences une nouvelle.",
+  "solve.medalReached": "{medal} obtenu",
+  "solve.xp": "+{n} XP",
+  "solve.goldDaily": "Les exercices en or rapportent des XP 1× par jour",
+  "solve.noXp": "pas de XP, la médaille suivante demande {what}",
+  "solve.otherNumbers": "d'autres chiffres",
+  "solve.anotherRepeat": "une répétition de plus",
+  "hint.prefix": "Indice : {hint}",
+  "hint.default": "Relis attentivement l'énoncé et fais attention à la plage.",
+  "weekdays": "di,lu,ma,me,je,ve,sa",
+  "day.one": "jour",
+  "day.many": "jours",
+  "exercise.one": "exercice",
+  "exercise.many": "exercices",
+  "streak.inRow": "{days} de suite",
+  "streak.label": "{unit} de suite",
+  "goal.today": "{n}/{goal} aujourd'hui",
+  "goal.reached": "Objectif du jour atteint.",
+  "goal.streak": "Série : {days}.",
+  "level.short": "Niv. {level}",
+  "level.word": "Niveau {level}",
+  "level.srToNext": ", encore {n} XP jusqu'au niveau {level}",
+  "level.srOpen": ". Ouvrir le profil",
+  "level.title": "Niveau {level} {name} · {xp} XP",
+  "level.name.1": "Débutant",
+  "level.name.2": "Collaborateur",
+  "level.name.3": "Contrôleur",
+  "level.name.4": "Analyste",
+  "level.name.5": "Pro d'Excel",
+  "level.name.6": "Maître d'Excel",
+  "levelup.text": "Tu as atteint le niveau {level} ({xp} XP).",
+  "levelup.next": " Prochain objectif : {name} à {min} XP.",
+  "levelup.locked": " Les niveaux 5 et 6 s'atteignent avec tous les exercices (Premium).",
+  "profile.maxLevel": "Niveau le plus élevé atteint.",
+  "profile.nextLocked": "Le niveau {level} ({name}) s'atteint avec tous les exercices.",
+  "profile.premiumReach": "Accessible avec Premium",
+  "profile.toNext": "Encore {n} XP jusqu'au niveau {level} ({name}).",
+  "profile.barLabel": "Progression vers le niveau suivant",
+  "profile.best": "(record : {days})",
+  "profile.dayLabel": "{weekday} {date} : {n} {unit}",
+  "profile.dayMet": ", objectif du jour atteint",
+  "profile.today": "auj.",
+  "profile.solved": "Résolus",
+  "profile.of": "sur {n}",
+  "profile.gold": "Or",
+  "profile.silver": "+ {n} argent",
+  "profile.xp": "XP",
+  "profile.reset": "Progression réinitialisée.",
+  "badge.earned": "Débloqué.",
+  "badge.locked": "Verrouillé.",
+  "badge.share": "Partager le badge",
+  "badge.shareAria": "Partager le badge «{name}»",
+  "badge.toast": "Badge débloqué : {name}",
+  "badge.erste-formel.name": "Première formule",
+  "badge.erste-formel.desc": "Résous ton premier exercice.",
+  "badge.pfad.name": "{short} terminé",
+  "badge.pfad.desc": "Tous les exercices disponibles du parcours «{track}» avec au moins le bronze.",
+  "badge.gold.name": "Parcours en or {short}",
+  "badge.gold.desc": "Tous les exercices du parcours «{track}» en or.",
+  "badge.streak-7.name": "7 jours de suite",
+  "badge.streak-7.desc": "Atteins ton objectif du jour 7 jours de suite.",
+  "badge.streak-30.name": "30 jours de suite",
+  "badge.streak-30.desc": "Atteins ton objectif du jour 30 jours de suite.",
+  "badge.sverweis-profi.name": "Pro de RECHERCHEV",
+  "badge.sverweis-profi.desc": "Tous les exercices RECHERCHEV disponibles en or.",
+  "badge.fruehaufsteher.name": "Lève-tôt",
+  "badge.fruehaufsteher.desc": "Résous un exercice avant 7 heures.",
+  "badge.nachtschicht.name": "Équipe de nuit",
+  "badge.nachtschicht.desc": "Résous un exercice après 22 heures.",
+  "badge.xp-100.name": "100 XP",
+  "badge.xp-100.desc": "Accumule 100 XP.",
+  "badge.xp-500.name": "500 XP",
+  "badge.xp-500.desc": "Accumule 500 XP.",
+  "share.failed": "L'image n'a pas pu être créée.",
+  "share.eyebrow": "BADGE DÉBLOQUÉ",
+  "share.line": "{level} · {name}   ·   Série : {days}",
+  "share.title": "Partager le badge «{name}»",
+  "share.alt": "Aperçu : badge «{name}» avec niveau et série, Excel-Drills",
+  "share.download": "Télécharger l'image (PNG)",
+  "share.button": "Partager …",
+  "share.text": "Badge «{name}» débloqué sur Excel-Drills.",
+  "share.file": "excel-drills-badge-{id}.png",
+  "html.skip": "Aller à l'exercice",
+  "html.gami": "Ta progression",
+  "html.goalChange": ", modifier l'objectif du jour",
+  "html.goalLegend": "Objectif par jour",
+  "html.goal1": "1 exercice",
+  "html.goal2": "2 exercices",
+  "html.goal5": "5 exercices",
+  "html.localeGroup": "Langue et pays",
+  "html.mainNav": "Navigation principale",
+  "html.navTracks": "Parcours",
+  "html.navArticles": "Articles",
+  "html.navHandouts": "Fiches",
+  "html.navPremium": "Premium",
+  "html.exNav": "Parcours et exercices",
+  "html.trackLabel": "Parcours d'apprentissage",
+  "html.listHeading": "Exercices",
+  "html.writeUs": "Écris-nous",
+  "html.loading": "Chargement des exercices et du moteur de formules…",
+  "html.gridRegion": "Tableau (défilement horizontal)",
+  "html.check": "Vérifier",
+  "html.download": "Télécharger le fichier Excel",
+  "html.stepsHeading": "Comment procéder",
+  "html.stepsNote": "Coche les étapes terminées. Les coches servent uniquement à ton suivi et sont enregistrées dans ce navigateur.",
+  "html.questionsHeading": "Questions de contrôle",
+  "html.checkAnswers": "Vérifier les réponses",
+  "html.hint": "Indice",
+  "html.next": "Exercice suivant →",
+  "html.paywallTitle": "Cet exercice fait partie de Premium",
+  "html.paywallText": "Avec Premium, tu débloques tous les exercices de tous les parcours, y compris SIERREUR, RECHERCHEV avec barèmes, CONCAT, SOMMEPROD et les formules SI imbriquées. Dès CHF 4.10 par mois, avec une garantie satisfait ou remboursé de 100 %.",
+  "html.later": "Plus tard",
+  "html.pfLevel": "Niveau",
+  "html.pfStreak": "Série",
+  "html.pfWeek": "7 derniers jours",
+  "html.pfGoal": "Objectif du jour",
+  "html.pfStats": "Statistiques",
+  "html.pfBadges": "Badges",
+  "html.pfStorage": "Ta progression est enregistrée uniquement dans ce navigateur. Les comptes suivront plus tard.",
+  "html.reset": "Réinitialiser la progression",
+  "html.resetQ": "Vraiment réinitialiser ? Les XP, médailles, badges et la série seront effacés de ce navigateur. Impossible de revenir en arrière.",
+  "html.resetYes": "Oui, réinitialiser",
+  "html.resetNo": "Annuler",
+  "html.levelup": "Niveau supérieur",
+  "html.levelupOk": "Continuer",
+  "html.imprint": "Mentions légales",
+  "html.privacy": "Protection des données",
+  "locale.formulaHelp": "Valide avec Entrée. Tu sépares les arguments par un point-virgule (;) et les décimales par un point.",
+  "locale.miniHelp": "Valide avec Entrée. Tu sépares les arguments par un point-virgule (;).",
+  "locale.projectNote": "Saisis les nombres tels qu'ils apparaissent dans ton TCD ou ta requête. Virgule ou point comme séparateur décimal ; l'apostrophe et le % sont facultatifs.",
+  "locale.switched": "Français (Suisse) : fonctions en français (SOMME, SI, RECHERCHEV), point décimal, apostrophe pour les milliers, montants en CHF.",
+  "locale.name": "Suisse romande",
+  "locale.close": "Fermer",
+  "msg.noEquals": "Une formule commence toujours par =. Exemple : =SOMME(B2:B6)",
+  "msg.empty": "Saisis d'abord une formule.",
+  "msg.comma": "Dans Excel en français (Suisse), tu sépares les arguments par ; et non par ,",
+  "msg.decimalComma": "En Suisse, tu écris les nombres décimaux avec un point, p. ex. 0.5.",
+  "msg.english": "En français, la fonction s'appelle {name} (et non {en}).",
+  "msg.englishConst": "En français, tu écris {name} au lieu de {en}.",
+  "msg.german": "En français, la fonction s'appelle {name} ({de} est le nom allemand).",
+  "msg.germanConst": "En français, tu écris {name} ({de} est la forme allemande).",
+  "msg.unknownFn": "Excel ne connaît pas la fonction {name}. Vérifie l'orthographe.",
+  "msg.quotesGeneric": "Dans une formule, le texte doit être entre guillemets, p. ex. \"OK\".",
+  "msg.cycle": "Référence circulaire : ta formule fait référence à la cellule cible elle-même. Choisis une plage sans la cellule cible.",
+  "msg.noRef": "Utilise des références de cellules plutôt que des nombres fixes.",
+  "msg.mustUse": "Dans cet exercice, utilise la fonction {fn}.",
+  "msg.mustContain": "Ta formule doit contenir {s}.",
+  "msg.alt": "Presque : ta formule fonctionne avec ces chiffres, mais avec d'autres valeurs dans le tableau, le résultat serait faux. Vérifie ta condition et ne saisis pas de résultats en dur.",
+  "msg.wrong": "Pas encore juste.",
+  "msg.genericFallback": "Vérifie la structure, les plages et les séparateurs de ta formule.",
+  "msg.success": "Juste ! Ta formule donne le bon résultat.",
+  "pmsg.empty": "Saisis un nombre ici.",
+  "pmsg.invalid": "Ce n'est pas un nombre. Écris par exemple 1234.50, 1'234,50 ou 12.5 %.",
+  "pmsg.wrong": "Pas encore juste.",
+  "pmsg.right": "Juste.",
+  "pmsg.allRight": "Tout est juste ! Ton rapport donne les bons chiffres.",
+  "pmsg.some": "{n} réponses justes sur {total}. Vérifie les questions marquées."
+ },
+ "exercises": {
+  "summe-1": {
+   "topic": "SOMME",
+   "title": "Additionner le chiffre d'affaires mensuel",
+   "task": "Calcule en B7 la somme de tous les chiffres d'affaires de B2:B6.",
+   "hints": {
+    "noRange": "Astuce : utilise une plage comme B2:B6 plutôt que des cellules isolées.",
+    "generic": "La fonction s'appelle SOMME. Syntaxe : =SOMME(plage)."
+   },
+   "data": {
+    "Zürich": "Zurich",
+    "Bern": "Berne",
+    "Basel": "Bâle",
+    "Luzern": "Lucerne",
+    "Lugano": "Lugano",
+    "Filiale": "Succursale",
+    "Umsatz CHF": "Chiffre d'affaires CHF",
+    "Total": "Total"
+   }
+  },
+  "mittelwert-1": {
+   "topic": "MOYENNE",
+   "title": "Montant moyen des sinistres",
+   "task": "Calcule en B8 le montant moyen des sinistres de B2:B7.",
+   "hints": {
+    "generic": "Dans Excel, la moyenne se calcule avec MOYENNE : =MOYENNE(B2:B7)."
+   },
+   "data": {
+    "Schaden-Nr.": "N° de sinistre",
+    "Betrag CHF": "Montant CHF",
+    "Durchschnitt": "Moyenne"
+   }
+  },
+  "max-1": {
+   "topic": "MAX / MIN",
+   "title": "Chiffre d'affaires mensuel le plus élevé",
+   "task": "Affiche en B14 la valeur mensuelle la plus élevée de B2:B13.",
+   "hints": {
+    "generic": "MAX renvoie la plus grande valeur d'une plage : =MAX(B2:B13)."
+   },
+   "data": {
+    "Jan": "janv.",
+    "Feb": "févr.",
+    "Mär": "mars",
+    "Apr": "avr.",
+    "Mai": "mai",
+    "Jun": "juin",
+    "Jul": "juil.",
+    "Aug": "août",
+    "Sep": "sept.",
+    "Okt": "oct.",
+    "Nov": "nov.",
+    "Dez": "déc.",
+    "Monat": "Mois",
+    "Umsatz": "Chiffre d'affaires",
+    "Maximum": "Maximum"
+   }
+  },
+  "wenn-1": {
+   "topic": "SI",
+   "title": "Budget respecté ?",
+   "task": "Écris en C2 une formule qui affiche \"OK\" si les coûts réels (B2) sont inférieurs ou égaux au budget (A2), sinon \"Dépassé\".",
+   "hints": {
+    "quotes": "Dans une formule, le texte doit être entre guillemets : \"OK\".",
+    "generic": "Syntaxe : =SI(condition;valeur_si_vrai;valeur_si_faux)."
+   },
+   "data": {
+    "Budget": "Budget",
+    "Ist": "Réel",
+    "Status": "Statut"
+   },
+   "terms": {
+    "OK": "OK",
+    "Überzogen": "Dépassé"
+   }
+  },
+  "zaehlenwenn-1": {
+   "topic": "NB.SI",
+   "title": "Compter les factures ouvertes",
+   "task": "Compte en B9 combien de factures de B2:B8 ont le statut \"ouverte\".",
+   "hints": {
+    "quotes": "Le critère est du texte et doit être entre guillemets : \"ouverte\".",
+    "generic": "Syntaxe : =NB.SI(plage;critère)."
+   },
+   "data": {
+    "Rechnung": "Facture",
+    "Status": "Statut",
+    "bezahlt": "payée",
+    "storniert": "annulée",
+    "Anzahl offen": "Factures ouvertes"
+   },
+   "terms": {
+    "offen": "ouverte"
+   }
+  },
+  "summewenn-1": {
+   "topic": "SOMME.SI",
+   "title": "Chiffre d'affaires d'une région",
+   "task": "Calcule en E2 le chiffre d'affaires total de la région \"Est\" à partir du tableau A2:B9.",
+   "hints": {
+    "quotes": "Le critère \"Est\" doit être entre guillemets, ou alors tu fais référence à D2.",
+    "generic": "Syntaxe : =SOMME.SI(plage_critères;critère;plage_somme)."
+   },
+   "data": {
+    "Region": "Région",
+    "Umsatz": "Chiffre d'affaires",
+    "Total": "Total",
+    "West": "Ouest",
+    "Süd": "Sud"
+   },
+   "terms": {
+    "Ost": "Est"
+   }
+  },
+  "summewenn-2": {
+   "topic": "SOMME.SI",
+   "title": "Commandes de plus de 3 pièces",
+   "task": "Additionne en C8 le montant de toutes les commandes dont la quantité (colonne A) est supérieure à 3.",
+   "hints": {
+    "quotes": "Les critères de comparaison comme >3 doivent être écrits comme du texte : \">3\".",
+    "generic": "Syntaxe : =SOMME.SI(plage_critères;\">3\";plage_somme)."
+   },
+   "data": {
+    "Menge": "Quantité",
+    "Artikel": "Article",
+    "Betrag": "Montant",
+    "Ordner": "Classeurs",
+    "Toner": "Toner",
+    "Papier": "Papier",
+    "Stifte": "Stylos",
+    "Total >3": "Total >3"
+   },
+   "terms": {
+    ">3": ">3"
+   }
+  },
+  "sverweis-1": {
+   "topic": "RECHERCHEV",
+   "title": "Rechercher un prix",
+   "task": "Avec RECHERCHEV, va chercher en E2 le prix de l'article indiqué en D2 dans la liste de prix A2:B6. Correspondance exacte.",
+   "hints": {
+    "generic": "Syntaxe : =RECHERCHEV(valeur_cherchée;table;no_index_col;FAUX). FAUX impose une correspondance exacte."
+   },
+   "data": {
+    "Artikel": "Article",
+    "Preis": "Prix",
+    "Gesucht": "Recherché"
+   }
+  },
+  "runden-1": {
+   "topic": "ARRONDI",
+   "title": "Arrondir au centime",
+   "task": "Arrondis en B2 le montant de A2 à 2 décimales (arrondi commercial).",
+   "hints": {
+    "generic": "Syntaxe : =ARRONDI(nombre;no_chiffres)."
+   },
+   "data": {
+    "Betrag": "Montant",
+    "Gerundet": "Arrondi"
+   }
+  },
+  "absolut-1": {
+   "topic": "Référence absolue",
+   "title": "TVA avec un taux fixe",
+   "task": "Calcule en C2 la TVA sur le montant B2 avec le taux en F1. La formule doit pouvoir être recopiée vers le bas : fixe F1 avec le signe $.",
+   "hints": {
+    "dollar": "Sans $, la référence à F1 se décale quand tu recopies la formule. Écris $F$1.",
+    "generic": "Une référence absolue s'écrit ainsi : $F$1."
+   },
+   "data": {
+    "Position": "Poste",
+    "Netto": "Net",
+    "MwSt": "TVA",
+    "Satz": "Taux",
+    "Beratung": "Conseil",
+    "Lizenz": "Licence",
+    "Support": "Support"
+   }
+  },
+  "wennfehler-1": {
+   "topic": "SIERREUR",
+   "title": "Intercepter les erreurs",
+   "task": "Divise en C2 le chiffre d'affaires A2 par le nombre de pièces B2 et affiche \"n.d.\" si une erreur se produit.",
+   "hints": {
+    "generic": "Syntaxe : =SIERREUR(valeur;valeur_si_erreur)."
+   },
+   "data": {
+    "Umsatz": "Chiffre d'affaires",
+    "Stück": "Pièces",
+    "Preis/Stück": "Prix/pièce"
+   },
+   "terms": {
+    "n/a": "n.d."
+   }
+  },
+  "sverweis-2": {
+   "topic": "RECHERCHEV",
+   "title": "Taux de commission par palier",
+   "task": "Détermine en B2 le taux de commission pour le chiffre d'affaires A2 à l'aide du barème D2:E5 (correspondance approximative).",
+   "hints": {
+    "generic": "Pour un barème, utilise VRAI (correspondance approximative) et une première colonne triée par ordre croissant."
+   },
+   "data": {
+    "Umsatz": "Chiffre d'affaires",
+    "Satz": "Taux",
+    "Ab Umsatz": "CA à partir de"
+   }
+  },
+  "textkette-1": {
+   "topic": "CONCAT",
+   "title": "Réunir prénom et nom",
+   "task": "Réunis en C2 le prénom (A2) et le nom (B2), avec un espace entre les deux.",
+   "hints": {
+    "generic": "Assemble les textes avec & ou avec CONCAT(A2;\" \";B2)."
+   },
+   "data": {
+    "Vorname": "Prénom",
+    "Nachname": "Nom",
+    "Vollständig": "Nom complet",
+    "Anna": "Anna",
+    "Keller": "Keller"
+   }
+  },
+  "summenprodukt-1": {
+   "topic": "SOMMEPROD",
+   "title": "Valeur totale du stock",
+   "task": "Calcule en B7 la valeur totale : la somme des quantités multipliées par les prix pour toutes les lignes A2:B6, en une seule formule.",
+   "hints": {
+    "generic": "SOMMEPROD multiplie deux plages ligne par ligne, puis additionne : =SOMMEPROD(A2:A6;B2:B6)."
+   },
+   "data": {
+    "Menge": "Quantité",
+    "Preis": "Prix",
+    "Lagerwert": "Valeur du stock"
+   }
+  },
+  "wenn-verschachtelt-1": {
+   "topic": "SI imbriqués",
+   "title": "Attribuer une classe de risque",
+   "task": "Affiche en B2 \"élevé\" si le taux de sinistres A2 est supérieur à 0.8, \"moyen\" s'il est supérieur à 0.5, sinon \"faible\".",
+   "hints": {
+    "generic": "Imbrique les fonctions : =SI(cond1;\"élevé\";SI(cond2;\"moyen\";\"faible\"))."
+   },
+   "data": {
+    "Schadenquote": "Taux de sinistres",
+    "Klasse": "Classe"
+   },
+   "terms": {
+    "hoch": "élevé",
+    "mittel": "moyen",
+    "tief": "faible"
+   }
+  },
+  "acc-abweichung-1": {
+   "topic": "Écart budget-réel",
+   "title": "Écart en CHF",
+   "task": "Calcule en D2 l'écart du compte Matériel de bureau : réel (C2) moins budget (B2). Une valeur positive signifie que le budget a été dépassé.",
+   "hints": {
+    "generic": "Écart = réel − budget, donc =C2-B2. Avec =B2-C2, tu inverses le signe."
+   },
+   "data": {
+    "Konto": "Compte",
+    "Budget CHF": "Budget CHF",
+    "Ist CHF": "Réel CHF",
+    "Büromaterial": "Matériel de bureau",
+    "Reisespesen": "Frais de déplacement",
+    "Weiterbildung": "Formation continue",
+    "Abweichung CHF": "Écart CHF"
+   }
+  },
+  "acc-abweichung-2": {
+   "topic": "Écart budget-réel",
+   "title": "Écart en pour cent",
+   "task": "Calcule en E2 l'écart des frais de déplacement en pour cent du budget : (réel C2 − budget B2) / budget B2. Donne le résultat sous forme décimale (−0.12 correspond à −12 %), sans multiplier par 100. Tu appliqueras ensuite le format pourcentage dans Excel.",
+   "hints": {
+    "generic": "Divise l'écart par le budget : =(C2-B2)/B2. Ne multiplie pas par 100, le format pourcentage s'en charge."
+   },
+   "data": {
+    "Konto": "Compte",
+    "Budget CHF": "Budget CHF",
+    "Ist CHF": "Réel CHF",
+    "Büromaterial": "Matériel de bureau",
+    "Reisespesen": "Frais de déplacement",
+    "Weiterbildung": "Formation continue",
+    "Abw. CHF": "Écart CHF",
+    "Abw. %": "Écart %"
+   }
+  },
+  "acc-anteil-1": {
+   "topic": "Part du total",
+   "title": "Part d'une branche dans le total",
+   "task": "Calcule en C2 la part de la branche Véhicules à moteur dans le total des primes en B6. Fixe le total avec une référence absolue ($B$6) pour pouvoir recopier la formule vers le bas. Résultat sous forme décimale.",
+   "hints": {
+    "dollar": "Fixe le total avec $B$6 (au minimum B$6), sinon la référence se décale quand tu recopies vers le bas.",
+    "generic": "Part = valeur / total, p. ex. =B2/$B$6."
+   },
+   "data": {
+    "Sparte": "Branche",
+    "Prämien CHF": "Primes CHF",
+    "Motorfahrzeug": "Véhicules à moteur",
+    "Hausrat": "Ménage",
+    "Haftpflicht": "Responsabilité civile",
+    "Gebäude": "Bâtiments",
+    "Total": "Total",
+    "Anteil": "Part"
+   }
+  },
+  "acc-mwst-1": {
+   "topic": "TVA net/brut",
+   "title": "Net à partir du brut",
+   "task": "Le taux de TVA se trouve en F1. Calcule en C2 le montant net de la facture à partir du montant brut B2. Utilise une référence absolue pour le taux ($F$1). Pour rappel : brut = net × (1 + taux).",
+   "hints": {
+    "dollar": "Fixe le taux avec $F$1 pour qu'il reste en place quand tu recopies la formule.",
+    "generic": "Net à partir du brut : divise par (1 + taux), donc =B2/(1+$F$1). Brut × (1 − taux) ne donne pas le montant net."
+   },
+   "data": {
+    "Rechnung": "Facture",
+    "Brutto CHF": "Brut CHF",
+    "Netto CHF": "Net CHF",
+    "MwSt-Satz": "Taux de TVA"
+   }
+  },
+  "acc-rundung-1": {
+   "topic": "Arrondi à 5 centimes",
+   "title": "Arrondir à 5 centimes",
+   "task": "Arrondis en C2 le montant B2 aux 5 centimes (arrondi commercial, p. ex. 47.33 → 47.35, 47.32 → 47.30).",
+   "hints": {
+    "generic": "Divise par 0.05, arrondis à 0 décimale et multiplie à nouveau par 0.05 : =ARRONDI(B2/0.05;0)*0.05. Autre possibilité : =ARRONDI.AU.MULTIPLE(B2;0.05)."
+   },
+   "data": {
+    "Beleg": "Justificatif",
+    "Betrag CHF": "Montant CHF",
+    "Gerundet CHF": "Arrondi CHF",
+    "Spesen Taxi": "Frais de taxi",
+    "Parkgebühr": "Taxe de parking",
+    "Kaffee Kunde": "Café client"
+   }
+  },
+  "acc-summewenns-1": {
+   "topic": "SOMME.SI.ENS",
+   "title": "Coûts par centre de coûts et par mois",
+   "task": "Calcule en G2 la somme des montants (C2:C9) du centre de coûts indiqué en E2 (\"Marketing\") pour le mois indiqué en F2 (\"févr.\"). Les deux conditions doivent être remplies en même temps.",
+   "hints": {
+    "quotes": "Un texte utilisé comme critère doit être entre guillemets (\"Marketing\"), ou alors tu fais référence à E2 et F2.",
+    "generic": "Syntaxe : =SOMME.SI.ENS(plage_somme;plage_critères1;critère1;plage_critères2;critère2). Ici, la plage à additionner vient en premier."
+   },
+   "data": {
+    "Kostenstelle": "Centre de coûts",
+    "Monat": "Mois",
+    "Betrag CHF": "Montant CHF",
+    "Total CHF": "Total CHF",
+    "IT": "IT",
+    "HR": "RH",
+    "Jan": "janv.",
+    "Mär": "mars"
+   },
+   "terms": {
+    "Marketing": "Marketing",
+    "Feb": "févr."
+   }
+  },
+  "acc-duplikate-1": {
+   "topic": "Trouver les doublons",
+   "title": "Signaler les numéros de pièce en double",
+   "task": "Affiche en C2 \"Doublon\" si le numéro de pièce A2 apparaît plus d'une fois dans la plage A2:A7, sinon un texte vide (\"\"). Fixe la plage avec $ pour que la formule puisse être recopiée.",
+   "hints": {
+    "generic": "Compte combien de fois A2 apparaît dans la plage : =SI(NB.SI($A$2:$A$7;A2)>1;\"Doublon\";\"\")."
+   },
+   "data": {
+    "Beleg-Nr.": "N° de pièce",
+    "Betrag CHF": "Montant CHF",
+    "Prüfung": "Contrôle"
+   },
+   "terms": {
+    "Duplikat": "Doublon"
+   }
+  },
+  "acc-sollhaben-1": {
+   "topic": "Contrôle de plausibilité",
+   "title": "Vérifier que débit = crédit",
+   "task": "Vérifie en E2 si la somme du débit (B2:B6) correspond à la somme du crédit (C2:C6). Arrondis les deux sommes à 2 décimales avec ARRONDI, pour que les écarts d'arrondi du calcul en virgule flottante ne posent pas de problème. Résultat : \"OK\" ou \"Écart\".",
+   "hints": {
+    "quotes": "Les résultats \"OK\" et \"Écart\" doivent être entre guillemets.",
+    "generic": "Compare les sommes arrondies : =SI(ARRONDI(SOMME(B2:B6);2)=ARRONDI(SOMME(C2:C6);2);\"OK\";\"Écart\")."
+   },
+   "data": {
+    "Konto": "Compte",
+    "Soll CHF": "Débit CHF",
+    "Haben CHF": "Crédit CHF",
+    "Prüfung": "Contrôle",
+    "1020 Bank": "1020 Banque",
+    "1100 Debitoren": "1100 Débiteurs",
+    "2000 Kreditoren": "2000 Créanciers",
+    "3200 Warenertrag": "3200 Ventes de marchandises",
+    "6000 Mietaufwand": "6000 Charges de loyer"
+   },
+   "terms": {
+    "OK": "OK",
+    "Differenz": "Écart"
+   }
+  },
+  "acc-abstimmung-1": {
+   "topic": "Rapprochement de comptes",
+   "title": "Trouver l'écriture manquante",
+   "task": "Cherche en C2 la référence bancaire A2 dans la liste du grand livre E2:F7 et renvoie le montant comptabilisé de la colonne F (recherche exacte). Si la référence ne figure pas dans le grand livre, \"manquant\" doit s'afficher.",
+   "hints": {
+    "generic": "Imbrique les fonctions : =SIERREUR(RECHERCHEV(A2;$E$2:$F$7;2;FAUX);\"manquant\"). Sans FAUX, RECHERCHEV cherche une valeur approchée et trouve de faux résultats."
+   },
+   "data": {
+    "Bank Ref.": "Réf. banque",
+    "Betrag CHF": "Montant CHF",
+    "Hauptbuch CHF": "Grand livre CHF",
+    "Hauptbuch Ref.": "Réf. grand livre"
+   },
+   "terms": {
+    "fehlt": "manquant"
+   }
+  },
+  "acc-alterung-1": {
+   "topic": "Échéancier des postes ouverts",
+   "title": "Classer les postes ouverts par ancienneté",
+   "task": "La date de référence se trouve en H1 (n'utilise pas AUJOURDHUI(), sinon le résultat change tous les jours). Calcule en D2 le nombre de jours depuis l'échéance (date de référence moins B2) et classe : jusqu'à 30 jours \"0-30\", jusqu'à 60 jours \"31-60\", au-delà \">60\". Utilise un trait d'union sans espace.",
+   "hints": {
+    "generic": "Jours = $H$1-B2. Imbrique les fonctions : =SI(jours<=30;\"0-30\";SI(jours<=60;\"31-60\";\">60\")). Attention au <= pour les limites 30 et 60."
+   },
+   "data": {
+    "Rechnung": "Facture",
+    "Fällig am": "Échéance",
+    "Betrag CHF": "Montant CHF",
+    "Klasse": "Classe",
+    "Stichtag": "Date de réf."
+   },
+   "terms": {
+    "0-30": "0-30",
+    "31-60": "31-60",
+    ">60": ">60"
+   }
+  },
+  "acc-abgrenzung-1": {
+   "topic": "FIN.MOIS et MOIS.DECALER",
+   "title": "Échéance en fin de mois",
+   "task": "La police commence le B2 et dure C2 mois. Calcule en D2 la fin du mois d'échéance : d'abord la date d'échéance avec MOIS.DECALER (début plus durée), puis la fin du mois avec FIN.MOIS. Excel affiche le résultat sous forme de numéro de série jusqu'à ce que tu formates la cellule en date.",
+   "hints": {
+    "generic": "MOIS.DECALER(B2;C2) décale de C2 mois, FIN.MOIS(date;0) passe à la fin du mois : =FIN.MOIS(MOIS.DECALER(B2;C2);0)."
+   },
+   "data": {
+    "Police": "Police",
+    "Beginn": "Début",
+    "Laufzeit Mte": "Durée (mois)",
+    "Ablauf Monatsende": "Échéance fin de mois"
+   }
+  },
+  "fin-zins-1": {
+   "topic": "Intérêt simple",
+   "title": "Intérêts d'un dépôt à terme",
+   "task": "Calcule en D2 les intérêts du dépôt à terme : capital A2 × taux B2 × jours C2 / 360 (usage bancaire suisse, 360 jours par an).",
+   "hints": {
+    "generic": "Intérêts = capital × taux × jours / 360, donc =A2*B2*C2/360."
+   },
+   "data": {
+    "Kapital CHF": "Capital CHF",
+    "Zins p.a.": "Taux annuel",
+    "Tage": "Jours",
+    "Zins CHF": "Intérêts CHF"
+   }
+  },
+  "fin-zinseszins-1": {
+   "topic": "Intérêts composés",
+   "title": "Capital final avec intérêts composés",
+   "task": "Calcule en D2 le capital final après C2 années si A2 est rémunéré chaque année au taux B2 et que les intérêts restent sur le compte (intérêts composés). Formule : capital × (1 + taux) ^ années.",
+   "hints": {
+    "generic": "Puissance avec ^ : =A2*(1+B2)^C2. N'oublie pas les parenthèses autour de (1+B2)."
+   },
+   "data": {
+    "Kapital CHF": "Capital CHF",
+    "Zins p.a.": "Taux annuel",
+    "Jahre": "Années",
+    "Endkapital CHF": "Capital final CHF"
+   }
+  },
+  "fin-cashflow-1": {
+   "topic": "Tableau des flux de trésorerie",
+   "title": "Solde cumulé",
+   "task": "Calcule en C3 le solde à fin janvier : solde de la ligne précédente (C2) plus flux de trésorerie du mois (B3). Construite ainsi, la formule peut être recopiée vers le bas.",
+   "hints": {
+    "generic": "Solde courant = solde précédent + flux de trésorerie : =C2+B3."
+   },
+   "data": {
+    "Monat": "Mois",
+    "Cashflow CHF": "Cash-flow CHF",
+    "Saldo CHF": "Solde CHF",
+    "Anfangssaldo": "Solde initial",
+    "Jan": "janv.",
+    "Feb": "févr.",
+    "Mär": "mars",
+    "Apr": "avr."
+   }
+  },
+  "fin-schadenquote-1": {
+   "topic": "Taux de sinistres",
+   "title": "Taux de sinistres global",
+   "task": "Calcule en D6 le taux de sinistres de toutes les branches : somme des sinistres (C2:C5) divisée par la somme des primes (B2:B5). Résultat sous forme décimale (0.71 = 71 %), tu appliques le format pourcentage ensuite. Attention : la moyenne des taux individuels serait fausse.",
+   "hints": {
+    "generic": "Taux global = total des sinistres / total des primes : =SOMME(C2:C5)/SOMME(B2:B5). Ne prends pas la moyenne des taux individuels."
+   },
+   "data": {
+    "Sparte": "Branche",
+    "Prämien CHF": "Primes CHF",
+    "Motorfahrzeug": "Véhicules à moteur",
+    "Hausrat": "Ménage",
+    "Haftpflicht": "Responsabilité civile",
+    "Gebäude": "Bâtiments",
+    "Total": "Total",
+    "Schäden CHF": "Sinistres CHF",
+    "Schadenquote": "Taux de sinistres"
+   }
+  },
+  "fin-cagr-1": {
+   "topic": "CAGR",
+   "title": "Croissance annuelle moyenne",
+   "task": "Calcule en D2 le taux de croissance annuel moyen (CAGR) des primes de B2 (première année) à B7 (dernière année). Formule : (valeur finale / valeur initiale) ^ (1 / nombre d'années) − 1, nombre d'années = A7 − A2. Résultat sous forme décimale.",
+   "hints": {
+    "generic": "=(B7/B2)^(1/(A7-A2))-1. L'exposant a besoin de ses propres parenthèses : 1/(A7-A2)."
+   },
+   "data": {
+    "Jahr": "Année",
+    "Prämien Mio. CHF": "Primes mio CHF",
+    "CAGR": "CAGR"
+   }
+  },
+  "fin-praemienstaffel-1": {
+   "topic": "RECHERCHEV approximative",
+   "title": "Prime selon le barème",
+   "task": "Le barème de primes A2:B6 s'applique à partir de la somme d'assurance indiquée. Cherche en F2, avec RECHERCHEV et une correspondance approximative (VRAI), le taux pour la somme E2 et multiplie-le par E2.",
+   "hints": {
+    "generic": "Recherche approximative : =E2*RECHERCHEV(E2;$A$2:$B$6;2;VRAI). La première colonne du barème doit être triée par ordre croissant. Avec FAUX, tu ne trouves que des correspondances exactes."
+   },
+   "data": {
+    "Summe ab CHF": "Somme dès CHF",
+    "Prämiensatz": "Taux de prime",
+    "Police": "Police",
+    "Summe CHF": "Somme CHF",
+    "Prämie CHF": "Prime CHF"
+   }
+  },
+  "fin-portfolio-1": {
+   "topic": "SOMMEPROD",
+   "title": "Rendement pondéré du portefeuille",
+   "task": "Calcule en C6 le rendement pondéré du portefeuille : somme des montants × rendements (SOMMEPROD sur B2:B5 et C2:C5) divisée par la somme des montants.",
+   "hints": {
+    "generic": "=SOMMEPROD(B2:B5;C2:C5)/SOMME(B2:B5). La moyenne simple des rendements ignore les pondérations."
+   },
+   "data": {
+    "Anlage": "Placement",
+    "Betrag CHF": "Montant CHF",
+    "Rendite": "Rendement",
+    "CH-Aktien": "Actions CH",
+    "Obligationen CHF": "Obligations CHF",
+    "Immobilienfonds": "Fonds immobiliers",
+    "Geldmarkt": "Marché monétaire",
+    "Portfolio": "Portefeuille"
+   }
+  },
+  "fin-breakeven-1": {
+   "topic": "Seuil de rentabilité",
+   "title": "Quantité au seuil de rentabilité",
+   "task": "Calcule en D2 la quantité au seuil de rentabilité : coûts fixes A2 / (prix B2 − coûts variables C2). Arrondis à l'unité supérieure avec ARRONDI.SUP, car on ne vend pas de demi-pièces.",
+   "hints": {
+    "generic": "=ARRONDI.SUP(A2/(B2-C2);0). Les parenthèses autour de (B2-C2) sont nécessaires, sinon tu divises seulement par B2."
+   },
+   "data": {
+    "Fixkosten CHF": "Coûts fixes CHF",
+    "Preis/Stück CHF": "Prix/pièce CHF",
+    "Var. Kosten/Stück CHF": "Coûts var./pièce CHF",
+    "Break-even Stück": "Seuil (pièces)"
+   }
+  },
+  "fin-rmz-1": {
+   "topic": "VPM",
+   "title": "Mensualité d'un leasing",
+   "task": "Calcule en D2 la mensualité pour le montant A2 au taux annuel B2 sur une durée de C2 années. Convertis le taux et la durée en mois. La mensualité doit être positive (VPM renvoie les paiements en négatif).",
+   "hints": {
+    "generic": "=-VPM(B2/12;C2*12;A2) ou =VPM(B2/12;C2*12;-A2). Taux mensuel = B2/12, nombre de mensualités = C2*12."
+   },
+   "data": {
+    "Betrag CHF": "Montant CHF",
+    "Zins p.a.": "Taux annuel",
+    "Laufzeit Jahre": "Durée (années)",
+    "Rate/Monat CHF": "Mensualité CHF"
+   }
+  },
+  "fin-bw-1": {
+   "topic": "VA",
+   "title": "Valeur actuelle d'une rente",
+   "task": "Calcule en D2 la valeur actuelle d'une rente annuelle A2 versée pendant C2 années en fin de période, actualisée au taux B2. Le résultat doit être positif.",
+   "hints": {
+    "generic": "=VA(taux;nombre_périodes;paiement) : =VA(B2;C2;-A2). Saisis le paiement en négatif, la valeur actuelle est alors positive."
+   },
+   "data": {
+    "Rente/Jahr CHF": "Rente/an CHF",
+    "Diskontsatz": "Taux d'actualisation",
+    "Jahre": "Années",
+    "Barwert CHF": "Valeur actuelle CHF"
+   }
+  },
+  "fin-zw-1": {
+   "topic": "VC",
+   "title": "Valeur finale du pilier 3a",
+   "task": "Tu verses chaque année A2 sur ton pilier 3a (toujours en fin d'année), au taux B2, pendant C2 années. Calcule en D2 la valeur finale avec VC. Le résultat doit être positif.",
+   "hints": {
+    "generic": "=VC(taux;nombre_périodes;paiement) : =VC(B2;C2;-A2). De ton point de vue, les versements sont négatifs, d'où -A2."
+   },
+   "data": {
+    "Einzahlung/Jahr CHF": "Versement/an CHF",
+    "Zins p.a.": "Taux annuel",
+    "Jahre": "Années",
+    "Endwert CHF": "Valeur finale CHF"
+   }
+  },
+  "pivot-1": {
+   "topic": "TCD",
+   "title": "Chiffre d'affaires par région et par trimestre",
+   "intro": "Bureau Alpin SA t'a envoyé l'export des ventes 2025 de ses six succursales, une ligne par commande. Crée à partir de ces données un tableau croisé dynamique (TCD) avec le chiffre d'affaires par région et par trimestre. Avec le TCD terminé, tu réponds aux questions de contrôle en quelques secondes.",
+   "steps": [
+    "Ouvre le fichier dans Excel et clique dans une cellule du tableau de la feuille «Données».",
+    "Dans l'onglet «Insertion», choisis «Tableau croisé dynamique» › «À partir d'un tableau ou d'une plage». Laisse «Nouvelle feuille de calcul» sélectionné et clique sur «OK».",
+    "Dans la liste des champs, fais glisser «Région» dans la zone «Lignes» et «Trimestre» dans la zone «Colonnes».",
+    "Fais glisser «Chiffre d'affaires CHF» dans la zone «Valeurs». Excel affiche «Somme de Chiffre d'affaires CHF».",
+    "Pour le nombre de commandes : fais aussi glisser «N° de commande» dans «Valeurs». Comme le champ contient du texte, Excel compte automatiquement («Nombre de N° de commande»).",
+    "Lis les valeurs dans le TCD et saisis-les ci-dessous. Tu peux laisser tomber les centimes."
+   ],
+   "questions": [
+    {
+     "q": "Quel est le chiffre d'affaires de la région Est au trimestre Q3 (CHF) ?",
+     "unit": "CHF",
+     "hint": "Cherche la ligne «Est» et la colonne «Q3». Vérifie que la zone des valeurs affiche bien «Somme de Chiffre d'affaires CHF» et non «Nombre»."
+    },
+    {
+     "q": "Quel est le chiffre d'affaires annuel de la région la plus forte (CHF) ?",
+     "unit": "CHF",
+     "hint": "Regarde la colonne «Total général» tout à droite et prends la plus grande valeur parmi les régions."
+    },
+    {
+     "q": "Quel est le chiffre d'affaires total 2025 de toutes les régions (CHF) ?",
+     "unit": "CHF",
+     "hint": "C'est la cellule en bas à droite du TCD : ligne «Total général», colonne «Total général»."
+    },
+    {
+     "q": "Combien de commandes (lignes de données) le tableau contient-il ?",
+     "unit": "lignes",
+     "hint": "Fais glisser «N° de commande» dans la zone «Valeurs» (nombre) et lis le total général. La ligne d'en-tête ne compte pas."
+    }
+   ],
+   "hints": {
+    "generic": "Lignes : Région, colonnes : Trimestre, valeurs : Somme de Chiffre d'affaires CHF. Le total général se trouve en bas et à droite du TCD."
+   }
+  },
+  "pivot-2": {
+   "topic": "TCD · Date",
+   "title": "Commandes par mois",
+   "intro": "Cette fois, l'export contient une vraie date de commande au lieu d'un trimestre. Regroupe les données du TCD par mois et par trimestre et affiche, en plus de la somme, la moyenne par commande. Tu trouveras ainsi le meilleur mois et le montant typique d'une commande.",
+   "steps": [
+    "Clique dans le tableau de la feuille «Données» et choisis «Insertion» › «Tableau croisé dynamique» › «À partir d'un tableau ou d'une plage» › «OK».",
+    "Fais glisser «Date» dans la zone «Lignes». Excel 365 regroupe le plus souvent automatiquement par trimestres et par mois. Sinon : clic droit sur une date du TCD › «Grouper» › sélectionne «Mois» et «Trimestres» › «OK».",
+    "Fais glisser «Chiffre d'affaires CHF» dans la zone «Valeurs» («Somme de Chiffre d'affaires CHF»).",
+    "Fais glisser «Chiffre d'affaires CHF» une deuxième fois dans «Valeurs». Clique dessus › «Paramètres des champs de valeurs» › «Moyenne» › «OK».",
+    "Fais glisser «N° de commande» dans «Valeurs» pour voir le nombre de commandes par mois et par trimestre.",
+    "Avec les signes plus et moins devant les trimestres, tu déplies et replies les mois."
+   ],
+   "questions": [
+    {
+     "q": "Quel mois a eu le chiffre d'affaires (somme) le plus élevé ? Saisis le numéro du mois (1 = janvier, 12 = décembre).",
+     "unit": "",
+     "hint": "Trie ou compare la somme par mois, pas la moyenne. Saisis le mois sous forme de nombre, par exemple 4 pour avril."
+    },
+    {
+     "q": "Quel est le chiffre d'affaires moyen par commande en mars (CHF) ?",
+     "unit": "CHF",
+     "hint": "Il te faut «Moyenne de Chiffre d'affaires CHF» (paramètres des champs de valeurs), pas la somme. Lis la valeur à la ligne «mars»."
+    },
+    {
+     "q": "Combien de commandes y a-t-il eu au deuxième trimestre (Q2) ?",
+     "unit": "lignes",
+     "hint": "Compte avec «Nombre de N° de commande» et lis la ligne «Trim2» (avril à juin ensemble)."
+    }
+   ],
+   "hints": {
+    "generic": "Date dans les lignes, regroupée par mois et par trimestres. Chiffre d'affaires deux fois dans les valeurs : une fois en somme, une fois en moyenne."
+   }
+  },
+  "pivot-3": {
+   "topic": "TCD · Parts",
+   "title": "Parts et classement",
+   "intro": "La direction ne veut pas seulement voir des francs, mais des parts : quelle part du chiffre d'affaires vient de quel groupe de produits, et quelle succursale occupe quel rang ? Avec «Afficher les valeurs», le TCD fait le calcul pour toi, sans aucune formule.",
+   "steps": [
+    "Crée un tableau croisé dynamique à partir du tableau de la feuille «Données» : «Insertion» › «Tableau croisé dynamique» › «À partir d'un tableau ou d'une plage» › «OK».",
+    "Fais glisser «Groupe de produits» dans «Lignes» et «Chiffre d'affaires CHF» dans «Valeurs».",
+    "Clic droit sur une valeur › «Afficher les valeurs» › «% du total général». Tu vois maintenant les parts en pour cent.",
+    "Dans «Lignes», remplace «Groupe de produits» par «Succursale» et lis les parts des succursales.",
+    "Fais glisser «Chiffre d'affaires CHF» une deuxième fois dans «Valeurs». Clic droit › «Afficher les valeurs» › «Rang du plus grand au plus petit» › champ de base «Succursale» › «OK».",
+    "Astuce : avec clic droit › «Trier» › «Trier du plus grand au plus petit», la succursale la plus forte apparaît en haut."
+   ],
+   "questions": [
+    {
+     "q": "Quelle part du chiffre d'affaires total revient au groupe de produits «Service» (en %) ?",
+     "unit": "%",
+     "hint": "«Afficher les valeurs» › «% du total général», lignes par groupe de produits. Saisis la valeur en pour cent, p. ex. 12.3."
+    },
+    {
+     "q": "Quelle part du chiffre d'affaires total revient à la succursale de Lugano (en %) ?",
+     "unit": "%",
+     "hint": "Même affichage en pour cent, mais avec «Succursale» dans les lignes au lieu de «Groupe de produits»."
+    },
+    {
+     "q": "À quel rang se trouve la succursale de Bâle selon le chiffre d'affaires (1 = chiffre d'affaires le plus élevé) ?",
+     "unit": "",
+     "hint": "«Afficher les valeurs» › «Rang du plus grand au plus petit» avec le champ de base «Succursale». Ou trie les succursales par chiffre d'affaires décroissant et compte."
+    }
+   ],
+   "hints": {
+    "generic": "Clic droit sur une valeur du TCD › «Afficher les valeurs». Tu y trouves «% du total général» et «Rang du plus grand au plus petit»."
+   }
+  },
+  "pivot-4": {
+   "topic": "TCD · Champ calculé",
+   "title": "Marge par succursale avec segment",
+   "intro": "L'export contient les ventes et les coûts pour 2024 et 2025 (montants en CHF). Calcule la marge directement dans le TCD avec un champ calculé, filtre sur l'année 2025 et pilote les trimestres avec un segment. Tu obtiens ainsi un petit rapport que tu peux réutiliser chaque mois.",
+   "steps": [
+    "Crée un tableau croisé dynamique à partir du tableau de la feuille «Données» («Insertion» › «Tableau croisé dynamique» › «À partir d'un tableau ou d'une plage»).",
+    "Fais glisser «Succursale» dans «Lignes» et «Année» dans «Filtres». Dans le filtre au-dessus du TCD, choisis l'année 2025.",
+    "Clique dans le TCD › onglet «Analyse du tableau croisé dynamique» › «Champs, éléments et jeux» › «Champ calculé». Nom : Marge, formule : =Ventes-Coûts › «Ajouter» › «OK».",
+    "Crée un deuxième champ calculé : nom : Taux de marge, formule : =(Ventes-Coûts)/Ventes. Mets-le en pourcentage via «Paramètres des champs de valeurs» › «Format de nombre».",
+    "«Analyse du tableau croisé dynamique» › «Insérer un segment» › «Trimestre» › «OK». Un clic sur un bouton du segment filtre le TCD sur ce trimestre.",
+    "Pour les questions sur toute l'année, efface le filtre du segment (icône d'entonnoir avec la croix rouge en haut à droite du segment)."
+   ],
+   "questions": [
+    {
+     "q": "Quelle est la marge (ventes − coûts) de la succursale de Lucerne en 2025 (CHF) ?",
+     "unit": "CHF",
+     "hint": "Vérifie que l'année 2025 est bien choisie dans le filtre «Année» et que le segment affiche tous les trimestres."
+    },
+    {
+     "q": "Quel est le taux de marge 2025 de toutes les succursales (marge / ventes, en %) ?",
+     "unit": "%",
+     "hint": "Le champ calculé =(Ventes-Coûts)/Ventes calcule avec les sommes. Lis la ligne «Total général», pas la moyenne des succursales."
+    },
+    {
+     "q": "Quelle est la marge de la succursale de Zurich au quatrième trimestre 2025 (CHF) ?",
+     "unit": "CHF",
+     "hint": "Année 2025 dans le filtre, clique sur «Q4» dans le segment, puis lis la ligne «Zurich»."
+    }
+   ],
+   "hints": {
+    "generic": "Champ calculé : «Analyse du tableau croisé dynamique» › «Champs, éléments et jeux» › «Champ calculé», formule =Ventes-Coûts. N'oublie pas le filtre sur 2025."
+   }
+  },
+  "pq-1": {
+   "topic": "Power Query",
+   "title": "Fusionner les commandes avec le segment client",
+   "intro": "Deux exports pas tout à fait propres : dans la feuille «Commandes», chaque commande n'indique que le numéro de client ; le segment (Privé, PME, Grand compte) se trouve dans la feuille «Clients». Fusionne les deux avec Power Query et fais le ménage au passage. Attention : l'export cache des erreurs qui fausseraient un simple TCD.",
+   "steps": [
+    "Clique dans le tableau de la feuille «Commandes» et choisis «Données» › «À partir d'un tableau ou d'une plage». L'éditeur Power Query s'ouvre.",
+    "Sélectionne la colonne «N° client» › onglet «Transformer» › «Format» › «Supprimer les espaces». Les espaces au début et à la fin disparaissent.",
+    "Sélectionne toutes les colonnes (clic dans le tableau, puis Ctrl+A) › «Accueil» › «Supprimer les lignes» › «Supprimer les doublons». En bas à gauche, tu vois le nombre de lignes.",
+    "«Accueil» › «Fermer et charger» › «Fermer et charger dans…» › «Créer uniquement la connexion». Fais de même pour le tableau de la feuille «Clients» («Données» › «À partir d'un tableau ou d'une plage», puis «Créer uniquement la connexion»).",
+    "«Données» › «Obtenir des données» › «Combiner les requêtes» › «Fusionner» : en haut «Commandes», en bas «Clients», clique dans les deux sur la colonne «N° client», type de jointure «Externe gauche» › «OK». Développe la nouvelle colonne (icône à deux flèches) et sélectionne uniquement «Segment».",
+    "«Accueil» › «Regrouper par» : regrouper par «Segment», nouvelle colonne «Ventes» avec l'opération «Somme» de la colonne «Montant CHF» › «OK».",
+    "Clients sans commande : encore une fois «Fusionner», cette fois en haut «Clients» et en bas «Commandes», type de jointure «Anti gauche (lignes uniquement dans la première)». Le nombre de lignes est la réponse."
+   ],
+   "questions": [
+    {
+     "q": "Combien de commandes (lignes) restent après la suppression des doublons ?",
+     "unit": "lignes",
+     "hint": "Sélectionne toutes les colonnes avant «Supprimer les doublons». Sinon, Power Query ne supprime que les doublons d'une seule colonne, par exemple chaque deuxième commande du même client."
+    },
+    {
+     "q": "Quel est le chiffre d'affaires du segment «PME» (CHF) ?",
+     "unit": "CHF",
+     "hint": "Trop peu ? Il manque alors des commandes dont le numéro de client se termine par un espace («Format» › «Supprimer les espaces» avant la fusion). Trop ? Les lignes en double sont encore là."
+    },
+    {
+     "q": "Combien de clients n'ont passé aucune commande ?",
+     "unit": "",
+     "hint": "Type de jointure «Anti gauche» avec «Clients» en haut. Si tu obtiens plus, les numéros de client avec espaces n'ont pas été nettoyés et ne trouvent pas de correspondance."
+    }
+   ],
+   "hints": {
+    "generic": "Ordre dans Power Query : d'abord supprimer les espaces dans «N° client», puis supprimer les doublons sur toutes les colonnes, ensuite fusionner avec «Clients» et regrouper par segment."
+   }
+  }
+ },
+ "files": {
+  "Daten": "Données",
+  "Bestellungen": "Commandes",
+  "Kunden": "Clients",
+  "Bestell-Nr.": "N° de commande",
+  "Quartal": "Trimestre",
+  "Filiale": "Succursale",
+  "Region": "Région",
+  "Produktgruppe": "Groupe de produits",
+  "Umsatz CHF": "Chiffre d'affaires CHF",
+  "Datum": "Date",
+  "Jahr": "Année",
+  "Umsatz": "Ventes",
+  "Kosten": "Coûts",
+  "Kundennr.": "N° client",
+  "Betrag CHF": "Montant CHF",
+  "Firma": "Entreprise",
+  "Ort": "Localité",
+  "Segment": "Segment",
+  "Zürich": "Zurich",
+  "St. Gallen": "Saint-Gall",
+  "Bern": "Berne",
+  "Luzern": "Lucerne",
+  "Basel": "Bâle",
+  "Lugano": "Lugano",
+  "Winterthur": "Winterthour",
+  "Aarau": "Aarau",
+  "Thun": "Thoune",
+  "Chur": "Coire",
+  "Ost": "Est",
+  "Mitte": "Centre",
+  "Nordwest": "Nord-Ouest",
+  "Süd": "Sud",
+  "Hardware": "Hardware",
+  "Software": "Software",
+  "Zubehör": "Accessoires",
+  "Service": "Service",
+  "Schulung": "Formation",
+  "Privat": "Privé",
+  "KMU": "PME",
+  "Grosskunde": "Grand compte"
+ }
+}

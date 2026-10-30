@@ -1,0 +1,1075 @@
+{
+ "_info": "Excel-Drills: Übersetzung Italiano (Svizzera). ui = Oberfläche (Schlüssel wie app/i18n/ui-de.js, html.* aus app/index.html, msg.*/pmsg.*/locale.* aus app/engine.js); exercises = Texte pro Übungs-ID (data: Zellen, terms: Texte, auf die Formeln Bezug nehmen); files = Blattnamen, Kopfzeilen und Text-Zellen der Projektdateien (files/it/). Zahlen, Formeln und Antworten stehen nur in exercises.json.",
+ "lang": "it",
+ "ui": {
+  "doc.title": "Esercizi – Excel-Drills",
+  "notice.unlocked": "Grazie! Premium è attivo. Ora hai accesso a tutti gli esercizi di tutti i percorsi.",
+  "notice.invalidKey": "Questo codice di attivazione non è valido. Controlla il link nell'e-mail di conferma o scrivici.",
+  "notice.appFailed": "Non è stato possibile caricare l'app. Ricarica la pagina.",
+  "notice.noExercises": "Non ci sono ancora esercizi.",
+  "notice.engineFailed": "Non è stato possibile caricare il motore delle formule. Controlla la connessione internet (o un blocco contenuti) e ricarica la pagina. Puoi comunque guardare gli esercizi.",
+  "notice.loadFailed": "Non è stato possibile caricare gli esercizi. Controlla la connessione internet e ricarica la pagina.",
+  "notice.langFailed": "Non è stato possibile caricare la traduzione. L'app resta in tedesco.",
+  "notice.langEngine": "Non è stato possibile caricare il motore delle formule per questa lingua. Ricarica la pagina per verificare le formule.",
+  "track.soon": "Presto disponibile",
+  "track.progress": "{solved}/{total} risolti",
+  "track.progressGold": " · {n} oro",
+  "track.basis.name": "Base",
+  "track.basis.claim": "Le funzioni richieste in ogni test di Excel",
+  "track.basis.short": "Base",
+  "track.accounting.name": "Contabilità & Controlling",
+  "track.accounting.claim": "Chiusura, riconciliazione, scostamenti",
+  "track.accounting.short": "Contabilità",
+  "track.finance.name": "Banca & Finanza",
+  "track.finance.claim": "Interessi, cash flow, premi, scenari",
+  "track.finance.short": "Finanza",
+  "track.consulting.name": "Consulting",
+  "track.consulting.claim": "Modelli puliti, analisi rapide",
+  "track.consulting.short": "Consulting",
+  "track.data.name": "Data & Reporting",
+  "track.data.claim": "Pulire i dati, creare report",
+  "track.data.short": "Data & Reporting",
+  "list.heading": "Esercizi: {track}",
+  "list.emptyText": "Il percorso «{track}» sarà presto disponibile. Scrivici se vuoi averlo per primo.",
+  "list.emptyLink": "Maggiori informazioni sul percorso «{track}»",
+  "list.progressSoon": "Percorso {track}: presto disponibile.",
+  "list.progress": "Percorso {track}: {solved} esercizi risolti su {total}, {gold} con oro.",
+  "list.project": "Progetto",
+  "list.projectAria": "Progetto, ",
+  "list.solvedState": "risolto, {medal}",
+  "list.lockedState": "Premium, bloccato",
+  "sheet.row": "Riga",
+  "sheet.targetEmpty": "Cella di destinazione {cell}, vuota",
+  "sheet.caption": "Dati dell'esercizio «{title}». Cella di destinazione: {cell}.",
+  "ex.premium": " · Premium",
+  "ex.solved": "Hai già risolto questo esercizio. Risolvilo di nuovo, o con altri numeri, per la prossima medaglia.",
+  "ex.solvedProject": "Hai già risolto questo progetto. Rispondi di nuovo alle domande per la prossima medaglia.",
+  "ex.fill": "In Excel copieresti poi questa formula verso il basso ({range}). Viene verificata la formula in {cell}.",
+  "ex.formulaLabel": "Formula per la cella {cell}",
+  "pj.file": "{file} (Excel, {kind})",
+  "pj.free": "gratuito",
+  "pj.premium": "Premium",
+  "again.projectNote": "Ripetizione: rispondi di nuovo alle domande di controllo, meglio ancora con una tabella pivot o una query ricostruita da capo. L'oro arriva dopo 3 soluzioni corrette.",
+  "again.projectRound": "Nuovo giro: rispondi di nuovo alle domande.",
+  "again.original": "Di nuovo con i numeri originali. Il compito resta lo stesso.",
+  "again.other": "Altri numeri (set di dati {n} di {total}). Il compito resta lo stesso.",
+  "again.noAlt": "Ripetizione: per questo esercizio non ci sono altri numeri. L'oro arriva dopo 3 soluzioni corrette.",
+  "again.round": "Nuovo giro: inserisci di nuovo la formula.",
+  "again.btnAlt": "Di nuovo con altri numeri",
+  "again.btnRepeat": "Di nuovo (ripetizione)",
+  "mastery.repeatSuffix": " · ripetizione",
+  "mastery.bronze": "Risolvi l'esercizio per il bronzo.",
+  "mastery.silver": "Ancora 1 soluzione corretta per l'argento.",
+  "mastery.goldRepeat": "Ancora {n} ripetizione/i per l'oro.",
+  "mastery.goldOther": "Risolvi l'esercizio con altri numeri per l'oro.",
+  "mastery.goldMore": "Ancora {n} soluzione/i corretta/e per l'oro.",
+  "mastery.done": "Oro raggiunto.",
+  "mastery.doneRepeat": "Oro raggiunto (ripetizione).",
+  "medal.1": "Bronzo",
+  "medal.2": "Argento",
+  "medal.3": "Oro",
+  "done.title": "Percorso «{track}» completato!",
+  "done.all": "Ottimo: hai risolto tutti i {n} esercizi di questo percorso.",
+  "done.next": "Continua con «{track}» →",
+  "done.allTracks": "Vedi tutti i percorsi",
+  "done.more": " Altri percorsi sono in preparazione.",
+  "done.lastTitle": "Ultimo esercizio del percorso «{track}» risolto",
+  "done.count": "Hai risolto {solved} esercizi su {total}.",
+  "done.premiumRest": " I restanti {n} fanno parte di Premium.",
+  "done.unlock": "Sblocca tutti gli esercizi",
+  "done.firstOpen": "Vai al primo esercizio aperto",
+  "check.unexpected": "Durante la verifica si è verificato un errore imprevisto. Ricarica la pagina e riprova.",
+  "check.excelShows": "Qui Excel mostrerebbe {err}.",
+  "check.yourResult": "Il tuo risultato: {value}",
+  "solve.counted": "Questo giro è già stato contato. Con «{btn}» ne inizi uno nuovo.",
+  "solve.medalReached": "{medal} raggiunto",
+  "solve.xp": "+{n} XP",
+  "solve.goldDaily": "Gli esercizi d'oro danno XP 1× al giorno",
+  "solve.noXp": "nessun XP, la prossima medaglia richiede {what}",
+  "solve.otherNumbers": "altri numeri",
+  "solve.anotherRepeat": "un'altra ripetizione",
+  "hint.prefix": "Suggerimento: {hint}",
+  "hint.default": "Rileggi bene il compito e fai attenzione all'intervallo.",
+  "weekdays": "do,lu,ma,me,gi,ve,sa",
+  "day.one": "giorno",
+  "day.many": "giorni",
+  "exercise.one": "esercizio",
+  "exercise.many": "esercizi",
+  "streak.inRow": "{days} di fila",
+  "streak.label": "{unit} di fila",
+  "goal.today": "{n}/{goal} oggi",
+  "goal.reached": "Obiettivo giornaliero raggiunto.",
+  "goal.streak": "Serie: {days}.",
+  "level.short": "Liv. {level}",
+  "level.word": "Livello {level}",
+  "level.srToNext": ", ancora {n} XP al livello {level}",
+  "level.srOpen": ". Apri il profilo",
+  "level.title": "Livello {level} {name} · {xp} XP",
+  "level.name.1": "Principiante",
+  "level.name.2": "Impiegato",
+  "level.name.3": "Controller",
+  "level.name.4": "Analista",
+  "level.name.5": "Esperto di Excel",
+  "level.name.6": "Maestro di Excel",
+  "levelup.text": "Hai raggiunto il livello {level} ({xp} XP).",
+  "levelup.next": " Prossimo obiettivo: {name} a {min} XP.",
+  "levelup.locked": " I livelli 5 e 6 si raggiungono con tutti gli esercizi (Premium).",
+  "profile.maxLevel": "Livello massimo raggiunto.",
+  "profile.nextLocked": "Il livello {level} ({name}) si raggiunge con tutti gli esercizi.",
+  "profile.premiumReach": "Raggiungibile con Premium",
+  "profile.toNext": "Ancora {n} XP al livello {level} ({name}).",
+  "profile.barLabel": "Progresso verso il livello successivo",
+  "profile.best": "(record: {days})",
+  "profile.dayLabel": "{weekday} {date}: {n} {unit}",
+  "profile.dayMet": ", obiettivo giornaliero raggiunto",
+  "profile.today": "oggi",
+  "profile.solved": "Risolti",
+  "profile.of": "su {n}",
+  "profile.gold": "Oro",
+  "profile.silver": "+ {n} argento",
+  "profile.xp": "XP",
+  "profile.reset": "Progressi azzerati.",
+  "badge.earned": "Sbloccato.",
+  "badge.locked": "Bloccato.",
+  "badge.share": "Condividi il badge",
+  "badge.shareAria": "Condividi il badge «{name}»",
+  "badge.toast": "Badge sbloccato: {name}",
+  "badge.erste-formel.name": "Prima formula",
+  "badge.erste-formel.desc": "Risolvi il tuo primo esercizio.",
+  "badge.pfad.name": "{short} completato",
+  "badge.pfad.desc": "Tutti gli esercizi disponibili del percorso «{track}» con almeno il bronzo.",
+  "badge.gold.name": "Percorso d'oro {short}",
+  "badge.gold.desc": "Tutti gli esercizi del percorso «{track}» con l'oro.",
+  "badge.streak-7.name": "7 giorni di fila",
+  "badge.streak-7.desc": "Raggiungi il tuo obiettivo giornaliero 7 giorni di fila.",
+  "badge.streak-30.name": "30 giorni di fila",
+  "badge.streak-30.desc": "Raggiungi il tuo obiettivo giornaliero 30 giorni di fila.",
+  "badge.sverweis-profi.name": "Esperto di CERCA.VERT",
+  "badge.sverweis-profi.desc": "Tutti gli esercizi CERCA.VERT disponibili con l'oro.",
+  "badge.fruehaufsteher.name": "Mattiniero",
+  "badge.fruehaufsteher.desc": "Risolvi un esercizio prima delle 7.",
+  "badge.nachtschicht.name": "Turno di notte",
+  "badge.nachtschicht.desc": "Risolvi un esercizio dopo le 22.",
+  "badge.xp-100.name": "100 XP",
+  "badge.xp-100.desc": "Raccogli 100 XP.",
+  "badge.xp-500.name": "500 XP",
+  "badge.xp-500.desc": "Raccogli 500 XP.",
+  "share.failed": "Non è stato possibile creare l'immagine.",
+  "share.eyebrow": "BADGE SBLOCCATO",
+  "share.line": "{level} · {name}   ·   Serie: {days}",
+  "share.title": "Condividi il badge «{name}»",
+  "share.alt": "Anteprima: badge «{name}» con livello e serie, Excel-Drills",
+  "share.download": "Scarica l'immagine (PNG)",
+  "share.button": "Condividi …",
+  "share.text": "Badge «{name}» sbloccato su Excel-Drills.",
+  "share.file": "excel-drills-badge-{id}.png",
+  "html.skip": "Vai all'esercizio",
+  "html.gami": "I tuoi progressi",
+  "html.goalChange": ", modifica l'obiettivo giornaliero",
+  "html.goalLegend": "Obiettivo al giorno",
+  "html.goal1": "1 esercizio",
+  "html.goal2": "2 esercizi",
+  "html.goal5": "5 esercizi",
+  "html.localeGroup": "Lingua e paese",
+  "html.mainNav": "Navigazione principale",
+  "html.navTracks": "Percorsi",
+  "html.navArticles": "Articoli",
+  "html.navHandouts": "Schede",
+  "html.navPremium": "Premium",
+  "html.exNav": "Percorsi ed esercizi",
+  "html.trackLabel": "Percorso di apprendimento",
+  "html.listHeading": "Esercizi",
+  "html.writeUs": "Scrivici",
+  "html.loading": "Caricamento degli esercizi e del motore delle formule…",
+  "html.gridRegion": "Tabella (scorrimento orizzontale)",
+  "html.check": "Verifica",
+  "html.download": "Scarica il file Excel",
+  "html.stepsHeading": "Come procedere",
+  "html.stepsNote": "Spunta i passaggi completati. Le spunte servono solo a te per orientarti e vengono salvate in questo browser.",
+  "html.questionsHeading": "Domande di controllo",
+  "html.checkAnswers": "Verifica le risposte",
+  "html.hint": "Suggerimento",
+  "html.next": "Esercizio successivo →",
+  "html.paywallTitle": "Questo esercizio fa parte di Premium",
+  "html.paywallText": "Con Premium sblocchi tutti gli esercizi di tutti i percorsi, anche SE.ERRORE, CERCA.VERT con scaglioni, CONCAT, MATR.SOMMA.PRODOTTO e le formule SE nidificate. Da CHF 4.10 al mese, con garanzia soddisfatti o rimborsati al 100 %.",
+  "html.later": "Più tardi",
+  "html.pfLevel": "Livello",
+  "html.pfStreak": "Serie",
+  "html.pfWeek": "Ultimi 7 giorni",
+  "html.pfGoal": "Obiettivo giornaliero",
+  "html.pfStats": "Statistiche",
+  "html.pfBadges": "Badge",
+  "html.pfStorage": "I tuoi progressi sono salvati solo in questo browser. Gli account arriveranno più avanti.",
+  "html.reset": "Azzera i progressi",
+  "html.resetQ": "Vuoi davvero azzerare tutto? XP, medaglie, badge e serie verranno cancellati da questo browser. Non si può annullare.",
+  "html.resetYes": "Sì, azzera",
+  "html.resetNo": "Annulla",
+  "html.levelup": "Livello superiore",
+  "html.levelupOk": "Avanti",
+  "html.imprint": "Note legali",
+  "html.privacy": "Protezione dei dati",
+  "locale.formulaHelp": "Conferma con Invio. Separi gli argomenti con il punto e virgola (;) e i decimali con il punto.",
+  "locale.miniHelp": "Conferma con Invio. Separi gli argomenti con il punto e virgola (;).",
+  "locale.projectNote": "Inserisci i numeri come compaiono nella tua tabella pivot o nella tua query. Virgola o punto come separatore decimale; apostrofo e % sono facoltativi.",
+  "locale.switched": "Italiano (Svizzera): funzioni in italiano (SOMMA, SE, CERCA.VERT), punto decimale, apostrofo per le migliaia, importi in CHF.",
+  "locale.name": "Svizzera italiana",
+  "locale.close": "Chiudi",
+  "msg.noEquals": "Una formula inizia sempre con =. Esempio: =SOMMA(B2:B6)",
+  "msg.empty": "Inserisci prima una formula.",
+  "msg.comma": "In Excel in italiano (Svizzera) separi gli argomenti con ; e non con ,",
+  "msg.decimalComma": "In Svizzera scrivi i numeri decimali con il punto, ad es. 0.5.",
+  "msg.english": "In italiano la funzione si chiama {name} (non {en}).",
+  "msg.englishConst": "In italiano scrivi {name} invece di {en}.",
+  "msg.german": "In italiano la funzione si chiama {name} ({de} è il nome tedesco).",
+  "msg.germanConst": "In italiano scrivi {name} ({de} è la forma tedesca).",
+  "msg.unknownFn": "Excel non conosce la funzione {name}. Controlla come l'hai scritta.",
+  "msg.quotesGeneric": "Nelle formule il testo va tra virgolette, ad es. \"OK\".",
+  "msg.cycle": "Riferimento circolare: la tua formula fa riferimento alla cella di destinazione stessa. Scegli un intervallo senza la cella di destinazione.",
+  "msg.noRef": "Usa riferimenti di cella invece di numeri fissi.",
+  "msg.mustUse": "In questo esercizio usa la funzione {fn}.",
+  "msg.mustContain": "La tua formula deve contenere {s}.",
+  "msg.alt": "Quasi: la tua formula funziona con questi numeri, ma con altri valori nella tabella darebbe un risultato sbagliato. Controlla la condizione e non inserire risultati fissi.",
+  "msg.wrong": "Non ancora giusto.",
+  "msg.genericFallback": "Controlla struttura, intervalli e separatori della tua formula.",
+  "msg.success": "Giusto! La tua formula restituisce il risultato corretto.",
+  "pmsg.empty": "Inserisci qui un numero.",
+  "pmsg.invalid": "Questo non è un numero. Scrivi ad esempio 1234.50, 1'234,50 o 12.5 %.",
+  "pmsg.wrong": "Non ancora giusto.",
+  "pmsg.right": "Giusto.",
+  "pmsg.allRight": "Tutto giusto! Il tuo report restituisce i numeri corretti.",
+  "pmsg.some": "{n} risposte giuste su {total}. Controlla le domande segnalate."
+ },
+ "exercises": {
+  "summe-1": {
+   "topic": "SOMMA",
+   "title": "Sommare il fatturato mensile",
+   "task": "Calcola in B7 la somma di tutti i fatturati in B2:B6.",
+   "hints": {
+    "noRange": "Suggerimento: usa un intervallo come B2:B6 invece di singole celle.",
+    "generic": "La funzione si chiama SOMMA. Sintassi: =SOMMA(intervallo)."
+   },
+   "data": {
+    "Zürich": "Zurigo",
+    "Bern": "Berna",
+    "Basel": "Basilea",
+    "Luzern": "Lucerna",
+    "Lugano": "Lugano",
+    "Filiale": "Filiale",
+    "Umsatz CHF": "Fatturato CHF",
+    "Total": "Totale"
+   }
+  },
+  "mittelwert-1": {
+   "topic": "MEDIA",
+   "title": "Importo medio dei sinistri",
+   "task": "Calcola in B8 l'importo medio dei sinistri in B2:B7.",
+   "hints": {
+    "generic": "In Excel la media si calcola con MEDIA: =MEDIA(B2:B7)."
+   },
+   "data": {
+    "Schaden-Nr.": "N. sinistro",
+    "Betrag CHF": "Importo CHF",
+    "Durchschnitt": "Media"
+   }
+  },
+  "max-1": {
+   "topic": "MAX / MIN",
+   "title": "Fatturato mensile più alto",
+   "task": "Riporta in B14 il valore mensile più alto di B2:B13.",
+   "hints": {
+    "generic": "MAX restituisce il valore più grande di un intervallo: =MAX(B2:B13)."
+   },
+   "data": {
+    "Jan": "gen",
+    "Feb": "feb",
+    "Mär": "mar",
+    "Apr": "apr",
+    "Mai": "mag",
+    "Jun": "giu",
+    "Jul": "lug",
+    "Aug": "ago",
+    "Sep": "set",
+    "Okt": "ott",
+    "Nov": "nov",
+    "Dez": "dic",
+    "Monat": "Mese",
+    "Umsatz": "Fatturato",
+    "Maximum": "Massimo"
+   }
+  },
+  "wenn-1": {
+   "topic": "SE",
+   "title": "Budget rispettato?",
+   "task": "Scrivi in C2 una formula che restituisce \"OK\" se i costi effettivi (B2) sono minori o uguali al budget (A2), altrimenti \"Sforato\".",
+   "hints": {
+    "quotes": "Nelle formule il testo va tra virgolette: \"OK\".",
+    "generic": "Sintassi: =SE(condizione;valore_se_vero;valore_se_falso)."
+   },
+   "data": {
+    "Budget": "Budget",
+    "Ist": "Effettivo",
+    "Status": "Stato"
+   },
+   "terms": {
+    "OK": "OK",
+    "Überzogen": "Sforato"
+   }
+  },
+  "zaehlenwenn-1": {
+   "topic": "CONTA.SE",
+   "title": "Contare le fatture aperte",
+   "task": "Conta in B9 quante fatture in B2:B8 hanno lo stato \"aperta\".",
+   "hints": {
+    "quotes": "Il criterio è un testo e va tra virgolette: \"aperta\".",
+    "generic": "Sintassi: =CONTA.SE(intervallo;criterio)."
+   },
+   "data": {
+    "Rechnung": "Fattura",
+    "Status": "Stato",
+    "bezahlt": "pagata",
+    "storniert": "stornata",
+    "Anzahl offen": "Fatture aperte"
+   },
+   "terms": {
+    "offen": "aperta"
+   }
+  },
+  "summewenn-1": {
+   "topic": "SOMMA.SE",
+   "title": "Fatturato di una regione",
+   "task": "Calcola in E2 il fatturato totale della regione \"Est\" dalla tabella A2:B9.",
+   "hints": {
+    "quotes": "Il criterio \"Est\" va tra virgolette, oppure fai riferimento a D2.",
+    "generic": "Sintassi: =SOMMA.SE(intervallo_criteri;criterio;intervallo_somma)."
+   },
+   "data": {
+    "Region": "Regione",
+    "Umsatz": "Fatturato",
+    "Total": "Totale",
+    "West": "Ovest",
+    "Süd": "Sud"
+   },
+   "terms": {
+    "Ost": "Est"
+   }
+  },
+  "summewenn-2": {
+   "topic": "SOMMA.SE",
+   "title": "Ordini di oltre 3 pezzi",
+   "task": "Somma in C8 l'importo di tutti gli ordini con una quantità (colonna A) maggiore di 3.",
+   "hints": {
+    "quotes": "I criteri di confronto come >3 vanno scritti come testo: \">3\".",
+    "generic": "Sintassi: =SOMMA.SE(intervallo_criteri;\">3\";intervallo_somma)."
+   },
+   "data": {
+    "Menge": "Quantità",
+    "Artikel": "Articolo",
+    "Betrag": "Importo",
+    "Ordner": "Raccoglitori",
+    "Toner": "Toner",
+    "Papier": "Carta",
+    "Stifte": "Penne",
+    "Total >3": "Totale >3"
+   },
+   "terms": {
+    ">3": ">3"
+   }
+  },
+  "sverweis-1": {
+   "topic": "CERCA.VERT",
+   "title": "Cercare un prezzo",
+   "task": "Con CERCA.VERT recupera in E2 il prezzo dell'articolo in D2 dal listino prezzi A2:B6. Corrispondenza esatta.",
+   "hints": {
+    "generic": "Sintassi: =CERCA.VERT(valore;matrice_tabella;indice;FALSO). FALSO impone la corrispondenza esatta."
+   },
+   "data": {
+    "Artikel": "Articolo",
+    "Preis": "Prezzo",
+    "Gesucht": "Cercato"
+   }
+  },
+  "runden-1": {
+   "topic": "ARROTONDA",
+   "title": "Arrotondare al centesimo",
+   "task": "Arrotonda in B2 l'importo in A2 a 2 decimali (arrotondamento commerciale).",
+   "hints": {
+    "generic": "Sintassi: =ARROTONDA(numero;num_cifre)."
+   },
+   "data": {
+    "Betrag": "Importo",
+    "Gerundet": "Arrotondato"
+   }
+  },
+  "absolut-1": {
+   "topic": "Riferimento assoluto",
+   "title": "IVA con aliquota fissa",
+   "task": "Calcola in C2 l'IVA sull'importo B2 con l'aliquota in F1. La formula deve poter essere copiata verso il basso: blocca F1 con il segno $.",
+   "hints": {
+    "dollar": "Senza $ il riferimento a F1 si sposta quando copi la formula. Scrivi $F$1.",
+    "generic": "Un riferimento assoluto si scrive così: $F$1."
+   },
+   "data": {
+    "Position": "Voce",
+    "Netto": "Netto",
+    "MwSt": "IVA",
+    "Satz": "Aliquota",
+    "Beratung": "Consulenza",
+    "Lizenz": "Licenza",
+    "Support": "Supporto"
+   }
+  },
+  "wennfehler-1": {
+   "topic": "SE.ERRORE",
+   "title": "Gestire gli errori",
+   "task": "Dividi in C2 il fatturato A2 per il numero di pezzi B2 e restituisci \"n.d.\" se si verifica un errore.",
+   "hints": {
+    "generic": "Sintassi: =SE.ERRORE(valore;valore_se_errore)."
+   },
+   "data": {
+    "Umsatz": "Fatturato",
+    "Stück": "Pezzi",
+    "Preis/Stück": "Prezzo/pezzo"
+   },
+   "terms": {
+    "n/a": "n.d."
+   }
+  },
+  "sverweis-2": {
+   "topic": "CERCA.VERT",
+   "title": "Provvigione per scaglione",
+   "task": "Determina in B2 la percentuale di provvigione per il fatturato in A2 in base alla tabella a scaglioni D2:E5 (corrispondenza approssimativa).",
+   "hints": {
+    "generic": "Per gli scaglioni usa VERO (corrispondenza approssimativa) e una prima colonna ordinata in modo crescente."
+   },
+   "data": {
+    "Umsatz": "Fatturato",
+    "Satz": "Percentuale",
+    "Ab Umsatz": "Fatturato da"
+   }
+  },
+  "textkette-1": {
+   "topic": "CONCAT",
+   "title": "Unire nome e cognome",
+   "task": "Unisci in C2 il nome (A2) e il cognome (B2), con uno spazio in mezzo.",
+   "hints": {
+    "generic": "Unisci i testi con & oppure con CONCAT(A2;\" \";B2)."
+   },
+   "data": {
+    "Vorname": "Nome",
+    "Nachname": "Cognome",
+    "Vollständig": "Nome completo",
+    "Anna": "Anna",
+    "Keller": "Keller"
+   }
+  },
+  "summenprodukt-1": {
+   "topic": "MATR.SOMMA.PRODOTTO",
+   "title": "Valore totale del magazzino",
+   "task": "Calcola in B7 il valore totale: la somma di quantità per prezzo per tutte le righe A2:B6, in un'unica formula.",
+   "hints": {
+    "generic": "MATR.SOMMA.PRODOTTO moltiplica due intervalli riga per riga e poi somma: =MATR.SOMMA.PRODOTTO(A2:A6;B2:B6)."
+   },
+   "data": {
+    "Menge": "Quantità",
+    "Preis": "Prezzo",
+    "Lagerwert": "Valore magazzino"
+   }
+  },
+  "wenn-verschachtelt-1": {
+   "topic": "SE nidificati",
+   "title": "Assegnare una classe di rischio",
+   "task": "Restituisci in B2 \"alto\" se il tasso di sinistralità A2 è superiore a 0.8, \"medio\" se è superiore a 0.5, altrimenti \"basso\".",
+   "hints": {
+    "generic": "Annida le funzioni: =SE(cond1;\"alto\";SE(cond2;\"medio\";\"basso\"))."
+   },
+   "data": {
+    "Schadenquote": "Tasso di sinistralità",
+    "Klasse": "Classe"
+   },
+   "terms": {
+    "hoch": "alto",
+    "mittel": "medio",
+    "tief": "basso"
+   }
+  },
+  "acc-abweichung-1": {
+   "topic": "Scostamento budget-consuntivo",
+   "title": "Scostamento in CHF",
+   "task": "Calcola in D2 lo scostamento del conto Materiale d'ufficio: consuntivo (C2) meno budget (B2). Un valore positivo significa che il budget è stato superato.",
+   "hints": {
+    "generic": "Scostamento = consuntivo − budget, quindi =C2-B2. Con =B2-C2 inverti il segno."
+   },
+   "data": {
+    "Konto": "Conto",
+    "Budget CHF": "Budget CHF",
+    "Ist CHF": "Consuntivo CHF",
+    "Büromaterial": "Materiale d'ufficio",
+    "Reisespesen": "Spese di viaggio",
+    "Weiterbildung": "Formazione continua",
+    "Abweichung CHF": "Scostamento CHF"
+   }
+  },
+  "acc-abweichung-2": {
+   "topic": "Scostamento budget-consuntivo",
+   "title": "Scostamento in percentuale",
+   "task": "Calcola in E2 lo scostamento delle spese di viaggio in percentuale del budget: (consuntivo C2 − budget B2) / budget B2. Indica il risultato come numero decimale (−0.12 corrisponde a −12 %), senza moltiplicare per 100. Il formato percentuale lo applichi poi in Excel.",
+   "hints": {
+    "generic": "Dividi lo scostamento per il budget: =(C2-B2)/B2. Non moltiplicare per 100, se ne occupa il formato percentuale."
+   },
+   "data": {
+    "Konto": "Conto",
+    "Budget CHF": "Budget CHF",
+    "Ist CHF": "Consuntivo CHF",
+    "Büromaterial": "Materiale d'ufficio",
+    "Reisespesen": "Spese di viaggio",
+    "Weiterbildung": "Formazione continua",
+    "Abw. CHF": "Scost. CHF",
+    "Abw. %": "Scost. %"
+   }
+  },
+  "acc-anteil-1": {
+   "topic": "Quota sul totale",
+   "title": "Quota di un ramo sul totale",
+   "task": "Calcola in C2 la quota del ramo Veicoli a motore sul totale dei premi in B6. Blocca il totale con un riferimento assoluto ($B$6), così potresti copiare la formula verso il basso. Risultato come numero decimale.",
+   "hints": {
+    "dollar": "Blocca il totale con $B$6 (almeno B$6), altrimenti il riferimento si sposta quando copi verso il basso.",
+    "generic": "Quota = valore / totale, ad es. =B2/$B$6."
+   },
+   "data": {
+    "Sparte": "Ramo",
+    "Prämien CHF": "Premi CHF",
+    "Motorfahrzeug": "Veicoli a motore",
+    "Hausrat": "Economia domestica",
+    "Haftpflicht": "Responsabilità civile",
+    "Gebäude": "Stabili",
+    "Total": "Totale",
+    "Anteil": "Quota"
+   }
+  },
+  "acc-mwst-1": {
+   "topic": "IVA netto/lordo",
+   "title": "Netto dal lordo",
+   "task": "L'aliquota IVA si trova in F1. Calcola in C2 l'importo netto della fattura partendo dall'importo lordo B2. Per l'aliquota usa un riferimento assoluto ($F$1). Promemoria: lordo = netto × (1 + aliquota).",
+   "hints": {
+    "dollar": "Blocca l'aliquota con $F$1, così resta fissa quando copi la formula.",
+    "generic": "Netto dal lordo: dividi per (1 + aliquota), quindi =B2/(1+$F$1). Lordo × (1 − aliquota) non dà l'importo netto."
+   },
+   "data": {
+    "Rechnung": "Fattura",
+    "Brutto CHF": "Lordo CHF",
+    "Netto CHF": "Netto CHF",
+    "MwSt-Satz": "Aliquota IVA"
+   }
+  },
+  "acc-rundung-1": {
+   "topic": "Arrotondamento a 5 centesimi",
+   "title": "Arrotondare a 5 centesimi",
+   "task": "Arrotonda in C2 l'importo B2 ai 5 centesimi (arrotondamento commerciale, ad es. 47.33 → 47.35, 47.32 → 47.30).",
+   "hints": {
+    "generic": "Dividi per 0.05, arrotonda a 0 decimali e moltiplica di nuovo per 0.05: =ARROTONDA(B2/0.05;0)*0.05. In alternativa: =ARROTONDA.MULTIPLO(B2;0.05)."
+   },
+   "data": {
+    "Beleg": "Giustificativo",
+    "Betrag CHF": "Importo CHF",
+    "Gerundet CHF": "Arrotondato CHF",
+    "Spesen Taxi": "Spese taxi",
+    "Parkgebühr": "Tassa di posteggio",
+    "Kaffee Kunde": "Caffè cliente"
+   }
+  },
+  "acc-summewenns-1": {
+   "topic": "SOMMA.PIÙ.SE",
+   "title": "Costi per centro di costo e mese",
+   "task": "Calcola in G2 la somma degli importi (C2:C9) del centro di costo in E2 (\"Marketing\") nel mese in F2 (\"feb\"). Entrambe le condizioni devono essere soddisfatte contemporaneamente.",
+   "hints": {
+    "quotes": "Un testo usato come criterio va tra virgolette (\"Marketing\"), oppure fai riferimento a E2 e F2.",
+    "generic": "Sintassi: =SOMMA.PIÙ.SE(intervallo_somma;intervallo_criteri1;criterio1;intervallo_criteri2;criterio2). Qui l'intervallo da sommare viene per primo."
+   },
+   "data": {
+    "Kostenstelle": "Centro di costo",
+    "Monat": "Mese",
+    "Betrag CHF": "Importo CHF",
+    "Total CHF": "Totale CHF",
+    "IT": "IT",
+    "HR": "RU",
+    "Jan": "gen",
+    "Mär": "mar"
+   },
+   "terms": {
+    "Marketing": "Marketing",
+    "Feb": "feb"
+   }
+  },
+  "acc-duplikate-1": {
+   "topic": "Trovare i duplicati",
+   "title": "Segnalare i giustificativi doppi",
+   "task": "Restituisci in C2 \"Doppio\" se il numero di giustificativo A2 compare più di una volta nell'intervallo A2:A7, altrimenti un testo vuoto (\"\"). Blocca l'intervallo con $, così la formula si può copiare.",
+   "hints": {
+    "generic": "Conta quante volte A2 compare nell'intervallo: =SE(CONTA.SE($A$2:$A$7;A2)>1;\"Doppio\";\"\")."
+   },
+   "data": {
+    "Beleg-Nr.": "N. giustificativo",
+    "Betrag CHF": "Importo CHF",
+    "Prüfung": "Verifica"
+   },
+   "terms": {
+    "Duplikat": "Doppio"
+   }
+  },
+  "acc-sollhaben-1": {
+   "topic": "Controllo di plausibilità",
+   "title": "Verificare dare = avere",
+   "task": "Verifica in E2 se la somma del dare (B2:B6) corrisponde alla somma dell'avere (C2:C6). Arrotonda entrambe le somme a 2 decimali con ARROTONDA, così le differenze di arrotondamento del calcolo in virgola mobile non danno fastidio. Risultato: \"OK\" o \"Differenza\".",
+   "hints": {
+    "quotes": "I risultati \"OK\" e \"Differenza\" vanno tra virgolette.",
+    "generic": "Confronta le somme arrotondate: =SE(ARROTONDA(SOMMA(B2:B6);2)=ARROTONDA(SOMMA(C2:C6);2);\"OK\";\"Differenza\")."
+   },
+   "data": {
+    "Konto": "Conto",
+    "Soll CHF": "Dare CHF",
+    "Haben CHF": "Avere CHF",
+    "Prüfung": "Verifica",
+    "1020 Bank": "1020 Banca",
+    "1100 Debitoren": "1100 Debitori",
+    "2000 Kreditoren": "2000 Creditori",
+    "3200 Warenertrag": "3200 Ricavi da merci",
+    "6000 Mietaufwand": "6000 Costi di locazione"
+   },
+   "terms": {
+    "OK": "OK",
+    "Differenz": "Differenza"
+   }
+  },
+  "acc-abstimmung-1": {
+   "topic": "Riconciliazione dei conti",
+   "title": "Trovare la registrazione mancante",
+   "task": "Cerca in C2 il riferimento bancario A2 nell'elenco del libro mastro E2:F7 e restituisci l'importo registrato dalla colonna F (ricerca esatta). Se il riferimento manca nel libro mastro, deve comparire \"mancante\".",
+   "hints": {
+    "generic": "Annida le funzioni: =SE.ERRORE(CERCA.VERT(A2;$E$2:$F$7;2;FALSO);\"mancante\"). Senza FALSO, CERCA.VERT cerca un valore approssimativo e trova risultati sbagliati."
+   },
+   "data": {
+    "Bank Ref.": "Rif. banca",
+    "Betrag CHF": "Importo CHF",
+    "Hauptbuch CHF": "Libro mastro CHF",
+    "Hauptbuch Ref.": "Rif. libro mastro"
+   },
+   "terms": {
+    "fehlt": "mancante"
+   }
+  },
+  "acc-alterung-1": {
+   "topic": "Scadenzario delle partite aperte",
+   "title": "Classificare le partite aperte per anzianità",
+   "task": "La data di riferimento si trova in H1 (non usare OGGI(), altrimenti il risultato cambia ogni giorno). Calcola in D2 i giorni trascorsi dalla scadenza (data di riferimento meno B2) e classifica: fino a 30 giorni \"0-30\", fino a 60 giorni \"31-60\", oltre \">60\". Usa un trattino senza spazi.",
+   "hints": {
+    "generic": "Giorni = $H$1-B2. Annida le funzioni: =SE(giorni<=30;\"0-30\";SE(giorni<=60;\"31-60\";\">60\")). Attenzione al <= per i limiti 30 e 60."
+   },
+   "data": {
+    "Rechnung": "Fattura",
+    "Fällig am": "Scadenza",
+    "Betrag CHF": "Importo CHF",
+    "Klasse": "Classe",
+    "Stichtag": "Data di rif."
+   },
+   "terms": {
+    "0-30": "0-30",
+    "31-60": "31-60",
+    ">60": ">60"
+   }
+  },
+  "acc-abgrenzung-1": {
+   "topic": "FINE.MESE e DATA.MESE",
+   "title": "Scadenza a fine mese",
+   "task": "La polizza inizia il B2 e dura C2 mesi. Calcola in D2 la fine del mese di scadenza: prima la data di scadenza con DATA.MESE (inizio più durata), poi la fine del mese con FINE.MESE. Excel mostra il risultato come numero seriale finché non formatti la cella come data.",
+   "hints": {
+    "generic": "DATA.MESE(B2;C2) sposta di C2 mesi, FINE.MESE(data;0) va alla fine del mese: =FINE.MESE(DATA.MESE(B2;C2);0)."
+   },
+   "data": {
+    "Police": "Polizza",
+    "Beginn": "Inizio",
+    "Laufzeit Mte": "Durata (mesi)",
+    "Ablauf Monatsende": "Scadenza fine mese"
+   }
+  },
+  "fin-zins-1": {
+   "topic": "Interesse semplice",
+   "title": "Interessi di un deposito a termine",
+   "task": "Calcola in D2 gli interessi del deposito a termine: capitale A2 × tasso B2 × giorni C2 / 360 (uso bancario svizzero, 360 giorni all'anno).",
+   "hints": {
+    "generic": "Interessi = capitale × tasso × giorni / 360, quindi =A2*B2*C2/360."
+   },
+   "data": {
+    "Kapital CHF": "Capitale CHF",
+    "Zins p.a.": "Tasso annuo",
+    "Tage": "Giorni",
+    "Zins CHF": "Interessi CHF"
+   }
+  },
+  "fin-zinseszins-1": {
+   "topic": "Interesse composto",
+   "title": "Capitale finale con interesse composto",
+   "task": "Calcola in D2 il capitale finale dopo C2 anni, se A2 frutta ogni anno interessi al tasso B2 e gli interessi restano sul conto (interesse composto). Formula: capitale × (1 + tasso) ^ anni.",
+   "hints": {
+    "generic": "Potenza con ^: =A2*(1+B2)^C2. Non dimenticare le parentesi attorno a (1+B2)."
+   },
+   "data": {
+    "Kapital CHF": "Capitale CHF",
+    "Zins p.a.": "Tasso annuo",
+    "Jahre": "Anni",
+    "Endkapital CHF": "Capitale finale CHF"
+   }
+  },
+  "fin-cashflow-1": {
+   "topic": "Tabella dei flussi di cassa",
+   "title": "Saldo cumulato",
+   "task": "Calcola in C3 il saldo a fine gennaio: saldo della riga precedente (C2) più il flusso di cassa del mese (B3). Impostata così, la formula si può copiare verso il basso.",
+   "hints": {
+    "generic": "Saldo progressivo = saldo precedente + flusso di cassa: =C2+B3."
+   },
+   "data": {
+    "Monat": "Mese",
+    "Cashflow CHF": "Flusso di cassa CHF",
+    "Saldo CHF": "Saldo CHF",
+    "Anfangssaldo": "Saldo iniziale",
+    "Jan": "gen",
+    "Feb": "feb",
+    "Mär": "mar",
+    "Apr": "apr"
+   }
+  },
+  "fin-schadenquote-1": {
+   "topic": "Tasso di sinistralità",
+   "title": "Tasso di sinistralità complessivo",
+   "task": "Calcola in D6 il tasso di sinistralità di tutti i rami: somma dei sinistri (C2:C5) divisa per la somma dei premi (B2:B5). Risultato come numero decimale (0.71 = 71 %), il formato percentuale lo applichi dopo. Attenzione: la media dei singoli tassi sarebbe sbagliata.",
+   "hints": {
+    "generic": "Tasso complessivo = totale sinistri / totale premi: =SOMMA(C2:C5)/SOMMA(B2:B5). Non usare la media dei singoli tassi."
+   },
+   "data": {
+    "Sparte": "Ramo",
+    "Prämien CHF": "Premi CHF",
+    "Motorfahrzeug": "Veicoli a motore",
+    "Hausrat": "Economia domestica",
+    "Haftpflicht": "Responsabilità civile",
+    "Gebäude": "Stabili",
+    "Total": "Totale",
+    "Schäden CHF": "Sinistri CHF",
+    "Schadenquote": "Tasso di sinistralità"
+   }
+  },
+  "fin-cagr-1": {
+   "topic": "CAGR",
+   "title": "Crescita media annua",
+   "task": "Calcola in D2 il tasso di crescita annuo composto (CAGR) dei premi da B2 (primo anno) a B7 (ultimo anno). Formula: (valore finale / valore iniziale) ^ (1 / numero di anni) − 1, numero di anni = A7 − A2. Risultato come numero decimale.",
+   "hints": {
+    "generic": "=(B7/B2)^(1/(A7-A2))-1. L'esponente ha bisogno di parentesi proprie: 1/(A7-A2)."
+   },
+   "data": {
+    "Jahr": "Anno",
+    "Prämien Mio. CHF": "Premi mio. CHF",
+    "CAGR": "CAGR"
+   }
+  },
+  "fin-praemienstaffel-1": {
+   "topic": "CERCA.VERT approssimativa",
+   "title": "Premio da tabella a scaglioni",
+   "task": "La tabella dei premi A2:B6 vale a partire dalla somma assicurata indicata. Cerca in F2, con CERCA.VERT e corrispondenza approssimativa (VERO), l'aliquota per la somma E2 e moltiplicala per E2.",
+   "hints": {
+    "generic": "Ricerca approssimativa: =E2*CERCA.VERT(E2;$A$2:$B$6;2;VERO). La prima colonna della tabella deve essere ordinata in modo crescente. Con FALSO trovi solo corrispondenze esatte."
+   },
+   "data": {
+    "Summe ab CHF": "Somma da CHF",
+    "Prämiensatz": "Aliquota premio",
+    "Police": "Polizza",
+    "Summe CHF": "Somma CHF",
+    "Prämie CHF": "Premio CHF"
+   }
+  },
+  "fin-portfolio-1": {
+   "topic": "MATR.SOMMA.PRODOTTO",
+   "title": "Rendimento ponderato del portafoglio",
+   "task": "Calcola in C6 il rendimento ponderato del portafoglio: somma di importo × rendimento (MATR.SOMMA.PRODOTTO su B2:B5 e C2:C5) divisa per la somma degli importi.",
+   "hints": {
+    "generic": "=MATR.SOMMA.PRODOTTO(B2:B5;C2:C5)/SOMMA(B2:B5). La media semplice dei rendimenti ignora i pesi."
+   },
+   "data": {
+    "Anlage": "Investimento",
+    "Betrag CHF": "Importo CHF",
+    "Rendite": "Rendimento",
+    "CH-Aktien": "Azioni CH",
+    "Obligationen CHF": "Obbligazioni CHF",
+    "Immobilienfonds": "Fondi immobiliari",
+    "Geldmarkt": "Mercato monetario",
+    "Portfolio": "Portafoglio"
+   }
+  },
+  "fin-breakeven-1": {
+   "topic": "Punto di pareggio",
+   "title": "Quantità di pareggio",
+   "task": "Calcola in D2 la quantità di pareggio: costi fissi A2 / (prezzo B2 − costi variabili C2). Arrotonda per eccesso al pezzo intero con ARROTONDA.PER.ECC, perché non si possono vendere mezzi pezzi.",
+   "hints": {
+    "generic": "=ARROTONDA.PER.ECC(A2/(B2-C2);0). Le parentesi attorno a (B2-C2) sono necessarie, altrimenti dividi solo per B2."
+   },
+   "data": {
+    "Fixkosten CHF": "Costi fissi CHF",
+    "Preis/Stück CHF": "Prezzo/pezzo CHF",
+    "Var. Kosten/Stück CHF": "Costi var./pezzo CHF",
+    "Break-even Stück": "Pareggio (pezzi)"
+   }
+  },
+  "fin-rmz-1": {
+   "topic": "RATA",
+   "title": "Rata mensile di un leasing",
+   "task": "Calcola in D2 la rata mensile per l'importo A2 al tasso annuo B2 e con una durata di C2 anni. Converti tasso e durata in mesi. La rata deve risultare positiva (RATA restituisce i pagamenti come valori negativi).",
+   "hints": {
+    "generic": "=-RATA(B2/12;C2*12;A2) oppure =RATA(B2/12;C2*12;-A2). Tasso mensile = B2/12, numero di rate = C2*12."
+   },
+   "data": {
+    "Betrag CHF": "Importo CHF",
+    "Zins p.a.": "Tasso annuo",
+    "Laufzeit Jahre": "Durata (anni)",
+    "Rate/Monat CHF": "Rata mensile CHF"
+   }
+  },
+  "fin-bw-1": {
+   "topic": "VA",
+   "title": "Valore attuale di una rendita",
+   "task": "Calcola in D2 il valore attuale di una rendita annua A2, pagata per C2 anni a fine periodo e attualizzata al tasso B2. Il risultato deve essere positivo.",
+   "hints": {
+    "generic": "=VA(tasso;periodi;pagamento): =VA(B2;C2;-A2). Inserisci il pagamento come valore negativo, così il valore attuale è positivo."
+   },
+   "data": {
+    "Rente/Jahr CHF": "Rendita/anno CHF",
+    "Diskontsatz": "Tasso di sconto",
+    "Jahre": "Anni",
+    "Barwert CHF": "Valore attuale CHF"
+   }
+  },
+  "fin-zw-1": {
+   "topic": "VAL.FUT",
+   "title": "Valore finale del pilastro 3a",
+   "task": "Ogni anno versi A2 nel pilastro 3a (sempre a fine anno), al tasso B2, per C2 anni. Calcola in D2 il valore finale con VAL.FUT. Il risultato deve essere positivo.",
+   "hints": {
+    "generic": "=VAL.FUT(tasso;periodi;pagamento): =VAL.FUT(B2;C2;-A2). Dal tuo punto di vista i versamenti sono negativi, per questo -A2."
+   },
+   "data": {
+    "Einzahlung/Jahr CHF": "Versamento/anno CHF",
+    "Zins p.a.": "Tasso annuo",
+    "Jahre": "Anni",
+    "Endwert CHF": "Valore finale CHF"
+   }
+  },
+  "pivot-1": {
+   "topic": "Pivot",
+   "title": "Fatturato per regione e trimestre",
+   "intro": "Ufficio Alpino SA ti ha inviato l'esportazione delle vendite 2025 delle sue sei filiali, una riga per ordine. Crea una tabella pivot con il fatturato per regione e trimestre. Con la tabella pivot pronta rispondi alle domande di controllo in pochi secondi.",
+   "steps": [
+    "Apri il file in Excel e fai clic in una cella qualsiasi della tabella nel foglio «Dati».",
+    "Nella scheda «Inserisci» scegli «Tabella pivot» › «Da tabella/intervallo». Lascia selezionato «Nuovo foglio di lavoro» e fai clic su «OK».",
+    "Nell'elenco dei campi trascina «Regione» nell'area «Righe» e «Trimestre» nell'area «Colonne».",
+    "Trascina «Fatturato CHF» nell'area «Valori». Excel mostra «Somma di Fatturato CHF».",
+    "Per il numero di ordini: trascina anche «N. ordine» in «Valori». Dato che il campo contiene testo, Excel conta automaticamente («Conteggio di N. ordine»).",
+    "Leggi i valori nella tabella pivot e inseriscili qui sotto. I centesimi puoi tralasciarli."
+   ],
+   "questions": [
+    {
+     "q": "Qual è il fatturato della regione Est nel trimestre Q3 (CHF)?",
+     "unit": "CHF",
+     "hint": "Cerca la riga «Est» e la colonna «Q3». Controlla che nell'area dei valori ci sia davvero «Somma di Fatturato CHF» e non «Conteggio»."
+    },
+    {
+     "q": "Qual è il fatturato annuo della regione più forte (CHF)?",
+     "unit": "CHF",
+     "hint": "Guarda la colonna «Totale complessivo» tutta a destra e prendi il valore più grande tra le regioni."
+    },
+    {
+     "q": "Qual è il fatturato totale 2025 di tutte le regioni (CHF)?",
+     "unit": "CHF",
+     "hint": "È la cella in basso a destra della tabella pivot: riga «Totale complessivo», colonna «Totale complessivo»."
+    },
+    {
+     "q": "Quanti ordini (righe di dati) contiene la tabella?",
+     "unit": "righe",
+     "hint": "Trascina «N. ordine» nell'area «Valori» (conteggio) e leggi il totale complessivo. La riga di intestazione non conta."
+    }
+   ],
+   "hints": {
+    "generic": "Righe: Regione, colonne: Trimestre, valori: Somma di Fatturato CHF. Il totale complessivo si trova in basso e a destra nella tabella pivot."
+   }
+  },
+  "pivot-2": {
+   "topic": "Pivot · Data",
+   "title": "Ordini per mese",
+   "intro": "Questa volta l'esportazione contiene una vera data dell'ordine invece di un trimestre. Raggruppa i dati della tabella pivot per mesi e trimestri e fatti mostrare, oltre alla somma, anche la media per ordine. Così trovi il mese migliore e l'importo tipico di un ordine.",
+   "steps": [
+    "Fai clic nella tabella del foglio «Dati» e scegli «Inserisci» › «Tabella pivot» › «Da tabella/intervallo» › «OK».",
+    "Trascina «Data» nell'area «Righe». Excel 365 di solito raggruppa automaticamente per trimestri e mesi. Altrimenti: clic destro su una data nella tabella pivot › «Raggruppa» › seleziona «Mesi» e «Trimestri» › «OK».",
+    "Trascina «Fatturato CHF» nell'area «Valori» («Somma di Fatturato CHF»).",
+    "Trascina «Fatturato CHF» una seconda volta in «Valori». Fai clic sul campo › «Impostazioni campo valore» › «Media» › «OK».",
+    "Trascina «N. ordine» in «Valori» per vedere il numero di ordini per mese e trimestre.",
+    "Con i segni più e meno davanti ai trimestri espandi e comprimi i mesi."
+   ],
+   "questions": [
+    {
+     "q": "In quale mese il fatturato (somma) è stato più alto? Inserisci il numero del mese (1 = gennaio, 12 = dicembre).",
+     "unit": "",
+     "hint": "Ordina o confronta la somma per mese, non la media. Inserisci il mese come numero, per esempio 4 per aprile."
+    },
+    {
+     "q": "Qual è il fatturato medio per ordine a marzo (CHF)?",
+     "unit": "CHF",
+     "hint": "Ti serve «Media di Fatturato CHF» (impostazioni campo valore), non la somma. Leggi il valore nella riga «mar»."
+    },
+    {
+     "q": "Quanti ordini ci sono stati nel secondo trimestre (Q2)?",
+     "unit": "righe",
+     "hint": "Conta con «Conteggio di N. ordine» e leggi la riga «Trim2» (da aprile a giugno insieme)."
+    }
+   ],
+   "hints": {
+    "generic": "Data nelle righe, raggruppata per mesi e trimestri. Fatturato due volte nei valori: una volta come somma, una volta come media."
+   }
+  },
+  "pivot-3": {
+   "topic": "Pivot · Quote",
+   "title": "Quote e classifica",
+   "intro": "La direzione non vuole vedere solo franchi, ma quote: quale parte del fatturato arriva da quale gruppo di prodotti e quale filiale occupa quale posizione? Con «Mostra valori come» la tabella pivot fa il calcolo per te, senza formule.",
+   "steps": [
+    "Crea una tabella pivot dalla tabella del foglio «Dati»: «Inserisci» › «Tabella pivot» › «Da tabella/intervallo» › «OK».",
+    "Trascina «Gruppo prodotti» in «Righe» e «Fatturato CHF» in «Valori».",
+    "Clic destro su un valore › «Mostra valori come» › «% del totale complessivo». Ora vedi le quote in percentuale.",
+    "In «Righe» sostituisci «Gruppo prodotti» con «Filiale» e leggi le quote delle filiali.",
+    "Trascina «Fatturato CHF» una seconda volta in «Valori». Clic destro › «Mostra valori come» › «Classifica dal più grande al più piccolo» › campo base «Filiale» › «OK».",
+    "Suggerimento: con clic destro › «Ordina» › «Ordina dal più grande al più piccolo» la filiale più forte finisce in cima."
+   ],
+   "questions": [
+    {
+     "q": "Che quota del fatturato totale ha il gruppo di prodotti «Assistenza» (in %)?",
+     "unit": "%",
+     "hint": "«Mostra valori come» › «% del totale complessivo», righe per gruppo di prodotti. Inserisci il valore percentuale, ad es. 12.3."
+    },
+    {
+     "q": "Che quota del fatturato totale ha la filiale di Lugano (in %)?",
+     "unit": "%",
+     "hint": "Stessa vista percentuale, ma con «Filiale» nelle righe invece di «Gruppo prodotti»."
+    },
+    {
+     "q": "In che posizione si trova la filiale di Basilea per fatturato (1 = fatturato più alto)?",
+     "unit": "",
+     "hint": "«Mostra valori come» › «Classifica dal più grande al più piccolo» con il campo base «Filiale». Oppure ordina le filiali per fatturato decrescente e conta."
+    }
+   ],
+   "hints": {
+    "generic": "Clic destro su un valore della tabella pivot › «Mostra valori come». Lì trovi «% del totale complessivo» e «Classifica dal più grande al più piccolo»."
+   }
+  },
+  "pivot-4": {
+   "topic": "Pivot · Campo calcolato",
+   "title": "Margine per filiale con filtro dati",
+   "intro": "L'esportazione contiene fatturato e costi per il 2024 e il 2025 (importi in CHF). Calcola il margine direttamente nella tabella pivot con un campo calcolato, filtra sull'anno 2025 e gestisci i trimestri con un filtro dati. Ne nasce un piccolo report che puoi riutilizzare ogni mese.",
+   "steps": [
+    "Crea una tabella pivot dalla tabella del foglio «Dati» («Inserisci» › «Tabella pivot» › «Da tabella/intervallo»).",
+    "Trascina «Filiale» in «Righe» e «Anno» in «Filtri». Nel filtro sopra la tabella pivot scegli l'anno 2025.",
+    "Fai clic nella tabella pivot › scheda «Analisi tabella pivot» › «Campi, elementi e set» › «Campo calcolato». Nome: Margine, formula: =Fatturato-Costi › «Aggiungi» › «OK».",
+    "Crea un secondo campo calcolato: nome: Quota margine, formula: =(Fatturato-Costi)/Fatturato. Formattalo come percentuale tramite «Impostazioni campo valore» › «Formato numero».",
+    "«Analisi tabella pivot» › «Inserisci filtro dati» › «Trimestre» › «OK». Un clic su un pulsante del filtro dati filtra la tabella pivot su quel trimestre.",
+    "Per le domande sull'intero anno, cancella il filtro dati (icona dell'imbuto con la croce rossa in alto a destra nel filtro dati)."
+   ],
+   "questions": [
+    {
+     "q": "Qual è il margine (fatturato − costi) della filiale di Lucerna nel 2025 (CHF)?",
+     "unit": "CHF",
+     "hint": "Controlla che nel filtro «Anno» sia davvero selezionato il 2025 e che il filtro dati mostri tutti i trimestri."
+    },
+    {
+     "q": "Qual è la quota di margine 2025 di tutte le filiali (margine / fatturato, in %)?",
+     "unit": "%",
+     "hint": "Il campo calcolato =(Fatturato-Costi)/Fatturato calcola con le somme. Leggi la riga «Totale complessivo», non la media delle filiali."
+    },
+    {
+     "q": "Qual è il margine della filiale di Zurigo nel quarto trimestre 2025 (CHF)?",
+     "unit": "CHF",
+     "hint": "Anno 2025 nel filtro, nel filtro dati fai clic su «Q4», poi leggi la riga «Zurigo»."
+    }
+   ],
+   "hints": {
+    "generic": "Campo calcolato: «Analisi tabella pivot» › «Campi, elementi e set» › «Campo calcolato», formula =Fatturato-Costi. Non dimenticare il filtro sul 2025."
+   }
+  },
+  "pq-1": {
+   "topic": "Power Query",
+   "title": "Unire gli ordini con il segmento cliente",
+   "intro": "Due esportazioni non proprio pulite: nel foglio «Ordini» per ogni ordine c'è solo il numero cliente, il segmento (Privati, PMI, Grande cliente) si trova nel foglio «Clienti». Unisci le due tabelle con Power Query e intanto fai pulizia. Attenzione: nell'esportazione si nascondono errori che falserebbero una semplice tabella pivot.",
+   "steps": [
+    "Fai clic nella tabella del foglio «Ordini» e scegli «Dati» › «Da tabella/intervallo». Si apre l'editor di Power Query.",
+    "Seleziona la colonna «N. cliente» › scheda «Trasforma» › «Formato» › «Taglia». Così spariscono gli spazi all'inizio e alla fine.",
+    "Seleziona tutte le colonne (clic nella tabella, poi Ctrl+A) › «Home» › «Rimuovi righe» › «Rimuovi duplicati». In basso a sinistra vedi il numero di righe.",
+    "«Home» › «Chiudi e carica» › «Chiudi e carica in…» › «Crea solo connessione». Fai lo stesso per la tabella del foglio «Clienti» («Dati» › «Da tabella/intervallo», poi «Crea solo connessione»).",
+    "«Dati» › «Recupera dati» › «Combina query» › «Unisci»: sopra «Ordini», sotto «Clienti», in entrambe fai clic sulla colonna «N. cliente», tipo di join «Esterno sinistro» › «OK». Espandi la nuova colonna (icona con le frecce) e seleziona solo «Segmento».",
+    "«Home» › «Raggruppa per»: raggruppa per «Segmento», nuova colonna «Fatturato» con l'operazione «Somma» della colonna «Importo CHF» › «OK».",
+    "Clienti senza ordini: di nuovo «Unisci», questa volta sopra «Clienti» e sotto «Ordini», tipo di join «Anti sinistro (solo righe nella prima)». Il numero di righe è la risposta."
+   ],
+   "questions": [
+    {
+     "q": "Quanti ordini (righe) restano dopo aver rimosso i duplicati?",
+     "unit": "righe",
+     "hint": "Seleziona tutte le colonne prima di «Rimuovi duplicati». Altrimenti Power Query rimuove solo i duplicati di una colonna, per esempio ogni secondo ordine dello stesso cliente."
+    },
+    {
+     "q": "Qual è il fatturato del segmento «PMI» (CHF)?",
+     "unit": "CHF",
+     "hint": "Troppo poco? Allora mancano ordini il cui numero cliente finisce con uno spazio («Formato» › «Taglia» prima di unire). Troppo? Allora ci sono ancora le righe doppie."
+    },
+    {
+     "q": "Quanti clienti non hanno nessun ordine?",
+     "unit": "",
+     "hint": "Tipo di join «Anti sinistro» con «Clienti» sopra. Se ne risultano di più, i numeri cliente con spazi non sono stati tagliati e non trovano corrispondenza."
+    }
+   ],
+   "hints": {
+    "generic": "Ordine in Power Query: prima tagliare gli spazi in «N. cliente», poi rimuovere i duplicati su tutte le colonne, quindi unire con «Clienti» e raggruppare per segmento."
+   }
+  }
+ },
+ "files": {
+  "Daten": "Dati",
+  "Bestellungen": "Ordini",
+  "Kunden": "Clienti",
+  "Bestell-Nr.": "N. ordine",
+  "Quartal": "Trimestre",
+  "Filiale": "Filiale",
+  "Region": "Regione",
+  "Produktgruppe": "Gruppo prodotti",
+  "Umsatz CHF": "Fatturato CHF",
+  "Datum": "Data",
+  "Jahr": "Anno",
+  "Umsatz": "Fatturato",
+  "Kosten": "Costi",
+  "Kundennr.": "N. cliente",
+  "Betrag CHF": "Importo CHF",
+  "Firma": "Azienda",
+  "Ort": "Località",
+  "Segment": "Segmento",
+  "Zürich": "Zurigo",
+  "St. Gallen": "San Gallo",
+  "Bern": "Berna",
+  "Luzern": "Lucerna",
+  "Basel": "Basilea",
+  "Lugano": "Lugano",
+  "Winterthur": "Winterthur",
+  "Aarau": "Aarau",
+  "Thun": "Thun",
+  "Chur": "Coira",
+  "Ost": "Est",
+  "Mitte": "Centro",
+  "Nordwest": "Nord-ovest",
+  "Süd": "Sud",
+  "Hardware": "Hardware",
+  "Software": "Software",
+  "Zubehör": "Accessori",
+  "Service": "Assistenza",
+  "Schulung": "Formazione",
+  "Privat": "Privati",
+  "KMU": "PMI",
+  "Grosskunde": "Grande cliente"
+ }
+}

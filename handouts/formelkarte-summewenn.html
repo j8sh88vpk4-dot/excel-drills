@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Formelkarte SUMMEWENN | Excel-Drills</title>
+  <link rel="stylesheet" href="handout.css">
+</head>
+<body class="">
+  <nav class="screen-bar" aria-label="Handout">
+    <a href="./">Zur Übersicht: Handouts und Spickzettel</a>
+    <span>Drucken: A4 hoch, Ränder «Standard», Kopf- und Fusszeilen aus</span>
+  </nav>
+  <main>
+  <article class="sheet card">
+    <header class="hd">
+      <span class="brand"><span class="mark" aria-hidden="true">X</span>Excel-Drills</span>
+      <div class="hd-text">
+        <p class="kicker">Formelkarte</p>
+        <h1>SUMMEWENN</h1>
+        <p class="sub">Schweizer Schreibweise: Semikolon, Punkt als Dezimalzeichen, Hochkomma als Tausender</p>
+      </div>
+    </header>
+    <p class="lead">Summiert nur die Werte, deren Zeile eine Bedingung erfüllt. Für mehrere Bedingungen: SUMMEWENNS.</p>
+    <section class="box syntax-box" aria-labelledby="syn-h">
+      <h2 class="sec-title" id="syn-h">Syntax</h2>
+      <code class="formula"><span class="nb">=SUMMEWENN(Bereich;</span><wbr><span class="nb">Suchkriterien;</span><wbr><span class="nb">Summe_Bereich)</span></code>
+      <dl>
+          <dt>Bereich</dt><dd>Zellen, die mit dem Kriterium verglichen werden, z. B. die Spalte Kostenstelle.</dd>
+          <dt>Suchkriterien</dt><dd>Bedingung: "Ost", "&gt;10000", "Bahn*" oder ein Zellbezug wie E2.</dd>
+          <dt>Summe_Bereich</dt><dd>Zellen, die summiert werden. Fehlt das Argument, summiert Excel den Bereich selbst.</dd>
+          <dt>SUMMEWENNS</dt><dd>=SUMMEWENNS(Summe_Bereich;Kriterien_Bereich1;Kriterien1;…): Summenbereich zuerst.</dd>
+      </dl>
+    </section>
+    <section aria-labelledby="ex-h">
+      <h2 class="sec-title" id="ex-h">Drei Beispiele</h2>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Kostenstelle</td><td>Betrag CHF</td><td></td><td>Kostenstelle</td><td>Total CHF</td></tr><tr><th scope="row">2</th><td>KS-100</td><td class="num">1'250.00</td><td></td><td>KS-100</td><td class="hl num">2'205.50</td></tr><tr><th scope="row">3</th><td>KS-200</td><td class="num">480.00</td><td></td><td>KS-200</td><td class="hl num">1'600.00</td></tr><tr><th scope="row">4</th><td>KS-100</td><td class="num">315.50</td><td></td><td></td><td></td></tr><tr><th scope="row">5</th><td>KS-100</td><td class="num">640.00</td><td></td><td></td><td></td></tr><tr><th scope="row">6</th><td>KS-200</td><td class="num">1'120.00</td><td></td><td></td><td></td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">1</span>Kosten pro Kostenstelle</h3>
+          <p><span class="lbl">Formel in E2, nach unten kopiert</span></p>
+          <code class="formula"><span class="nb">=SUMMEWENN($A$2:$A$6;D2;$B$2:$B$6)</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">2'205.50</span></p>
+          <p class="note">Kriterium als Zellbezug D2: eine Formel für alle Kostenstellen.</p>
+        </div>
+      </div>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Schaden-Nr.</td><td>Betrag CHF</td><td></td><td>Summe ≥ 10'000</td></tr><tr><th scope="row">2</th><td>S-201</td><td class="num">3'400</td><td></td><td class="hl num">73'050</td></tr><tr><th scope="row">3</th><td>S-202</td><td class="num">18'750</td><td></td><td></td></tr><tr><th scope="row">4</th><td>S-203</td><td class="num">9'990</td><td></td><td></td></tr><tr><th scope="row">5</th><td>S-204</td><td class="num">42'300</td><td></td><td></td></tr><tr><th scope="row">6</th><td>S-205</td><td class="num">12'000</td><td></td><td></td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">2</span>Grossschäden über einer Schwelle</h3>
+          <p><span class="lbl">Formel in D2</span></p>
+          <code class="formula"><span class="nb">=SUMMEWENN(B2:B6;"&gt;=10000")</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">73'050</span></p>
+          <p class="note">Vergleich in Anführungszeichen; Summe_Bereich fehlt, also wird B summiert.</p>
+        </div>
+      </div>
+      <div class="ex-row">
+        <div><table class="xl"><thead><tr><th scope="col"><span class="vh">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead><tbody><tr class="hr"><th scope="row">1</th><td>Buchungstext</td><td>Betrag CHF</td><td></td><td>Bahn total</td></tr><tr><th scope="row">2</th><td>Bahn Zürich–Bern</td><td class="num">51.00</td><td></td><td class="hl num">102.00</td></tr><tr><th scope="row">3</th><td>Hotel Bern</td><td class="num">189.00</td><td></td><td></td></tr><tr><th scope="row">4</th><td>Bahn Bern–Zürich</td><td class="num">51.00</td><td></td><td></td></tr><tr><th scope="row">5</th><td>Taxi Bahnhof</td><td class="num">28.50</td><td></td><td></td></tr></tbody></table></div>
+        <div>
+          <h3><span class="n">3</span>Spesen mit Platzhalter</h3>
+          <p><span class="lbl">Formel in D2</span></p>
+          <code class="formula"><span class="nb">=SUMMEWENN(A2:A5;"Bahn*";B2:B5)</span></code>
+          <p><span class="lbl">Ergebnis</span><span class="res">102.00</span></p>
+          <p class="note">* steht für beliebig viele Zeichen, ? für genau eines.</p>
+        </div>
+      </div>
+    </section>
+    <section aria-labelledby="err-h">
+      <h2 class="sec-title" id="err-h">Fehlercodes und Ursachen</h2>
+      <table class="err-table">
+        <tbody>
+          <tr><th scope="row">#NV</th><td>Tritt in SUMMEWENN selbst kaum auf; kommt aus Zellen im Summenbereich, die schon #NV enthalten.</td></tr>
+          <tr><th scope="row">#NAME?</th><td>Englischer Name (SUMIF), Tippfehler oder Text-Kriterium ohne Anführungszeichen (Ost statt "Ost").</td></tr>
+          <tr><th scope="row">#WERT!</th><td>Bei SUMMEWENNS sind Summen- und Kriterienbereiche unterschiedlich gross (z. B. C2:C9 und A2:A8).</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <div class="card-bottom">
+      <section class="box en-de" aria-labelledby="en-h">
+        <h2 class="sec-title" id="en-h">Englisch – Deutsch</h2>
+        <p><span>SUMIF = SUMMEWENN</span> <span>SUMIFS = SUMMEWENNS</span> <span>COUNTIF = ZÄHLENWENN</span> <span>AVERAGEIF = MITTELWERTWENN</span> <span>Komma , = Semikolon ;</span></p>
+        <p class="small" style="margin-top:1.2mm">Formeln aus englischen Foren übersetzen: Funktionsnamen ersetzen, Komma durch Semikolon ersetzen; der Dezimalpunkt bleibt.</p>
+      </section>
+      <!-- QR-Code-Platzhalter: hier einen QR-Code (SVG, ca. 24 x 24 mm) auf https://excel-drills.ch/artikel/summewenn.html einsetzen,
+           z. B. als <img src="qr-summewenn.svg" alt="QR-Code zum Artikel"> anstelle von .qr-slot. -->
+      <div class="qr">
+        <div class="qr-slot">QR-Code</div>
+        <p>Artikel und Gratis-Übung:<br>excel-drills.ch/<br>artikel/summewenn.html</p>
+      </div>
+    </div>
+    <footer class="ft">
+      <span><strong>excel-drills.ch</strong></span>
+      <span>Mehr Übungen direkt im Browser: <strong>excel-drills.ch/app/</strong></span>
+    </footer>
+  </article>
+  </main>
+</body>
+</html>

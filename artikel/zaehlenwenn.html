@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZÄHLENWENN Excel: Syntax, Beispiele und Übung</title>
+  <meta name="description" content="ZÄHLENWENN in Excel erklärt: Kriterien richtig schreiben, offene Pendenzen und Grossschäden zählen, Duplikate finden, typische Fehler und Gratis-Übung.">
+  <link rel="canonical" href="https://excel-drills.ch/artikel/zaehlenwenn.html">
+  <meta property="og:url" content="https://excel-drills.ch/artikel/zaehlenwenn.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:site_name" content="Excel-Drills">
+  <meta property="og:title" content="ZÄHLENWENN Excel: Syntax, Beispiele und Übung">
+  <meta property="og:description" content="ZÄHLENWENN in Excel erklärt: Kriterien richtig schreiben, offene Pendenzen und Grossschäden zählen, Duplikate finden, typische Fehler und Gratis-Übung.">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23107C41'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'%3EX%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script defer src="../assets/analytics.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ZÄHLENWENN in Excel",
+  "description": "ZÄHLENWENN in Excel erklärt: Kriterien richtig schreiben, offene Pendenzen und Grossschäden zählen, Duplikate finden, typische Fehler und Gratis-Übung.",
+  "inLanguage": "de-CH",
+  "datePublished": "2026-10-30",
+  "dateModified": "2026-10-30",
+  "author": {
+    "@type": "Organization",
+    "name": "Excel-Drills"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Excel-Drills"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was ist der Unterschied zwischen ZÄHLENWENN und ANZAHL?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ANZAHL zählt alle Zellen, die eine Zahl enthalten, ohne Bedingung. ZÄHLENWENN zählt nur die Zellen, die ein Kriterium erfüllen, und funktioniert auch mit Text. Für alle nicht leeren Zellen, egal ob Text oder Zahl, gibt es ANZAHL2."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie zähle ich mit ZÄHLENWENN alle nicht leeren Zellen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mit dem Kriterium \"<>\", also =ZÄHLENWENN(C2:C8;\"<>\"). Für leere Zellen nimmst du \"\" oder die Funktion ANZAHLLEEREZELLEN."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Unterscheidet ZÄHLENWENN zwischen Gross- und Kleinschreibung?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nein, \"offen\" und \"Offen\" zählen gleich. Brauchst du eine exakte Unterscheidung, kombinierst du SUMMENPRODUKT mit IDENTISCH: =SUMMENPRODUKT(--IDENTISCH(C2:C8;\"Offen\"))."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie zähle ich Werte zwischen zwei Grenzen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mit ZÄHLENWENNS und zwei Bedingungen auf denselben Bereich, zum Beispiel =ZÄHLENWENNS(B2:B8;\">=5000\";B2:B8;\"<10000\") für alle Beträge ab 5'000 und unter 10'000."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../" aria-label="Excel-Drills Startseite"><span class="mark" aria-hidden="true">X</span>Excel-Drills</a>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="../app/">Übungen</a>
+        <a href="../pfad/">Pfade</a>
+        <a href="../artikel/" aria-current="page">Artikel</a>
+        <a href="../handouts/">Handouts</a>
+        <a href="../premium.html">Preise</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inhalt" class="wrap">
+    <article class="prose article">
+      <nav class="breadcrumb" aria-label="Brotkrümelnavigation">
+        <ol>
+          <li><a href="../">Startseite</a></li>
+          <li><a href="./">Artikel</a></li>
+          <li aria-current="page">ZÄHLENWENN in Excel</li>
+        </ol>
+      </nav>
+      <h1>ZÄHLENWENN in Excel</h1>
+      <p class="article-meta">Stand: 30. Oktober 2026 &middot; Schweizer Schreibweise mit Semikolon</p>
+      <div class="summary">
+        <p>ZÄHLENWENN zählt, wie viele Zellen in einem Bereich ein Kriterium erfüllen, zum Beispiel alle offenen Rechnungen. Die Formel lautet <code>=ZÄHLENWENN(Bereich;Suchkriterien)</code>, etwa <code>=ZÄHLENWENN(C2:C8;"offen")</code>. Für mehrere Bedingungen gleichzeitig nimmst du ZÄHLENWENNS.</p>
+      </div>
+
+      <h2>Wofür du ZÄHLENWENN brauchst</h2>
+      <p>Wie viele Rechnungen sind noch offen? Wie viele Schadenfälle liegen über CHF 10'000? Wie viele Pendenzen hat jede Person auf dem Tisch? Kommt eine Kundennummer doppelt vor? Alle diese Fragen beantwortest du mit ZÄHLENWENN. Die Funktion zählt Zellen, die eine Bedingung erfüllen, und aktualisiert sich automatisch, sobald sich die Daten ändern.</p>
+      <p>ZÄHLENWENN ist die Schwester von <a href="summewenn.html">SUMMEWENN</a>: Die Kriterien funktionieren genau gleich, nur dass gezählt statt summiert wird. Wer eine der beiden Funktionen sicher beherrscht, hat die andere praktisch schon gelernt.</p>
+
+      <h2>Die Syntax von ZÄHLENWENN</h2>
+      <div class="syntax">
+        <code class="formula">=ZÄHLENWENN(Bereich;Suchkriterien)</code>
+        <dl>
+          <dt>Bereich</dt>
+          <dd>Die Zellen, die gezählt werden sollen, wenn sie das Kriterium erfüllen, zum Beispiel die Statusspalte <code>C2:C8</code>. Leere Zellen und Zellen mit anderem Inhalt werden nicht mitgezählt.</dd>
+          <dt>Suchkriterien</dt>
+          <dd>Die Bedingung. Ein Text wie <code>"offen"</code> und ein Vergleich wie <code>"&gt;=10000"</code> stehen in Anführungszeichen. Eine reine Zahl (<code>5</code>) oder ein Zellbezug (<code>E2</code>) brauchen keine.</dd>
+        </dl>
+      </div>
+      <p>Anders als SUMMEWENN hat ZÄHLENWENN kein drittes Argument: Gezählt wird immer im selben Bereich, der auch geprüft wird.</p>
+      <h3>Die wichtigsten Kriterien</h3>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Kriterien in ZÄHLENWENN (horizontal scrollbar)">
+<table class="article-table compare">
+<caption>Kriterien in ZÄHLENWENN</caption>
+<thead><tr><th scope="col">Kriterium</th><th scope="col">zählt Zellen, die …</th></tr></thead><tbody>
+<tr><th scope="row"><code>"offen"</code></th><td>genau «offen» enthalten (Gross-/Kleinschreibung egal)</td></tr>
+<tr><th scope="row"><code>"&lt;&gt;erledigt"</code></th><td>nicht «erledigt» enthalten, auch leere Zellen</td></tr>
+<tr><th scope="row"><code>"&gt;=10000"</code></th><td>eine Zahl grösser oder gleich 10'000 enthalten</td></tr>
+<tr><th scope="row"><code>"&gt;="&amp;E1</code></th><td>grösser oder gleich dem Wert in E1 sind</td></tr>
+<tr><th scope="row"><code>E2</code></th><td>gleich dem Inhalt von E2 sind</td></tr>
+<tr><th scope="row"><code>"*AG"</code></th><td>auf «AG» enden</td></tr>
+<tr><th scope="row"><code>"&lt;&gt;"</code></th><td>nicht leer sind</td></tr>
+<tr><th scope="row"><code>""</code></th><td>leer sind</td></tr>
+</tbody></table></div>
+
+      <h2>Beispiel 1: Pendenzen nach Status und Person (Büro)</h2>
+      <p>Im Team führt ihr eine Pendenzenliste. Du willst wissen, wie viele Pendenzen offen sind und wie viele jede Person insgesamt hat.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Pendenzenliste in A1:C8, Auswertung pro Person in E1:F4 (horizontal scrollbar)">
+<table class="article-table">
+<caption>Pendenzenliste in A1:C8, Auswertung pro Person in E1:F4</caption>
+<thead><tr><th scope="col"><span class="visually-hidden">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th><th scope="col">F</th></tr></thead><tbody>
+<tr class="header-row"><th scope="row">1</th><td>Pendenz</td><td>Verantwortlich</td><td>Status</td><td></td><td>Person</td><td>Anzahl</td></tr>
+<tr><th scope="row">2</th><td>P-01</td><td>Gerber</td><td>offen</td><td></td><td>Gerber</td><td class="hl num">3</td></tr>
+<tr><th scope="row">3</th><td>P-02</td><td>Steiner</td><td>erledigt</td><td></td><td>Steiner</td><td class="hl num">2</td></tr>
+<tr><th scope="row">4</th><td>P-03</td><td>Gerber</td><td>in Arbeit</td><td></td><td>Weber</td><td class="hl num">2</td></tr>
+<tr><th scope="row">5</th><td>P-04</td><td>Weber</td><td>offen</td><td></td><td></td><td></td></tr>
+<tr><th scope="row">6</th><td>P-05</td><td>Steiner</td><td>offen</td><td></td><td></td><td></td></tr>
+<tr><th scope="row">7</th><td>P-06</td><td>Gerber</td><td>erledigt</td><td></td><td></td><td></td></tr>
+<tr><th scope="row">8</th><td>P-07</td><td>Weber</td><td>erledigt</td><td></td><td></td><td></td></tr>
+</tbody></table></div>
+      <p>Anzahl offener Pendenzen:</p>
+      <code class="formula">=ZÄHLENWENN(C2:C8;"offen")</code>
+      <p>Ergebnis: 3. «in Arbeit» zählt nicht, weil der Text nicht genau «offen» lautet. Willst du alles, was noch nicht erledigt ist, nimmst du das Ungleich-Kriterium: <code>=ZÄHLENWENN(C2:C8;"&lt;&gt;erledigt")</code> ergibt 4. Achtung: Dieses Kriterium zählt auch leere Zellen, falls der Bereich über die Liste hinausgeht.</p>
+      <p>Für die Auswertung pro Person steht der Name in E2 bis E4, und die Formel in F2 wird nach unten kopiert:</p>
+      <code class="formula">=ZÄHLENWENN($B$2:$B$8;E2)</code>
+      <p>Der Bereich ist mit <code>$</code> fixiert, das Kriterium <code>E2</code> wandert beim Kopieren mit. Gerber hat 3 Pendenzen, Steiner und Weber je 2.</p>
+      <p>Willst du die offenen Pendenzen pro Person, kombinierst du zwei Bedingungen mit ZÄHLENWENNS:</p>
+      <code class="formula">=ZÄHLENWENNS($B$2:$B$8;E2;$C$2:$C$8;"offen")</code>
+      <p>Für Gerber ergibt das 1. ZÄHLENWENNS nimmt beliebig viele Paare aus Bereich und Kriterium und zählt nur die Zeilen, in denen alle Bedingungen gleichzeitig zutreffen.</p>
+
+      <h2>Beispiel 2: Grossschäden zählen und Anteil berechnen (Versicherung)</h2>
+      <p>In der Schadenstatistik willst du wissen, wie viele Fälle die Grenze von CHF 10'000 erreichen und welchen Anteil sie an allen Fällen haben.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Schadenfälle in A1:B8 (horizontal scrollbar)">
+<table class="article-table">
+<caption>Schadenfälle in A1:B8</caption>
+<thead><tr><th scope="col"><span class="visually-hidden">Zeile</span></th><th scope="col">A</th><th scope="col">B</th></tr></thead><tbody>
+<tr class="header-row"><th scope="row">1</th><td>Schaden-Nr.</td><td>Betrag CHF</td></tr>
+<tr><th scope="row">2</th><td>S-401</td><td class="num">3'400</td></tr>
+<tr><th scope="row">3</th><td>S-402</td><td class="num">18'750</td></tr>
+<tr><th scope="row">4</th><td>S-403</td><td class="num">9'990</td></tr>
+<tr><th scope="row">5</th><td>S-404</td><td class="num">42'300</td></tr>
+<tr><th scope="row">6</th><td>S-405</td><td class="num">1'150</td></tr>
+<tr><th scope="row">7</th><td>S-406</td><td class="num">12'000</td></tr>
+<tr><th scope="row">8</th><td>S-407</td><td class="num">10'000</td></tr>
+</tbody></table></div>
+      <code class="formula">=ZÄHLENWENN(B2:B8;"&gt;=10000")</code>
+      <p>Ergebnis: 4. Mit <code>"&gt;10000"</code> wären es nur 3, weil S-407 mit genau 10'000 dann nicht mehr dazugehört. Ob die Grenze dazugehört, ist eine fachliche Frage, die du klären solltest, bevor du die Formel baust. In Formeln schreibst du Zahlen übrigens ohne Hochkomma: <code>10000</code>, nicht <code>10'000</code>.</p>
+      <p>Den Anteil der Grossschäden an allen Fällen berechnest du, indem du durch die Anzahl aller Beträge teilst:</p>
+      <code class="formula">=ZÄHLENWENN(B2:B8;"&gt;=10000")/ANZAHL(B2:B8)</code>
+      <p>Ergebnis: 4 von 7, also rund 57.1&nbsp;%, wenn du die Zelle als Prozent formatierst. ANZAHL zählt alle Zellen mit Zahlen und ist hier der richtige Nenner.</p>
+      <p>Für Bandbreiten, etwa alle Fälle zwischen CHF 5'000 und CHF 10'000, setzt du zwei Bedingungen auf denselben Bereich: <code>=ZÄHLENWENNS(B2:B8;"&gt;=5000";B2:B8;"&lt;10000")</code>. Das ergibt 1 (S-403).</p>
+
+      <h2>Beispiel 3: Doppelte Kundennummern finden (Finance)</h2>
+      <p>Vor einem Import in die Buchhaltung oder einem Serienbrief willst du sicher sein, dass jede Kundennummer nur einmal vorkommt. ZÄHLENWENN zählt für jede Zeile, wie oft die Nummer in der ganzen Liste steht.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Kundennummern in A1:A9, Prüfung in B und C (horizontal scrollbar)">
+<table class="article-table">
+<caption>Kundennummern in A1:A9, Prüfung in B und C</caption>
+<thead><tr><th scope="col"><span class="visually-hidden">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th></tr></thead><tbody>
+<tr class="header-row"><th scope="row">1</th><td>Kunden-Nr.</td><td>Vorkommen</td><td>Prüfung</td></tr>
+<tr><th scope="row">2</th><td>K-1001</td><td class="num">1</td><td></td></tr>
+<tr><th scope="row">3</th><td>K-1002</td><td class="hl num">2</td><td class="hl">Duplikat</td></tr>
+<tr><th scope="row">4</th><td>K-1003</td><td class="hl num">2</td><td class="hl">Duplikat</td></tr>
+<tr><th scope="row">5</th><td>K-1002</td><td class="hl num">2</td><td class="hl">Duplikat</td></tr>
+<tr><th scope="row">6</th><td>K-1004</td><td class="num">1</td><td></td></tr>
+<tr><th scope="row">7</th><td>K-1005</td><td class="num">1</td><td></td></tr>
+<tr><th scope="row">8</th><td>K-1003</td><td class="hl num">2</td><td class="hl">Duplikat</td></tr>
+<tr><th scope="row">9</th><td>K-1006</td><td class="num">1</td><td></td></tr>
+</tbody></table></div>
+      <p>Die Formel in B2, nach unten kopiert:</p>
+      <code class="formula">=ZÄHLENWENN($A$2:$A$9;A2)</code>
+      <p>Jeder Wert grösser als 1 ist ein Duplikat. Mit WENN machst du daraus einen lesbaren Hinweis in Spalte C:</p>
+      <code class="formula">=WENN(ZÄHLENWENN($A$2:$A$9;A2)&gt;1;"Duplikat";"")</code>
+      <p>Hier sind die <code>$</code>-Zeichen entscheidend. Ohne sie würde der Bereich beim Kopieren mit nach unten wandern, und spätere Zeilen würden ihre Duplikate weiter oben nicht mehr sehen.</p>
+
+      <h2>Typische Fehler und wie du sie erkennst</h2>
+      <h3><code>#NAME?</code></h3>
+      <p><code>=ZÄHLENWENN(C2:C8;offen)</code> liefert <code>#NAME?</code>, weil Excel «offen» ohne Anführungszeichen für einen Bereichsnamen hält. Richtig ist <code>"offen"</code>. Auch <code>COUNTIF</code> in der deutschen Excel-Version oder ein Tippfehler wie <code>ZAEHLENWENN</code> führen zu <code>#NAME?</code>.</p>
+      <h3>Excel nimmt die Formel nicht an</h3>
+      <p>Ein Operator ohne Anführungszeichen (<code>=ZÄHLENWENN(B2:B8;&gt;=10000)</code>) oder Kommas statt Semikolons (<code>=ZÄHLENWENN(C2:C8,"offen")</code>) führen dazu, dass Excel beim Bestätigen ein Problem mit der Formel meldet.</p>
+      <h3>Ergebnis 0 oder zu tief</h3>
+      <ul>
+        <li><strong>Zellbezug in Anführungszeichen:</strong> <code>"&gt;=E1"</code> vergleicht mit dem Text «E1». Richtig: <code>"&gt;="&amp;E1</code>.</li>
+        <li><strong>Leerzeichen:</strong> «offen » mit Leerzeichen am Ende wird von <code>"offen"</code> nicht erfasst. Bereinige die Daten mit GLÄTTEN oder verwende vorübergehend <code>"offen*"</code>, um das Problem zu bestätigen.</li>
+        <li><strong>Zahlen als Text:</strong> Ein Vergleich wie <code>"&gt;=10000"</code> berücksichtigt nur echte Zahlen. Beträge, die als Text gespeichert sind, fallen heraus.</li>
+        <li><strong>Platzhalter im Text:</strong> Suchst du nach einem echten Sternchen oder Fragezeichen, setzt du eine Tilde davor: <code>"~*"</code>.</li>
+      </ul>
+      <h3>Fehlende <code>$</code></h3>
+      <p>Wie im Duplikat-Beispiel gezeigt: Ohne absoluten Bezug verschiebt sich der Bereich beim Kopieren. Die Formel liefert dann keine Fehlermeldung, sondern stillschweigend falsche Zahlen. Mehr dazu im Artikel über <a href="absolute-bezuege.html">absolute Bezüge</a>.</p>
+
+      <h2>Englisch vs. Deutsch</h2>
+      <p>Aus <code>=COUNTIF(C2:C8,"open")</code> wird in der Schweizer Excel-Version <code>=ZÄHLENWENN(C2:C8;"offen")</code>. Beachte den Umlaut im deutschen Namen: ZÄHLENWENN, nicht ZAHLENWENN.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="ZÄHLENWENN und verwandte Funktionen: Deutsch und Englisch (horizontal scrollbar)">
+<table class="article-table compare">
+<caption>ZÄHLENWENN und verwandte Funktionen: Deutsch und Englisch</caption>
+<thead><tr><th scope="col">Deutsch</th><th scope="col">Englisch</th><th scope="col">zählt …</th></tr></thead><tbody>
+<tr><th scope="row">ZÄHLENWENN</th><td>COUNTIF</td><td>Zellen, die ein Kriterium erfüllen</td></tr>
+<tr><th scope="row">ZÄHLENWENNS</th><td>COUNTIFS</td><td>Zellen, die mehrere Kriterien gleichzeitig erfüllen</td></tr>
+<tr><th scope="row">ANZAHL</th><td>COUNT</td><td>Zellen mit Zahlen</td></tr>
+<tr><th scope="row">ANZAHL2</th><td>COUNTA</td><td>nicht leere Zellen</td></tr>
+<tr><th scope="row">ANZAHLLEEREZELLEN</th><td>COUNTBLANK</td><td>leere Zellen</td></tr>
+<tr><th scope="row">SUMMEWENN</th><td>SUMIF</td><td>summiert statt zählt</td></tr>
+<tr><th scope="row">IDENTISCH</th><td>EXACT</td><td>vergleicht Text mit Gross-/Kleinschreibung</td></tr>
+</tbody></table></div>
+
+      <aside class="practice-box" aria-labelledby="practice-heading">
+        <h2 id="practice-heading">Jetzt üben</h2>
+        <p><strong>ZÄHLENWENN: Offene Rechnungen zählen.</strong> Du zählst in einer Rechnungsliste, wie viele Rechnungen den Status «offen» haben. Excel-Drills prüft dein Ergebnis sofort und meldet sich, wenn zum Beispiel die Anführungszeichen fehlen.</p>
+        <p>Die Übung ist gratis, braucht keine Anmeldung und läuft direkt im Browser.</p>
+        <p><a class="btn" href="../app/#zaehlenwenn-1">ZÄHLENWENN-Übung starten</a></p>
+      </aside>
+
+      <section class="faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">Häufige Fragen</h2>
+          <details>
+            <summary>Was ist der Unterschied zwischen ZÄHLENWENN und ANZAHL?</summary>
+            <p>ANZAHL zählt alle Zellen, die eine Zahl enthalten, ohne Bedingung. ZÄHLENWENN zählt nur die Zellen, die ein Kriterium erfüllen, und funktioniert auch mit Text. Für alle nicht leeren Zellen, egal ob Text oder Zahl, gibt es ANZAHL2.</p>
+          </details>
+          <details>
+            <summary>Wie zähle ich mit ZÄHLENWENN alle nicht leeren Zellen?</summary>
+            <p>Mit dem Kriterium "&lt;&gt;", also =ZÄHLENWENN(C2:C8;"&lt;&gt;"). Für leere Zellen nimmst du "" oder die Funktion ANZAHLLEEREZELLEN.</p>
+          </details>
+          <details>
+            <summary>Unterscheidet ZÄHLENWENN zwischen Gross- und Kleinschreibung?</summary>
+            <p>Nein, "offen" und "Offen" zählen gleich. Brauchst du eine exakte Unterscheidung, kombinierst du SUMMENPRODUKT mit IDENTISCH: =SUMMENPRODUKT(--IDENTISCH(C2:C8;"Offen")).</p>
+          </details>
+          <details>
+            <summary>Wie zähle ich Werte zwischen zwei Grenzen?</summary>
+            <p>Mit ZÄHLENWENNS und zwei Bedingungen auf denselben Bereich, zum Beispiel =ZÄHLENWENNS(B2:B8;"&gt;=5000";B2:B8;"&lt;10000") für alle Beträge ab 5'000 und unter 10'000.</p>
+          </details>
+      </section>
+
+      <aside class="practice-box handout-box" aria-labelledby="card-heading">
+        <h2 id="card-heading">Formelkarte als PDF</h2>
+        <p>Alles Wichtige zu ZÄHLENWENN auf einer A4-Seite: Syntax, drei Beispiele mit Tabelle, Englisch–Deutsch und die häufigsten Fehlercodes. Gratis, zum Ausdrucken neben die Tastatur.</p>
+        <p><a class="btn btn-secondary" href="../handouts/pdf/formelkarte-zaehlenwenn.pdf" download>Formelkarte ZÄHLENWENN herunterladen (PDF)</a></p>
+        <p class="fill-note">Weitere Formelkarten und Spickzettel findest du unter <a href="../handouts/">Handouts</a>.</p>
+      </aside>
+
+      <nav class="read-more" aria-labelledby="read-more-heading">
+        <h2 id="read-more-heading">Weiterlesen</h2>
+        <ul>
+            <li><a href="sverweis.html">SVERWEIS einfach erklärt</a>: Werte in einer Tabelle nachschlagen: Preise, Prämien, Rabattstaffeln. Mit FALSCH und WAHR richtig umgehen.</li>
+            <li><a href="summewenn.html">SUMMEWENN: Übung und Erklärung</a>: Nur passende Werte summieren: Kosten pro Kostenstelle, Schäden über einer Schwelle, Teiltexte mit Platzhaltern.</li>
+            <li><a href="wenn-funktion.html">WENN-Funktion in Excel</a>: Bedingungen prüfen und Entscheidungen abbilden: Budgetkontrolle, Selbstbehalt, UND/ODER und verschachtelte WENN.</li>
+            <li><a href="absolute-bezuege.html">Absolute Bezüge in Excel ($)</a>: Wann du das Dollarzeichen brauchst: MwSt mit festem Satz, Anteil am Total, gemischte Bezüge für Tabellen.</li>
+        </ul>
+        <p><a href="./">Alle Artikel im Überblick</a></p>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; 2026 Excel-Drills</span>
+      <span><a href="../artikel/">Artikel</a> &middot; <a href="../handouts/">Handouts</a> &middot; <a href="../impressum.html">Impressum</a> &middot; <a href="../datenschutz.html">Datenschutz</a></span>
+    </div>
+  </footer>
+</body>
+</html>

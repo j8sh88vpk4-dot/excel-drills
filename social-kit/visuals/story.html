@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<title>Excel-Drills Story 1080x1920 (?v=1..3)</title>
+<!-- Story / Reel-Endcard (Instagram, TikTok). Oben ~250 px und unten ~300 px bleiben frei von wichtigen Inhalten (UI-Overlays).
+     Ohne Parameter: Reel-Endcard (png/story.png, wie bisher).
+     ?v=1 Launch · ?v=2 Formelrätsel (Platz für Quiz-Sticker) · ?v=3 Streak/Meisterschaft
+     Gerendert von render-instagram.sh nach png/instagram/story-<v>.png. -->
+<style>
+  :root { --g:#107C41; --gd:#0B5A2E; --gl:#E7F2EB; --ink:#1B1F1D; --mut:#5A635E; --line:#D5DDD8; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { width:1080px; height:1920px; overflow:hidden; }
+  body { margin:0; background:var(--g); color:#fff;
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .mono { font-family:"SF Mono", Menlo, Consolas, monospace; }
+  .wrap { width:1080px; height:1920px; display:flex; flex-direction:column; align-items:center; padding:250px 90px 300px; text-align:center;
+    background-image:linear-gradient(rgba(255,255,255,.07) 2px, transparent 2px), linear-gradient(90deg, rgba(255,255,255,.07) 2px, transparent 2px);
+    background-size:120px 60px; }
+  .brand { display:flex; align-items:center; gap:20px; font-weight:800; font-size:48px; }
+  .logo { width:76px; height:76px; border-radius:14px; background:#fff; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:5px; padding:14px; }
+  .logo i { background:var(--g); border-radius:3px; }
+  .logo i:nth-child(4) { background:rgba(16,124,65,.4); }
+  h1 { margin-top:110px; font-size:108px; line-height:1.03; letter-spacing:-2.5px; font-weight:800; }
+  h1 em { font-style:normal; color:#B9E5C9; }
+  .sheet { margin-top:100px; width:100%; background:#fff; color:var(--ink); border-radius:24px; overflow:hidden; box-shadow:0 30px 60px rgba(0,0,0,.25); text-align:left; }
+  .fx { display:flex; align-items:center; border-bottom:2px solid var(--line); background:#F7F9F8; height:96px; }
+  .fx b { width:100px; text-align:center; font-size:28px; color:var(--mut); border-right:2px solid var(--line); line-height:96px; }
+  .fx span { padding:0 26px; font-size:40px; font-weight:600; white-space:nowrap; }
+  .ok { display:flex; align-items:center; gap:18px; padding:30px 30px; font-size:40px; font-weight:700; color:var(--gd); background:var(--gl); }
+  .ok .c { width:56px; height:56px; border-radius:50%; background:var(--g); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:34px; }
+  .facts { margin-top:100px; display:flex; flex-direction:column; gap:26px; font-size:46px; font-weight:600; }
+  .cta { margin-top:auto; background:#fff; color:var(--gd); font-size:52px; font-weight:800; padding:34px 60px; border-radius:999px; }
+  .kick { margin-top:64px; font-size:34px; font-weight:800; letter-spacing:1px; text-transform:uppercase; background:rgba(255,255,255,.16); padding:12px 26px; border-radius:10px; }
+  .kick + h1 { margin-top:30px; }
+  .q { margin-top:56px; font-size:46px; line-height:1.35; font-weight:600; color:rgba(255,255,255,.92); }
+  .q b { color:#fff; }
+  .opts { margin-top:56px; width:100%; display:flex; flex-direction:column; gap:26px; }
+  .opt { display:flex; align-items:center; gap:28px; background:#fff; color:var(--ink); border-radius:22px; padding:28px 32px; text-align:left; box-shadow:0 18px 40px rgba(0,0,0,.18); }
+  .opt b { flex:none; width:72px; height:72px; border-radius:50%; background:var(--gl); color:var(--gd); display:flex; align-items:center; justify-content:center; font-size:38px; font-weight:800; }
+  .opt span { font-size:42px; font-weight:600; }
+  .hint { margin-top:44px; font-size:36px; color:rgba(255,255,255,.85); }
+  .card { margin-top:56px; width:100%; background:#fff; color:var(--ink); border-radius:24px; padding:34px 44px 30px; text-align:left; box-shadow:0 30px 60px rgba(0,0,0,.25); }
+  .card .row { display:flex; align-items:center; justify-content:space-between; }
+  .card .lvl { font-size:30px; font-weight:700; color:var(--mut); }
+  .card .lvl b { color:var(--gd); }
+  .streak { display:flex; align-items:center; gap:16px; font-size:64px; font-weight:800; color:var(--ink); }
+  .streak svg { width:76px; height:76px; }
+  .days { margin-top:26px; display:grid; grid-template-columns:repeat(7,1fr); gap:14px; }
+  .days div { text-align:center; font-size:26px; font-weight:700; color:var(--mut); }
+  .days i { display:flex; margin:10px auto 0; width:84px; height:84px; border-radius:50%; border:4px solid var(--line); align-items:center; justify-content:center; font-style:normal; font-size:40px; color:#fff; }
+  .days i.on { background:var(--g); border-color:var(--g); }
+  .days i.today { border-color:var(--g); border-style:dashed; color:var(--g); }
+  .xp { margin-top:28px; height:22px; border-radius:11px; background:var(--gl); overflow:hidden; }
+  .xp i { display:block; height:100%; width:62%; background:var(--g); }
+  .xpl { margin-top:12px; font-size:26px; color:var(--mut); display:flex; justify-content:space-between; }
+  .medals { margin-top:28px; display:flex; gap:18px; }
+  .medal { flex:1; display:flex; align-items:center; gap:14px; border:3px solid var(--line); border-radius:16px; padding:12px 18px; font-size:30px; font-weight:700; }
+  .medal i { flex:none; width:44px; height:44px; border-radius:50%; }
+  .demo { margin-top:12px; font-size:24px; color:var(--mut); text-align:right; }
+  .facts.sm { margin-top:44px; margin-bottom:44px; gap:16px; font-size:40px; }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <div class="brand"><div class="logo"><i></i><i></i><i></i><i></i></div>Excel-Drills</div>
+  <h1>Excel <em>üben</em>,<br>nicht zuschauen.</h1>
+  <div class="sheet">
+    <div class="fx"><b class="mono">fx</b><span class="mono">=SVERWEIS(D2;A2:B6;2;FALSCH)</span></div>
+    <div class="ok"><span class="c">✓</span>Richtig. Nächste Übung.</div>
+  </div>
+  <div class="facts">
+    <div>42 Übungen · 4 Lernpfade</div>
+    <div>Deutsch · Semikolon · CHF</div>
+  </div>
+  <div class="cta">18 Übungen gratis · Link in Bio</div>
+</div>
+<script>
+(function () {
+  var brand = '<div class="brand"><div class="logo"><i></i><i></i><i></i><i></i></div>Excel-Drills</div>';
+  var flame = '<svg viewBox="0 0 24 24"><path fill="#E8590C" d="M12 2c1 3.5-1.5 5.2-1.5 7.6 0 1.3.9 2.2 2 2.2 1.4 0 2.2-1.2 2-3 2.3 1.7 3.5 4.3 3.5 6.6A6 6 0 0 1 12 22a6 6 0 0 1-6-6.4C6 11 10.5 8.6 12 2z"/><path fill="#FFC53D" d="M12 13.5c.6 1.7 2.6 2.4 2.6 4.4a2.6 2.6 0 0 1-5.2 0c0-1.6 1.6-2.4 2.6-4.4z"/></svg>';
+  var V = {
+    1: brand +
+      '<div class="kick">Neu · gebaut in der Schweiz</div>' +
+      '<h1>Excel <em>üben</em>,<br>nicht zuschauen.</h1>' +
+      '<div class="sheet"><div class="fx"><b class="mono">fx</b><span class="mono">=SUMME(B2:B5)</span></div>' +
+      '<div class="ok"><span class="c">✓</span>Richtig. Nächste Übung.</div></div>' +
+      '<div class="facts sm"><div>42 Übungen · 18 gratis</div><div>Basis · Accounting · Finance</div><div>Neu: Streak, Levels, Gold-Medaillen</div></div>' +
+      '<div class="cta">Gratis starten · Link in Bio</div>',
+    2: brand +
+      '<div class="kick">Formelrätsel</div>' +
+      '<h1>CHF 47.33<br>auf <em>5 Rappen</em>?</h1>' +
+      '<p class="q">Welche Formel ergibt <b>47.35</b>?</p>' +
+      '<div class="opts">' +
+        '<div class="opt"><b>A</b><span class="mono">=RUNDEN(B2;1)</span></div>' +
+        '<div class="opt"><b>B</b><span class="mono">=VRUNDEN(B2;0.05)</span></div>' +
+        '<div class="opt"><b>C</b><span class="mono">=ABRUNDEN(B2;2)</span></div>' +
+      '</div>' +
+      '<p class="hint">Tippe deine Antwort. Auflösung in der nächsten Story.</p>',
+    3: brand +
+      '<div class="kick">Neu in Excel-Drills</div>' +
+      '<h1>Wie lang ist deine <em>Streak</em>?</h1>' +
+      '<div class="card">' +
+        '<div class="row"><div class="streak">' + flame + '5 Tage</div><div class="lvl">Level 3 · <b>Controller</b></div></div>' +
+        '<div class="days">' + ['Mo','Di','Mi','Do','Fr','Sa','So'].map(function (d, i) {
+          return '<div>' + d + '<i class="' + (i < 5 ? 'on' : i === 5 ? 'today' : '') + '">' + (i < 5 ? '✓' : i === 5 ? '+' : '') + '</i></div>';
+        }).join('') + '</div>' +
+        '<div class="xp"><i></i></div><div class="xpl"><span>186 XP</span><span>Level 4 ab 300 XP</span></div>' +
+        '<div class="medals"><div class="medal"><i style="background:#C98A4B"></i>Bronze</div><div class="medal"><i style="background:#AEB6BF"></i>Silber</div><div class="medal"><i style="background:#E3B341"></i>Gold</div></div>' +
+        '<div class="demo">Beispielansicht</div>' +
+      '</div>' +
+      '<div class="facts sm"><div>Tagesziel: 1, 2 oder 5 Übungen</div><div>Gold = richtig, auch mit anderen Zahlen</div></div>' +
+      '<div class="cta">Streak starten · Link in Bio</div>'
+  };
+  var v = parseInt(new URLSearchParams(location.search).get('v'), 10);
+  if (V[v]) { document.getElementById('wrap').innerHTML = V[v]; document.title = 'Excel-Drills Story v' + v; }
+})();
+</script>
+</body>
+</html>

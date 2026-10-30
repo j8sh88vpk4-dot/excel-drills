@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SVERWEIS einfach erklärt: Syntax, Beispiele, Übung</title>
+  <meta name="description" content="SVERWEIS einfach erklärt: Syntax mit Semikolon, Praxisbeispiele aus Büro und Versicherung, typische Fehler wie #NV und eine Gratis-Übung im Browser.">
+  <link rel="canonical" href="https://excel-drills.ch/artikel/sverweis.html">
+  <meta property="og:url" content="https://excel-drills.ch/artikel/sverweis.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:site_name" content="Excel-Drills">
+  <meta property="og:title" content="SVERWEIS einfach erklärt: Syntax, Beispiele, Übung">
+  <meta property="og:description" content="SVERWEIS einfach erklärt: Syntax mit Semikolon, Praxisbeispiele aus Büro und Versicherung, typische Fehler wie #NV und eine Gratis-Übung im Browser.">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23107C41'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'%3EX%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script defer src="../assets/analytics.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "SVERWEIS einfach erklärt",
+  "description": "SVERWEIS einfach erklärt: Syntax mit Semikolon, Praxisbeispiele aus Büro und Versicherung, typische Fehler wie #NV und eine Gratis-Übung im Browser.",
+  "inLanguage": "de-CH",
+  "datePublished": "2026-10-30",
+  "dateModified": "2026-10-30",
+  "author": {
+    "@type": "Organization",
+    "name": "Excel-Drills"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Excel-Drills"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was ist der Unterschied zwischen FALSCH und WAHR im SVERWEIS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mit FALSCH sucht SVERWEIS nur exakte Treffer und liefert #NV, wenn der Wert fehlt. Mit WAHR sucht Excel den grössten Wert, der kleiner oder gleich dem Suchkriterium ist. Das ist für Staffeln gedacht und setzt eine aufsteigend sortierte erste Spalte voraus. Lässt du das Argument weg, gilt WAHR."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Warum liefert mein SVERWEIS #NV, obwohl der Wert in der Tabelle steht?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Meist liegt es an unsichtbaren Leerzeichen, an einer Zahl, die als Text gespeichert ist, oder an einer Matrix, die beim Kopieren ohne $-Zeichen verrutscht ist. Prüfe auch, ob der gesuchte Wert in der ersten Spalte der Matrix steht."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kann SVERWEIS nach links suchen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nein. SVERWEIS sucht immer in der ersten Spalte der Matrix und gibt Werte aus Spalten rechts davon zurück. Für die Suche nach links verwendest du INDEX mit VERGLEICH oder, falls deine Excel-Version sie anbietet, XVERWEIS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Sollte ich statt SVERWEIS besser XVERWEIS verwenden?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "XVERWEIS ist flexibler: Sie sucht standardmässig exakt, kann nach links suchen und hat einen eingebauten Wert für «nicht gefunden». Sie ist aber nicht in allen Excel-Versionen vorhanden. Wenn du Dateien mit anderen teilst oder in Einstellungstests arbeitest, ist SVERWEIS weiterhin der gemeinsame Nenner, und das Prinzip ist bei beiden gleich."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../" aria-label="Excel-Drills Startseite"><span class="mark" aria-hidden="true">X</span>Excel-Drills</a>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="../app/">Übungen</a>
+        <a href="../pfad/">Pfade</a>
+        <a href="../artikel/" aria-current="page">Artikel</a>
+        <a href="../handouts/">Handouts</a>
+        <a href="../premium.html">Preise</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inhalt" class="wrap">
+    <article class="prose article">
+      <nav class="breadcrumb" aria-label="Brotkrümelnavigation">
+        <ol>
+          <li><a href="../">Startseite</a></li>
+          <li><a href="./">Artikel</a></li>
+          <li aria-current="page">SVERWEIS einfach erklärt</li>
+        </ol>
+      </nav>
+      <h1>SVERWEIS einfach erklärt</h1>
+      <p class="article-meta">Stand: 30. Oktober 2026 &middot; Schweizer Schreibweise mit Semikolon</p>
+      <div class="summary">
+        <p>SVERWEIS sucht einen Wert in der ersten Spalte einer Tabelle und gibt den Wert aus einer anderen Spalte derselben Zeile zurück. Die Formel lautet <code>=SVERWEIS(Suchkriterium;Matrix;Spaltenindex;FALSCH)</code>. Mit FALSCH findet Excel nur exakte Treffer, mit WAHR den nächstkleineren Wert, etwa für Rabatt- oder Provisionsstaffeln.</p>
+      </div>
+
+      <h2>Wofür du SVERWEIS brauchst</h2>
+      <p>Im Büroalltag liegen Informationen selten in einer einzigen Tabelle. Die Preise stehen in der Preisliste, die Prämien im Policenbestand, die Kundennamen im Debitorenstamm. SVERWEIS verbindet solche Listen: Du gibst einen Schlüssel vor, etwa eine Artikelnummer oder eine Policennummer, und Excel holt dir den dazugehörigen Wert aus einer anderen Tabelle. Das «S» steht für senkrecht, denn Excel sucht von oben nach unten in der ersten Spalte der Tabelle.</p>
+      <p>Das spart nicht nur Tipparbeit. Wenn du Werte von Hand abschreibst, entstehen Fehler, und bei jeder Preisänderung musst du alles neu kontrollieren. Mit SVERWEIS änderst du den Preis einmal in der Preisliste, und alle Formeln, die darauf zugreifen, rechnen automatisch mit dem neuen Wert.</p>
+
+      <h2>Die Syntax von SVERWEIS</h2>
+      <div class="syntax">
+        <code class="formula">=SVERWEIS(Suchkriterium;Matrix;Spaltenindex;Bereich_Verweis)</code>
+        <dl>
+          <dt>Suchkriterium</dt>
+          <dd>Der Wert, den du suchst, meist ein Zellbezug wie <code>E2</code>. Es kann auch ein fester Text in Anführungszeichen sein, zum Beispiel <code>"B-130"</code>.</dd>
+          <dt>Matrix</dt>
+          <dd>Der Tabellenbereich, in dem gesucht wird, zum Beispiel <code>$A$2:$C$6</code>. Excel sucht das Suchkriterium ausschliesslich in der <strong>ersten Spalte</strong> dieses Bereichs.</dd>
+          <dt>Spaltenindex</dt>
+          <dd>Die Nummer der Spalte innerhalb der Matrix, aus der das Ergebnis kommt. Die erste Spalte der Matrix ist 1, die zweite 2 und so weiter. Gezählt wird ab dem Beginn der Matrix, nicht ab Spalte A des Tabellenblatts.</dd>
+          <dt>Bereich_Verweis</dt>
+          <dd><code>FALSCH</code> (oder <code>0</code>) verlangt eine exakte Übereinstimmung. <code>WAHR</code> (oder <code>1</code>) sucht ungefähr und liefert den grössten Wert, der kleiner oder gleich dem Suchkriterium ist. Lässt du das Argument weg, verwendet Excel <code>WAHR</code>. Genau das ist eine häufige Fehlerquelle.</dd>
+        </dl>
+      </div>
+      <p>Faustregel: Für Artikelnummern, Kundennummern, Policen und Namen schreibst du immer <code>FALSCH</code>. <code>WAHR</code> brauchst du nur für Staffeln und Bandbreiten, und dann muss die erste Spalte aufsteigend sortiert sein.</p>
+
+      <h2>Beispiel 1: Preis zu einer Artikelnummer (Büro)</h2>
+      <p>Du bestellst Büromaterial und willst zu jeder Artikelnummer automatisch den Preis anzeigen. Die Preisliste steht in A1:C6, die gesuchte Nummer tippst du in E2.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Bürobedarf: Preisliste in A1:C6, Abfrage in E1:F2 (horizontal scrollbar)">
+<table class="article-table">
+<caption>Bürobedarf: Preisliste in A1:C6, Abfrage in E1:F2</caption>
+<thead><tr><th scope="col"><span class="visually-hidden">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th><th scope="col">F</th></tr></thead><tbody>
+<tr class="header-row"><th scope="row">1</th><td>Art.-Nr.</td><td>Bezeichnung</td><td>Preis CHF</td><td></td><td>Gesucht</td><td>Preis CHF</td></tr>
+<tr><th scope="row">2</th><td>B-110</td><td>Ordner A4</td><td class="num">4.90</td><td></td><td>B-130</td><td class="hl num">89.00</td></tr>
+<tr><th scope="row">3</th><td>B-120</td><td>Kopierpapier 500 Bl.</td><td class="num">6.50</td><td></td><td></td><td></td></tr>
+<tr><th scope="row">4</th><td>B-130</td><td>Toner schwarz</td><td class="num">89.00</td><td></td><td></td><td></td></tr>
+<tr><th scope="row">5</th><td>B-140</td><td>Haftnotizen</td><td class="num">3.20</td><td></td><td></td><td></td></tr>
+<tr><th scope="row">6</th><td>B-150</td><td>Kugelschreiber</td><td class="num">1.80</td><td></td><td></td><td></td></tr>
+</tbody></table></div>
+      <p>Die Formel in F2:</p>
+      <code class="formula">=SVERWEIS(E2;$A$2:$C$6;3;FALSCH)</code>
+      <p>Excel sucht «B-130» in der ersten Spalte der Matrix, findet es in der dritten Datenzeile und gibt den Wert aus der dritten Spalte der Matrix zurück: 89.00. Der Spaltenindex ist 3, weil der Preis in der dritten Spalte des Bereichs A:C steht. Die Dollarzeichen in <code>$A$2:$C$6</code> sorgen dafür, dass die Matrix beim Kopieren der Formel nach unten nicht mitwandert. Mehr dazu im Artikel über <a href="absolute-bezuege.html">absolute Bezüge</a>.</p>
+
+      <h2>Beispiel 2: Jahresprämie zur Police (Versicherung)</h2>
+      <p>In der Schadenbearbeitung willst du neben jedem Schadenfall die Jahresprämie der betroffenen Police sehen, etwa um die Schadenquote einzuschätzen. Der Bestand liegt auf einem eigenen Tabellenblatt namens «Policen».</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Blatt «Policen»: Bestand in A1:D5 (horizontal scrollbar)">
+<table class="article-table">
+<caption>Blatt «Policen»: Bestand in A1:D5</caption>
+<thead><tr><th scope="col"><span class="visually-hidden">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead><tbody>
+<tr class="header-row"><th scope="row">1</th><td>Police</td><td>Versicherungsnehmer</td><td>Produkt</td><td>Jahresprämie CHF</td></tr>
+<tr><th scope="row">2</th><td>P-4101</td><td>Keller Treuhand GmbH</td><td>Betriebshaftpflicht</td><td class="num">2'340.00</td></tr>
+<tr><th scope="row">3</th><td>P-4102</td><td>Brunner Bau AG</td><td>Sachversicherung</td><td class="num">5'120.00</td></tr>
+<tr><th scope="row">4</th><td>P-4103</td><td>Meier Praxis</td><td>Rechtsschutz</td><td class="num">890.00</td></tr>
+<tr><th scope="row">5</th><td>P-4104</td><td>Lüthi Logistik</td><td>Motorfahrzeug</td><td class="num">7'460.00</td></tr>
+</tbody></table></div>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Blatt «Schäden»: Prämie wird in Spalte C nachgeschlagen (horizontal scrollbar)">
+<table class="article-table">
+<caption>Blatt «Schäden»: Prämie wird in Spalte C nachgeschlagen</caption>
+<thead><tr><th scope="col"><span class="visually-hidden">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th></tr></thead><tbody>
+<tr class="header-row"><th scope="row">1</th><td>Schaden-Nr.</td><td>Police</td><td>Jahresprämie CHF</td></tr>
+<tr><th scope="row">2</th><td>S-77</td><td>P-4103</td><td class="hl num">890.00</td></tr>
+<tr><th scope="row">3</th><td>S-78</td><td>P-4101</td><td class="hl num">2'340.00</td></tr>
+<tr><th scope="row">4</th><td>S-79</td><td>P-4199</td><td class="hl">#NV</td></tr>
+</tbody></table></div>
+      <p>Die Formel in C2 auf dem Blatt «Schäden», nach unten kopiert:</p>
+      <code class="formula">=SVERWEIS(B2;Policen!$A$2:$D$5;4;FALSCH)</code>
+      <p>Der Blattname mit Ausrufezeichen (<code>Policen!</code>) zeigt Excel, dass die Matrix auf einem anderen Blatt liegt. Du musst ihn nicht tippen: Wechsle beim Schreiben der Formel einfach auf das andere Blatt und markiere den Bereich. Für den Schaden S-79 liefert die Formel <code>#NV</code>, weil die Police P-4199 im Bestand nicht existiert. Das ist hier kein Formelfehler, sondern ein wertvoller Hinweis: Entweder fehlt die Police im Bestand oder die Nummer im Schadenfall ist falsch erfasst.</p>
+      <p>Willst du statt <code>#NV</code> einen lesbaren Text, packst du die Formel in WENNFEHLER:</p>
+      <code class="formula">=WENNFEHLER(SVERWEIS(B2;Policen!$A$2:$D$5;4;FALSCH);"Police fehlt")</code>
+      <p>Verwende das bewusst. WENNFEHLER verdeckt jeden Fehler, also auch einen falschen Spaltenindex. Prüfe deine Formel deshalb zuerst ohne WENNFEHLER.</p>
+
+      <h2>Beispiel 3: Rabattstaffel mit ungefährer Suche (Finance)</h2>
+      <p>Viele Konditionen sind als Staffel definiert: ab CHF 1'000 Bestellwert 2&nbsp;% Rabatt, ab CHF 5'000 5&nbsp;%, ab CHF 10'000 8&nbsp;%. Hier gibt es für einen Bestellwert von CHF 7'350 keinen exakten Treffer in der Tabelle, und das ist auch nicht nötig.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Rabattstaffel in D1:E5, Bestellwert in A2 (horizontal scrollbar)">
+<table class="article-table">
+<caption>Rabattstaffel in D1:E5, Bestellwert in A2</caption>
+<thead><tr><th scope="col"><span class="visually-hidden">Zeile</span></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th></tr></thead><tbody>
+<tr class="header-row"><th scope="row">1</th><td>Bestellwert CHF</td><td>Rabatt</td><td></td><td>Ab CHF</td><td>Rabatt</td></tr>
+<tr><th scope="row">2</th><td class="num">7'350.00</td><td class="hl num">5 %</td><td></td><td class="num">0</td><td class="num">0 %</td></tr>
+<tr><th scope="row">3</th><td></td><td></td><td></td><td class="num">1'000</td><td class="num">2 %</td></tr>
+<tr><th scope="row">4</th><td></td><td></td><td></td><td class="num">5'000</td><td class="num">5 %</td></tr>
+<tr><th scope="row">5</th><td></td><td></td><td></td><td class="num">10'000</td><td class="num">8 %</td></tr>
+</tbody></table></div>
+      <p>Die Formel in B2:</p>
+      <code class="formula">=SVERWEIS(A2;$D$2:$E$5;2;WAHR)</code>
+      <p>Mit <code>WAHR</code> sucht Excel den grössten Wert in D2:D5, der kleiner oder gleich 7'350 ist. Das ist 5'000, also lautet das Ergebnis 5&nbsp;%. Damit das funktioniert, muss die erste Spalte der Staffel aufsteigend sortiert sein und mit der tiefsten Stufe beginnen, hier mit 0. Fehlt die Zeile mit 0, liefert ein Bestellwert unter 1'000 den Fehler <code>#NV</code>, weil es keinen kleineren Wert gibt.</p>
+      <p>Das gleiche Muster brauchst du für Provisionsstufen, Steuertarife, Prämienklassen oder Notenskalen. Eine passende Übung mit einer Provisionsstaffel findest du im Premium-Bereich (siehe Kasten unten).</p>
+
+      <h2>Typische Fehler und wie du sie erkennst</h2>
+      <h3><code>#NV</code>: Wert nicht gefunden</h3>
+      <p>Das ist der häufigste SVERWEIS-Fehler. Die Ursachen:</p>
+      <ul>
+        <li><strong>Der Wert existiert wirklich nicht.</strong> Prüfe mit der Suche (Ctrl+F, auf dem Mac Cmd+F), ob die Nummer in der ersten Spalte der Matrix vorkommt.</li>
+        <li><strong>Unsichtbare Leerzeichen.</strong> «B-130 » mit Leerzeichen am Ende ist für Excel nicht dasselbe wie «B-130». Das passiert oft bei Daten aus ERP-Exporten. Abhilfe: <code>GLÄTTEN()</code> in einer Hilfsspalte.</li>
+        <li><strong>Zahl gegen Text.</strong> Steht die Artikelnummer 1001 einmal als Zahl und einmal als Text in der Tabelle (erkennbar an der linksbündigen Ausrichtung oder dem grünen Dreieck), findet SVERWEIS keinen Treffer.</li>
+        <li><strong>Der Wert steht nicht in der ersten Spalte der Matrix.</strong> Beginnt deine Matrix bei B statt bei A, sucht Excel in Spalte B.</li>
+        <li><strong>Verrutschte Matrix.</strong> Ohne <code>$</code> verschiebt sich <code>A2:C6</code> beim Kopieren nach unten zu <code>A3:C7</code>, <code>A4:C8</code> usw. Die oberen Einträge fallen heraus, und die Formel findet sie nicht mehr.</li>
+      </ul>
+      <h3><code>#BEZUG!</code> und <code>#WERT!</code>: falscher Spaltenindex</h3>
+      <p>Ist der Spaltenindex grösser als die Anzahl Spalten der Matrix, etwa 4 bei einer Matrix A:C, erscheint <code>#BEZUG!</code>. Ein Spaltenindex von 0 oder kleiner führt zu <code>#WERT!</code>.</p>
+      <h3><code>#NAME?</code>: Excel kennt einen Namen nicht</h3>
+      <p>Du hast den Funktionsnamen falsch geschrieben (zum Beispiel <code>SVERWEISS</code>) oder in der deutschen Excel-Version <code>VLOOKUP</code> getippt. Ebenfalls <code>#NAME?</code> ergibt ein Text-Suchkriterium ohne Anführungszeichen, etwa <code>=SVERWEIS(Toner;…)</code> statt <code>=SVERWEIS("Toner";…)</code>.</p>
+      <h3>Komma statt Semikolon</h3>
+      <p>Kopierst du eine Formel aus einer englischen Anleitung, etwa <code>=VLOOKUP(E2,A2:C6,3,FALSE)</code>, nimmt die deutschsprachige Excel-Version sie nicht an und meldet ein Problem mit der Formel. Ersetze die Kommas durch Semikolons und die englischen Namen durch die deutschen.</p>
+      <h3>Falscher Wert ohne Fehlermeldung</h3>
+      <p>Der gefährlichste Fall: Du vergisst das vierte Argument. Excel verwendet dann <code>WAHR</code>, sucht ungefähr und liefert bei einer unsortierten Liste einfach irgendeinen benachbarten Wert. Es erscheint kein Fehler, das Ergebnis sieht plausibel aus und ist trotzdem falsch. Schreibe deshalb bei Nummern und Namen immer ausdrücklich <code>FALSCH</code>.</p>
+
+      <h2>Englisch vs. Deutsch</h2>
+      <p>Viele Foren und Tutorials arbeiten mit der englischen Excel-Version. Die Logik ist identisch, nur die Namen und das Trennzeichen unterscheiden sich. Aus <code>=VLOOKUP(E2,$A$2:$C$6,3,FALSE)</code> wird in der Schweizer Excel-Version <code>=SVERWEIS(E2;$A$2:$C$6;3;FALSCH)</code>.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="SVERWEIS und verwandte Begriffe: Deutsch und Englisch (horizontal scrollbar)">
+<table class="article-table compare">
+<caption>SVERWEIS und verwandte Begriffe: Deutsch und Englisch</caption>
+<thead><tr><th scope="col">Deutsch</th><th scope="col">Englisch</th><th scope="col">Bemerkung</th></tr></thead><tbody>
+<tr><th scope="row">SVERWEIS</th><td>VLOOKUP</td><td>senkrechte Suche in der ersten Spalte</td></tr>
+<tr><th scope="row">WVERWEIS</th><td>HLOOKUP</td><td>waagrechte Suche in der ersten Zeile</td></tr>
+<tr><th scope="row">XVERWEIS</th><td>XLOOKUP</td><td>flexiblere Nachfolgerin, nicht in allen Versionen verfügbar</td></tr>
+<tr><th scope="row">INDEX / VERGLEICH</th><td>INDEX / MATCH</td><td>klassische Kombination für die Suche nach links</td></tr>
+<tr><th scope="row">WENNFEHLER / WENNNV</th><td>IFERROR / IFNA</td><td>Fehlerwerte abfangen</td></tr>
+<tr><th scope="row">FALSCH / WAHR</th><td>FALSE / TRUE</td><td>exakte bzw. ungefähre Übereinstimmung</td></tr>
+<tr><th scope="row">#NV</th><td>#N/A</td><td>Wert nicht gefunden</td></tr>
+<tr><th scope="row">#BEZUG!</th><td>#REF!</td><td>ungültiger Bezug, z.&nbsp;B. Spaltenindex zu gross</td></tr>
+<tr><th scope="row">#WERT!</th><td>#VALUE!</td><td>falscher Argumenttyp, z.&nbsp;B. Spaltenindex 0</td></tr>
+</tbody></table></div>
+      <p>Excel übersetzt Funktionsnamen automatisch, wenn du eine Datei in einer anderen Sprachversion öffnest. Nur beim Abtippen oder Kopieren von Formeltext musst du selbst übersetzen.</p>
+
+      <aside class="practice-box" aria-labelledby="practice-heading">
+        <h2 id="practice-heading">Jetzt üben</h2>
+        <p><strong>SVERWEIS: Preis nachschlagen.</strong> Du bekommst eine kleine Preisliste und holst mit SVERWEIS den Preis zu einer Artikelnummer. Excel-Drills prüft dein Ergebnis sofort und erklärt dir, was schiefgelaufen ist.</p>
+        <p>Die Übung ist gratis, braucht keine Anmeldung und läuft direkt im Browser.</p>
+        <p><a class="btn" href="../app/#sverweis-1">SVERWEIS-Übung starten</a></p>
+        <p>Danach geht es weiter mit der Staffel-Übung «Provisionssatz nach Stufe» mit <code>WAHR</code>: <a href="../app/#sverweis-2">SVERWEIS mit Staffel</a> (Teil von <a href="../premium.html">Premium</a>).</p>
+      </aside>
+
+      <section class="faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">Häufige Fragen</h2>
+          <details>
+            <summary>Was ist der Unterschied zwischen FALSCH und WAHR im SVERWEIS?</summary>
+            <p>Mit FALSCH sucht SVERWEIS nur exakte Treffer und liefert #NV, wenn der Wert fehlt. Mit WAHR sucht Excel den grössten Wert, der kleiner oder gleich dem Suchkriterium ist. Das ist für Staffeln gedacht und setzt eine aufsteigend sortierte erste Spalte voraus. Lässt du das Argument weg, gilt WAHR.</p>
+          </details>
+          <details>
+            <summary>Warum liefert mein SVERWEIS #NV, obwohl der Wert in der Tabelle steht?</summary>
+            <p>Meist liegt es an unsichtbaren Leerzeichen, an einer Zahl, die als Text gespeichert ist, oder an einer Matrix, die beim Kopieren ohne $-Zeichen verrutscht ist. Prüfe auch, ob der gesuchte Wert in der ersten Spalte der Matrix steht.</p>
+          </details>
+          <details>
+            <summary>Kann SVERWEIS nach links suchen?</summary>
+            <p>Nein. SVERWEIS sucht immer in der ersten Spalte der Matrix und gibt Werte aus Spalten rechts davon zurück. Für die Suche nach links verwendest du INDEX mit VERGLEICH oder, falls deine Excel-Version sie anbietet, XVERWEIS.</p>
+          </details>
+          <details>
+            <summary>Sollte ich statt SVERWEIS besser XVERWEIS verwenden?</summary>
+            <p>XVERWEIS ist flexibler: Sie sucht standardmässig exakt, kann nach links suchen und hat einen eingebauten Wert für «nicht gefunden». Sie ist aber nicht in allen Excel-Versionen vorhanden. Wenn du Dateien mit anderen teilst oder in Einstellungstests arbeitest, ist SVERWEIS weiterhin der gemeinsame Nenner, und das Prinzip ist bei beiden gleich.</p>
+          </details>
+      </section>
+
+      <aside class="practice-box handout-box" aria-labelledby="card-heading">
+        <h2 id="card-heading">Formelkarte als PDF</h2>
+        <p>Alles Wichtige zu SVERWEIS auf einer A4-Seite: Syntax, drei Beispiele mit Tabelle, Englisch–Deutsch und die häufigsten Fehlercodes. Gratis, zum Ausdrucken neben die Tastatur.</p>
+        <p><a class="btn btn-secondary" href="../handouts/pdf/formelkarte-sverweis.pdf" download>Formelkarte SVERWEIS herunterladen (PDF)</a></p>
+        <p class="fill-note">Weitere Formelkarten und Spickzettel findest du unter <a href="../handouts/">Handouts</a>.</p>
+      </aside>
+
+      <nav class="read-more" aria-labelledby="read-more-heading">
+        <h2 id="read-more-heading">Weiterlesen</h2>
+        <ul>
+            <li><a href="summewenn.html">SUMMEWENN: Übung und Erklärung</a>: Nur passende Werte summieren: Kosten pro Kostenstelle, Schäden über einer Schwelle, Teiltexte mit Platzhaltern.</li>
+            <li><a href="wenn-funktion.html">WENN-Funktion in Excel</a>: Bedingungen prüfen und Entscheidungen abbilden: Budgetkontrolle, Selbstbehalt, UND/ODER und verschachtelte WENN.</li>
+            <li><a href="zaehlenwenn.html">ZÄHLENWENN in Excel</a>: Zählen, was eine Bedingung erfüllt: offene Pendenzen, Schäden über einer Schwelle, Duplikate finden.</li>
+            <li><a href="absolute-bezuege.html">Absolute Bezüge in Excel ($)</a>: Wann du das Dollarzeichen brauchst: MwSt mit festem Satz, Anteil am Total, gemischte Bezüge für Tabellen.</li>
+        </ul>
+        <p><a href="./">Alle Artikel im Überblick</a></p>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; 2026 Excel-Drills</span>
+      <span><a href="../artikel/">Artikel</a> &middot; <a href="../handouts/">Handouts</a> &middot; <a href="../impressum.html">Impressum</a> &middot; <a href="../datenschutz.html">Datenschutz</a></span>
+    </div>
+  </footer>
+</body>
+</html>

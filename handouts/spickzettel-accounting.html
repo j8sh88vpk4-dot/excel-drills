@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Spickzettel Accounting &amp; Controlling | Excel-Drills</title>
+  <link rel="stylesheet" href="handout.css">
+</head>
+<body class="">
+  <nav class="screen-bar" aria-label="Handout">
+    <a href="./">Zur Übersicht: Handouts und Spickzettel</a>
+    <span>Drucken: A4 hoch, Ränder «Standard», Kopf- und Fusszeilen aus</span>
+  </nav>
+  <main>
+  <article class="sheet cheat">
+    <header class="hd">
+      <span class="brand"><span class="mark" aria-hidden="true">X</span>Excel-Drills</span>
+      <div class="hd-text">
+        <p class="kicker">Spickzettel</p>
+        <h1>Pfad Accounting &amp; Controlling</h1>
+        <p class="sub">Schweizer Schreibweise: Semikolon, Punkt als Dezimalzeichen, Hochkomma als Tausender</p>
+      </div>
+    </header>
+    <p class="cheat-intro"><span>10 Themen in der Reihenfolge des Lernpfads. Formel beginnt mit =, Argumente mit ; trennen, Text in "Anführungszeichen".</span><span>[ ] = optionales Argument</span></p>
+    <div class="cols">
+      <section class="fn">
+        <h2><span class="n">01</span>Budget-Ist-Abweichung</h2>
+        <p class="syn"><span class="nb">Abweichung CHF: =Ist-Budget</span></p>
+        <p class="syn"><span class="nb">Abweichung %: =(Ist-Budget)/Budget</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>B2 = 12'000 (Budget), C2 = 13'450 (Ist): <code><span class="nb">=C2-B2  /  =(C2-B2)/B2</span></code> <span class="res">1'450.00  /  0.1208 = 12.1 %</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Zusätzlich mal 100 rechnen und Prozentformat setzen ergibt 1'208 %.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">02</span>Anteil am Total</h2>
+        <p class="syn"><span class="nb">=Wert/$Total$  (Total absolut fixiert)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>B2 = 4'250'000, B6 = 10'000'000 (Total): <code><span class="nb">=B2/$B$6</span></code> <span class="res">0.425 = 42.5 %</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Ohne $ rutscht das Total beim Kopieren nach unten mit und die Formel liefert #DIV/0!.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">03</span>MwSt netto/brutto</h2>
+        <p class="syn"><span class="nb">Brutto: =Netto*(1+Satz)</span></p>
+        <p class="syn"><span class="nb">Netto: =Brutto/(1+Satz) · MwSt: =Brutto-Brutto/(1+Satz)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>B2 = 1'081.00 (brutto), F1 = 0.081: <code><span class="nb">=B2/(1+$F$1)</span></code> <span class="res">1'000.00</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Brutto*(1-Satz) ergibt nicht den Nettobetrag (hier 993.44 statt 1'000.00).</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">04</span>Rundung 5 Rappen</h2>
+        <p class="syn"><span class="nb">=RUNDEN(Zahl/0.05;0)*0.05</span></p>
+        <p class="syn"><span class="nb">oder =VRUNDEN(Zahl;Vielfaches)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>B2 = 47.33: <code><span class="nb">=RUNDEN(B2/0.05;0)*0.05</span></code> <span class="res">47.35</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>=RUNDEN(B2;2) rundet nur auf Rappen, nicht auf 5 Rappen.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">05</span>SUMMEWENNS</h2>
+        <p class="syn"><span class="nb">=SUMMEWENNS(Summe_Bereich;</span><wbr><span class="nb">Kriterien_Bereich1;</span><wbr><span class="nb">Kriterien1;</span></p>
+        <p class="syn"><span class="nb">  [Kriterien_Bereich2;</span><wbr><span class="nb">Kriterien2];</span><wbr><span class="nb">…)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A = Kostenstelle, B = Monat, C = Betrag: <code><span class="nb">=SUMMEWENNS(C2:C9;</span><wbr><span class="nb">A2:A9;</span><wbr><span class="nb">"Marketing";</span><wbr><span class="nb">B2:B9;</span><wbr><span class="nb">"Feb")</span></code> <span class="res">4'730.00</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Der Summenbereich kommt hier zuerst, anders als bei SUMMEWENN.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">06</span>Duplikate finden</h2>
+        <p class="syn"><span class="nb">=WENN(ZÄHLENWENN($Bereich$;</span><wbr><span class="nb">Zelle)&gt;1;</span><wbr><span class="nb">"Duplikat";</span><wbr><span class="nb">"")</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A2:A7 = Belegnummern, B-1041 kommt zweimal vor: <code><span class="nb">=WENN(ZÄHLENWENN($A$2:$A$7;</span><wbr><span class="nb">A2)&gt;1;</span><wbr><span class="nb">"Duplikat";</span><wbr><span class="nb">"")</span></code> <span class="res">Duplikat</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Ohne $ verschiebt sich der Prüfbereich beim Kopieren und Duplikate weiter oben fallen heraus.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">07</span>Plausibilitätscheck</h2>
+        <p class="syn"><span class="nb">=WENN(RUNDEN(SUMME(Soll);</span><wbr><span class="nb">2)=RUNDEN(SUMME(Haben);</span><wbr><span class="nb">2);</span><wbr><span class="nb">"OK";</span><wbr><span class="nb">"Differenz")</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>Soll B2:B6 und Haben C2:C6 je 22'350.75: <code><span class="nb">=WENN(RUNDEN(SUMME(B2:B6);</span><wbr><span class="nb">2)=RUNDEN(SUMME(C2:C6);</span><wbr><span class="nb">2);</span><wbr><span class="nb">"OK";</span><wbr><span class="nb">"Differenz")</span></code> <span class="res">OK</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Ohne RUNDEN melden Gleitkomma-Reste (0.0000000001) eine Differenz, obwohl die Beträge stimmen.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">08</span>Kontenabstimmung</h2>
+        <p class="syn"><span class="nb">=WENNFEHLER(SVERWEIS(Referenz;</span><wbr><span class="nb">$Liste$;</span><wbr><span class="nb">2;</span><wbr><span class="nb">FALSCH);</span><wbr><span class="nb">"fehlt")</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>A2 = ZA-7781, Hauptbuch E2:F7 ohne ZA-7781: <code><span class="nb">=WENNFEHLER(SVERWEIS(A2;</span><wbr><span class="nb">$E$2:$F$7;</span><wbr><span class="nb">2;</span><wbr><span class="nb">FALSCH);</span><wbr><span class="nb">"fehlt")</span></code> <span class="res">fehlt</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Ohne FALSCH findet SVERWEIS den nächstkleineren Eintrag und die fehlende Buchung bleibt unentdeckt.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">09</span>Alterung offener Posten</h2>
+        <p class="syn"><span class="nb">=WENN(Stichtag-Fällig&lt;=30;</span><wbr><span class="nb">"0-30";</span><wbr><span class="nb">WENN(Stichtag-Fällig&lt;=60;</span><wbr><span class="nb">"31-60";</span><wbr><span class="nb">"&gt;60"))</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>H1 = 31.10.2026 (Stichtag), B2 = 12.09.2026 → 49 Tage: <code><span class="nb">=WENN($H$1-B2&lt;=30;</span><wbr><span class="nb">"0-30";</span><wbr><span class="nb">WENN($H$1-B2&lt;=60;</span><wbr><span class="nb">"31-60";</span><wbr><span class="nb">"&gt;60"))</span></code> <span class="res">31-60</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>HEUTE() statt fixem Stichtag lässt die Klassen täglich springen; der Abschluss ist nicht reproduzierbar.</p>
+      </section>
+      <section class="fn">
+        <h2><span class="n">10</span>MONATSENDE und EDATUM</h2>
+        <p class="syn"><span class="nb">=EDATUM(Ausgangsdatum;Monate)</span></p>
+        <p class="syn"><span class="nb">=MONATSENDE(Ausgangsdatum;Monate)</span></p>
+        <p class="ex"><span class="lbl">Beispiel</span>B2 = 15.11.2026, C2 = 3 (Monate): <code><span class="nb">=MONATSENDE(EDATUM(B2;C2);0)</span></code> <span class="res">28.02.2027</span></p>
+        <p class="err"><span class="lbl">Typischer Fehler</span>Ohne Datumsformat erscheint eine Seriennummer (46446) statt eines Datums.</p>
+      </section>
+    </div>
+    <footer class="ft">
+      <span><strong>excel-drills.ch</strong></span>
+      <span>Übung direkt im Browser: <strong>excel-drills.ch/app/?pfad=accounting</strong></span>
+    </footer>
+  </article>
+  </main>
+</body>
+</html>
