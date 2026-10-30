@@ -1,7 +1,9 @@
 /*
  * Excel-Drills – Mini-Übung auf der Startseite.
  * Nutzt dieselbe Prüf-Engine wie die App (app/engine.js + HyperFormula deDE).
- * Ohne JavaScript oder wenn das CDN nicht lädt, bleibt der Link zur App sichtbar.
+ * HyperFormula wird erst bei Fokus im Formelfeld oder nach 3 s Leerlauf geladen (Ladezeit der Startseite).
+ * Ohne JavaScript oder wenn das CDN nicht lädt, bleibt bzw. erscheint der Link zur App.
+ * Eine Lösung wird in localStorage (excelDrillsMiniSolved) vermerkt; die App übernimmt sie als Übung 1.
  * Land (CH / DE): derselbe Wert wie in der App (localStorage excelDrillsLocale, ?land=de hat Vorrang).
  * Die Startseite ist deutsch und lädt nur das Sprachpaket deDE: Ist in der App FR oder IT gewählt, zeigt die
  * Mini-Übung DE-CH, ohne die gespeicherte Wahl zu ändern.
@@ -38,22 +40,80 @@
   if (!form || !input || !feedback || !target) return;
 
   var E = window.ExcelDrillsEngine;
-  var HF = window.HyperFormula;
-  try {
-    if (!E || !HF) throw new Error('Formel-Engine nicht geladen');
-    E.init(HF);
-  } catch (e) {
-    // Fallback bleibt sichtbar: Link zur App
-    fallback.textContent = 'Die Formel-Engine konnte gerade nicht geladen werden. ';
-    var a = document.createElement('a');
-    a.href = 'app/#summe-1';
-    a.textContent = 'Übung in der App lösen →';
-    fallback.appendChild(a);
-    return;
+  var HF = null;
+  var checkBtn = $('mini-check');
+  var engineState = 'idle';   // idle → loading → ready | failed
+  var pending = false;        // Prüfen gedrückt, bevor die Engine bereit war
+  var solvedTracked = false;
+  if (!E) return; // engine.js fehlt: Fallback-Link bleibt sichtbar
+
+  // HyperFormula (ca. 700 KB) erst laden, wenn jemand die Mini-Übung benutzt (Fokus im Formelfeld)
+  // oder 3 s nach dem Laden der Seite im Leerlauf. Gleiche Version und SRI-Hashes wie in app/index.html.
+  var HF_SCRIPTS = [
+    { src: 'https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/hyperformula.full.min.js',
+      sri: 'sha384-J7i5jngggSLZ7jIxuRKLh1jM0ZzhEZOPdCX6KrBHZXyWn4WYxANOzzWioi+nEK7w' },
+    { src: 'https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/languages/deDE.js',
+      sri: 'sha384-jWD9rgGJKCeZXZfD9IcDj4ex7PkMA3oQZbqPtUPh8VB0iQdD3DmT84VMqb2UB0nO' }
+  ];
+  function loadScript(item) {
+    return new Promise(function (resolve, reject) {
+      var tag = document.createElement('script');
+      tag.src = item.src;
+      tag.integrity = item.sri;
+      tag.crossOrigin = 'anonymous';
+      tag.onload = resolve;
+      tag.onerror = function () { reject(new Error('Laden fehlgeschlagen: ' + item.src)); };
+      document.head.appendChild(tag);
+    });
+  }
+  function setButton(loading) {
+    if (!checkBtn) return;
+    checkBtn.textContent = loading ? 'Engine wird geladen …' : 'Prüfen';
+    if (loading) checkBtn.setAttribute('aria-disabled', 'true'); else checkBtn.removeAttribute('aria-disabled');
+  }
+  function loadEngine() {
+    if (engineState !== 'idle') return;
+    engineState = 'loading';
+    setButton(true);
+    var chain = window.HyperFormula ? Promise.resolve() : loadScript(HF_SCRIPTS[0]);
+    chain
+      .then(function () { return window.HyperFormula && window.HyperFormula.languages && window.HyperFormula.languages.deDE ? null : loadScript(HF_SCRIPTS[1]); })
+      .then(function () {
+        HF = window.HyperFormula;
+        if (!HF) throw new Error('Formel-Engine nicht geladen');
+        E.init(HF);
+        engineState = 'ready';
+        setButton(false);
+        if (pending) { pending = false; runCheck(); }
+      })
+      .catch(function (e) {
+        engineState = 'failed';
+        if (window.console) console.error(e);
+        // Fallback: Link zur App
+        form.hidden = true;
+        feedback.className = 'feedback';
+        feedback.innerHTML = '';
+        fallback.hidden = false;
+        fallback.textContent = 'Die Formel-Engine konnte gerade nicht geladen werden. ';
+        var a = document.createElement('a');
+        a.href = 'app/#summe-1';
+        a.textContent = 'Übung in der App lösen →';
+        fallback.appendChild(a);
+      });
   }
 
   form.hidden = false;
   fallback.hidden = true;
+  input.addEventListener('focus', loadEngine);
+  form.addEventListener('pointerdown', loadEngine);
+  // Leerlauf: 3 s nach dem Laden der Seite (und wenn der Browser gerade nichts anderes tut)
+  function scheduleIdle() {
+    setTimeout(function () {
+      if (window.requestIdleCallback) window.requestIdleCallback(loadEngine, { timeout: 2000 });
+      else loadEngine();
+    }, 3000);
+  }
+  if (document.readyState === 'complete') scheduleIdle(); else window.addEventListener('load', scheduleIdle);
 
   function storageGet(key) { try { return window.localStorage.getItem(key); } catch (e) { return null; } }
   function storageSet(key, value) { try { window.localStorage.setItem(key, value); } catch (e) { /* ignorieren */ } }
@@ -128,6 +188,17 @@
 
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
+    if (engineState !== 'ready') {
+      // Engine noch nicht da: merken und nach dem Laden automatisch prüfen
+      pending = true;
+      show('info', ['Die Formel-Engine wird geladen, deine Formel wird gleich geprüft …']);
+      loadEngine();
+      return;
+    }
+    runCheck();
+  });
+
+  function runCheck() {
     var result;
     try {
       result = E.check(HF, exercise, input.value);
@@ -140,6 +211,12 @@
       show('ok', [result.message, result.tip]);
       input.setAttribute('aria-invalid', 'false');
       next.hidden = false;
+      // Für die App: Übung 1 wird beim nächsten App-Start als gelöst übernommen (app/app.js, importMiniSolve)
+      storageSet('excelDrillsMiniSolved', '1');
+      if (!solvedTracked) {
+        solvedTracked = true;
+        try { if (typeof window.ExcelDrillsTrack === 'function') window.ExcelDrillsTrack('mini_geloest', { land: locale }); } catch (e) { /* ignorieren */ }
+      }
     } else {
       setTarget(undefined);
       var lines = [result.message];
@@ -148,7 +225,7 @@
       input.setAttribute('aria-invalid', 'true');
       next.hidden = true;
     }
-  });
+  }
 
   input.addEventListener('input', function () {
     if (input.getAttribute('aria-invalid') === 'true') input.removeAttribute('aria-invalid');

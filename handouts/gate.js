@@ -50,6 +50,12 @@
     sent.then(function (ok) {
       if (!ok && !placeholder && window.console) console.warn('Handouts: Formular konnte nicht übermittelt werden, Downloads trotzdem freigeschaltet.');
       if (placeholder && window.console) console.info('Handouts: Formspree-PLATZHALTER aktiv, es wurde nichts gesendet.');
+      // Plausible: Lead-Anmeldung. status zeigt, ob die Adresse wirklich übermittelt wurde.
+      try {
+        if (typeof window.ExcelDrillsTrack === 'function') {
+          window.ExcelDrillsTrack('handout_lead', { status: ok ? 'gesendet' : (placeholder ? 'platzhalter' : 'fehler') });
+        }
+      } catch (e) { /* Messung ist optional */ }
       remember();
       unlock(true);
       box.insertAdjacentHTML('afterbegin', '<p class="fill-note" role="status">' +

@@ -74,3 +74,39 @@ Schwere: **blockierend** = verhindert Kauf/Lead oder zerstört Vertrauen · **ho
 - Sind die drei Stripe Payment Links live geschaltet und leiten sie mit `?key=…&plan=…` auf `/app/` zurück?
 - Soll «Premium gratis für Schulen, Ausbildungsbetriebe und Teams» bleiben? Es ist ein guter Lead-Kanal, konkurriert aber mit dem Ziel «20 zahlende Kunden», falls Firmen-Teams die eigentliche Kaufkraft sind.
 - Werden FR/IT in den nächsten vier Wochen aktiv beworben? Falls nein, kann Mangel 8 warten. Falls ja, braucht es mindestens die FR-Preisseite.
+
+---
+
+## Status 30.10.
+
+Umsetzung der Punkte, die ohne Angaben von Luca lösbar sind. Nicht angefasst: Impressum-/Datenschutz-Platzhalter, Formspree-ID, Garantie-Entscheid, Stripe-Links, `app/keys.js`.
+
+| Nr. | Status | Was gemacht wurde / Grund, warum offen |
+|---|---|---|
+| 1 | erledigt (vorher) / teilweise offen | Stripe-Hinweis war schon entfernt. Offen: Vertrauenszeile «Sichere Zahlung über Stripe · …», weil nur Luca weiss, welche Zahlarten in Stripe aktiv sind (TWINT?). |
+| 2 | offen | Braucht Name, Adresse, E-Mail, Hosting-Anbieter (Luca). Die neuen Texte verweisen nicht auf `[E-Mail]`. |
+| 3 | teilweise | Event `handout_lead` (mit `status` gesendet/platzhalter/fehler) in `handouts/gate.js`. Offen: Formspree-ID und Datenschutz-Abschnitt zu Formspree (Luca). |
+| 4 | erledigt (vorher) | Kundenportal-Link ist laut Luca korrekt (so von Stripe ausgegeben). |
+| 5 | erledigt | Domain war schon korrigiert. Neue Events `paywall_gezeigt`, `mini_geloest`, `handout_lead`, dokumentiert in `docs/ANALYTICS.md`. In Plausible müssen die drei Goals noch angelegt werden. |
+| 6 | erledigt | Mini-Übung vermerkt die Lösung (`excelDrillsMiniSolved`); die App übernimmt sie beim nächsten Start als `summe-1` (Bronze, +10 XP, Abzeichen «Erste Formel»), mit Toast und `uebung_geloest` (`ort=startseite`). |
+| 7 | erledigt | Mobil (< 801 px): Pfad-Select oben, dann die Übung, darunter die Übungsliste, eingeklappt mit «Alle Übungen anzeigen (n)». DOM-Reihenfolge = Anzeige-Reihenfolge (Tab-Reihenfolge stimmt). Im Kopf mobil nur das Level-Chip. |
+| 8 | teilweise | Paywall in FR/IT mit «(page en allemand)» / «(pagina in tedesco)» im Link, zweisprachiger Kasten oben auf `premium.html`, Preislink mit Hinweis auf `fr/` und `it/`. Offen: eigene FR/IT-Preis-, Pfad- und Handout-Seiten (Entscheid, ob FR/IT beworben werden, siehe offene Fragen). |
+| 9 | erledigt / teilweise | Paywall pro Pfad: «Noch n Übungen im Pfad …» mit Pfad-Satz und Liste der gesperrten Übungen (Thema: Titel, übersetzt), «Ab CHF 4.10/Monat im Jahresabo», Garantie nur als «siehe Preisseite». Dazu Code-Eingabe «Hast du schon einen Code?». Offen: Lead-Ausstieg «Spickzettel per Mail» statt «Später» (erst sinnvoll mit Formspree-ID) und Test-Pass (Preisentscheid). |
+| 10 | offen | Braucht Name, Foto, Hintergrund (Luca). |
+| 11 | erledigt | «Eine Formel beginnt immer mit =, zum Beispiel =SUMME(…).» (DE, FR, IT); verrät die Lösung nicht mehr. |
+| 12 | erledigt | Schalter einheitlich «DE-CH · FR · IT · DE-DE» (App) bzw. «DE-CH · DE-DE» (Startseite). |
+| 13 | offen | Entscheid Lead-Magnet vs. Premium-Inhalt (Luca). |
+| 14 | erledigt (App) | Zeichenleiste `= ; : ( ) $ "` (44 px) über dem Formelfeld, nur auf schmalen bzw. Touch-Geräten; fügt an der Cursorposition ein. Mini-Übung der Startseite ohne Leiste. |
+| 15 | erledigt | Desktop: Formelfeld beim Start fokussiert (mobil nicht, wegen Bildschirmtastatur). Skip-Link «Zur Formel-Eingabe springen» fokussiert das Feld (bei Projekten den Titel). Übungsliste kommt in der Tab-Reihenfolge nach der Übung. |
+| 16 | erledigt | Kopf-Chips erst nach der ersten Lösung. Neutrale Level-Namen (Einstieg, Sachbearbeitung, Controlling, Analyse, Excel-Profi, Excel-Meisterschaft; FR/IT entsprechend), «Lv» → «Level», «Streak» → «Serie» (DE). Level-up unter Level 4 als Toast, ab Level 4 als Dialog. XP bleibt. |
+| 17 | erledigt | Startseite lädt HyperFormula erst bei Fokus im Formelfeld oder nach 3 s Leerlauf (mit SRI); Formular sofort sichtbar, Button «Engine wird geladen …», Prüfen vor dem Laden wird nachgeholt. App lädt frFR/itIT nur bei FR/IT. |
+| 18 | erledigt | Pfadseiten (Generator `scripts/pfad/build.py`): «3 von 11 Übungen gratis …» aus `exercises.json`, Liste aller Übungen mit «gratis» (Link) bzw. Schloss «Premium», Preis «ab CHF 4.10/Monat im Jahresabo». |
+| 19 | teilweise | Hinweis über dem Download: Excel auf dem Computer (Windows oder Mac), auf dem Handy später öffnen (DE/FR/IT). Offen: Mac-Abweichungen in den Schritten (Menüs in Excel für Mac prüfen) und «Link an mich senden» (braucht Mailversand). |
+| 20 | erledigt | «Trenne die Argumente mit Semikolon (;), nicht mit Komma (,).» (DE/FR/IT, DE-DE mit Dezimalkomma), ohne doppelten Punkt. |
+| 21 | erledigt | Datenschutz: Startseite und App laden über jsDelivr (Startseite erst bei Fokus/nach einigen Sekunden). Veraltete Analytics-Kommentare entfernt. |
+| 22 | erledigt | Gold/Silber mit dunkler Kontur; `.btn-small`, Chips, Kopf-Chips, Sprachschalter 44 px (Mini-Schalter 36 px). |
+| 23 | erledigt | Label «Schnupper-Übung · SUMME». |
+
+Zusätzlich: Profil-Abschnitt «Dein Zugangscode» (nur mit Premium) mit Code, «Kopieren», Link `https://excel-drills.ch/app/?key=<code>` und «Link kopieren»; Code-Eingabe im Paywall-Dialog (gleicher Prüfweg `Keys.isValid`, akzeptiert auch den ganzen Link). Logik in `app/access.js`, getestet in `scripts/check-exercises.mjs`.
+
+**Test 30.10.:** `npm run check` und `python3 scripts/artikel/check.py` bestanden. Browsertest (headless Chrome, eine Instanz, Last unter 8): Startseite lädt HyperFormula nicht vor, lädt beim Fokus bzw. nach ~3 s Leerlauf und prüft korrekt. Paywall in DE/FR/IT mit Pfad-Liste, Preis, Garantie-Verweis und Sprachhinweis. Falscher Code wird abgelehnt. FR/IT laden ihr Sprachpaket nach. Mobil 390 px: Reihenfolge Select → Übung → Liste, Liste eingeklappt, Zeichenleiste funktioniert. Konsole ohne Fehler. Screenshots in `docs/screenshots/ux/` (home-1280, home-390, app-erstkontakt-390, paywall-de/fr/it, premium-390). Hinweis: Bei Übungen mit langen Tabellen (z. B. MAX/MIN, 14 Zeilen) liegt das Formelfeld mobil unter dem ersten Bildschirm; Aufgabe und Tabelle stehen aber oben.

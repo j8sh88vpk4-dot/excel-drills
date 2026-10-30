@@ -390,7 +390,7 @@ def index_page():
         <p><button class="btn" type="submit" id="gate-submit">Downloads freischalten</button></p>
         <p id="gate-status" class="fill-note" role="status" aria-live="polite"></p>
       </form>
-      <noscript><p class="notice">Für die Freischaltung braucht es JavaScript. Ohne JavaScript schreib uns eine Mail an <a href="mailto:[E-Mail]">[E-Mail]</a>, dann senden wir dir die PDFs.</p></noscript>
+      <noscript><p class="notice">Für die Freischaltung braucht es JavaScript. Ohne JavaScript schreib uns eine Mail an <a href="mailto:luca@familymoser.ch">luca@familymoser.ch</a>, dann senden wir dir die PDFs.</p></noscript>
 
       <div id="gate-downloads" class="gate-downloads" hidden>
         <h3 id="gate-downloads-heading" tabindex="-1">Deine Downloads</h3>

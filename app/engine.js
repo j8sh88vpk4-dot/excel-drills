@@ -170,9 +170,9 @@
   var ALIASES = { de: { 'TEXTKETTE': 'VERKETTEN' }, fr: { 'CONCAT': 'CONCATENER' }, it: { 'CONCAT': 'CONCATENA' } };
 
   var MSG = {
-    noEquals: 'Eine Formel beginnt immer mit =. Beispiel: =SUMME(B2:B6)',
+    noEquals: 'Eine Formel beginnt immer mit =, zum Beispiel =SUMME(…).',
     empty: 'Gib zuerst eine Formel ein.',
-    comma: 'In der deutschen/Schweizer Excel-Version trennst du Argumente mit ; statt ,',
+    comma: 'Trenne die Argumente mit Semikolon (;), nicht mit Komma (,).',
     decimalComma: 'Dezimalzahlen schreibst du in der Schweizer Excel-Version mit Punkt, z. B. 0.5.',
     english: function (en, de) { return 'Auf Deutsch heisst die Funktion ' + de + ' (nicht ' + en + ').'; },
     englishConst: function (en, de) { return 'Auf Deutsch schreibst du ' + de + ' statt ' + en + '.'; },
@@ -252,7 +252,7 @@
     var v = MSG[k];
     MSG_DE[k] = typeof v === 'function' ? function () { return mapText(v.apply(null, arguments), 'de'); } : mapText(v, 'de');
   });
-  MSG_DE.comma = 'In der deutschen Excel-Version trennst du Argumente mit ; und Dezimalzahlen mit Komma';
+  MSG_DE.comma = 'In der deutschen Excel-Version trennst du Argumente mit Semikolon (;) und Dezimalzahlen mit Komma (,).';
   MSG_DE.decimalDot = 'In der deutschen Excel-Version schreibst du Dezimalzahlen mit Komma, z. B. 0,05 statt 0.05. Einen Punkt wie in 1.5 liest Excel als Tausendertrennzeichen oder Datum, nicht als Dezimalzahl.';
   MSG.german = function (de, name) { return 'Die Funktion heisst ' + name + '.'; };
   MSG.germanConst = function (de, name) { return 'Du schreibst ' + name + ' statt ' + de + '.'; };
@@ -608,7 +608,7 @@
     if (f[0] !== '=') return { ok: false, message: MSG.noEquals };
 
     var en = findEnglish(f);
-    if (en) return { ok: false, message: commaKind(f) === 'separator' ? en + ' ' + MSG.comma + '.' : en };
+    if (en) return { ok: false, message: commaKind(f) === 'separator' ? en + ' ' + MSG.comma : en };
 
     var mine = evaluate(HF, ex.data, ex.target, f);
     if (mine.error) {

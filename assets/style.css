@@ -132,7 +132,15 @@ code, kbd { font-family: var(--mono); font-size: 0.92em; background: var(--grid-
 
 /* App */
 .app-header .points { display: inline-flex; align-items: center; gap: 0.35rem; background: var(--accent-soft); color: var(--accent-strong); font-weight: 700; border-radius: 999px; padding: 0.25rem 0.8rem; }
-.app-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 1.5rem; padding-top: 1.5rem; }
+.app-layout {
+  display: grid; grid-template-columns: 280px minmax(0, 1fr); grid-template-rows: auto 1fr;
+  grid-template-areas: "tracks main" "list main"; column-gap: 1.5rem; padding-top: 1.5rem;
+}
+/* DOM-Reihenfolge: Pfadwahl, Übung, Liste. Breit: Pfadwahl und Liste links, Übung rechts über beide Zeilen. */
+.track-nav { grid-area: tracks; min-width: 0; }
+.app-layout > .panel { grid-area: main; align-self: start; }
+.exercise-nav { grid-area: list; align-self: start; min-width: 0; }
+.list-toggle { display: none; }
 .exercise-nav h2 { font-size: 1rem; margin: 0 0 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
 .exercise-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
 .exercise-list button {
@@ -218,11 +226,27 @@ code, kbd { font-family: var(--mono); font-size: 0.92em; background: var(--grid-
 dialog.paywall { max-width: 460px; width: calc(100% - 2rem); border: 0; border-radius: 12px; padding: 1.75rem; background: var(--surface); color: var(--text); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
 dialog.paywall::backdrop { background: rgba(10, 20, 15, 0.55); }
 dialog.paywall h2 { margin-top: 0; }
+.paywall-list { margin: 0.5rem 0 0.75rem; padding-left: 1.2rem; display: grid; gap: 0.2rem; font-size: 0.97rem; line-height: 1.4; }
+.paywall-more { margin: 0 0 0.75rem; }
+.paywall-price { margin: 0; font-weight: 800; font-size: 1.1rem; color: var(--accent-strong); }
+dialog.paywall .fine { margin: 0.25rem 0 0; }
+.paywall-code { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid var(--border); display: grid; gap: 0.35rem; }
+.paywall-code label { font-weight: 700; font-size: 0.95rem; }
+.paywall-code .formula-row { flex-wrap: nowrap; }
+.paywall-code .formula-input { flex: 1 1 8rem; width: 0; min-width: 0; min-height: 44px; font-size: 1rem; }
+.paywall-code .formula-input[aria-invalid="true"] { border-color: var(--err-text); }
+.code-err { color: var(--err-text); }
+.access-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0.4rem 0; }
+.access-code { font-size: 1.05rem; font-weight: 700; padding: 0.3rem 0.6rem; overflow-wrap: anywhere; }
+.access-link { flex: 1 1 14rem; width: 0; min-width: 0; min-height: 44px; font-size: 0.9rem; }
 
 @media (max-width: 800px) {
-  .app-layout { grid-template-columns: minmax(0, 1fr); }
-  .exercise-nav { min-width: 0; }
-  .exercise-list { max-height: 260px; overflow-y: auto; padding-right: 0.25rem; }
+  /* Mobil: Pfad-Auswahl (Select), dann die Übung, dann die einklappbare Übungsliste */
+  .app-layout { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; grid-template-areas: "tracks" "main" "list"; row-gap: 1rem; padding-top: 1rem; }
+  .track-picker { margin-bottom: 0; }
+  .exercise-nav { padding-top: 0.25rem; }
+  .list-toggle:not([hidden]) { display: inline-flex; width: 100%; margin-bottom: 0.6rem; }
+  .exercise-nav[data-collapsed="true"] .exercise-list { display: none; }
   .track-tabs { display: none; }
   .track-select { display: block; }
   .panel { padding: 1rem; }
@@ -230,6 +254,9 @@ dialog.paywall h2 { margin-top: 0; }
 }
 .mt-0 { margin-top: 0; }
 .hero-plain { background: none; padding-bottom: 1rem; }
+/* Preisseite: kurzer Hinweis für FR/IT (Seite nur auf Deutsch) */
+.lang-note { margin: 1.25rem 0 0; padding: 0.7rem 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); font-size: 0.93rem; }
+.lang-note p { margin: 0.2rem 0; }
 .guarantee-icon { font-size: 1.6rem; color: var(--accent); line-height: 1; }
 .guarantee p { margin: 0; }
 .prose code { overflow-wrap: anywhere; }
@@ -363,7 +390,7 @@ dialog.paywall h2 { margin-top: 0; }
 .count-badge { display: inline-block; font-size: 0.8rem; font-weight: 700; color: var(--accent-strong); background: var(--accent-soft); border-radius: 999px; padding: 0.05rem 0.6rem; }
 
 .chip-cloud { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.chip { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 40px; padding: 0.35rem 0.85rem; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text); font-family: var(--mono); font-weight: 600; font-size: 0.93rem; text-decoration: none; }
+.chip { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 44px; padding: 0.35rem 0.85rem; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text); font-family: var(--mono); font-weight: 600; font-size: 0.93rem; text-decoration: none; }
 .chip:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-strong); }
 .chip-kind { font-family: var(--font); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
 .chip-article .chip-kind { color: var(--accent-strong); }
@@ -437,7 +464,7 @@ dialog.paywall h2 { margin-top: 0; }
 
 .gami { display: flex; align-items: center; gap: 0.5rem; flex-wrap: nowrap; min-width: 0; }
 .streak-chip, .goal-chip, .level-badge {
-  display: inline-flex; align-items: center; gap: 0.35rem; min-height: 36px; padding: 0.2rem 0.65rem;
+  display: inline-flex; align-items: center; gap: 0.35rem; min-height: 44px; padding: 0.2rem 0.65rem;
   border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text);
   font: inherit; font-size: 0.9rem; font-weight: 700; white-space: nowrap; line-height: 1.2;
 }
@@ -458,7 +485,7 @@ dialog.paywall h2 { margin-top: 0; }
 }
 .goal-options { border: 0; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
 .goal-options legend { font-weight: 700; font-size: 0.9rem; padding: 0; margin-bottom: 0.3rem; }
-.goal-options label { display: flex; align-items: center; gap: 0.5rem; min-height: 36px; cursor: pointer; font-weight: 600; }
+.goal-options label { display: flex; align-items: center; gap: 0.5rem; min-height: 44px; cursor: pointer; font-weight: 600; }
 .goal-options input { width: 18px; height: 18px; accent-color: var(--accent); margin: 0; }
 .goal-options-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .goal-options-row label { border: 1px solid var(--border); border-radius: 999px; padding: 0.2rem 0.9rem; }
@@ -476,8 +503,8 @@ dialog.paywall h2 { margin-top: 0; }
 .medal-ribbon { fill: var(--accent); opacity: 0.55; }
 .medal-ring { fill: none; stroke: rgba(255, 255, 255, 0.55); stroke-width: 1.2; }
 .medal-bronze .medal-disc { fill: var(--bronze); }
-.medal-silver .medal-disc { fill: var(--silver); }
-.medal-gold .medal-disc { fill: var(--gold); }
+.medal-silver .medal-disc { fill: var(--silver); stroke: #5b636a; stroke-width: 1; }
+.medal-gold .medal-disc { fill: var(--gold); stroke: #7a5f00; stroke-width: 1; }
 .exercise-list .state.done { line-height: 0; }
 .exercise-list .state .medal { width: 22px; height: 22px; }
 .ex-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.6rem; }
@@ -549,7 +576,7 @@ dialog.profile::backdrop, dialog.levelup::backdrop { background: rgba(10, 20, 15
 .badge-card.locked .badge-name, .badge-card.gated .badge-name { color: var(--muted); }
 .badge-premium { font-size: 0.8rem; font-weight: 700; }
 .badge-card .btn { margin-top: 0.35rem; }
-.btn-small { min-height: 40px; padding: 0.35rem 0.85rem; font-size: 0.9rem; }
+.btn-small { min-height: 44px; padding: 0.35rem 0.85rem; font-size: 0.9rem; }
 .btn-danger { background: var(--danger); border-color: var(--danger); }
 .btn-danger:hover { background: var(--danger); border-color: var(--danger); filter: brightness(0.92); }
 .share-area { margin-top: 1rem; padding: 0.9rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg); }
@@ -584,7 +611,7 @@ dialog.levelup p { margin: 0 0 1.1rem; color: var(--muted); }
 .locale-switch { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; background: var(--surface); flex: none; }
 .locale-switch[hidden] { display: none; }
 .locale-switch button {
-  font: inherit; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.02em; min-height: 36px; min-width: 44px;
+  font: inherit; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.02em; min-height: 44px; min-width: 44px;
   padding: 0.2rem 0.7rem; border: 0; background: transparent; color: var(--muted); cursor: pointer;
 }
 .locale-switch button + button { border-left: 1px solid var(--border); }
@@ -592,13 +619,13 @@ dialog.levelup p { margin: 0 0 1.1rem; color: var(--muted); }
 .locale-switch button[aria-pressed="true"] { background: var(--accent); color: #fff; }
 @media (prefers-color-scheme: dark) { .locale-switch button[aria-pressed="true"] { color: #0b1a12; } }
 .locale-switch button:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; border-radius: 999px; }
-.locale-switch-small button { min-height: 30px; min-width: 38px; font-size: 0.78rem; padding: 0.1rem 0.55rem; }
+.locale-switch-small button { min-height: 36px; min-width: 44px; font-size: 0.78rem; padding: 0.1rem 0.55rem; }
 .mini-head .locale-switch { margin-left: auto; }
 /* App-Kopf: Sprache und Land DE | FR | IT | DE-DE, auf schmalen Bildschirmen als Auswahlliste */
 .locale-picker { display: inline-flex; align-items: center; flex: none; }
 .locale-picker[hidden] { display: none; }
 .locale-select {
-  display: none; font: inherit; font-size: 0.85rem; font-weight: 700; min-height: 36px; padding: 0.2rem 0.5rem;
+  display: none; font: inherit; font-size: 0.85rem; font-weight: 700; min-height: 44px; padding: 0.2rem 0.5rem;
   border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text);
 }
 .locale-select:focus-visible { outline: 3px solid var(--focus); outline-offset: 1px; }
@@ -611,6 +638,22 @@ dialog.levelup p { margin: 0 0 1.1rem; color: var(--muted); }
   .app-header .wrap { row-gap: 0.4rem; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   .app-header .gami { order: 3; flex: 1 1 100%; }
 }
+/* Schmale Bildschirme: im Kopf nur das Level-Chip; Serie und Tagesziel stehen im Profil */
+@media (max-width: 640px) {
+  .app-header .streak-chip, .app-header .goal-wrap { display: none; }
+}
+
+/* Zeichenleiste über dem Formelfeld: nur auf schmalen bzw. Touch-Geräten */
+.symbol-bar { display: none; }
+@media (max-width: 800px), (pointer: coarse) {
+  .symbol-bar { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.5rem; }
+  .symbol-bar button {
+    min-width: 44px; min-height: 44px; padding: 0 0.6rem; font-family: var(--mono); font-size: 1.1rem; font-weight: 700;
+    border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); cursor: pointer;
+  }
+  .symbol-bar button:active { background: var(--accent-soft); border-color: var(--accent); }
+}
+.pj-desktop { margin: 0.6rem 0 0; padding: 0.5rem 0.8rem; border-left: 3px solid var(--target-border); background: var(--target); border-radius: 0 6px 6px 0; font-size: 0.95rem; }
 @media (max-width: 480px) {
   .gami { gap: 0.35rem; }
   .streak-chip, .goal-chip, .level-badge { padding: 0.2rem 0.5rem; font-size: 0.85rem; }
@@ -664,3 +707,8 @@ dialog.levelup p { margin: 0 0 1.1rem; color: var(--muted); }
 .pj-q.ok .pj-fb { color: var(--ok-text); }
 .pj-q.err .pj-fb { color: var(--err-text); }
 .pj-form .actions { margin-top: 0.9rem; }
+
+/* Pfadseiten: Liste aller Übungen mit gratis/Premium */
+.track-exercise-list { display: grid; gap: 0.3rem; }
+.track-exercise-list .ex-free { font-size: 0.85rem; font-weight: 700; color: var(--accent-strong); }
+.track-exercise-list .ex-lock { font-size: 0.85rem; font-weight: 700; color: var(--muted); white-space: nowrap; }

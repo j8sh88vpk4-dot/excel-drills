@@ -7,6 +7,9 @@
   var STORAGE_TRACK = 'excelDrillsTrack';
   var STORAGE_STEPS = 'excelDrillsProjectSteps'; // abgehakte Schritte der Projekt-Übungen: { <id>: [Indizes] }
   var STORAGE_LOCALE = 'excelDrillsLocale';      // Sprache/Land: de-CH (Standard), de-DE, fr-CH, it-CH (alt: ch, de)
+  var STORAGE_MINI = 'excelDrillsMiniSolved';    // von assets/mini-drill.js gesetzt: Mini-Übung der Startseite gelöst
+  var MINI_EXERCISE = 'summe-1';                 // wird beim ersten App-Start als gelöst übernommen
+  var LEVELUP_MODAL_FROM = 4;                    // Level-up unter diesem Level nur als Toast, ab hier als Dialog
   var DEFAULT_TRACK = 'basis';
   var MOBILE_QUERY = '(max-width: 800px)';
 
@@ -14,6 +17,8 @@
   var Keys = window.ExcelDrillsKeys;
   var G = window.ExcelDrillsGamification;
   var Badges = window.ExcelDrillsBadges;
+  var Access = window.ExcelDrillsAccess;
+  var paywallExercise = null;      // gesperrte Übung, die den Paywall-Dialog ausgelöst hat
   var HF = null;
   var exercises = [];
   var tracks = [];          // sortiert nach order; jeder Pfad hat .items (Übungen in Reihenfolge)
@@ -33,6 +38,14 @@
   var uiDict = null;               // ui-Texte aus i18n/fr.json bzw. it.json, null für Deutsch
   var htmlDe = null;               // deutsche Originaltexte der statischen Elemente (data-i18n)
   var i18nLoading = {};            // laufende Ladevorgänge: lang → Promise
+  var packLoading = {};            // HyperFormula-Sprachpakete frFR/itIT: lang → Promise
+  // Sprachpakete für FR/IT werden erst geladen, wenn die Sprache gewählt ist (DE-CH braucht nur deDE aus index.html).
+  // SRI-Hashes aus node_modules/hyperformula/dist/languages (Version 3.0.0, wie in index.html).
+  var HF_CDN = 'https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/languages/';
+  var LANG_PACKS = {
+    fr: { code: 'frFR', sri: 'sha384-q1L6SEj5wqXtGFt3wP1YsMToQdosF2+uMVCn7LbvfVc+yhV9sjz9axE2+5xW7ldc' },
+    it: { code: 'itIT', sri: 'sha384-LfEYBjeJ7xWrtp8QmXQLFou81VNnMPeD5nvymC+nKrSnLNxsIGl7lxlpJkyIauK9' }
+  };
 
   // Oberflächentext im aktuellen Land. Platzhalter {name} aus params.
   function T(key, params) {
@@ -55,7 +68,12 @@
     formulaPart: $('formula-part'), project: $('project-part'), pjDownload: $('pj-download'), pjFile: $('pj-file'),
     pjSteps: $('pj-steps'), pjForm: $('pj-form'), pjQuestions: $('pj-questions'), pjCheck: $('pj-check'),
     formulaHelp: $('formula-help'), pjNote: $('pj-q-note'), localeSwitch: $('locale-switch'), profileClose: $('profile-close'),
-    localePicker: $('locale-picker'), localeSelect: $('locale-select')
+    localePicker: $('locale-picker'), localeSelect: $('locale-select'),
+    exerciseNav: $('exercise-nav'), listToggle: $('list-toggle'), skipLink: $('skip-link'), symbolBar: $('symbol-bar'),
+    paywallLead: $('paywall-lead'), paywallList: $('paywall-list'), paywallMore: $('paywall-more'), gami: $('gami'),
+    codeForm: $('paywall-code-form'), codeInput: $('paywall-code'), codeMsg: $('paywall-code-msg'),
+    pfAccess: $('pf-access'), accessCode: $('access-code'), accessCopy: $('access-copy'), accessLink: $('access-link'),
+    accessLinkCopy: $('access-link-copy'), accessMsg: $('access-msg')
   };
 
   /* ---------- Speicher (localStorage, mit Fallback falls blockiert) ---------- */
@@ -65,6 +83,9 @@
   }
   function storageSet(key, value) {
     try { window.localStorage.setItem(key, value); } catch (e) { /* z. B. privater Modus: Fortschritt nur für diese Sitzung */ }
+  }
+  function storageRemove(key) {
+    try { window.localStorage.removeItem(key); } catch (e) { /* ignorieren */ }
   }
   // Schlüssel bleibt excelDrillsProgress. Alter Stand { points, solved } wird verlustfrei zu Version 2 migriert
   // (Punkte = XP, gelöste Übungen = Bronze); «points» und «solved» bleiben im gespeicherten Objekt erhalten.
@@ -143,6 +164,32 @@
     return i18nLoading[lang];
   }
 
+  // HyperFormula-Sprachpaket (frFR/itIT) nachladen und registrieren. Deutsch ist immer geladen.
+  // Ergebnis false: Paket nicht verfügbar (offline, Blocker); die Texte wechseln trotzdem, Prüfen bleibt gesperrt.
+  function loadLangPack(loc) {
+    var pack = LANG_PACKS[E.langOf(loc)];
+    var H = window.HyperFormula;
+    if (!pack) return Promise.resolve(true);
+    if (!H) return Promise.resolve(false);
+    if (H.languages && H.languages[pack.code]) return Promise.resolve(true);
+    if (!packLoading[pack.code]) {
+      packLoading[pack.code] = new Promise(function (resolve) {
+        var tag = document.createElement('script');
+        tag.src = HF_CDN + pack.code + '.js';
+        tag.integrity = pack.sri;
+        tag.crossOrigin = 'anonymous';
+        tag.onload = function () { resolve(true); };
+        tag.onerror = function () { delete packLoading[pack.code]; tag.remove(); resolve(false); };
+        document.head.appendChild(tag);
+      }).then(function (okLoaded) {
+        // Neu geladenes Paket registrieren (idempotent); vor dem Start der Engine übernimmt das init().
+        if (okLoaded && HF) { try { E.init(HF); } catch (e) { if (window.console) console.error(e); } }
+        return okLoaded;
+      });
+    }
+    return packLoading[pack.code];
+  }
+
   // Übung im aktuellen Land (Texte, Daten, Musterlösung). Fortschritt und IDs nutzen weiterhin die Originalübung.
   function lx(ex) {
     if (!ex) return ex;
@@ -193,7 +240,8 @@
   function setAppLocale(next) {
     next = E.normalizeLocale(next);
     if (next === locale) return;
-    loadI18n(next).then(function (okLoaded) {
+    Promise.all([loadI18n(next), loadLangPack(next)]).then(function (res) {
+      var okLoaded = res[0];
       if (!okLoaded) { showNotice(T('notice.langFailed'), true); if (els.localeSelect) els.localeSelect.value = locale; return; }
       locale = E.setLocale(next);
       localized = {};
@@ -203,6 +251,7 @@
       if (locale === 'de-DE') params.set('land', 'de');
       else if (locale !== 'de-CH') params.set('lang', E.langOf(locale));
       window.history.replaceState(null, '', window.location.pathname + (params.toString() ? '?' + params : '') + window.location.hash);
+      clearToasts();
       applyLocaleUi();
       track('land', { land: locale });
       if (HF && !E.hasLanguage(locale)) showNotice(T('notice.langEngine'), true);
@@ -381,6 +430,7 @@
 
     if (!isAvailable(tr)) {
       els.list.hidden = true;
+      els.listToggle.hidden = true;
       els.trackEmpty.hidden = false;
       els.trackEmptyText.textContent = T('list.emptyText', { track: tr.name });
       els.trackEmptyLink.href = landingUrl(tr);
@@ -390,6 +440,7 @@
     }
     els.list.hidden = false;
     els.trackEmpty.hidden = true;
+    renderListToggle();
 
     tr.items.forEach(function (ex, i) {
       var lex = lx(ex);
@@ -424,11 +475,29 @@
 
       btn.append(topic, title, state);
       btn.setAttribute('aria-label', (i + 1) + '. ' + (project ? T('list.projectAria') : '') + lex.topic + ': ' + lex.title + (stateLabel ? ' (' + stateLabel + ')' : ''));
-      btn.addEventListener('click', function () { openExercise(ex, btn); });
+      btn.addEventListener('click', function () {
+        // Mobil: Liste nach der Wahl wieder einklappen, damit die Übung oben bleibt
+        if (isMobile() && !isLocked(ex)) setListCollapsed(true);
+        openExercise(ex, isMobile() ? null : btn);
+      });
       li.appendChild(btn);
       els.list.appendChild(li);
     });
     els.listProgress.textContent = T('list.progress', { track: tr.name, solved: solvedCount(tr), total: tr.items.length, gold: goldCount(tr) });
+  }
+
+  /* Mobil (< 801 px): Übungsliste unter der Übung, eingeklappt. Auf breiten Bildschirmen ist der Knopf ausgeblendet. */
+  function isMobile() { return !!(window.matchMedia && window.matchMedia(MOBILE_QUERY).matches); }
+  function listCollapsed() { return els.exerciseNav.dataset.collapsed === 'true'; }
+  function renderListToggle() {
+    var collapsed = listCollapsed();
+    els.listToggle.hidden = false;
+    els.listToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    els.listToggle.textContent = collapsed ? T('list.showAll', { n: currentTrack ? currentTrack.items.length : exercises.length }) : T('list.hideAll');
+  }
+  function setListCollapsed(collapsed) {
+    els.exerciseNav.dataset.collapsed = collapsed ? 'true' : 'false';
+    renderListToggle();
   }
 
   /* ---------- Tabelle ---------- */
@@ -492,7 +561,7 @@
 
   function openExercise(ex, trigger, opts) {
     opts = opts || {};
-    if (isLocked(ex)) { openPaywall(trigger); return; }
+    if (isLocked(ex)) { openPaywall(trigger, ex); return; }
     current = ex;
     dataset = 0;
     attemptCounted = false;
@@ -765,7 +834,8 @@
         var prem = document.createElement('a');
         prem.className = 'btn';
         prem.href = '../premium.html';
-        prem.textContent = T('done.unlock');
+        prem.hreflang = 'de-CH';
+        prem.textContent = T('paywall.cta');
         actions.appendChild(prem);
       } else {
         var firstOpen = open.filter(function (e) { return !isLocked(e); })[0];
@@ -868,8 +938,41 @@
 
   /* ---------- Paywall ---------- */
 
-  function openPaywall(trigger) {
+  // Inhalt je Pfad: gesperrte Übungen des Pfads (Thema und Titel im aktuellen Land), Preis, Verweis auf die Preisseite.
+  function renderPaywall(tr) {
+    var locked = tr ? tr.items.filter(isLocked) : [];
+    els.paywallList.innerHTML = '';
+    if (!locked.length) {
+      els.paywallLead.textContent = T('paywall.leadGeneric');
+      els.paywallList.hidden = true;
+      els.paywallMore.hidden = true;
+      return;
+    }
+    var intro = T('paywall.track.' + tr.id);
+    els.paywallLead.textContent = T('paywall.lead', { n: locked.length, track: tr.name }) +
+      (intro !== 'paywall.track.' + tr.id ? ' ' + intro : '');
+    locked.forEach(function (ex) {
+      var lex = lx(ex);
+      var li = document.createElement('li');
+      var topic = document.createElement('strong');
+      topic.textContent = lex.topic;
+      li.append(topic, document.createTextNode(': ' + lex.title));
+      els.paywallList.appendChild(li);
+    });
+    els.paywallList.hidden = false;
+    els.paywallMore.textContent = T('paywall.more');
+    els.paywallMore.hidden = false;
+  }
+
+  function openPaywall(trigger, ex) {
     lastTrigger = trigger || document.activeElement;
+    paywallExercise = ex || null;
+    var tr = ex ? trackOf(ex) : currentTrack;
+    renderPaywall(tr);
+    els.codeInput.value = '';
+    els.codeInput.removeAttribute('aria-invalid');
+    els.codeMsg.textContent = '';
+    track('paywall_gezeigt', { pfad: tr ? tr.id : 'unbekannt', uebung: ex ? ex.id : '' });
     if (typeof els.paywall.showModal === 'function') {
       els.paywall.showModal();
     } else {
@@ -877,6 +980,69 @@
     }
   }
   function closePaywall() { els.paywall.close(); }
+
+  // «Hast du schon einen Code?»: gleicher Prüfweg wie ?key= (Keys.isValid), Eingabe als Code oder ganzer Link
+  function onCodeSubmit(evt) {
+    evt.preventDefault();
+    var raw = els.codeInput.value;
+    var fail = function (msg) {
+      els.codeInput.setAttribute('aria-invalid', 'true');
+      els.codeMsg.className = 'fine code-err';
+      els.codeMsg.textContent = msg;
+      els.codeInput.focus();
+    };
+    if (!String(raw).trim()) { fail(T('code.empty')); return; }
+    var code = Access ? Access.redeem(raw, Keys) : (Keys.isValid(raw) ? Keys.normalize(raw) : null);
+    if (!code) { fail(T('code.invalid')); return; }
+    storageSet(STORAGE_KEY, code);
+    unlocked = true;
+    var ex = paywallExercise;
+    paywallExercise = null;
+    lastTrigger = null;              // Fokus geht an die freigeschaltete Übung, nicht zurück zum Auslöser
+    closePaywall();
+    els.notice.className = '';
+    els.notice.textContent = '';
+    settleProgress(true);            // Level-Grenze ohne Premium entfällt
+    if (ex) openExercise(ex, null);
+    else { if (current) renderExerciseText(current); renderAll(); }
+    toast(T('code.ok'), T('code.okText'));
+  }
+
+  // Text in die Zwischenablage; Fallback über ein markiertes Feld (ältere Browser, http)
+  function copyText(text, statusEl, selectEl) {
+    var done = function (okCopied) { statusEl.textContent = okCopied ? T('copy.ok') : T('copy.failed'); };
+    var legacy = function () {
+      var field = selectEl;
+      var temp = null;
+      if (!field) {
+        temp = document.createElement('textarea');
+        temp.value = text;
+        temp.setAttribute('readonly', '');
+        temp.style.position = 'fixed'; temp.style.opacity = '0';
+        (gx.profile || document.body).appendChild(temp);
+        field = temp;
+      }
+      field.focus(); field.select();
+      var okCopied = false;
+      try { okCopied = document.execCommand('copy'); } catch (e) { okCopied = false; }
+      if (temp) temp.remove();
+      done(okCopied);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, legacy);
+    } else {
+      legacy();
+    }
+  }
+
+  // Profil: «Dein Zugangscode», nur mit Premium
+  function renderAccess() {
+    var code = unlocked ? storageGet(STORAGE_KEY) : null;
+    els.pfAccess.hidden = !code;
+    if (!code) return;
+    els.accessCode.textContent = code;
+    els.accessLink.value = Access ? Access.accessLink(code) : 'https://excel-drills.ch/app/?key=' + encodeURIComponent(code);
+  }
 
   /* ---------- Gamification: Anzeige ---------- */
 
@@ -930,6 +1096,8 @@
     var goal = progress.goal;
     var lv = G.levelFor(progress.xp, unlocked);
 
+    // Vor der ersten Lösung keine Zähler mit 0 im Kopf
+    if (els.gami) els.gami.hidden = !(progress.xp > 0 || Object.keys(progress.solved || {}).length > 0);
     gx.streakValue.textContent = String(streak);
     gx.streakChip.title = T('streak.inRow', { days: daysText(streak) });
     gx.streakLabel.textContent = ' ' + T('streak.label', { unit: dayUnit(streak) });
@@ -955,6 +1123,12 @@
     });
   }
 
+  // Beim Sprachwechsel: wartende und sichtbare Toasts entfernen, sonst erscheinen sie in der alten Sprache
+  function clearToasts() {
+    toastQueue = [];
+    if (gx.toasts) gx.toasts.innerHTML = '';
+  }
+
   /* Toasts: dezent, verschwinden nach ein paar Sekunden, einer nach dem anderen */
   function toast(title, text, icon) {
     toastQueue.push({ title: title, text: text, icon: icon });
@@ -970,7 +1144,10 @@
     gx.toasts.appendChild(el);
     var hide = function () {
       el.classList.add('leaving');
-      setTimeout(function () { el.remove(); toastQueue.shift(); showNextToast(); }, 200);
+      setTimeout(function () {
+        if (!el.parentNode) return; // durch clearToasts() schon entfernt
+        el.remove(); toastQueue.shift(); showNextToast();
+      }, 200);
     };
     var timer = setTimeout(hide, 4200);
     el.addEventListener('mouseenter', function () { clearTimeout(timer); });
@@ -995,7 +1172,10 @@
     renderHeader();
     if (silent) return;
     earned.forEach(function (b) { toast(T('badge.toast', { name: b.name }), b.desc, badgeIconSvg(b.icon)); });
-    if (up) openLevelUp(lv);
+    if (up) {
+      if (lv >= LEVELUP_MODAL_FROM) openLevelUp(lv);
+      else toast(T('levelup.toast', { level: lv, name: levelName(lv) }), '', badgeIconSvg('star'));
+    }
   }
 
   function flameSvg() {
@@ -1112,6 +1292,7 @@
       '<div><dt>' + escapeHtml(T('profile.xp')) + '</dt><dd>' + progress.xp + '</dd></div>';
 
     renderBadges();
+    renderAccess();
   }
 
   function renderBadges() {
@@ -1144,6 +1325,7 @@
     gx.resetConfirm.hidden = true;
     gx.resetBtn.hidden = false;
     gx.shareArea.hidden = true;
+    els.accessMsg.textContent = '';
     renderProfile();
     openDialog(gx.profile, gx.profileClose);
   }
@@ -1353,6 +1535,38 @@
     return { track: tr, exercise: ex, lockedHash: hashEx && isLocked(hashEx) ? hashEx : null };
   }
 
+  // Mini-Übung der Startseite (assets/mini-drill.js) als Übung 1 übernehmen: Bronze, XP, Abzeichen «Erste Formel»
+  function importMiniSolve() {
+    if (!storageGet(STORAGE_MINI)) return;
+    storageRemove(STORAGE_MINI);
+    var ex = exercises.filter(function (e) { return e.id === MINI_EXERCISE; })[0];
+    if (!ex || isSolved(ex)) return;
+    var outcome = G.recordSolve(progress, ex, 0, new Date());
+    saveProgress();
+    toast(T('mini.imported'), T('mini.importedText', { xp: outcome.xp }), medalSvg(1));
+    track('uebung_geloest', { uebung: ex.id, pfad: trackOf(ex).id, ort: 'startseite' });
+    settleProgress(false);
+  }
+
+  // Zeichenleiste über dem Formelfeld (nur mobil sichtbar): fügt an der Cursorposition ein
+  function initSymbolBar() {
+    if (!els.symbolBar) return;
+    // Knopf soll den Fokus nicht aus dem Feld nehmen (Tastatur bleibt offen)
+    els.symbolBar.addEventListener('mousedown', function (e) { if (e.target.closest('button')) e.preventDefault(); });
+    els.symbolBar.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-insert]');
+      if (!b) return;
+      var inp = els.input;
+      var text = b.dataset.insert;
+      var start = typeof inp.selectionStart === 'number' ? inp.selectionStart : inp.value.length;
+      var end = typeof inp.selectionEnd === 'number' ? inp.selectionEnd : start;
+      inp.value = inp.value.slice(0, start) + text + inp.value.slice(end);
+      inp.focus();
+      try { inp.setSelectionRange(start + text.length, start + text.length); } catch (err) { /* ignorieren */ }
+      inp.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  }
+
   function init() {
     if (!E || !Keys || !G || !Badges) { fail(T('notice.appFailed')); return; }
     var wanted = resolveLocale();
@@ -1379,12 +1593,27 @@
       if (ex && (!current || current.id !== ex.id)) openExercise(ex, null, { keepUrl: true });
     });
     els.paywallClose.addEventListener('click', closePaywall);
+    els.codeForm.addEventListener('submit', onCodeSubmit);
+    els.codeInput.addEventListener('input', function () { els.codeInput.removeAttribute('aria-invalid'); });
+    els.accessCopy.addEventListener('click', function () { copyText(els.accessCode.textContent, els.accessMsg, null); });
+    els.accessLinkCopy.addEventListener('click', function () { copyText(els.accessLink.value, els.accessMsg, els.accessLink); });
+    els.accessLink.addEventListener('focus', function () { els.accessLink.select(); });
+    els.listToggle.addEventListener('click', function () { setListCollapsed(!listCollapsed()); });
+    // Skip-Link: direkt ins Formelfeld (bei Projekten auf den Titel), nicht nur auf <main>
+    els.skipLink.addEventListener('click', function (e) {
+      var target = !els.view.hidden && current && !E.isProject(current) && !els.input.disabled ? els.input
+        : (!els.view.hidden ? els.title : els.main);
+      e.preventDefault();
+      target.focus();
+    });
+    initSymbolBar();
     initGamification();
     els.paywall.addEventListener('close', function () { if (lastTrigger && lastTrigger.focus) lastTrigger.focus(); });
     els.paywall.addEventListener('click', function (e) { if (e.target === els.paywall) closePaywall(); });
 
     // Übungen und (für FR/IT) die Übersetzung parallel laden. Schlägt die Übersetzung fehl, bleibt die App auf Deutsch.
-    var i18nReady = loadI18n(wanted).then(function (okLoaded) {
+    var i18nReady = Promise.all([loadI18n(wanted), loadLangPack(wanted)]).then(function (res) {
+      var okLoaded = res[0];
       if (okLoaded && wanted !== locale) { locale = E.setLocale(wanted); applyLocaleUi(); }
       else if (!okLoaded) showNotice(T('notice.langFailed'), true);
     });
@@ -1396,6 +1625,7 @@
         buildTracks(json);
         relabelTracks();
         settleProgress(migratedFromV1);
+        importMiniSolve();
         var engineReady = false;
         try {
           HF = window.HyperFormula;
@@ -1417,7 +1647,8 @@
         if (isAvailable(start.track)) {
           var ex = start.exercise || firstOpenExercise(start.track);
           if (ex) {
-            openExercise(ex, null, { noFocus: true });
+            // Desktop: Formelfeld gleich fokussieren. Mobil nicht (die Bildschirmtastatur würde die Aufgabe verdecken).
+            openExercise(ex, null, { noFocus: isMobile() });
           } else {
             // Pfad enthält nur Premium-Übungen: erste verfügbare Übung eines anderen Pfads zeigen
             var other = exercises.filter(function (e) { return !isLocked(e); })[0] || exercises[0];
@@ -1435,7 +1666,7 @@
           updateUrl(start.track.id, null);
           renderAll();
         }
-        if (start.lockedHash) openPaywall(null);
+        if (start.lockedHash) openPaywall(null, start.lockedHash);
       })
       .catch(function (e) {
         if (window.console) console.error(e);

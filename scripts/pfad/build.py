@@ -2,14 +2,14 @@
 Aufruf: python3 scripts/pfad/build.py   (Kopf, Header und Footer kommen aus scripts/artikel/lib.py)
 Die Themenlisten sind bewusst statisch, damit die Seiten ohne JavaScript indexierbar sind.
 Name, Claim und Zielgruppe stehen hier als Kopie von "tracks" in app/exercises.json: bei Änderungen dort nachführen."""
-import os, sys
+import html, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "artikel"))
 from lib import head, header, footer, DOMAIN  # noqa: E402
 
 ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
 OUT = os.path.join(ROOT, "pfad")
-MAIL = "mailto:[E-Mail]"  # Platzhalter wie in impressum.html; vor Livegang ersetzen
+MAIL = "mailto:luca@familymoser.ch"  # Platzhalter wie in impressum.html; vor Livegang ersetzen
 
 TRACKS = [
     {"id": "basis", "name": "Basis", "claim": "Die Funktionen, die jeder Excel-Test abfragt",
@@ -24,6 +24,20 @@ TRACKS = [
      "audience": "Reporting, Analysten", "soon": False},
 ]
 BY_ID = {t["id"]: t for t in TRACKS}
+
+# Übungen pro Pfad direkt aus app/exercises.json (Anzahl gratis/total und Liste mit Schloss)
+with open(os.path.join(ROOT, "app", "exercises.json"), encoding="utf-8") as fh:
+    EXERCISES = json.load(fh)["exercises"]
+PRICE_NOTE = "ab CHF 4.10/Monat im Jahresabo"
+
+
+def track_items(tid):
+    return [e for e in EXERCISES if e.get("track", "basis") == tid]
+
+
+def counts(tid):
+    items = track_items(tid)
+    return sum(1 for e in items if e["free"]), len(items)
 
 # ---------------------------------------------------------------- Inhalte
 
@@ -124,7 +138,7 @@ PAGES["accounting"] = dict(
       <p>Den Abschluss bildet ein kleines Projekt rund um die Pivot-Tabelle. Du verdichtest eine Buchungsliste nach Konto und Monat und lernst, wann sich eine Pivot-Tabelle lohnt und wann eine Formel-Auswertung die bessere Wahl ist, etwa wenn der Report jeden Monat gleich aussehen muss.</p>
 
       <h2>Gratis testen, mit Premium alles</h2>
-      <p>Einzelne Übungen kannst du gratis und ohne Anmeldung lösen. Premium schaltet alle Übungen in allen Lernpfaden frei, auch die neuen, die laufend dazukommen. Wer im Finanzbereich arbeitet, kann danach im Pfad <a href="finance.html">Banking &amp; Finance</a> mit Zinsrechnung, Cashflows und Szenarien weitermachen.</p>
+      <p>{free} von {total} Übungen in diesem Pfad löst du gratis und ohne Anmeldung. Premium schaltet alle Übungen in allen Lernpfaden frei ({price}), auch die neuen, die laufend dazukommen. Wer im Finanzbereich arbeitet, kann danach im Pfad <a href="finance.html">Banking &amp; Finance</a> mit Zinsrechnung, Cashflows und Szenarien weitermachen.</p>
 """,
     practice="Starte mit der ersten Übung im Pfad. Dein Fortschritt bleibt in deinem Browser gespeichert.",
 )
@@ -172,7 +186,7 @@ PAGES["finance"] = dict(
       <p>Die Szenario-Übungen zeigen, wie du ein Modell steuerbar machst: Eine einzige Zelle entscheidet, ob Basis-, Best- oder Worst-Case gerechnet wird. Das ist dasselbe Prinzip, das in Bewertungsmodellen und Business Cases verwendet wird.</p>
 
       <h2>Gratis testen, mit Premium alles</h2>
-      <p>Einzelne Übungen kannst du gratis und ohne Anmeldung lösen. Premium schaltet alle Übungen in allen Lernpfaden frei, auch die neuen, die laufend dazukommen. Wer zusätzlich mit Abschluss und Budget zu tun hat, findet im Pfad <a href="accounting.html">Accounting &amp; Controlling</a> die passenden Übungen.</p>
+      <p>{free} von {total} Übungen in diesem Pfad löst du gratis und ohne Anmeldung. Premium schaltet alle Übungen in allen Lernpfaden frei ({price}), auch die neuen, die laufend dazukommen. Wer zusätzlich mit Abschluss und Budget zu tun hat, findet im Pfad <a href="accounting.html">Accounting &amp; Controlling</a> die passenden Übungen.</p>
 """,
     practice="Starte mit der ersten Übung im Pfad. Dein Fortschritt bleibt in deinem Browser gespeichert.",
 )
@@ -298,11 +312,32 @@ def others_html(current):
     return "\n".join(lines)
 
 
+def exercises_html(tid):
+    free, total = counts(tid)
+    rows = []
+    for e in track_items(tid):
+        title, topic = html.escape(e["title"]), html.escape(e["topic"])
+        if e["free"]:
+            rows.append(f'          <li><a href="../app/?pfad={tid}#{e["id"]}">{title}</a> <span class="fill-note">({topic})</span> <span class="ex-free">gratis</span></li>')
+        else:
+            rows.append(f'          <li>{title} <span class="fill-note">({topic})</span> <span class="ex-lock"><span aria-hidden="true">🔒</span> Premium</span></li>')
+    items = "\n".join(rows)
+    return f'''      <section class="track-exercises" aria-labelledby="exercises-heading">
+        <h2 id="exercises-heading">Alle Übungen im Pfad</h2>
+        <p><strong>{free} von {total} Übungen gratis</strong>, alle {total} mit Premium {PRICE_NOTE} (<a href="../premium.html">Preise ansehen</a>).</p>
+        <ol class="track-exercise-list">
+{items}
+        </ol>
+      </section>
+'''
+
+
 def track_page(tid):
     t, p = BY_ID[tid], PAGES[tid]
     name = t["name"].replace("&", "&amp;")
     topics = topics_html(p["topics"])
     plain = lambda s: s.replace("&amp;", "&")
+    exercises = "" if t["soon"] else exercises_html(tid)
     if t["soon"]:
         ld = {"@context": "https://schema.org", "@type": "WebPage", "name": p["h1"], "description": p["desc"],
               "inLanguage": "de-CH", "isPartOf": {"@type": "WebSite", "name": "Excel-Drills"}}
@@ -355,8 +390,8 @@ def track_page(tid):
       </div>
 {cta}
 
-{p["body"].format(topics=topics)}
-{practice}
+{p["body"].format(topics=topics, free=counts(tid)[0], total=counts(tid)[1], price=PRICE_NOTE)}
+{exercises}{practice}
 
       <nav class="read-more" aria-labelledby="read-more-heading">
         <h2 id="read-more-heading">Weitere Lernpfade</h2>

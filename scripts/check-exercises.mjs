@@ -20,6 +20,7 @@ vm.runInContext(read('app/i18n/ui-de.js'), ctx);
 vm.runInContext(read('app/engine.js'), ctx);
 vm.runInContext(read('app/keys.js'), ctx);
 vm.runInContext(read('app/gamification.js'), ctx);
+vm.runInContext(read('app/access.js'), ctx);
 
 const HF = ctx.HyperFormula;
 const E = ctx.ExcelDrillsEngine;
@@ -159,7 +160,7 @@ const byId = Object.fromEntries(exercises.map((e) => [e.id, e]));
 const cases = [
   ['summe-1', 'SUMME(B2:B6)', false, 'beginnt immer mit ='],
   ['summe-1', '=SUM(B2:B6)', false, 'Auf Deutsch heisst die Funktion SUMME'],
-  ['summe-1', '=SUMME(B2,B6)', false, 'trennst du Argumente mit ; statt ,'],
+  ['summe-1', '=SUMME(B2,B6)', false, 'Trenne die Argumente mit Semikolon (;), nicht mit Komma (,)'],
   ['summe-1', '=summe(b2:b6)', true, ''],
   ['summe-1', '=SUMME(B2;B3;B4;B5;B6)', true, ''],
   ['summe-1', '=B2+B3+B4+B5+B6', false, 'Verwende in dieser Übung die Funktion SUMME'],
@@ -175,7 +176,7 @@ const cases = [
   ['zaehlenwenn-1', '=COUNTIF(B2:B8;"offen")', false, 'ZÄHLENWENN'],
   ['summewenn-1', '=SUMMEWENN(A2:A9;Ost;B2:B9)', false, 'Anführungszeichen'],
   ['summewenn-2', '=SUMMEWENN(A2:A7;>3;C2:C7)', false, '">3"'],
-  ['summewenn-2', '=SUMIF(A2:A7,">3",C2:C7)', false, 'trennst du Argumente mit ;'],
+  ['summewenn-2', '=SUMIF(A2:A7,">3",C2:C7)', false, 'Argumente mit Semikolon (;)'],
   ['sverweis-1', '=SVERWEIS(D2;A2:B6;2;FALSE)', false, 'FALSCH statt FALSE'],
   ['sverweis-1', '=VLOOKUP(D2;A2:B6;2;0)', false, 'SVERWEIS'],
   ['runden-1', '=ROUND(A2;2)', false, 'RUNDEN'],
@@ -236,6 +237,18 @@ eq(ctx.ExcelDrillsKeys.hash('abc'), 'ba7816bf8f01cfea414140de5dae2223b00361a3961
 eq(ctx.ExcelDrillsKeys.hash('XD-TEST'), ctx.ExcelDrillsKeys.hash(' xd-test '.trim().toUpperCase()), 'hash normalisiert');
 eq(ctx.ExcelDrillsKeys.isValid('DRILLS-2026-TEST'), false, 'alter Test-Key ungültig');
 eq(ctx.ExcelDrillsKeys.isValid('FALSCH'), false, 'isValid(FALSCH)');
+// Zugangscode (app/access.js): Eingabe als Code oder ganzer Link, Prüfung über einen Stub statt echter Codes
+const A = ctx.ExcelDrillsAccess;
+const stubKeys = { isValid: (k) => String(k).trim().toUpperCase() === 'XD-ABC', normalize: (k) => String(k).trim().toUpperCase() };
+eq(A.extractCode('  xd-abc '), 'xd-abc', 'extractCode trimmt');
+eq(A.extractCode('https://excel-drills.ch/app/?key=XD-ABC&plan=jahr'), 'XD-ABC', 'extractCode aus Link');
+eq(A.extractCode('excel-drills.ch/app/?plan=jahr&key=xd%2Dabc#summe-1'), 'xd-abc', 'extractCode aus Link mit plan zuerst');
+eq(A.redeem('xd-abc', stubKeys), 'XD-ABC', 'redeem gültig, normalisiert');
+eq(A.redeem('https://excel-drills.ch/app/?key=xd-abc', stubKeys), 'XD-ABC', 'redeem aus Link');
+eq(A.redeem('falsch', stubKeys), null, 'redeem ungültig');
+eq(A.redeem('', stubKeys), null, 'redeem leer');
+eq(A.redeem('FALSCH', ctx.ExcelDrillsKeys), null, 'redeem mit echten Keys: ungültig');
+eq(A.accessLink('XD-ABC'), 'https://excel-drills.ch/app/?key=XD-ABC', 'accessLink');
 
 // 7) Deutschland (DE): jede Übung zusätzlich mit Dezimalkomma, EUR und ß prüfen
 console.log('\nDeutschland (DE)\n');
@@ -354,7 +367,7 @@ for (const ex of exercises) {
 console.log('Feedback-Regeln (DE)');
 const byIdDe = Object.fromEntries(exercises.map((e) => [e.id, E.localize(e, 'de')]));
 const casesDe = [
-  ['summe-1', '=SUMME(B2,B6)', false, 'trennst du Argumente mit ; und Dezimalzahlen mit Komma'],
+  ['summe-1', '=SUMME(B2,B6)', false, 'trennst du Argumente mit Semikolon (;) und Dezimalzahlen mit Komma'],
   ['summe-1', '=SUM(B2,B6)', false, 'heißt die Funktion SUMME'],
   ['summe-1', '=SUMME(B2:B6)', true, ''],
   ['acc-rundung-1', '=RUNDEN(B2/0.05;0)*0.05', false, 'Dezimalzahlen mit Komma'],
@@ -364,7 +377,7 @@ const casesDe = [
   ['runden-1', '=A2*1,5', false, 'Funktion RUNDEN'],
   ['wenn-verschachtelt-1', '=WENN(A2>0,8;"hoch";WENN(A2>0,5;"mittel";"tief"))', true, ''],
   ['wenn-verschachtelt-1', '=WENN(A2>0.8;"hoch";WENN(A2>0.5;"mittel";"tief"))', false, 'Komma'],
-  ['summewenn-2', '=SUMIF(A2:A7,">3",C2:C7)', false, 'trennst du Argumente mit ;'],
+  ['summewenn-2', '=SUMIF(A2:A7,">3",C2:C7)', false, 'Argumente mit Semikolon (;)'],
   ['absolut-1', '=B2*$F$1', true, ''],
   ['acc-mwst-1', '=B2/(1+$F$1)', true, ''],
   ['acc-mwst-1', '=B2*(1-$F$1)', false, 'Netto aus brutto'],
@@ -623,8 +636,8 @@ async function checkLanguages() {
       ['summe-1', 'SOMME(B2:B6)', false, 'commence toujours par ='],
       ['summe-1', '=SUM(B2:B6)', false, "En français, la fonction s'appelle SOMME (et non SUM)"],
       ['summe-1', '=SUMME(B2:B6)', false, "En français, la fonction s'appelle SOMME"],
-      ['summe-1', '=SOMME(B2,B6)', false, 'tu sépares les arguments par ; et non par ,'],
-      ['summe-1', '=SUM(B2,B6)', false, 'tu sépares les arguments par ;'],
+      ['summe-1', '=SOMME(B2,B6)', false, 'Sépare les arguments par un point-virgule (;), pas par une virgule (,)'],
+      ['summe-1', '=SUM(B2,B6)', false, 'Sépare les arguments par un point-virgule (;)'],
       ['summe-1', '=somme(b2:b6)', true, ''],
       ['summe-1', '=SOMME(B2:B6)', true, ''],
       ['summe-1', '=SOMME(B2;B3;B4;B5;B6)', true, ''],
@@ -648,7 +661,7 @@ async function checkLanguages() {
       ['summewenn-1', '=SOMME.SI(A2:A9;Est;B2:B9)', false, 'guillemets'],
       ['summewenn-1', '=SOMME.SI(A2:A9;D2;B2:B9)', true, ''],
       ['summewenn-2', '=SOMME.SI(A2:A7;>3;C2:C7)', false, '">3"'],
-      ['summewenn-2', '=SUMIF(A2:A7,">3",C2:C7)', false, 'tu sépares les arguments par ;'],
+      ['summewenn-2', '=SUMIF(A2:A7,">3",C2:C7)', false, 'Sépare les arguments par un point-virgule (;)'],
       ['sverweis-1', '=RECHERCHEV(D2;A2:B6;2;FALSE)', false, 'tu écris FAUX au lieu de FALSE'],
       ['sverweis-1', '=RECHERCHEV(D2;A2:B6;2;FALSCH)', false, 'tu écris FAUX (FALSCH'],
       ['sverweis-1', '=RECHERCHEV(D2;A2:B6;2;FAUX)', true, ''],
@@ -691,8 +704,8 @@ async function checkLanguages() {
       ['summe-1', 'SOMMA(B2:B6)', false, 'inizia sempre con ='],
       ['summe-1', '=SUM(B2:B6)', false, 'In italiano la funzione si chiama SOMMA (non SUM)'],
       ['summe-1', '=SUMME(B2:B6)', false, 'In italiano la funzione si chiama SOMMA'],
-      ['summe-1', '=SOMMA(B2,B6)', false, 'separi gli argomenti con ; e non con ,'],
-      ['summe-1', '=SUM(B2,B6)', false, 'separi gli argomenti con ;'],
+      ['summe-1', '=SOMMA(B2,B6)', false, 'Separa gli argomenti con il punto e virgola (;), non con la virgola (,)'],
+      ['summe-1', '=SUM(B2,B6)', false, 'Separa gli argomenti con il punto e virgola (;)'],
       ['summe-1', '=somma(b2:b6)', true, ''],
       ['summe-1', '=SOMMA(B2:B6)', true, ''],
       ['summe-1', '=B2+B3+B4+B5+B6', false, 'usa la funzione SOMMA'],
@@ -710,7 +723,7 @@ async function checkLanguages() {
       ['zaehlenwenn-1', '=ZÄHLENWENN(B2:B8;"aperta")', false, 'si chiama CONTA.SE'],
       ['summewenn-1', '=SOMMA.SE(A2:A9;Est;B2:B9)', false, 'virgolette'],
       ['summewenn-2', '=SOMMA.SE(A2:A7;>3;C2:C7)', false, '">3"'],
-      ['summewenn-2', '=SUMIF(A2:A7,">3",C2:C7)', false, 'separi gli argomenti con ;'],
+      ['summewenn-2', '=SUMIF(A2:A7,">3",C2:C7)', false, 'Separa gli argomenti con il punto e virgola (;)'],
       ['sverweis-1', '=CERCA.VERT(D2;A2:B6;2;FALSE)', false, 'scrivi FALSO invece di FALSE'],
       ['sverweis-1', '=CERCA.VERT(D2;A2:B6;2;FALSO)', true, ''],
       ['sverweis-1', '=cerca.vert(d2;a2:b6;2;falso)', true, ''],

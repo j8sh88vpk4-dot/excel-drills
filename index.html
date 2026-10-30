@@ -108,10 +108,10 @@
         <div class="mini-drill" id="mini-drill">
           <div class="mini-head">
             <h2 id="mini-heading">Probier es gleich hier</h2>
-            <span class="tag">Übung 1 &middot; SUMME</span>
+            <span class="tag">Schnupper-Übung &middot; SUMME</span>
             <div class="locale-switch locale-switch-small" id="mini-locale" role="group" aria-label="Land: Zahlenformat und Währung" hidden>
-              <button type="button" data-locale="ch" aria-pressed="true" title="Schweiz: 12'500, CHF">CH<span class="visually-hidden"> Schweiz</span></button>
-              <button type="button" data-locale="de" aria-pressed="false" title="Deutschland: 12.500, EUR">DE<span class="visually-hidden"> Deutschland</span></button>
+              <button type="button" data-locale="ch" aria-pressed="true" title="Deutsch (Schweiz): 12'500, CHF">DE-CH<span class="visually-hidden"> Deutsch, Schweiz</span></button>
+              <button type="button" data-locale="de" aria-pressed="false" title="Deutsch (Deutschland): 12.500, EUR">DE-DE<span class="visually-hidden"> Deutsch, Deutschland</span></button>
             </div>
           </div>
           <p class="mini-task" id="mini-task">Berechne in <strong>B6</strong> die Summe der Umsätze in B2:B5.</p>
@@ -436,11 +436,8 @@
     </div>
   </footer>
 
-  <!-- Formel-Engine für die Mini-Übung: HyperFormula 3.0.0 (GPLv3) + deutsches Sprachpaket, wie in app/index.html. -->
-  <script src="https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/hyperformula.full.min.js"
-          integrity="sha384-J7i5jngggSLZ7jIxuRKLh1jM0ZzhEZOPdCX6KrBHZXyWn4WYxANOzzWioi+nEK7w" crossorigin="anonymous" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/languages/deDE.js"
-          integrity="sha384-jWD9rgGJKCeZXZfD9IcDj4ex7PkMA3oQZbqPtUPh8VB0iQdD3DmT84VMqb2UB0nO" crossorigin="anonymous" defer></script>
+  <!-- Formel-Engine für die Mini-Übung: HyperFormula 3.0.0 (GPLv3) + deutsches Sprachpaket. mini-drill.js lädt beides
+       erst bei Fokus im Formelfeld oder nach 3 s Leerlauf (mit SRI, gleiche Hashes wie app/index.html). -->
   <script src="app/engine.js" defer></script>
   <script src="assets/mini-drill.js" defer></script>
 </body>

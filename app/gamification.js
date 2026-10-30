@@ -22,12 +22,12 @@
   'use strict';
 
   var LEVELS = [
-    { level: 1, name: 'Anfänger', min: 0 },
-    { level: 2, name: 'Sachbearbeiter', min: 50 },
-    { level: 3, name: 'Controller', min: 150 },
-    { level: 4, name: 'Analyst', min: 300 },
+    { level: 1, name: 'Einstieg', min: 0 },
+    { level: 2, name: 'Sachbearbeitung', min: 50 },
+    { level: 3, name: 'Controlling', min: 150 },
+    { level: 4, name: 'Analyse', min: 300 },
     { level: 5, name: 'Excel-Profi', min: 500 },
-    { level: 6, name: 'Excel-Meister', min: 800 }
+    { level: 6, name: 'Excel-Meisterschaft', min: 800 }
   ];
   // Ohne Premium endet der Aufstieg bei Level 4 (Level 5 und 6 brauchen alle Übungen).
   var FREE_LEVEL_CAP = 4;
