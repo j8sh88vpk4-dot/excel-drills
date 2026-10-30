@@ -16,11 +16,14 @@
 1. Google Keyword Planner (braucht Google-Ads-Konto): Volumen DE/AT/CH für
    «Excel lernen», «Excel üben», «Excel Übungen», «SVERWEIS», «SVERWEIS Übung», «SUMMEWENN», «Pivot Tabelle Übung».
    Go-Schwelle: > 50'000 kombinierte Suchen/Monat.
-2. Domain: excel-drills.ch gekauft (30.10.), überall eingetragen. Offen: Render-Service anlegen, CNAME setzen.
+2. Erledigt 30.10.: GitHub-Repo j8sh88vpk4-dot/excel-drills (public), Render Static Site live unter
+   https://excel-drills.onrender.com, Custom Domains excel-drills.ch + www angelegt. OFFEN: DNS beim Registrar:
+   A @ → 216.24.57.1, CNAME www → excel-drills.onrender.com; danach in Render «Verify».
 3. Stripe erledigt (30.10.): Produkt, drei Payment-Links (in premium.html eingetragen), Branding (Logo, Grün),
    Kundenportal-Link in der FAQ. Weiterleitung /app/?key=…&plan=… gesetzt. Offen: echten Key hashen (keys.js),
    Testkauf im Testmodus. Hinweis: Stripe-Konto heisst noch «Linkedin» (Einstellungen › Unternehmensdaten).
-4. Impressum/Datenschutz ausfüllen, Render-Deploy (render.yaml liegt bei).
+4. Impressum/Datenschutz ausfüllen ([Name], [Adresse], [E-Mail]); Formspree-ID für das Handout-Formular;
+   UX-Review in docs/UX-REVIEW.md (23 Punkte) abarbeiten.
 
 ## Erledigt 30.10. (Nachmittag)
 - Lernpfade: Basis 15, Accounting & Controlling 11, Banking & Finance 11 Übungen (37 total, 16 gratis);
