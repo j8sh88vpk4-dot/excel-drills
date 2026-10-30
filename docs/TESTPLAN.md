@@ -22,8 +22,10 @@
 3. Stripe erledigt (30.10.): Produkt, drei Payment-Links (in premium.html eingetragen), Branding (Logo, Grün),
    Kundenportal-Link in der FAQ. Weiterleitung /app/?key=…&plan=… gesetzt. Offen: echten Key hashen (keys.js),
    Testkauf im Testmodus. Hinweis: Stripe-Konto heisst noch «Linkedin» (Einstellungen › Unternehmensdaten).
-4. Impressum/Datenschutz ausfüllen ([Name], [Adresse], [E-Mail]); Formspree-ID für das Handout-Formular;
-   UX-Review in docs/UX-REVIEW.md (23 Punkte) abarbeiten.
+4. Erledigt 30.10.: Impressum/Datenschutz (Luca Moser, Kapfstrasse 27, 6020 Emmenbrücke, luca@familymoser.ch),
+   UX-Review umgesetzt (Status in docs/UX-REVIEW.md), Stripe-Belege aktiviert, Zugangslink im Rechnungsvermerk,
+   Zugangscode im Profil + Code-Eingabe in der Paywall. OFFEN: Formspree-ID, Entscheid Garantie/Handouts,
+   Mail-Adresse auf hallo@excel-drills.ch umstellen, sobald Weiterleitung bei Hostpoint steht.
 
 ## Erledigt 30.10. (Nachmittag)
 - Lernpfade: Basis 15, Accounting & Controlling 11, Banking & Finance 11 Übungen (37 total, 16 gratis);
