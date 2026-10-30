@@ -24,7 +24,8 @@
    Testkauf im Testmodus. Hinweis: Stripe-Konto heisst noch «Linkedin» (Einstellungen › Unternehmensdaten).
 4. Erledigt 30.10.: Impressum/Datenschutz (Luca Moser, Kapfstrasse 27, 6020 Emmenbrücke, luca@familymoser.ch),
    UX-Review umgesetzt (Status in docs/UX-REVIEW.md), Stripe-Belege aktiviert, Zugangslink im Rechnungsvermerk,
-   Zugangscode im Profil + Code-Eingabe in der Paywall. OFFEN: Formspree-ID, Entscheid Garantie/Handouts,
+   Zugangscode im Profil + Code-Eingabe in der Paywall. Entschieden 30.10.: Garantie 14 Tage, Spickzettel/Formelkarten gratis gegen E-Mail, Trainer-Handouts nur mit
+   Premium-Code. OFFEN: Formspree-ID,
    Mail-Adresse auf hallo@excel-drills.ch umstellen, sobald Weiterleitung bei Hostpoint steht.
 
 ## Erledigt 30.10. (Nachmittag)
