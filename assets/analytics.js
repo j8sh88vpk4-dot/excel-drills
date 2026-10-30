@@ -5,7 +5,7 @@
 
   // Muss exakt der in Plausible angelegten Site entsprechen.
   // Bei einem Domainwechsel nur hier ändern (und die Site in Plausible entsprechend anlegen).
-  var DOMAIN = 'excel-uebungen.ch';
+  var DOMAIN = 'excel-drills.ch';
 
   try {
     // Warteschlange: Ereignisse vor dem Laden des Plausible-Skripts gehen nicht verloren.
