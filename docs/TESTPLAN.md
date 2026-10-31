@@ -91,5 +91,6 @@
 | Keyword-Volumen DACH | > 50k/Monat | < 20k/Monat |
 | Abschlussquote Gratis-Übung 1 → Übung 10 | > 30 % | < 10 % |
 | Wiederkehr: Nutzer mit Streak ≥ 3 Tagen (Analytics-Event) | > 15 % | < 5 % |
+| Paywall-Konversion (kauf / paywall_gezeigt) | > 2 % | < 0.5 % → Gratis-Anteil prüfen (Basis 10 → 6–7, Fachpfade stärkste Übungen gratis) |
 
 Grauzone dazwischen: 4 weitere Wochen mit 10 zusätzlichen Übungen und Funktions-Artikeln, dann erneut entscheiden.
