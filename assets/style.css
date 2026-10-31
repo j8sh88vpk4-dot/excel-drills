@@ -718,3 +718,23 @@ dialog.levelup p { margin: 0 0 1.1rem; color: var(--muted); }
 /* Launch-Hinweis auf der Preisseite */
 .launch-note{margin:1rem 0 1.25rem;padding:.75rem 1rem;border:1px dashed var(--accent,#107C41);border-radius:10px;background:rgba(16,124,65,.06)}
 .launch-note code{font-weight:700;padding:.1em .35em;border-radius:4px;background:rgba(16,124,65,.12)}
+
+/* PWA (assets/pwa.js): Offline-Leiste unter dem Kopf, Hinweiskarten (Update, Installation) unten links */
+.offline-bar { padding: 0.45rem 1.25rem; background: var(--target); color: var(--text); border-bottom: 1px solid var(--target-border); font-size: 0.9rem; text-align: center; }
+.offline-bar[hidden] { display: none; }
+.pwa-layer { position: fixed; left: 1rem; bottom: 1rem; z-index: 61; display: grid; gap: 0.5rem; max-width: min(380px, calc(100vw - 2rem)); }
+.pwa-layer:empty { display: none; }
+.pwa-card {
+  display: grid; gap: 0.6rem; padding: 0.85rem 1rem; background: var(--surface); color: var(--text);
+  border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16); font-size: 0.95rem; line-height: 1.4; animation: toast-in 0.25s ease-out;
+}
+.pwa-card-body span { color: var(--muted); }
+.pwa-card-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+@media (prefers-reduced-motion: reduce) { .pwa-card { animation: none; } }
+@media (max-width: 480px) {
+  .pwa-layer { left: 0.75rem; right: 0.75rem; bottom: 0.75rem; max-width: none; }
+}
+/* Toasts über einer offenen Karte stapeln statt sie zu verdecken (--pwa-layer-h setzt assets/pwa.js) */
+@media (max-width: 800px) { .toasts { bottom: calc(1rem + var(--pwa-layer-h, 0px)); } }
+@media (max-width: 480px) { .toasts { bottom: calc(0.75rem + var(--pwa-layer-h, 0px)); } }

@@ -12,12 +12,16 @@
   var LEVELUP_MODAL_FROM = 4;                    // Level-up unter diesem Level nur als Toast, ab hier als Dialog
   var DEFAULT_TRACK = 'basis';
   var MOBILE_QUERY = '(max-width: 800px)';
+  var STORAGE_INSTALL = 'excelDrillsInstallHint';  // Zeitpunkt (ms), zu dem die Installations-Karte zuletzt kam
+  var INSTALL_AFTER_SOLVED = 2;                    // Karte frühestens ab der zweiten gelösten Übung
+  var INSTALL_PAUSE_MS = 7 * 24 * 3600 * 1000;     // höchstens einmal pro 7 Tage
 
   var E = window.ExcelDrillsEngine;
   var Keys = window.ExcelDrillsKeys;
   var G = window.ExcelDrillsGamification;
   var Badges = window.ExcelDrillsBadges;
   var Access = window.ExcelDrillsAccess;
+  var Pwa = window.ExcelDrillsPwa;  // assets/pwa.js (optional: ohne Service Worker läuft die App wie bisher)
   var paywallExercise = null;      // gesperrte Übung, die den Paywall-Dialog ausgelöst hat
   var HF = null;
   var exercises = [];
@@ -235,6 +239,7 @@
     if (els.localeSelect) els.localeSelect.value = locale;
     relabelTracks();
     if (HF) els.checkBtn.disabled = !E.hasLanguage(locale);
+    if (Pwa) Pwa.refresh();
   }
 
   function setAppLocale(next) {
@@ -916,6 +921,7 @@
       celebrate(outcome);
       if (outcome.first) track('uebung_geloest', { uebung: current.id, pfad: trackOf(current).id });
       if (outcome.goalReached && outcome.streak === 3) track('streak_3');
+      if (outcome.first) maybeOfferInstall();
     }
     var next = nextExercise();
     els.nextBtn.hidden = !next;
@@ -927,6 +933,40 @@
       var focusTarget = els.trackDone.querySelector('a, button');
       if (focusTarget) focusTarget.focus();
     }
+  }
+
+  /* ---------- Installation als App (PWA) ----------
+   * Nach der zweiten gelösten Übung eine Karte «Auf dem Home-Bildschirm installieren», höchstens einmal pro 7 Tage.
+   * Chrome/Edge/Android: eigener Button ruft den gespeicherten beforeinstallprompt auf (assets/pwa.js).
+   * Safari auf iOS kennt das nicht: dort nur der Hinweis «Teilen › Zum Home-Bildschirm». Sonst (Firefox Desktop,
+   * schon installiert) gar nichts.
+   */
+  function maybeOfferInstall() {
+    if (!Pwa || Pwa.isStandalone()) return;
+    if (exercises.filter(isSolved).length < INSTALL_AFTER_SOLVED) return;
+    var last = Number(storageGet(STORAGE_INSTALL)) || 0;
+    if (Date.now() - last < INSTALL_PAUSE_MS) return;
+    var mode = Pwa.canPrompt() ? 'prompt' : (Pwa.isIosSafari() ? 'ios' : null);
+    if (!mode) return;
+    storageSet(STORAGE_INSTALL, String(Date.now()));
+    var title = function () { return T('pwa.installTitle'); };
+    if (mode === 'ios') {
+      Pwa.showCard('install', { title: title, text: function () { return T('pwa.iosText'); },
+        actions: [{ label: function () { return T('pwa.iosOk'); }, primary: true }] });
+      return;
+    }
+    Pwa.showCard('install', {
+      title: title,
+      text: function () { return T('pwa.installText'); },
+      actions: [
+        { label: function () { return T('pwa.installBtn'); }, primary: true, onClick: function () {
+          Pwa.promptInstall().then(function (outcome) {
+            if (outcome !== 'unavailable') track('pwa_install', { ergebnis: outcome === 'accepted' ? 'akzeptiert' : 'abgelehnt' });
+          });
+        } },
+        { label: function () { return T('pwa.later'); } }
+      ]
+    });
   }
 
   function onHint() {
@@ -1571,6 +1611,7 @@
     if (!E || !Keys || !G || !Badges) { fail(T('notice.appFailed')); return; }
     var wanted = resolveLocale();
     locale = E.setLocale(E.langOf(wanted) === 'de' ? wanted : 'de-CH');
+    if (Pwa) Pwa.setTranslator(T);
     applyLocaleUi();
     unlocked = resolveUnlock();
     initLocaleSwitch();

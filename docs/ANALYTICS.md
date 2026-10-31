@@ -25,9 +25,10 @@ Die Datenschutzerklärung (datenschutz.html) ist entsprechend angepasst.
 | `paywall_gezeigt` | Paywall-Dialog in app/ geöffnet (Klick auf gesperrte Übung oder Direktlink) (app/app.js, `openPaywall`) | `pfad` (Pfad-ID), `uebung` (Übungs-ID, leer wenn unbekannt) |
 | `mini_geloest` | Mini-Übung auf der Startseite gelöst, einmal pro Seitenaufruf (assets/mini-drill.js) | `land` (`de-CH`/`de-DE`) |
 | `handout_lead` | Handout-Formular abgeschickt (handouts/gate.js) | `status`: `gesendet` (Adresse übermittelt), `platzhalter` (Formspree-ID fehlt noch, nichts gesendet), `fehler` |
+| `pwa_install` | Klick auf «Installieren» in der Installations-Karte der App und Antwort im Browser-Dialog (app/app.js, `maybeOfferInstall`; nur Chrome/Edge/Android mit `beforeinstallprompt`) | `ergebnis`: `akzeptiert`, `abgelehnt` |
 
 Beim Ziel `kauf` «Enable revenue tracking» mit Währung CHF aktivieren. In den Goal-Einstellungen die Properties
-`plan`, `uebung`, `pfad`, `land`, `ort`, `status` unter «Custom Properties» freigeben, damit sie aufgeschlüsselt werden.
+`plan`, `uebung`, `pfad`, `land`, `ort`, `status`, `ergebnis` unter «Custom Properties» freigeben, damit sie aufgeschlüsselt werden.
 
 ## Stripe-Erfolgs-URL
 
@@ -62,3 +63,16 @@ UTM-Parameter wertet Plausible automatisch aus; Schema in `social-kit/utm.md`.
   (Custom event) anlegen, sonst erscheinen sie nicht in der Auswertung.
 - Trichter: Besuch → `mini_geloest` / `uebung_geloest` → `paywall_gezeigt` → `premium_klick` → `kauf`.
 - `handout_lead` zählt bis zum Eintragen der Formspree-ID nur mit `status=platzhalter` (Adressen gehen dann noch verloren).
+
+## Stand 31.10.2026 (PWA): Installation
+
+- Neu: `pwa_install` mit Property `ergebnis` (`akzeptiert`/`abgelehnt`). In Plausible als Goal (Custom event)
+  anlegen und `ergebnis` unter «Custom Properties» freigeben.
+- Die Karte erscheint nach der zweiten gelösten Übung, höchstens einmal pro 7 Tage (localStorage
+  `excelDrillsInstallHint`). Safari auf iOS hat keinen Installationsdialog: dort nur der Text
+  «Teilen › Zum Home-Bildschirm», ohne Ereignis (die Installation ist dort nicht messbar).
+- Start aus der installierten App: `start_url` ist `/app/?quelle=pwa`. Plausible wertet `quelle` nicht automatisch
+  als Quelle aus (nur `utm_*`, `ref`, `source`); die Aufrufe sind unter Seiten mit dem Parameter nicht getrennt sichtbar.
+  Bei Bedarf `start_url` auf `/app/?utm_source=pwa` ändern (CACHE_VERSION in sw.js nicht nötig, nur Manifest).
+- Offline gelöste Übungen senden kein `uebung_geloest` (Plausible nicht erreichbar, die Warteschlange geht mit
+  dem Schliessen der Seite verloren).

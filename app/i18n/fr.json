@@ -266,7 +266,17 @@
   "code.invalid": "Ce code n'est pas valable. Vérifie le code ou le lien de ton e-mail de confirmation.",
   "code.empty": "Saisis d'abord ton code.",
   "copy.ok": "Copié.",
-  "copy.failed": "La copie n'a pas fonctionné. Sélectionne le texte et copie-le à la main."
+  "copy.failed": "La copie n'a pas fonctionné. Sélectionne le texte et copie-le à la main.",
+  "pwa.updateTitle": "Nouvelle version disponible",
+  "pwa.updateText": "Recharge la page pour l'utiliser.",
+  "pwa.reload": "Recharger",
+  "pwa.later": "Plus tard",
+  "pwa.offline": "Hors ligne : les exercices gratuits fonctionnent, mais pas l'achat Premium ni le téléchargement de fichiers.",
+  "pwa.installTitle": "Installer sur l'écran d'accueil",
+  "pwa.installText": "Excel-Drills s'ouvre alors comme une app, et les exercices gratuits fonctionnent aussi hors ligne.",
+  "pwa.installBtn": "Installer",
+  "pwa.iosText": "Dans Safari : Partager › Sur l'écran d'accueil. Excel-Drills s'ouvre ensuite comme une app, les exercices gratuits fonctionnent aussi hors ligne.",
+  "pwa.iosOk": "Compris"
  },
  "exercises": {
   "summe-1": {

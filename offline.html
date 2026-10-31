@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offline – Excel-Drills</title>
+  <meta name="description" content="Du bist offline. Die Gratis-Übungen von Excel-Drills funktionieren trotzdem.">
+  <meta name="robots" content="noindex">
+  <!-- Fallback des Service Workers (sw.js) für Seiten ohne Netz. Wird unter beliebigen URLs ausgeliefert,
+       deshalb nur absolute Pfade. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23107C41'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'%3EX%3C/text%3E%3C/svg%3E">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#107C41">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Excel-Drills">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="/app/" aria-label="Excel-Drills Übungen"><span class="mark" aria-hidden="true">X</span>Excel-Drills</a>
+    </div>
+  </header>
+
+  <main id="inhalt" class="wrap">
+    <div class="prose">
+      <h1>Du bist offline</h1>
+      <p>Diese Seite braucht eine Internetverbindung. Die Gratis-Übungen funktionieren aber auch ohne Netz, dein Fortschritt bleibt in diesem Browser gespeichert.</p>
+      <p><a class="btn" href="/app/">Gratis-Übungen öffnen</a></p>
+      <p><button class="btn btn-secondary" type="button" id="retry">Nochmals versuchen</button></p>
+      <p class="fill-note" lang="fr-CH">Hors ligne : les exercices gratuits fonctionnent quand même. <a href="/app/?lang=fr">Ouvrir les exercices</a></p>
+      <p class="fill-note" lang="it-CH">Offline: gli esercizi gratuiti funzionano comunque. <a href="/app/?lang=it">Apri gli esercizi</a></p>
+    </div>
+  </main>
+  <script>
+    document.getElementById('retry').addEventListener('click', function () { location.reload(); });
+    // Sobald das Netz zurück ist, die ursprünglich angefragte Seite laden
+    window.addEventListener('online', function () { location.reload(); });
+  </script>
+</body>
+</html>

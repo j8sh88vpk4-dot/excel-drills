@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- App-Icon (PWA): Marke wie social-kit/visuals/logo-symbol.html (weisses X auf Excel-Grün).
+     ?v=any       abgerundetes Quadrat, transparente Ecken (Manifest purpose any)
+     ?v=maskable  vollflächig, X kleiner im sicheren Bereich (80 % Kreis; Manifest purpose maskable)
+     ?v=apple     vollflächig ohne Transparenz (iOS rundet selbst ab; apple-touch-icon)
+     Rendern: sh scripts/pwa/render-icons.sh -->
+<style>
+html,body{margin:0;width:100vw;height:100vh;background:transparent;overflow:hidden}
+.b{width:100vw;height:100vh;background:#107C41;display:flex;align-items:center;justify-content:center}
+.x{color:#fff;font-weight:800;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;line-height:1}
+</style></head><body><div class="b"><div class="x">X</div></div>
+<script>
+  var v = new URLSearchParams(location.search).get('v') || 'any';
+  var s = Math.min(innerWidth, innerHeight);
+  var b = document.querySelector('.b'), x = document.querySelector('.x');
+  // Proportionen aus logo-symbol.html (512 px: Radius 96, Schrift 320, Laufweite -8, Versatz -10)
+  var f = v === 'maskable' ? 0.47 : 0.625;
+  b.style.borderRadius = v === 'any' ? (s * 96 / 512) + 'px' : '0';
+  x.style.fontSize = (s * f) + 'px';
+  x.style.letterSpacing = (-s * f * 8 / 320) + 'px';
+  x.style.marginTop = (-s * f * 10 / 320) + 'px';
+</script></body></html>

@@ -1,0 +1,27 @@
+{
+  "id": "/app/",
+  "name": "Excel-Drills",
+  "short_name": "Excel-Drills",
+  "description": "Excel-Übungen mit Sofort-Prüfung: Formel eintippen, Ergebnis prüfen, auf Deutsch, Französisch und Italienisch. Die Gratis-Übungen laufen auch offline.",
+  "lang": "de-CH",
+  "dir": "ltr",
+  "start_url": "/app/?quelle=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#107C41",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/assets/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Üben", "short_name": "Üben", "description": "Übungen öffnen", "url": "/app/",
+      "icons": [{ "src": "/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Preise", "short_name": "Preise", "description": "Premium und Preise ansehen", "url": "/premium.html",
+      "icons": [{ "src": "/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }] }
+  ]
+}

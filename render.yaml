@@ -8,3 +8,16 @@ services:
       - path: /*
         name: X-Content-Type-Options
         value: nosniff
+      # PWA: Service Worker nie aus dem HTTP-Cache, damit Updates (CACHE_VERSION in sw.js) sofort ankommen
+      - path: /sw.js
+        name: Cache-Control
+        value: no-cache
+      - path: /sw.js
+        name: Service-Worker-Allowed
+        value: /
+      - path: /manifest.webmanifest
+        name: Content-Type
+        value: application/manifest+json
+      - path: /manifest.webmanifest
+        name: Cache-Control
+        value: no-cache

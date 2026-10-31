@@ -198,6 +198,18 @@
     'share.download': 'Bild herunterladen (PNG)',
     'share.button': 'Teilen …',
     'share.text': 'Abzeichen «{name}» bei Excel-Drills freigeschaltet.',
-    'share.file': 'excel-drills-abzeichen-{id}.png'
+    'share.file': 'excel-drills-abzeichen-{id}.png',
+
+    // PWA (assets/pwa.js zeigt Update-Hinweis und Offline-Leiste, app.js die Installations-Karte)
+    'pwa.updateTitle': 'Neue Version verfügbar',
+    'pwa.updateText': 'Lade neu, um sie zu verwenden.',
+    'pwa.reload': 'Neu laden',
+    'pwa.later': 'Später',
+    'pwa.offline': 'Offline: Die Gratis-Übungen funktionieren, Premium-Kauf und Datei-Downloads nicht.',
+    'pwa.installTitle': 'Auf dem Home-Bildschirm installieren',
+    'pwa.installText': 'Excel-Drills startet dann wie eine App, und die Gratis-Übungen laufen auch offline.',
+    'pwa.installBtn': 'Installieren',
+    'pwa.iosText': 'In Safari: Teilen › Zum Home-Bildschirm. Danach startet Excel-Drills wie eine App, die Gratis-Übungen laufen auch offline.',
+    'pwa.iosOk': 'Verstanden'
   };
 })(typeof window !== 'undefined' ? window : globalThis);
