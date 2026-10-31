@@ -20,7 +20,7 @@ import {
 const env = (k: string) => Deno.env.get(k) ?? '';
 const SITE_URL = (env('SITE_URL') || 'https://excel-drills.ch').replace(/\/$/, '');
 // Stripe-Price-IDs sind nicht geheim: hier eintragen ODER als Secret setzen (Secret hat Vorrang).
-const DEFAULT_PRICES = { monat: '', jahr: '', lifetime: '' };
+const DEFAULT_PRICES = { monat: 'price_1UWH3p2ObEvn7ZEOU7nycPdc', jahr: 'price_1UWH3p2ObEvn7ZEOus8nKejk', lifetime: 'price_1UWH3p2ObEvn7ZEOPAiNZGkx' };
 const PRICES = {
   PRICE_MONAT: env('PRICE_MONAT') || DEFAULT_PRICES.monat,
   PRICE_JAHR: env('PRICE_JAHR') || DEFAULT_PRICES.jahr,
