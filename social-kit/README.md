@@ -179,7 +179,7 @@ Rhythmus: LinkedIn 3× pro Woche (Di/Mi/Do 07:30–08:30 oder 12:00), X täglich
 - [ ] Analytics aktiv (sonst sind UTM-Links wertlos)
 - [ ] Stripe-Links in premium.html eingetragen, Testkauf durchgeführt
 - [ ] og:image in index.html gesetzt (`assets/og-image.png` liegt bereit, 1200×630)
-- [ ] Schulen/Teams-Angebot (EM-02/EM-03) bestätigt oder aus Texten gestrichen
+- [x] Schulen/Teams-Angebot entschieden (31.10.): Schulen und Berufsschulen gratis, Firmen-Teams ab 5 Personen CHF 39/Person/Jahr
 - [x] 14-Tage-Garantie auf premium.html sichtbar (31.10.)
 - [x] Stripe-Promo-Code SVERWEIS20 angelegt (31.10.) (20 %, Jahresabo + Lifetime, Mindestbetrag CHF 49, einmalig, bis 15.11.2026)
 - [ ] LinkedIn-Profil: Zeile «Baut Excel-Drills (Excel-Übungen auf Deutsch)» im Untertitel, Link im Featured-Bereich

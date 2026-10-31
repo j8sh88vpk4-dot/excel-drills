@@ -65,7 +65,7 @@ Excel-Drills ist anders gebaut:
 - Läuft im Browser, keine Installation, für die Gratis-Übungen kein Login
 - Lernpfade Basis, Accounting & Controlling, Banking & Finance, Data & Reporting (42 Übungen)
 
-Für Teams biete ich eine Teamlizenz an: {Konditionen, z. B. «ab 5 Personen CHF {Preis} pro Person und Jahr»}. Für die ersten Teams gerne zu Pilotkonditionen gegen ehrliches Feedback.
+Für Teams biete ich einen Teampreis an: ab 5 Personen CHF 39 pro Person und Jahr (statt 49), eine Rechnung für alle, Trainer-Handouts inklusive. Für die ersten Teams gerne zu Pilotkonditionen gegen ehrliches Feedback.
 
 Hättest du 15 Minuten für einen kurzen Call? Oder wenn du es zuerst selbst anschauen willst: https://excel-drills.ch/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-02
 

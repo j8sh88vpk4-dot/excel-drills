@@ -69,8 +69,8 @@
   Datenschutzerklärung angepasst). Offen: Site in Plausible mit echter Domain anlegen und Ziele einrichten, siehe docs/ANALYTICS.md.
 - canonical, og:url, og:image nach Domainwahl setzen (Kommentar in index.html).
 - Zusätzliche alt-Datensätze für summe-1, mittelwert-1, max-1, summewenn-* (verhindert festgetippte Ergebnisse).
-- Texte bestätigen: «100 % Geld zurück» (index.html FAQ, premium.html), «Schulen/Teams gratis». Im Social-Kit bewusst
-  weggelassen, bis bestätigt. Teamlizenz-Preis für EM-02 festlegen.
+- Texte bestätigen: «100 % Geld zurück» (index.html FAQ, premium.html), «Schulen/Teams»: entschieden 31.10. – Schulen und Berufsschulen gratis,
+  Firmen-Teams ab 5 Personen CHF 39/Person/Jahr (eine Rechnung), Trainer-Handouts inklusive.
 - Startseite lädt HyperFormula (~1 MB) für die Mini-Übung; falls zu langsam, erst beim Klick ins Formelfeld laden.
 - Lokal starten: `npm run preview` → http://127.0.0.1:8787/ ; Prüfskript: `npm run check`.
 
