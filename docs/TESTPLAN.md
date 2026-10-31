@@ -56,7 +56,7 @@
   Empfehlung: `brew install ffmpeg` für bessere GIF-Qualität. frames/ (349 MB) kann gelöscht werden.
 - Handouts: 11 PDFs mit excel-drills.ch neu gerendert; 31.10.: Formular via Supabase, echte QR-Codes (scripts/handouts/qr.py).
 
-- PWA (31.10. Abend): manifest.webmanifest, sw.js (Precache ~1.2 MB inkl. HyperFormula, Gratis-Übungen offline),
+- PWA (31.10. Abend): manifest.json, sw.js (Precache ~1.2 MB inkl. HyperFormula, Gratis-Übungen offline),
   Installationskarte nach 2. Übung, Offline-Leiste, Update-Hinweis, Icons in assets/icons/. Bei App-Änderungen
   CACHE_VERSION in sw.js erhöhen. Echtgeräte-Test Android/iPhone offen.
 - Live-fertig (31.10.): keine Platzhalter mehr; Handout-Formular speichert in Supabase-Tabelle leads (anon insert only);

@@ -15,9 +15,9 @@ services:
       - path: /sw.js
         name: Service-Worker-Allowed
         value: /
-      - path: /manifest.webmanifest
+      - path: /manifest.json
         name: Content-Type
         value: application/manifest+json
-      - path: /manifest.webmanifest
+      - path: /manifest.json
         name: Cache-Control
         value: no-cache

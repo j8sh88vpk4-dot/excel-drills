@@ -15,7 +15,7 @@
  */
 'use strict';
 
-const CACHE_VERSION = '2026-10-31.1';
+const CACHE_VERSION = '2026-10-31.2';
 const CACHE_PREFIX = 'excel-drills-';
 const CACHE = CACHE_PREFIX + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 4000; // Network-First: danach Cache, falls vorhanden (langsames Netz im Zug)
@@ -40,7 +40,7 @@ const PRECACHE = [
   '/assets/analytics.js',
   '/assets/pwa.js',
   '/offline.html',
-  '/manifest.webmanifest',
+  '/manifest.json',
   '/assets/icons/icon-192.png',
   '/assets/icons/icon-512.png',
   '/assets/icons/icon-maskable-192.png',
@@ -106,7 +106,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   if (path === '/app' || path.startsWith('/app/') || path.startsWith('/assets/') ||
-      path === '/manifest.webmanifest' || path === '/offline.html') {
+      path === '/manifest.json' || path === '/offline.html') {
     event.respondWith(staleWhileRevalidate(event, req, cacheKey(req, url)));
     return;
   }

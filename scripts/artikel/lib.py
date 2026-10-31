@@ -107,7 +107,7 @@ def head(title, desc, path, og_type, jsonld):
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="{ICON}">
-  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="manifest" href="../manifest.json">
   <meta name="theme-color" content="#107C41">
   <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
   <meta name="mobile-web-app-capable" content="yes">
