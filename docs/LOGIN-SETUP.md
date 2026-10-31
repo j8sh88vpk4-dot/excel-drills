@@ -1,6 +1,16 @@
 # Konto «Fortschritt sichern» einrichten (Supabase + Stripe-Webhook)
 
-Stand 31.10.2026. Solange `app/config.js` leer ist, ist die Konto-Funktion unsichtbar und die App läuft wie bisher
+Stand 31.10.2026.
+
+> **Erledigt durch Claude am 31.10.2026:** Supabase-Projekt «excel-drills» (Organisation Excel-Drills, Free, Region Zürich
+> eu-central-2, Projekt-Ref `uijlrixalisqbcgivccn`), SQL-Schema ausgeführt, Site URL und 4 Redirect-URLs gesetzt,
+> Edge Function `stripe-webhook` über den Dashboard-Editor deployt (Verify JWT aus), Stripe-Webhook
+> `excel-drills-supabase` auf `https://uijlrixalisqbcgivccn.supabase.co/functions/v1/stripe-webhook` mit 5 Events,
+> `app/config.js` und Price-IDs eingetragen.
+> **Noch offen (nur Luca):** Secrets `STRIPE_SECRET_KEY` (Restricted Key, nur Lesen) und `STRIPE_WEBHOOK_SECRET`
+> (Stripe › Workbench › Webhooks › excel-drills-supabase › Signatur-Geheimnis anzeigen) unter
+> Supabase › Edge Functions › Secrets eintragen; Resend-Konto + SMTP in Supabase; danach Mail-Vorlagen (Schritt 3)
+> und Testkauf (Schritt 10). Erst dann Branch `login` auf `main` mergen. Solange `app/config.js` leer ist, ist die Konto-Funktion unsichtbar und die App läuft wie bisher
 (nur localStorage, Zugangscode per `?key=`). Alles hier ist eine einmalige Einrichtung, ca. 60–90 Minuten.
 
 ## Wer trägt was ein?
