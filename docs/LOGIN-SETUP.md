@@ -24,7 +24,7 @@ und die drei Price-IDs (z. B. als Screenshot oder Text im Chat, die sind nicht g
 
 1. https://supabase.com › Sign in (z. B. mit GitHub) › **New project**.
 2. Name: `excel-drills`. Datenbank-Passwort: generieren lassen und im Passwortmanager ablegen.
-3. **Region: Central EU (Frankfurt)** (`eu-central-1`). Das steht so in der Datenschutzerklärung.
+3. **Region: Central Europe (Zurich)** (`eu-central-2`). Das steht so in der Datenschutzerklärung.
 4. Plan: Free reicht für den Test (pausiert nach 7 Tagen ohne Aktivität; bei Go auf Pro wechseln, USD 25/Monat).
 5. Nach dem Anlegen: **Project Settings › API Keys** (bzw. «Data API»):
    - **Project URL** und **anon / publishable key** an Claude geben.

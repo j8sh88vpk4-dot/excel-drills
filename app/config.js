@@ -6,6 +6,6 @@
  * Niemals den Service-Role-Key, Stripe-Secret oder Webhook-Secret eintragen! Siehe docs/LOGIN-SETUP.md.
  */
 window.ExcelDrillsConfig = {
-  supabaseUrl: '',      // z. B. 'https://abcdefghijklmnop.supabase.co'
-  supabaseAnonKey: ''   // Supabase › Project Settings › API Keys › anon / publishable
+  supabaseUrl: 'https://uijlrixalisqbcgivccn.supabase.co',
+  supabaseAnonKey: 'sb_publishable_jtC1RxHTZq84yrxItckk8Q_iz_19kyU'   // Publishable Key, öffentlich
 };
