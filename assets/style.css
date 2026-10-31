@@ -678,6 +678,8 @@ dialog.levelup p { margin: 0 0 1.1rem; color: var(--muted); }
 .gate-field input:user-invalid { border-color: var(--err-text); }
 .gate-check { display: flex; gap: 0.6rem; align-items: flex-start; }
 .gate-check input { width: 1.2rem; height: 1.2rem; margin: 0.15rem 0 0; accent-color: var(--accent); flex: none; }
+.gate-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.gate-error { margin: 0; color: var(--err-text); font-weight: 700; font-size: 0.95rem; }
 .gate-downloads { background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.25rem 0; }
 .gate-downloads h3 { margin-top: 0; }
 .gate-downloads h3:focus { outline: none; }

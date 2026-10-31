@@ -102,7 +102,10 @@ def head(title, desc, path, og_type, jsonld):
   <meta property="og:site_name" content="Excel-Drills">
   <meta property="og:title" content="{html.escape(title, quote=True)}">
   <meta property="og:description" content="{html.escape(desc, quote=True)}">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="{DOMAIN}/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="{ICON}">
   <link rel="stylesheet" href="../assets/style.css">
   <script defer src="../assets/analytics.js"></script>

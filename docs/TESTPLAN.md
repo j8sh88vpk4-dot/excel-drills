@@ -25,7 +25,7 @@
 4. Erledigt 30.10.: Impressum/Datenschutz (Luca Moser, Kapfstrasse 27, 6020 Emmenbrücke, luca@familymoser.ch),
    UX-Review umgesetzt (Status in docs/UX-REVIEW.md), Stripe-Belege aktiviert, Zugangslink im Rechnungsvermerk,
    Zugangscode im Profil + Code-Eingabe in der Paywall. Entschieden 30.10.: Garantie 14 Tage, Spickzettel/Formelkarten gratis gegen E-Mail, Trainer-Handouts nur mit
-   Premium-Code. OFFEN: Formspree-ID,
+   Premium-Code. 31.10.: Formular speichert in Supabase (Tabelle leads, statt Formspree). OFFEN:
    Mail-Adresse auf hallo@excel-drills.ch umstellen, sobald Weiterleitung bei Hostpoint steht.
 
 ## Erledigt 30.10. (Nachmittag)
@@ -54,7 +54,7 @@
   Schritt-Beschriftungen prüfen (Mrz, Qrtl2, Kürzen, Linker Anti, Rangfolge nach Grösstem).
 - Video (social-kit/video): 20 s, 9:16 und 1:1, H.264 ohne Ton, mit excel-drills.ch; Swift-Encoder, weil ffmpeg fehlt.
   Empfehlung: `brew install ffmpeg` für bessere GIF-Qualität. frames/ (349 MB) kann gelöscht werden.
-- Handouts: 11 PDFs mit excel-drills.ch neu gerendert; Formspree-ID und QR-Codes noch einzusetzen.
+- Handouts: 11 PDFs mit excel-drills.ch neu gerendert; 31.10.: Formular via Supabase, echte QR-Codes (scripts/handouts/qr.py).
 
 ## Technische Restpunkte vor Livegang
 - Erledigt 30.10.: Key als SHA-256-Hash in app/keys.js hinterlegt (Klartext nur in den Stripe-Weiterleitungen). Mechanismus ist clientseitig,

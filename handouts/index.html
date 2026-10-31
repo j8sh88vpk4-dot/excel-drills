@@ -12,7 +12,10 @@
   <meta property="og:site_name" content="Excel-Drills">
   <meta property="og:title" content="Excel Spickzettel und Formelkarten als PDF | Excel-Drills">
   <meta property="og:description" content="Excel-Formelkarten zu SVERWEIS, SUMMEWENN, WENN, ZÄHLENWENN und Bezügen gratis als PDF, dazu Spickzettel und Trainer-Handouts pro Lernpfad.">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://excel-drills.ch/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23107C41'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'%3EX%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="../assets/style.css">
   <script defer src="../assets/analytics.js"></script>
@@ -87,29 +90,28 @@
       <h2 id="spickzettel">Spickzettel pro Lernpfad</h2>
       <p>Die Spickzettel fassen alle Funktionen eines Lernpfads auf einer Seite zusammen. Gib deine E-Mail-Adresse ein, dann erscheinen die Downloads sofort.</p>
 
-      <!-- E-Mail-Gate einrichten (Formspree):
-           1. Auf https://formspree.io ein Konto und ein neues Formular anlegen.
-           2. Die Formular-ID (z. B. xyzabcd) unten in action="https://formspree.io/f/PLATZHALTER" einsetzen.
-           3. In Formspree die Benachrichtigung bzw. den Export (CSV, Zapier, Mailchimp) einrichten.
-           4. Datenschutzerklärung (datenschutz.html, Abschnitt «Handouts und Newsletter») mit dem Anbieter ergänzen.
-           Alternative Buttondown (Newsletter-Tool mit Double-Opt-in):
-           action="https://buttondown.com/api/emails/embed-subscribe/<BENUTZERNAME>", Feld name="email" beibehalten,
-           Name als name="metadata__name" senden; die Checkbox steuert dann, ob überhaupt abonniert wird.
-           Solange PLATZHALTER im action steht, sendet handouts/gate.js nichts und schaltet die Downloads direkt frei. -->
-      <form id="gate-form" class="gate-form" action="https://formspree.io/f/PLATZHALTER" method="POST" aria-describedby="gate-hint">
+      <!-- E-Mail-Gate: handouts/gate.js sendet die Angaben per fetch an die Supabase-Tabelle «leads»
+           (REST, nur INSERT für die Rolle anon erlaubt, kein Lesen). URL und Publishable Key stehen nur in
+           assets/leads-config.js. Kein action/method: ohne JavaScript wird nichts gesendet (siehe noscript).
+           Das Feld «website» ist ein Honeypot gegen Bots: für Menschen unsichtbar, wenn ausgefüllt, sendet gate.js nichts. -->
+      <form id="gate-form" class="gate-form" aria-describedby="gate-hint" novalidate>
         <div class="gate-field">
           <label for="gate-name">Name <span class="fill-note">(optional)</span></label>
           <input id="gate-name" name="name" type="text" autocomplete="name">
         </div>
         <div class="gate-field">
           <label for="gate-email">E-Mail</label>
-          <input id="gate-email" name="email" type="email" autocomplete="email" required>
+          <input id="gate-email" name="email" type="email" autocomplete="email" required aria-describedby="gate-email-error">
+          <p id="gate-email-error" class="gate-error" hidden>Bitte gib eine gültige E-Mail-Adresse ein, z. B. name@beispiel.ch.</p>
         </div>
         <div class="gate-check">
           <input id="gate-optin" name="newsletter" type="checkbox" value="ja">
           <label for="gate-optin">Ich möchte Tipps und neue Übungen per Mail</label>
         </div>
-        <input type="hidden" name="_subject" value="Excel-Drills: Download Handouts">
+        <div class="gate-hp" aria-hidden="true">
+          <label for="gate-website">Website (bitte leer lassen)</label>
+          <input id="gate-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
         <p id="gate-hint" class="fill-note">Ohne Häkchen schicken wir dir keine Mails. Abmelden geht jederzeit. Details in der <a href="../datenschutz.html">Datenschutzerklärung</a>.</p>
         <p><button class="btn" type="submit" id="gate-submit">Downloads freischalten</button></p>
         <p id="gate-status" class="fill-note" role="status" aria-live="polite"></p>
@@ -162,6 +164,7 @@
     </div>
   </footer>
   <script src="../app/keys.js" defer></script>
+  <script src="../assets/leads-config.js" defer></script>
   <script src="gate.js" defer></script>
 </body>
 </html>

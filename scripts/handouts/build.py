@@ -1,6 +1,6 @@
 """Erzeugt die Handouts als HTML (Druckvorlage für scripts/handouts/render.sh):
   handouts/spickzettel-<pfad>.html   (A, je 1 Seite)
-  handouts/formelkarte-<slug>.html   (B, je 1 Seite)
+  handouts/formelkarte-<slug>.html   (B, je 1 Seite, mit QR-Code auf den Artikel via scripts/handouts/qr.py)
   handouts/trainer-<pfad>.html       (C, max. 2 Seiten)
   handouts/index.html                (Übersicht mit E-Mail-Gate, Header/Footer aus scripts/artikel/lib.py)
 Aufruf: python3 scripts/handouts/build.py   danach: sh scripts/handouts/render.sh
@@ -14,6 +14,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "artikel"))
 sys.path.insert(0, HERE)
 from lib import head, header, footer, DOMAIN  # noqa: E402
 from content import CHEAT, CHEAT_TRACK, CARDS, GOALS, PLAN  # noqa: E402
+from qr import svg as qr_svg  # noqa: E402  (eigener Encoder, ohne Netzwerk und Pakete)
 
 OUT = os.path.join(ROOT, "handouts")
 URL = DOMAIN.replace("https://", "")
@@ -159,6 +160,7 @@ def card(c):
     en = " ".join(f'<span>{e(en)} = {e(de)}</span>' for de, en in c["en"])
     errs = "\n".join(f'          <tr><th scope="row">{e(code)}</th><td>{e(why)}</td></tr>' for code, why in c["errors"])
     url = f'{URL}/artikel/{c["article"]}'
+    qr = qr_svg(f"https://{url}", f"QR-Code zum Artikel {c['name']}: https://{url}")
     body = f'''  <article class="sheet card">
 {hd("Formelkarte", e(c["name"]))}
     <p class="lead">{e(c["lead"])}</p>
@@ -187,10 +189,8 @@ def card(c):
         <p>{en}</p>
         <p class="small" style="margin-top:1.2mm">Formeln aus englischen Foren übersetzen: Funktionsnamen ersetzen, Komma durch Semikolon ersetzen; der Dezimalpunkt bleibt.</p>
       </section>
-      <!-- QR-Code-Platzhalter: hier einen QR-Code (SVG, ca. 24 x 24 mm) auf https://{url} einsetzen,
-           z. B. als <img src="qr-{c["slug"]}.svg" alt="QR-Code zum Artikel"> anstelle von .qr-slot. -->
       <div class="qr">
-        <div class="qr-slot">QR-Code</div>
+        {qr}
         <p>Artikel und Gratis-Übung:<br>{URL}/<br>artikel/{c["article"]}</p>
       </div>
     </div>
@@ -363,29 +363,28 @@ def index_page():
       <h2 id="spickzettel">Spickzettel pro Lernpfad</h2>
       <p>Die Spickzettel fassen alle Funktionen eines Lernpfads auf einer Seite zusammen. Gib deine E-Mail-Adresse ein, dann erscheinen die Downloads sofort.</p>
 
-      <!-- E-Mail-Gate einrichten (Formspree):
-           1. Auf https://formspree.io ein Konto und ein neues Formular anlegen.
-           2. Die Formular-ID (z. B. xyzabcd) unten in action="https://formspree.io/f/PLATZHALTER" einsetzen.
-           3. In Formspree die Benachrichtigung bzw. den Export (CSV, Zapier, Mailchimp) einrichten.
-           4. Datenschutzerklärung (datenschutz.html, Abschnitt «Handouts und Newsletter») mit dem Anbieter ergänzen.
-           Alternative Buttondown (Newsletter-Tool mit Double-Opt-in):
-           action="https://buttondown.com/api/emails/embed-subscribe/<BENUTZERNAME>", Feld name="email" beibehalten,
-           Name als name="metadata__name" senden; die Checkbox steuert dann, ob überhaupt abonniert wird.
-           Solange PLATZHALTER im action steht, sendet handouts/gate.js nichts und schaltet die Downloads direkt frei. -->
-      <form id="gate-form" class="gate-form" action="https://formspree.io/f/PLATZHALTER" method="POST" aria-describedby="gate-hint">
+      <!-- E-Mail-Gate: handouts/gate.js sendet die Angaben per fetch an die Supabase-Tabelle «leads»
+           (REST, nur INSERT für die Rolle anon erlaubt, kein Lesen). URL und Publishable Key stehen nur in
+           assets/leads-config.js. Kein action/method: ohne JavaScript wird nichts gesendet (siehe noscript).
+           Das Feld «website» ist ein Honeypot gegen Bots: für Menschen unsichtbar, wenn ausgefüllt, sendet gate.js nichts. -->
+      <form id="gate-form" class="gate-form" aria-describedby="gate-hint" novalidate>
         <div class="gate-field">
           <label for="gate-name">Name <span class="fill-note">(optional)</span></label>
           <input id="gate-name" name="name" type="text" autocomplete="name">
         </div>
         <div class="gate-field">
           <label for="gate-email">E-Mail</label>
-          <input id="gate-email" name="email" type="email" autocomplete="email" required>
+          <input id="gate-email" name="email" type="email" autocomplete="email" required aria-describedby="gate-email-error">
+          <p id="gate-email-error" class="gate-error" hidden>Bitte gib eine gültige E-Mail-Adresse ein, z. B. name@beispiel.ch.</p>
         </div>
         <div class="gate-check">
           <input id="gate-optin" name="newsletter" type="checkbox" value="ja">
           <label for="gate-optin">Ich möchte Tipps und neue Übungen per Mail</label>
         </div>
-        <input type="hidden" name="_subject" value="Excel-Drills: Download Handouts">
+        <div class="gate-hp" aria-hidden="true">
+          <label for="gate-website">Website (bitte leer lassen)</label>
+          <input id="gate-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
         <p id="gate-hint" class="fill-note">Ohne Häkchen schicken wir dir keine Mails. Abmelden geht jederzeit. Details in der <a href="../datenschutz.html">Datenschutzerklärung</a>.</p>
         <p><button class="btn" type="submit" id="gate-submit">Downloads freischalten</button></p>
         <p id="gate-status" class="fill-note" role="status" aria-live="polite"></p>
@@ -429,6 +428,7 @@ def index_page():
 
 {footer("../")}
   <script src="../app/keys.js" defer></script>
+  <script src="../assets/leads-config.js" defer></script>
   <script src="gate.js" defer></script>
 </body>
 </html>
