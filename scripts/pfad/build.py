@@ -9,7 +9,7 @@ from lib import head, header, footer, DOMAIN  # noqa: E402
 
 ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
 OUT = os.path.join(ROOT, "pfad")
-MAIL = "mailto:luca@familymoser.ch"  # Platzhalter wie in impressum.html; vor Livegang ersetzen
+MAIL = "mailto:hallo@excel-drills.ch"  # Platzhalter wie in impressum.html; vor Livegang ersetzen
 
 TRACKS = [
     {"id": "basis", "name": "Basis", "claim": "Die Funktionen, die jeder Excel-Test abfragt",
