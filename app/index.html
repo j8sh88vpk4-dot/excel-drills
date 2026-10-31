@@ -44,6 +44,19 @@
           <span class="visually-hidden" id="level-sr">, 0 XP. Profil öffnen</span>
         </button>
       </div>
+      <div class="account" id="account" hidden>
+        <button class="btn btn-secondary btn-small account-login" type="button" id="account-login" data-i18n="html.accountLogin">Fortschritt sichern</button>
+        <div class="account-wrap" hidden>
+          <button class="account-btn" type="button" id="account-btn" aria-expanded="false" aria-controls="account-menu">
+            <span class="account-avatar" id="account-avatar" aria-hidden="true"></span><span class="account-name" id="account-name"></span>
+          </button>
+          <div class="account-menu" id="account-menu" hidden>
+            <p class="account-menu-email" id="account-menu-email"></p>
+            <button type="button" id="account-menu-profile" data-i18n="html.accountMenuProfile">Konto</button>
+            <button type="button" id="account-menu-logout" data-i18n="html.accountMenuLogout">Abmelden</button>
+          </div>
+        </div>
+      </div>
       <div class="locale-picker" id="locale-picker" hidden>
         <div class="locale-switch" id="locale-switch" role="group" aria-label="Sprache und Land" data-i18n-attr="aria-label:html.localeGroup">
           <button type="button" data-locale="de-CH" aria-pressed="true" lang="de-CH" title="Deutsch (Schweiz): 12'500.50, CHF">DE-CH<span class="visually-hidden"> Deutsch, Schweiz</span></button>
@@ -242,8 +255,12 @@
       </p>
       <p class="fine" id="access-msg" role="status" aria-live="polite"></p>
     </section>
+    <section class="pf-section" id="pf-account" aria-labelledby="pf-account-h" hidden>
+      <h3 id="pf-account-h" data-i18n="html.accountHeading">Konto</h3>
+      <div id="pf-account-body"></div>
+    </section>
     <section class="pf-section pf-foot">
-      <p class="fine" data-i18n="html.pfStorage">Dein Fortschritt ist nur in diesem Browser gespeichert. Konten folgen später.</p>
+      <p class="fine" id="pf-storage" data-i18n="html.pfStorage">Dein Fortschritt ist nur in diesem Browser gespeichert. Konten folgen später.</p>
       <button class="btn btn-secondary btn-small" type="button" id="reset-btn" data-i18n="html.reset">Fortschritt zurücksetzen</button>
       <div class="reset-confirm" id="reset-confirm" role="group" aria-labelledby="reset-q" hidden>
         <p id="reset-q" data-i18n="html.resetQ">Wirklich zurücksetzen? XP, Medaillen, Abzeichen und Streak werden in diesem Browser gelöscht. Das lässt sich nicht rückgängig machen.</p>
@@ -253,6 +270,32 @@
         </div>
       </div>
     </section>
+  </dialog>
+
+  <dialog class="profile login" id="login-dialog" aria-labelledby="login-title">
+    <div class="profile-head">
+      <h2 id="login-title" data-i18n="html.accountLogin">Fortschritt sichern</h2>
+      <button class="icon-btn" type="button" id="login-close" aria-label="Schliessen" data-i18n-attr="aria-label:html.close">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <p data-i18n="html.loginLead">Mit einem Konto ist dein Fortschritt auf allen Geräten da, und Premium aus deinem Kauf gilt überall. Kein Passwort: Du bekommst einen Anmeldelink per E-Mail.</p>
+    <form class="login-form" id="login-form" novalidate>
+      <label for="login-email" data-i18n="html.loginEmail">E-Mail-Adresse</label>
+      <div class="formula-row">
+        <input class="formula-input" id="login-email" name="email" type="email" autocomplete="email" inputmode="email"
+               autocapitalize="off" autocorrect="off" spellcheck="false" required aria-describedby="login-msg">
+        <button class="btn" type="submit" id="login-submit" data-i18n="html.loginSubmit">Link senden</button>
+      </div>
+      <p class="fine" id="login-msg" role="status" aria-live="polite"></p>
+    </form>
+    <div class="login-sent" id="login-sent" role="status" aria-live="polite" hidden>
+      <p><strong data-i18n="html.loginSentTitle">Schau in dein Postfach.</strong> <span id="login-sent-text"></span></p>
+      <p class="fine" data-i18n="html.loginSentHint">Keine Mail da? Prüfe den Spam-Ordner. Einen neuen Link kannst du nach einer Minute anfordern.</p>
+      <button class="btn btn-secondary btn-small" type="button" id="login-again" data-i18n="html.loginAgain">Andere E-Mail-Adresse</button>
+    </div>
+    <p class="fine login-optional"><span data-i18n="html.loginOptional">Freiwillig: Ohne Konto funktioniert alles wie bisher, dein Fortschritt bleibt dann nur in diesem Browser.</span>
+      <a href="../datenschutz.html#konto" data-i18n="html.privacy">Datenschutz</a></p>
   </dialog>
 
   <dialog class="levelup" id="levelup" aria-labelledby="levelup-title" aria-describedby="levelup-text">
@@ -279,12 +322,16 @@
           integrity="sha384-J7i5jngggSLZ7jIxuRKLh1jM0ZzhEZOPdCX6KrBHZXyWn4WYxANOzzWioi+nEK7w" crossorigin="anonymous" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/languages/deDE.js"
           integrity="sha384-jWD9rgGJKCeZXZfD9IcDj4ex7PkMA3oQZbqPtUPh8VB0iQdD3DmT84VMqb2UB0nO" crossorigin="anonymous" defer></script>
+  <!-- Konto (freiwillig): config.js leer = ausgeblendet. supabase-js 2.117.3 lädt account.js nur bei Bedarf
+       vom CDN (SRI-Hash in account.js, aus dem npm-Paket berechnet). -->
+  <script src="config.js" defer></script>
   <script src="keys.js" defer></script>
   <script src="access.js" defer></script>
   <script src="i18n/ui-de.js" defer></script>
   <script src="engine.js" defer></script>
   <script src="gamification.js" defer></script>
   <script src="badges.js" defer></script>
+  <script src="account.js" defer></script>
   <script src="app.js" defer></script>
 </body>
 </html>

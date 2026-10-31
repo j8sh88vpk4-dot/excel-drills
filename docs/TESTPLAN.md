@@ -56,6 +56,11 @@
   Empfehlung: `brew install ffmpeg` für bessere GIF-Qualität. frames/ (349 MB) kann gelöscht werden.
 - Handouts: 11 PDFs mit excel-drills.ch neu gerendert; Formspree-ID und QR-Codes noch einzusetzen.
 
+- Konto (31.10.): freiwilliges Konto «Fortschritt sichern» (Supabase, Magic-Link, kein Passwort) vorbereitet:
+  app/account.js, app/config.js (leer = aus), supabase/migrations/001_init.sql, Edge Function supabase/functions/stripe-webhook
+  (Stripe-Käufe -> Lizenzen, Kündigung/Zahlungsausfall). Tests: `npm run test:account` (103). Einrichtung durch Luca:
+  docs/LOGIN-SETUP.md. Code-Mechanismus (?key=) bleibt als Übergang.
+
 ## Technische Restpunkte vor Livegang
 - Erledigt 30.10.: Key als SHA-256-Hash in app/keys.js hinterlegt (Klartext nur in den Stripe-Weiterleitungen). Mechanismus ist clientseitig,
   für den Test ausreichend; bei Go später Stripe-Webhook + serverseitige Prüfung.
