@@ -69,6 +69,8 @@
 - Lokal starten: `npm run preview` → http://127.0.0.1:8787/ ; Prüfskript: `npm run check`.
 
 ## Launch (Woche 1–2)
+- Launch-Code SVERWEIS20 (20 %, bis 15.11., ab CHF 49) ist in Stripe angelegt und auf premium.html genannt.
+- Preis-Entscheid offen: Monatsabo CHF 9 → 12 (Empfehlung) oder 15.
 - LinkedIn-Post (eigenes Profil), r/de_EDV, r/Finanzen, r/Schweiz, 2–3 Controlling-Foren/Gruppen.
 - Erledigt 30.10.: 5 Funktions-Artikel unter /artikel/ (SVERWEIS 1'623, SUMMEWENN 1'302, WENN 1'366, ZÄHLENWENN 1'225,
   absolute Bezüge 1'547 Wörter), je mit Gratis-Übung verlinkt; sitemap.xml und robots.txt liegen bei.

@@ -5,6 +5,10 @@ Stand: 30.10.2026 · Launch-Zeitraum: Mo 2.11. bis Fr 27.11.2026 (Go/No-Go-Entsc
 **Ziel des Tests:** 500 Gratisnutzer **oder** 20 zahlende Kunden bis 27.11.2026.
 Social Media ist dabei der Startmotor, bis die Funktions-Artikel (SEO) Traffic bringen. Jeder Post hat deshalb genau ein Ziel: Klick auf eine Gratis-Übung, Kommentar (Reichweite) oder Kauf/Teamanfrage.
 
+## Launch-Code
+
+**SVERWEIS20**: 20 % auf Jahresabo und Lifetime, gültig bis 15.11.2026 (Stripe-Promo-Code, Mindestbetrag CHF 49, einmalig). In Launch-Post, erster Story und Netzwerk-Mail nennen; danach nicht mehr erwähnen.
+
 ## Inhalt
 
 | Datei | Inhalt | Anzahl |
