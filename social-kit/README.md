@@ -1,13 +1,13 @@
 # Social-Media-Kit Excel-Drills: 4-Wochen-Launch
 
-Stand: 30.10.2026 · Launch-Zeitraum: Mo 2.11. bis Fr 27.11.2026 (Go/No-Go-Entscheid gemäss `docs/TESTPLAN.md`)
+Stand: 31.10.2026 · Launch-Zeitraum: Mo 2.11. bis Fr 27.11.2026 (Go/No-Go-Entscheid gemäss `docs/TESTPLAN.md`)
 
 **Ziel des Tests:** 500 Gratisnutzer **oder** 20 zahlende Kunden bis 27.11.2026.
 Social Media ist dabei der Startmotor, bis die Funktions-Artikel (SEO) Traffic bringen. Jeder Post hat deshalb genau ein Ziel: Klick auf eine Gratis-Übung, Kommentar (Reichweite) oder Kauf/Teamanfrage.
 
 ## Launch-Code
 
-**SVERWEIS20**: 20 % auf Jahresabo und Lifetime, gültig bis 15.11.2026 (Stripe-Promo-Code, Mindestbetrag CHF 49, einmalig). In Launch-Post, erster Story und Netzwerk-Mail nennen; danach nicht mehr erwähnen.
+**SVERWEIS20**: 20 % auf Jahresabo und Lifetime, gültig bis 15.11.2026 (Stripe-Promo-Code, Mindestbetrag CHF 49, einmalig). Eingebaut in LI-01 (letzte Zeile vor den Hashtags), die Launch-Story vom 3.11. (Story-Plan in `instagram.md`) und EM-01; nirgends sonst, danach nicht mehr erwähnen.
 
 ## Inhalt
 
@@ -15,9 +15,9 @@ Social Media ist dabei der Startmotor, bis die Funktions-Artikel (SEO) Traffic b
 |---|---|---|
 | `linkedin.md` | Posts für Lucas Profil, fertig zum Kopieren | 12 Posts |
 | `reddit.md` | Subreddit-Posts mit Regel-Hinweis und Antwortvorlagen | 5 Posts, 10 Antwortvorlagen |
-| `x-threads.md` | Threads und Einzel-Tweets (DE) | 3 Threads, 10 Tweets |
+| `x-threads.md` | Threads und Einzel-Tweets (DE) | 3 Threads, 11 Tweets |
 | `instagram-tiktok.md` | Kurzvideo-Skripte und Karussell-Konzepte | 6 Skripte, 6 Karussells |
-| `instagram.md` | Fertige Instagram-Karussells (Captions, Hashtags), 4-Wochen-Reihenfolge, Bio, Story-Plan | 6 Karussells (43 Slides), 3 Stories |
+| `instagram.md` | Fertige Instagram-Karussells (Captions, Hashtags), 4-Wochen-Reihenfolge, Bio, Story-Plan | 6 Karussells (43 Slides), 3 Stories + 2 Text-Stories |
 | `email.md` | Netzwerk, HR/Teamleiter, Hochschulen/Berufsschulen | 3 Mails (+ Nachfass-Varianten) |
 | `utm.md` | UTM-Schema pro Kanal und fertige Links | – |
 | `visuals/*.html` | Bildvorlagen (OG, LinkedIn, Quadrat, Story), ohne externe Abhängigkeiten | 4 Vorlagen, 5 LinkedIn-Varianten |
@@ -27,8 +27,10 @@ Social Media ist dabei der Startmotor, bis die Funktions-Artikel (SEO) Traffic b
 
 ## Nutzung
 
-1. **Platzhalter ersetzen.** Alle Texte verwenden `{URL}` für den Link. Den passenden Link pro Kanal und Post holst du aus `utm.md` (z. B. `{URL_LI_01}`). Solange die Domain nicht fix ist, steht dort `{DOMAIN}`.
-2. **Zahlen nur echt einsetzen.** Platzhalter wie `{Nutzer}`, `{Übungen gelöst}`, `{Zahlende}` werden mit den Werten aus der Analytics (Plausible/Umami, siehe TESTPLAN) gefüllt. Gibt es keine Messung, wird der Satz gestrichen, nicht geschätzt.
+1. **Links sind eingesetzt.** Alle `{URL}`-Platzhalter sind durch den fertigen UTM-Link pro Post ersetzt (Referenz: `utm.md`, Domain `https://excel-drills.ch`). Neue Posts: Zeile in `utm.md` ergänzen.
+
+   **Beim Posten noch füllen:** `{Nutzer}`, `{Zahlende}`, `{Vorname}`, `{Nachname}`, `{Telefon}`, `{Modulname}`, `{Kanal}` sind gewollt offen und werden erst beim Posten bzw. Versand gefüllt (Zahlen nur aus der Analytics, `{Vorname}` bis `{Modulname}` pro Empfänger). Gleiches gilt für die übrigen `{…}` in LI-08, LI-12 und X-08/X-10 (Messwerte, Datum, Learnings). Gibt es keine Messung, wird der Satz gestrichen, nicht geschätzt.
+2. **Zahlen nur echt einsetzen.** Platzhalter wie `{Nutzer}`, `{Übungen gelöst}`, `{Zahlende}` werden mit den Werten aus der Analytics (Plausible, siehe `docs/ANALYTICS.md`) gefüllt.
 3. **Bilder.** PNGs liegen in `visuals/png/`. Alle neu rendern: `bash social-kit/visuals/render.sh` (headless Chrome; in einer Sandbox ggf. ausserhalb ausführen). Einzelnes Bild:
    ```bash
    CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
@@ -58,7 +60,8 @@ Social Media ist dabei der Startmotor, bis die Funktions-Artikel (SEO) Traffic b
 - **Keine Lernerfolgs-Versprechen.** Nicht «Test garantiert bestanden», nicht «in 7 Tagen Excel-Profi». Erlaubt: «Du übst genau die Funktionen, die typische Einstellungstests abfragen.»
 - **Keine Wissenschafts-Übertreibung.** Retrieval Practice/Testeffekt darf erwähnt werden, aber nicht mit erfundenen Prozentzahlen («90 % mehr behalten»).
 - **Keine Konkurrenz-Abwertung.** YouTube, Coddy, Kurse nicht schlechtreden; Unterschied sachlich beschreiben (selbst tippen, Sofort-Prüfung, Deutsch/CH).
-- **Garantie und Gratis-Angebote erst nach Bestätigung.** «Geld-zurück-Garantie» und «Schulen/Teams gratis» sind laut TESTPLAN noch zu bestätigen. Bis dahin in Posts weglassen; in `email.md` sind sie als Angebot formuliert, das Luca bewusst macht.
+- **Garantie entschieden, Schulen/Teams noch offen.** Die 14-Tage-Geld-zurück-Garantie gilt und darf als Nebensatz im Launch-Post (LI-01) und in der Netzwerk-Mail (EM-01) stehen; sonst nicht prominent bewerben. «Schulen/Teams gratis» ist laut TESTPLAN noch zu bestätigen; in `email.md` ist es als Angebot formuliert, das Luca bewusst macht.
+- **Spickzettel und Formelkarten** sind gratis gegen E-Mail, **Trainer-Handouts** gibt es nur mit Premium. Nie umgekehrt formulieren.
 - **Keine Microsoft-Nähe.** Nicht «offiziell», kein Microsoft-/Excel-Logo. «Excel» nur beschreibend verwenden; Hinweis «unabhängig, nicht mit Microsoft verbunden» im Profil/Footer.
 - **«Duolingo für Excel»** nur als Vergleich für die Idee («so wie bei Duolingo»), nie als Markenbezug oder Partnerschaft.
 
@@ -66,13 +69,18 @@ Social Media ist dabei der Startmotor, bis die Funktions-Artikel (SEO) Traffic b
 
 | Fakt | Wert |
 |---|---|
-| Übungen total | 37 (Basis 15, Accounting & Controlling 11, Banking & Finance 11) |
+| Übungen total | 42 in 4 Pfaden (Basis, Accounting & Controlling, Banking & Finance, Data & Reporting); Pfadgrössen: Basis 15, Accounting & Controlling 11, Banking & Finance 11, Data & Reporting 5 (Projekte) |
 | Gratis | 18 Übungen, ohne Anmeldung, im Browser |
 | Premium | CHF 9/Monat, CHF 49/Jahr, CHF 149 einmalig |
 | Prüfung | Formel-Engine rechnet die Formel, prüft das Ergebnis (nicht den Text); bei vielen Übungen zusätzlich mit anderen Zahlen |
 | Konventionen | Deutsche Funktionsnamen, Semikolon, CHF, Rappen-Rundung |
 | Hinweise | Englische Namen (SUM, VLOOKUP) werden erkannt und übersetzt |
-| In Arbeit | Lernpfade Consulting, Data & Reporting |
+| App | Als PWA auf dem Handy installierbar; die Gratis-Übungen laufen offline |
+| Sprachen | DE, FR, IT und DE-DE (Deutsch für Deutschland) |
+| Garantie | 14 Tage Geld-zurück |
+| Material | Spickzettel und Formelkarten gratis gegen E-Mail; Trainer-Handouts nur mit Premium |
+| Launch-Code | SVERWEIS20, 20 % auf Jahresabo und Lifetime, ab CHF 49, bis 15.11.2026 |
+| In Arbeit | Lernpfad Consulting |
 | Artikel | SVERWEIS, SUMMEWENN, WENN, ZÄHLENWENN, absolute Bezüge |
 
 Beispiel-Übungen, die sich für Posts eignen: `sverweis-1` (Preis nachschlagen, gratis), `runden-1` (auf Rappen runden, gratis), `acc-abweichung-2` (Abweichung in %, gratis), `fin-zinseszins-1` (gratis), `acc-rundung-1` (5 Rappen, premium), `fin-rmz-1` (Leasingrate, premium), `fin-bw-1` (Barwert einer Rente, premium), `fin-zw-1` (Endwert Säule 3a, premium).
@@ -107,6 +115,7 @@ Rhythmus: LinkedIn 3× pro Woche (Di/Mi/Do 07:30–08:30 oder 12:00), X täglich
 | Do 5.11. | LinkedIn | LI-02 SVERWEIS-Fehler (+ Bild linkedin-2) | Mehrwert, Saves, Klicks auf sverweis-1 |
 | Do 5.11. | Reddit | RD-01 r/de_EDV | Feedback + Nutzer |
 | Fr 6.11. | Instagram | IG-K1 Karussell SVERWEIS | Saves |
+| Fr 6.11. | X | X-11 (App installieren, offline) | Klicks |
 | Fr 6.11. | – | Auswertung W1 | Klicks pro Kanal, Abschlussquote Übung 1 |
 
 ### Woche 2 (9.–13.11.): Mehrwert, Zielgruppen Basis/Bewerbung
@@ -114,6 +123,7 @@ Rhythmus: LinkedIn 3× pro Woche (Di/Mi/Do 07:30–08:30 oder 12:00), X täglich
 | Tag | Kanal | Post-ID | Ziel |
 |---|---|---|---|
 | Mo 9.11. | X | X-T2 (SVERWEIS-Thread), X-03 | Klicks |
+| Mo 9.11. | Instagram | Text-Story «Auf dem Handy installieren» | Installationen |
 | Di 10.11. | LinkedIn | LI-03 Semikolon vs. Komma (+ linkedin-3) | Kommentare |
 | Di 10.11. | Instagram/TikTok | IG-V2, IG-V3 | Reichweite |
 | Mi 11.11. | Reddit | RD-03 r/Schweiz | Nutzer CH |
@@ -165,9 +175,11 @@ Rhythmus: LinkedIn 3× pro Woche (Di/Mi/Do 07:30–08:30 oder 12:00), X täglich
 
 ## Voraussetzungen vor dem ersten Post
 
-- [ ] Domain live, `{DOMAIN}` in `utm.md` ersetzt
+- [ ] Domain `excel-drills.ch` live (Links in allen Posts sind eingesetzt)
 - [ ] Analytics aktiv (sonst sind UTM-Links wertlos)
 - [ ] Stripe-Links in premium.html eingetragen, Testkauf durchgeführt
 - [ ] og:image in index.html gesetzt (`assets/og-image.png` liegt bereit, 1200×630)
-- [ ] Garantie- und Schulen/Teams-Angebot bestätigt oder aus Texten gestrichen
+- [ ] Schulen/Teams-Angebot (EM-02/EM-03) bestätigt oder aus Texten gestrichen
+- [x] 14-Tage-Garantie auf premium.html sichtbar (31.10.)
+- [x] Stripe-Promo-Code SVERWEIS20 angelegt (31.10.) (20 %, Jahresabo + Lifetime, Mindestbetrag CHF 49, einmalig, bis 15.11.2026)
 - [ ] LinkedIn-Profil: Zeile «Baut Excel-Drills (Excel-Übungen auf Deutsch)» im Untertitel, Link im Featured-Bereich

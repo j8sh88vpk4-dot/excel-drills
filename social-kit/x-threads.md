@@ -1,6 +1,6 @@
-# X (Twitter): 3 Threads, 10 Einzel-Tweets
+# X (Twitter): 3 Threads, 11 Einzel-Tweets
 
-Regeln: max. 280 Zeichen pro Tweet, Link nur im letzten Tweet eines Threads (Reichweite), 0–2 Hashtags. Links: `{URL_X_…}` aus `utm.md`.
+Regeln: max. 280 Zeichen pro Tweet, Link nur im letzten Tweet eines Threads (Reichweite), 0–2 Hashtags. Links: fertige UTM-Links aus `utm.md` eingesetzt (Link zählt als 23 Zeichen).
 
 ---
 
@@ -47,7 +47,7 @@ Tippst du aus Gewohnheit SUM, sagt dir die Übung, dass es SUMME heisst.
 ```
 Stand heute:
 • 42 Übungen
-• 4 Lernpfade: Basis, Accounting & Controlling, Banking & Finance
+• 4 Lernpfade: Basis, Accounting & Controlling, Banking & Finance, Data & Reporting
 • 18 gratis, ohne Anmeldung
 • Premium CHF 9/Monat, 49/Jahr, 149 einmalig
 ```
@@ -56,7 +56,7 @@ Stand heute:
 Ich poste hier jede Woche die echten Zahlen, auch wenn sie schlecht sind.
 
 Wenn du zwei Übungen löst und mir sagst, was nervt, hilft mir das enorm:
-{URL_X_T1}
+https://excel-drills.ch/?utm_source=x&utm_medium=social&utm_campaign=launch-2026-11&utm_content=x-t1
 ```
 
 ---
@@ -110,7 +110,7 @@ Steht der Schlüssel rechts: XVERWEIS oder INDEX/VERGLEICH.
 Lesen hilft wenig, tippen hilft.
 
 SVERWEIS-Übung mit Sofort-Prüfung, gratis, ohne Anmeldung:
-{URL_X_T2}
+https://excel-drills.ch/app/?utm_source=x&utm_medium=social&utm_campaign=launch-2026-11&utm_content=x-t2#sverweis-1
 ```
 
 ---
@@ -172,12 +172,12 @@ Aber für eine erste Einordnung reicht eine Zeile Excel.
 ```
 Ich habe dazu einen Lernpfad «Banking & Finance» gebaut: 11 Übungen, 3 gratis.
 
-{URL_X_T3}
+https://excel-drills.ch/pfad/finance.html?utm_source=x&utm_medium=social&utm_campaign=launch-2026-11&utm_content=x-t3
 ```
 
 ---
 
-## 10 Einzel-Tweets
+## 11 Einzel-Tweets
 
 **X-01** (Mi 4.11.)
 ```
@@ -225,7 +225,7 @@ Wiedererkennen ist nicht Können.
 
 Nach 10 Excel-Videos erkennst du SVERWEIS. Nach 10 selbst getippten SVERWEIS kannst du ihn.
 
-Darum habe ich Excel-Drills gebaut: {URL_X_05}
+Darum habe ich Excel-Drills gebaut: https://excel-drills.ch/app/?utm_source=x&utm_medium=social&utm_campaign=launch-2026-11&utm_content=x-05
 ```
 
 **X-06** (Mo 16.11.)
@@ -274,5 +274,14 @@ Heute ist Entscheidungstag für Excel-Drills.
 Ziel war: 500 Gratisnutzer oder 20 Zahlende in 4 Wochen.
 Ergebnis: {Nutzer} / {Zahlende}.
 
-Entscheid und Learnings: {URL_X_10}
+Entscheid und Learnings: https://excel-drills.ch/?utm_source=x&utm_medium=social&utm_campaign=launch-2026-11&utm_content=x-10
+```
+
+**X-11** (Fr 6.11.)
+```
+Excel-Drills lässt sich als App aufs Handy installieren, ohne App-Store: im Browser «Zum Home-Bildschirm» bzw. «App installieren» wählen.
+
+Die Gratis-Übungen laufen danach auch offline, z. B. im Zug.
+
+https://excel-drills.ch/app/?utm_source=x&utm_medium=social&utm_campaign=launch-2026-11&utm_content=x-11
 ```

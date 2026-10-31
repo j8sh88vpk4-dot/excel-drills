@@ -42,7 +42,7 @@ Alle Texte stehen in `drill.html` oben im `<script>` im Objekt `TEXT`:
 
 - `claim`, `task`, `err`, `okBig`, `okSmall`, `lvBefore`, `lvAfter`
 - `captions` – Untertitel mit Start- und Endzeit in ms
-- `outroFacts` und `url` – **`excel-drills.ch` ist ein Platzhalter**, vor dem Posten durch die definitive Domain ersetzen
+- `outroFacts` und `url` – `excel-drills.ch` ist die definitive Domain
 - Tabelle: `ROWS` und `RESULT` direkt darunter (Summe muss stimmen)
 
 Timing der Formel: Konstanten `T_TYPE1`, `STEP1`, `T_EDIT2`, `T_TYPE2`, `STEP2`. Nach Textänderungen die Vorschau anschauen (lange Texte können umbrechen) und dann neu rendern.
@@ -154,4 +154,4 @@ Hinweis: In der Sandbox von Claude Code startet headless Chrome nicht (ProcessSi
 
 > Lo stesso esercizio in tedesco, francese e italiano: con Excel-Drills ti alleni con SOMMA nella tua lingua – 18 esercizi gratuiti.
 
-(Domain `excel-drills.ch` ist wie bei Reel 1 ein Platzhalter.)
+(Domain `excel-drills.ch` ist wie bei Reel 1 final.)

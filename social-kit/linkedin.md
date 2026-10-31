@@ -1,8 +1,8 @@
 # LinkedIn: 12 Posts
 
-Format: Hook in Zeile 1, kurze Absätze, max. ~1'300 Zeichen, 3–5 Hashtags, ein CTA mit `{URL}`.
-Link-Tipp: Den Link in den **ersten Kommentar** setzen und im Post «Link im ersten Kommentar» schreiben, wenn die Reichweite mit Link im Text sichtbar schlechter ist. Die Texte unten enthalten `{URL}` direkt; je nach Variante verschieben.
-UTM-Links pro Post: siehe `utm.md` (`{URL_LI_01}` … `{URL_LI_12}`).
+Format: Hook in Zeile 1, kurze Absätze, max. ~1'300 Zeichen, 3–5 Hashtags, ein CTA mit dem fertigen UTM-Link.
+Link-Tipp: Den Link in den **ersten Kommentar** setzen und im Post «Link im ersten Kommentar» schreiben, wenn die Reichweite mit Link im Text sichtbar schlechter ist. Die Texte unten enthalten den fertigen Link direkt; je nach Variante in den ersten Kommentar verschieben.
+UTM-Links pro Post: eingesetzt, Referenz in `utm.md` (`li-01` … `li-12`).
 Bilder: `visuals/png/` (Angabe pro Post).
 
 ---
@@ -16,9 +16,9 @@ Ich habe im Job viele Excel-Schulungsvideos geschaut. Behalten habe ich erstaunl
 
 Im Konzern läuft Excel-Training meistens gleich: eine Lernplattform, viele Videos, ein Quiz mit Multiple Choice. Danach sitzt man vor der eigenen Tabelle und weiss nicht mehr, ob bei SVERWEIS zuerst die Matrix oder das Suchkriterium kommt.
 
-Bei Sprachen hat sich längst etwas anderes durchgesetzt: kurze Übungen, selbst antworten, sofort Feedback. So wie bei Duolingo.
+Bei Sprachen läuft es längst anders: kurze Übungen, selbst antworten, sofort Feedback. Wie bei Duolingo.
 
-Genau das habe ich für Excel gebaut: Excel-Drills.
+Das habe ich für Excel gebaut: Excel-Drills.
 
 So funktioniert es:
 → Du siehst eine kleine Tabelle aus dem Büroalltag
@@ -28,13 +28,14 @@ So funktioniert es:
 Konsequent für die Schweiz: deutsche Funktionsnamen, Semikolon, CHF, Rundung auf Rappen.
 
 Stand heute:
-• 42 Übungen in 4 Lernpfaden (Basis, Accounting & Controlling, Banking & Finance)
+• 42 Übungen in 4 Lernpfaden (Basis, Accounting & Controlling, Banking & Finance, Data & Reporting)
 • 18 davon gratis, ohne Anmeldung
-• Premium ab CHF 9 pro Monat
+• Premium ab CHF 9 pro Monat, 14 Tage Geld-zurück-Garantie
 
-Ich teste das jetzt vier Wochen öffentlich. Was ich brauche: Leute, die zwei, drei Übungen lösen und mir ehrlich sagen, was nervt.
+Ich teste das vier Wochen öffentlich. Löse zwei, drei Übungen und sag mir ehrlich, was nervt.
 
-Hier geht's los: {URL}
+Hier geht's los: https://excel-drills.ch/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-01
+Launch-Code SVERWEIS20: 20 % auf Jahresabo und Lifetime, gültig bis 15.11.2026.
 
 #Excel #Schweiz #Weiterbildung #KarriereSchweiz
 ```
@@ -65,7 +66,7 @@ Bonus: Die Suchspalte muss ganz links in der Matrix stehen. Wenn nicht: XVERWEIS
 
 Das Tückische: Alle drei Fehler erzeugen keinen #NV. Die Zahl sieht plausibel aus.
 
-Du kannst SVERWEIS hier gratis üben, mit Sofort-Prüfung: {URL}
+Du kannst SVERWEIS hier gratis üben, mit Sofort-Prüfung: https://excel-drills.ch/app/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-02#sverweis-1
 
 Welcher der drei ist dir schon passiert?
 
@@ -96,7 +97,7 @@ Kleine Schweizer Pointe: Bei uns ist der Punkt das Dezimalzeichen (1'250.50), da
 
 Ich habe Excel-Drills deshalb konsequent auf Deutsch gebaut: deutsche Funktionsnamen, Semikolon, CHF. Tippst du aus Gewohnheit VLOOKUP, sagt dir die Übung, wie die Funktion auf Deutsch heisst.
 
-Probier es mit einer Gratis-Übung: {URL}
+Probier es mit einer Gratis-Übung: https://excel-drills.ch/app/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-03#summewenn-1
 
 Arbeitest du mit Excel auf Deutsch oder Englisch?
 
@@ -127,7 +128,7 @@ Was hilft: dieselben Funktionen mehrmals selbst tippen, mit leicht anderen Aufga
 
 Dafür habe ich den Lernpfad «Basis» gebaut: 15 Übungen zu genau diesen Funktionen, 10 davon gratis, ohne Anmeldung, im Browser. Du tippst die Formel, die Prüfung zeigt sofort, ob sie stimmt.
 
-Wenn du gerade in einem Bewerbungsprozess bist: {URL}
+Wenn du gerade in einem Bewerbungsprozess bist: https://excel-drills.ch/pfad/basis.html?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-04
 
 Und wenn du jemanden kennst, der nächste Woche einen Excel-Test hat: Teil ihm den Link.
 
@@ -164,7 +165,7 @@ Die Prüfung rechnet deine Formel zusätzlich mit anderen Beträgen durch. Eine 
 
 Die ersten 3 Übungen sind gratis, der Rest ist Premium (CHF 9 pro Monat oder CHF 49 pro Jahr).
 
-Zum Pfad: {URL}
+Zum Pfad: https://excel-drills.ch/pfad/accounting.html?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-05
 
 Welche Formel fehlt dir in der Liste?
 
@@ -197,7 +198,7 @@ Zins und Zinseszins, kumulierter Cashflow, Schadenquote, CAGR, Prämienstaffel, 
 
 Die ersten 3 sind gratis. Alle Beträge in CHF, alle Formeln auf Deutsch.
 
-Zum Pfad: {URL}
+Zum Pfad: https://excel-drills.ch/pfad/finance.html?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-06
 
 #Excel #Finance #Banking #Versicherung
 ```
@@ -222,9 +223,9 @@ Für Excel heisst das:
 
 Videos sind gut, um eine Funktion kennenzulernen. Können entsteht beim Tippen.
 
-Darauf habe ich Excel-Drills aufgebaut. Keine Videos, keine Multiple-Choice-Fragen. Tabelle, Aufgabe, Formel, Prüfung. 18 Übungen sind gratis.
+Darauf habe ich Excel-Drills aufgebaut. Keine Videos, keine Multiple-Choice-Fragen. Tabelle, Aufgabe, Formel, Prüfung. 18 Übungen sind gratis, und die App lässt sich aufs Handy installieren; die Gratis-Übungen laufen auch offline.
 
-Probier eine und schau, ob du sie ohne Nachschlagen schaffst: {URL}
+Probier eine und schau, ob du sie ohne Nachschlagen schaffst: https://excel-drills.ch/app/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-07
 
 #Excel #Lernen #Weiterbildung #ExcelTipps
 ```
@@ -256,7 +257,7 @@ Was ich nächste Woche ändere: {konkrete Änderung}
 
 Warum ich das öffentlich mache: Als Strategie-Mensch rate ich anderen täglich, Annahmen früh zu testen. Hier teste ich meine eigenen.
 
-Wenn du mithelfen willst: Löse zwei Übungen und sag mir, wo du hängen geblieben bist. {URL}
+Wenn du mithelfen willst: Löse zwei Übungen und sag mir, wo du hängen geblieben bist. https://excel-drills.ch/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-08
 
 #BuildInPublic #SideProject #Gründen #Schweiz
 ```
@@ -296,7 +297,7 @@ Ein negatives zweites Argument rundet links vom Komma. -1 auf Zehner, -2 auf Hun
 
 Nützlich, wenn du im Management-Reporting auf Tausender runden willst: =RUNDEN(A2;-3)
 
-Wer es selbst tippen will, mit Sofort-Prüfung: {URL}
+Wer es selbst tippen will, mit Sofort-Prüfung: https://excel-drills.ch/app/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-09-kommentar#runden-1
 ```
 
 ---
@@ -326,7 +327,7 @@ Bonusfrage für die Kommentare: Welche Funktion hast du am längsten nicht verst
 
 #Excel #Weiterbildung #Lernen
 ```
-(Link nur im ersten Kommentar: «Wer üben will: {URL}»)
+(Link nur im ersten Kommentar: «Wer üben will: https://excel-drills.ch/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-10-kommentar»)
 
 ---
 
@@ -355,7 +356,7 @@ Netto aus Brutto: =B2/(1+C2), mit dem Satz in einer eigenen Zelle und absolutem 
 
 Die meisten Excel-Übungen online sind auf Englisch oder für Deutschland gemacht. Ich habe Excel-Drills deshalb mit Schweizer Konventionen gebaut: CHF, Rappen, Punkt als Dezimalzeichen.
 
-Gratis ausprobieren: {URL}
+Gratis ausprobieren: https://excel-drills.ch/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-11
 
 Welche Eigenheit fehlt in der Liste?
 
@@ -396,7 +397,7 @@ Entscheid: Ich stoppe den Ausbau. Die Site bleibt online, die Gratis-Übungen bl
 
 Danke an alle, die geübt, kommentiert und Fehler gemeldet haben. Besonders an {Anzahl} Personen, die mir ausführliches Feedback geschickt haben.
 
-Zur Site: {URL}
+Zur Site: https://excel-drills.ch/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-12
 
 #BuildInPublic #SideProject #Gründen #Excel
 ```

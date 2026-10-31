@@ -4,7 +4,7 @@
 **Aufnahme:** Screen-Recording der Site (QuickTime «Neue Bildschirmaufnahme» oder macOS Cmd+Shift+5), Browser-Zoom 150–175 %, nur den Übungsbereich aufnehmen. Danach in CapCut/Instagram Edits auf 9:16 zuschneiden (Übungstabelle oben, Gesicht/Text unten).
 **Optional Gesicht:** Luca vor der Kamera für Hook und CTA (Front-Kamera, Fensterlicht), Screen-Recording dazwischen.
 **Hintergrund/Endcard:** `visuals/png/story.png` als letzter Frame (2 s).
-**CTA:** Instagram «Link in Bio» (Bio-Link = `{URL_IG_BIO}`), TikTok «Link im Profil». Hashtags: Set G (README).
+**CTA:** Instagram «Link in Bio» (Bio-Link = `https://excel-drills.ch/?utm_source=instagram&utm_medium=bio&utm_campaign=launch`), TikTok «Link im Profil». Hashtags: Set G (README).
 **Musik:** nur lizenzfreie Sounds aus der App-Bibliothek, leise unter der Stimme.
 
 ---

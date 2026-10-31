@@ -1,6 +1,6 @@
 # E-Mail-Vorlagen
 
-Alle Mails einzeln versenden (kein BCC-Massenversand), Anrede anpassen, ein persönlicher Satz pro Person. Links aus `utm.md` (`{URL_EM_01}` usw.).
+Alle Mails einzeln versenden (kein BCC-Massenversand), Anrede anpassen, ein persönlicher Satz pro Person. UTM-Links aus `utm.md` sind eingesetzt.
 **Vor Versand prüfen:** Gratis-Zugang für Schulen und Teamrabatte sind Angebote, die du bewusst machst. Konditionen (Anzahl Plätze, Dauer, Preis Teamlizenz) vor dem ersten Versand festlegen und auf premium.html konsistent halten.
 
 ---
@@ -22,13 +22,15 @@ Ich habe in den letzten Wochen nebenbei Excel-Drills gebaut: kurze Excel-Übunge
 
 Die Idee kam aus meinem Alltag: Excel-Schulungen bestehen meist aus Videos, danach kann man Funktionen wiedererkennen, aber nicht selbst schreiben. Bei Sprachen löst Duolingo das mit kurzen Übungen, also habe ich das für Excel versucht.
 
-Stand heute: 42 Übungen in vier Lernpfaden (Basis, Accounting & Controlling, Banking & Finance, Data & Reporting), 18 davon gratis. Alles mit Schweizer Konventionen: deutsche Funktionsnamen, Semikolon, CHF.
+Stand heute: 42 Übungen in vier Lernpfaden (Basis, Accounting & Controlling, Banking & Finance, Data & Reporting), 18 davon gratis. Alles mit Schweizer Konventionen: deutsche Funktionsnamen, Semikolon, CHF. Premium gibt es ab CHF 9 pro Monat, mit 14 Tagen Geld-zurück-Garantie.
 
 Ich teste jetzt vier Wochen, ob das jemand braucht. Darum meine Bitte:
 
-1. Löse zwei, drei Gratis-Übungen: {URL_EM_01}
+1. Löse zwei, drei Gratis-Übungen: https://excel-drills.ch/app/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-01
 2. Schreib mir in zwei Sätzen, was dich gestört hat oder was fehlt. Kritik hilft mir mehr als Lob.
 3. Falls du jemanden kennst, der gerade einen Excel-Test vor sich hat oder im Controlling/Finance einsteigt: Leite die Mail gerne weiter.
+
+Für dich als Netzwerk gibt es bis 15.11.2026 den Launch-Code SVERWEIS20: 20 % auf Jahresabo und Lifetime (ab CHF 49).
 
 Danke dir!
 Luca
@@ -65,7 +67,7 @@ Excel-Drills ist anders gebaut:
 
 Für Teams biete ich eine Teamlizenz an: {Konditionen, z. B. «ab 5 Personen CHF {Preis} pro Person und Jahr»}. Für die ersten Teams gerne zu Pilotkonditionen gegen ehrliches Feedback.
 
-Hättest du 15 Minuten für einen kurzen Call? Oder wenn du es zuerst selbst anschauen willst: {URL_EM_02}
+Hättest du 15 Minuten für einen kurzen Call? Oder wenn du es zuerst selbst anschauen willst: https://excel-drills.ch/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-02
 
 Viele Grüsse
 Luca Moser
@@ -101,13 +103,13 @@ Ich bin auf Ihr Modul {Modulname} an der {Schule} gestossen und schreibe Ihnen, 
 
 Excel-Drills ist eine Sammlung kurzer Excel-Übungen auf Deutsch, die direkt im Browser gelöst werden. Die Lernenden sehen eine kleine Tabelle, schreiben die Formel selbst und erhalten sofort eine Rückmeldung. Geprüft wird das Ergebnis der Formel, bei vielen Übungen zusätzlich mit anderen Zahlen. So lassen sich auswendig getippte Resultate von verstandenen Formeln unterscheiden.
 
-Inhalte: 42 Übungen in den Lernpfaden Basis (SUMME bis SVERWEIS und verschachteltes WENN), Accounting & Controlling (Abweichungen, MwSt, Abstimmung, offene Posten) und Banking & Finance (Zins, RMZ, BW, ZW, CAGR). Deutsche Funktionsnamen, Semikolon, Schweizer Beispiele in CHF.
+Inhalte: 42 Übungen in den Lernpfaden Basis (SUMME bis SVERWEIS und verschachteltes WENN), Accounting & Controlling (Abweichungen, MwSt, Abstimmung, offene Posten) und Banking & Finance (Zins, RMZ, BW, ZW, CAGR) und Data & Reporting. Deutsche Funktionsnamen, Semikolon, Schweizer Beispiele in CHF.
 
 Mein Angebot: Ihre Lernenden erhalten kostenlosen Vollzugang für {Dauer, z. B. das laufende Semester}. Es braucht keine Installation und für die Gratis-Übungen keine Registrierung.
 
 Eine Bitte habe ich dafür: Wenn Ihnen das Werkzeug gefällt, würde ich mich über eine Verlinkung auf Ihrer Modul- oder Ressourcenseite freuen. Das hilft einem kleinen Projekt wie meinem, gefunden zu werden.
 
-Sie können sich hier selbst ein Bild machen: {URL_EM_03}
+Sie können sich hier selbst ein Bild machen: https://excel-drills.ch/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-03
 
 Gerne beantworte ich Fragen oder passe Übungen an Ihren Unterricht an.
 

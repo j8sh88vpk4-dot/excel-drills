@@ -36,7 +36,7 @@
 ```
 Hallo Mods
 
-Ich habe ein eigenes Nebenprojekt gebaut: Excel-Übungen auf Deutsch, die im Browser geprüft werden (16 von 42 Übungen gratis, Rest kostenpflichtig). Ich würde es gerne hier als Beitrag zur Diskussion stellen, mit Disclaimer und Inhalt, der auch ohne Klick nützlich ist.
+Ich habe ein eigenes Nebenprojekt gebaut: Excel-Übungen auf Deutsch, die im Browser geprüft werden (18 von 42 Übungen gratis, Rest kostenpflichtig). Ich würde es gerne hier als Beitrag zur Diskussion stellen, mit Disclaimer und Inhalt, der auch ohne Klick nützlich ist.
 
 Ist das erlaubt? Wenn ja: mit welchem Flair, und darf der Link in den Beitrag oder nur in einen Kommentar?
 
@@ -87,7 +87,7 @@ Was mich interessiert:
 1. Wo bricht die Formelprüfung? (Schreibweisen, die Excel akzeptiert, hier aber nicht)
 2. Ist das für Leute, die ihr bei Excel unterstützt, brauchbar?
 
-Link: {URL}
+Link: https://excel-drills.ch/app/?utm_source=reddit&utm_medium=social&utm_campaign=launch-2026-11&utm_content=de-edv
 ```
 
 ---
@@ -131,7 +131,7 @@ CHF 24'000 pro Jahr, 15 Jahre, 2 % Diskontsatz:
 =BW(2%;15;-24000) → ca. CHF 308'382
 Nützlich für die Frage «Rente oder Kapital?» als erste grobe Einordnung (keine Beratung, Steuern und Lebenserwartung fehlen hier).
 
-Disclaimer: Ich habe eine Excel-Übungsseite auf Deutsch gebaut, auf der man solche Formeln mit Sofort-Prüfung üben kann. Die Finance-Übungen zu RMZ/BW/ZW sind dort kostenpflichtig, die Grundlagen gratis. Wer's ausprobieren will: {URL}
+Disclaimer: Ich habe eine Excel-Übungsseite auf Deutsch gebaut, auf der man solche Formeln mit Sofort-Prüfung üben kann. Die Finance-Übungen zu RMZ/BW/ZW sind dort kostenpflichtig, die Grundlagen gratis. Wer's ausprobieren will: https://excel-drills.ch/pfad/finance.html?utm_source=reddit&utm_medium=social&utm_campaign=launch-2026-11&utm_content=finanzen
 Die Formeln oben funktionieren natürlich auch ohne.
 ```
 
@@ -140,7 +140,7 @@ Die Formeln oben funktionieren natürlich auch ohne.
 ## RD-03 r/Schweiz
 **Termin:** Mi 11.11. · **Flair:** z. B. «Diskussion» / «Projekt» · **Ziel:** Nutzer CH
 
-**Regel-Hinweis (Prüfung 30.10.2026: Regeln nicht abrufbar):** Vorher Modmail. Prüfen, ob Eigenwerbung erlaubt ist und ob es einen Flair/Thread für eigene Projekte gibt. Ist ein Link im Post nicht erlaubt: `{URL}` am Ende streichen und das Rätsel als Hauptinhalt stehen lassen. Ton: locker, selbstironisch, Schweizer Bezug klar. Nicht in Mundart schreiben, wenn es nicht natürlich wirkt.
+**Regel-Hinweis (Prüfung 30.10.2026: Regeln nicht abrufbar):** Vorher Modmail. Prüfen, ob Eigenwerbung erlaubt ist und ob es einen Flair/Thread für eigene Projekte gibt. Ist ein Link im Post nicht erlaubt: den Link am Ende streichen und das Rätsel als Hauptinhalt stehen lassen. Ton: locker, selbstironisch, Schweizer Bezug klar. Nicht in Mundart schreiben, wenn es nicht natürlich wirkt.
 
 **Titel:**
 ```
@@ -161,7 +161,7 @@ Darum habe ich Excel-Drills gebaut: kleine Tabellen aus dem Büroalltag, du tipp
 
 Kleines Rätsel für die, die nicht klicken wollen: Wie rundest du in Excel CHF 47.33 auf 5 Rappen? (Lösung in den Kommentaren)
 
-{URL}
+https://excel-drills.ch/?utm_source=reddit&utm_medium=social&utm_campaign=launch-2026-11&utm_content=schweiz
 ```
 
 **Erster eigener Kommentar (Lösung):**
@@ -197,16 +197,16 @@ So I built a small browser-based trainer:
 How the checker works, in short:
 1. The exercise sheet is loaded into HyperFormula with the deDE locale (function names and `;` as separator).
 2. Your formula is written into the target cell and evaluated; the value is compared with the model solution's value (only a floating-point tolerance of 1e-9).
-3. For many exercises the same formula is evaluated again on 1–3 alternate datasets (24 of 37 exercises), so a typed-in number or a formula that only fits by accident fails.
+3. For many exercises the same formula is evaluated again on 1–3 alternate datasets, so a typed-in number or a formula that only fits by accident fails.
 4. Unknown English function names are mapped to the German ones for the hint.
 
-37 exercises, 16 free without signup. The site itself is in German.
+42 exercises, 18 free without signup. The site itself is in German.
 
 What I'd value from this sub:
 1. Edge cases where Excel would accept a formula but my checker doesn't (or vice versa)
 2. Functions you think are missing for finance/accounting work
 
-{URL}
+https://excel-drills.ch/app/?utm_source=reddit&utm_medium=social&utm_campaign=launch-2026-11&utm_content=excel
 
 Happy to answer questions about the engine.
 ```
@@ -243,7 +243,7 @@ Die ersten 3 sind gratis, der Rest kostenpflichtig.
 
 Meine Frage an euch: Was fehlt? Was macht ihr jeden Monat in Excel, das ihr Neuen immer wieder erklären müsst? Ich baue die meistgenannten als Nächstes.
 
-Zum Anschauen: {URL}
+Zum Anschauen: https://excel-drills.ch/pfad/accounting.html?utm_source=reddit&utm_medium=social&utm_campaign=launch-2026-11&utm_content=buchhaltung
 ```
 
 ---
@@ -287,7 +287,7 @@ XVERWEIS ist besser, keine Frage. Aber viele Firmen-Dateien und Einstellungstest
 
 **«Pivot/Power Query fehlt.»**
 ```
-Richtig, Pivot und Power Query lassen sich im Browser nicht sinnvoll Formel für Formel prüfen. Der Pfad «Data & Reporting» ist in Arbeit; welche Aufgabe würdest du dort zuerst üben wollen?
+Richtig, Pivot und Power Query lassen sich im Browser nicht sinnvoll Formel für Formel prüfen. Der Pfad «Data & Reporting» deckt das Formelseitige ab und wächst weiter; welche Aufgabe würdest du dort als Nächstes üben wollen?
 ```
 
 **«Wer steckt dahinter? Datenschutz?»**
