@@ -3,6 +3,8 @@
 Stand 1.11.2026. Konto: @exceldrills.ch (Business-Konto, 1 Follower am Launch-Tag). Alle Dateien liegen in `social-kit/`.
 Captions Karussells: `instagram.md` (IG-K1 bis IG-K14). Reels: `video/formel-des-tages.md` (FdT-1 bis FdT-26) und `video/README.md` (Launch- und Switch-Reel).
 
+**Status 1.11.2026, 15:00 (Business Suite, Konto @exceldrills.ch):** terminiert sind alle 15 Feed-Posts (IG-K1 bis K14 ohne K11, Launch-Reel, Switch-Reel), die Bild-Stories 5 bis 8 (8.11., 12.11., 23.11., 27.11., je 12:05) und die Reels «Formel des Tages» FdT-1 bis FdT-15 (Mo 2.11. bis Di 17.11., täglich 18:30, mit Audio aus der Business-Suite-Bibliothek; Do 5.11. läuft stattdessen das Switch-Reel). Offen: FdT-16 bis FdT-25 rendern (`bash social-kit/video/formel-render.sh 16 17 …`) und terminieren, Collab IG-K11 am 12.11. in der App, Sticker-Stories täglich in der App, Bio-Link.
+
 ## Strategie für ein Konto mit 1 Follower
 
 Mit einem Follower gibt es keine Fans, die Beiträge anstossen. Reichweite kommt in den ersten Wochen fast nur über Reels (Empfehlungen an Nicht-Follower), über Kommentare bei anderen Konten und über Saves und Shares. Darum:
