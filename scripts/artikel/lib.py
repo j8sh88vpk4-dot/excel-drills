@@ -10,6 +10,7 @@ ARTICLES = [
     ("wenn-funktion.html", "WENN-Funktion in Excel", "Bedingungen prüfen und Entscheidungen abbilden: Budgetkontrolle, Selbstbehalt, UND/ODER und verschachtelte WENN."),
     ("zaehlenwenn.html", "ZÄHLENWENN in Excel", "Zählen, was eine Bedingung erfüllt: offene Pendenzen, Schäden über einer Schwelle, Duplikate finden."),
     ("absolute-bezuege.html", "Absolute Bezüge in Excel ($)", "Wann du das Dollarzeichen brauchst: MwSt mit festem Satz, Anteil am Total, gemischte Bezüge für Tabellen."),
+    ("excel-ueben-online-vergleich.html", "Excel online üben: 6 Plattformen im Vergleich (Schweiz)", "LogicExcel, Coddy, Easy4Me, zebis, Wings und Excel-Drills: Was gratis ist, wo deutsche Funktionsnamen und Semikolon stimmen, was für KV, Controlling und Einstellungstest taugt."),
 ]
 
 # Formelkarte pro Artikel (PDF aus scripts/handouts/build.py + render.sh)
@@ -18,6 +19,12 @@ CARDS = {"sverweis.html": ("sverweis", "SVERWEIS"), "summewenn.html": ("summewen
          "absolute-bezuege.html": ("absolute-bezuege", "absolute Bezüge")}
 
 def card_box(slug):
+    if slug not in CARDS:
+        return '''      <aside class="practice-box handout-box" aria-labelledby="card-heading">
+        <h2 id="card-heading">Spickzettel als PDF</h2>
+        <p>Die wichtigsten Excel-Funktionen Englisch–Deutsch, Semikolon statt Komma und die häufigsten Fehlercodes auf einer A4-Seite. Gratis, zum Ausdrucken neben die Tastatur.</p>
+        <p><a class="btn btn-secondary" href="../handouts/">Zu den Handouts</a></p>
+      </aside>'''
     key, name = CARDS[slug]
     return f'''      <aside class="practice-box handout-box" aria-labelledby="card-heading">
         <h2 id="card-heading">Formelkarte als PDF</h2>
@@ -118,11 +125,12 @@ def head(title, desc, path, og_type, jsonld):
 {ld}
 </head>'''
 
-def article_page(slug, title, desc, h1, summary, body, faq, practice):
+def article_page(slug, title, desc, h1, summary, body, faq, practice, date_iso=None, date_text="30. Oktober 2026"):
+    date_iso = date_iso or DATE
     faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub(r'<[^>]+>', '', a).replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&').replace('&nbsp;', ' ')}} for q, a in faq]}
     art_ld = {"@context": "https://schema.org", "@type": "Article", "headline": h1, "description": desc,
-              "inLanguage": "de-CH", "datePublished": DATE, "dateModified": DATE,
+              "inLanguage": "de-CH", "datePublished": date_iso, "dateModified": date_iso,
               "author": {"@type": "Organization", "name": "Excel-Drills"},
               "publisher": {"@type": "Organization", "name": "Excel-Drills"}}
     faq_html = '\n'.join(f'''          <details>
@@ -144,7 +152,7 @@ def article_page(slug, title, desc, h1, summary, body, faq, practice):
         </ol>
       </nav>
       <h1>{h1}</h1>
-      <p class="article-meta">Stand: 30. Oktober 2026 &middot; Schweizer Schreibweise mit Semikolon</p>
+      <p class="article-meta">Stand: {date_text} &middot; Schweizer Schreibweise mit Semikolon</p>
       <div class="summary">
         <p>{summary}</p>
       </div>

@@ -94,3 +94,9 @@
 | Paywall-Konversion (kauf / paywall_gezeigt) | > 2 % | < 0.5 % → Gratis-Anteil prüfen (Basis 10 → 6–7, Fachpfade stärkste Übungen gratis) |
 
 Grauzone dazwischen: 4 weitere Wochen mit 10 zusätzlichen Übungen und Funktions-Artikeln, dann erneut entscheiden.
+
+## 1.11.2026: Wettbewerb und SEO-Massnahme
+
+- Google-KI-Übersicht zu «excel übungen schweiz» listet LogicExcel (95 Gratis-Übungen im Browser, englisch gebaut, SUM/VLOOKUP), Coddy, Easy4Me, zebis, Wings. Excel-Drills fehlt (neu). Einziger direkter Konkurrent: LogicExcel; Differenzierung bleibt Deutsch/Semikolon/CHF/Berufspfade.
+- Massnahme: Vergleichsartikel `artikel/excel-ueben-online-vergleich.html` (Generator `scripts/artikel/a_vergleich.py`), transparent mit eigener Plattform; Ziel ist die Zitierung in der KI-Übersicht. Startseiten-Title/Description auf «Excel üben auf Deutsch … (Schweiz)» geschärft.
+- Werbung: Woche 1 keine; ab 9.11. Meta-Boost max. CHF 70 nur bei ≥30 % Mini-Übung-Quote und vorhandenen Premium-Klicks; Google Ads erst nach dem Go am 27.11.
