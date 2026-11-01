@@ -145,7 +145,7 @@
     notice('');
     if (!/^[A-Za-z0-9_-]{24,64}$/.test(adminToken)) {
       $('rr-loading').hidden = true;
-      notice('Dieser Link ist unvollständig. Bitte öffnen Sie den Ergebnis-Link genau so, wie Sie ihn erhalten haben.', true);
+      notice('Dieser Link ist unvollständig. Bitte öffnen Sie den Ergebnis-Link genau so, wie Sie ihn erhalten haben. Fragen: hallo@excel-drills.ch', true);
       return;
     }
     if (!cfg || !cfg.url || !cfg.key || typeof root.fetch !== 'function') {

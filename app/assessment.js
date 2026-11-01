@@ -261,6 +261,8 @@
     var table = els.sheet;
     clear(table);
     var cap = el('caption', 'visually-hidden', 'Tabelle zu «' + ex.title + '», Zielzelle ' + ex.target);
+    var lbl = document.getElementById('as-input-label');
+    if (lbl) lbl.textContent = 'Formel für Zelle ' + ex.target;
     table.appendChild(cap);
     var thead = el('thead'), hr = el('tr');
     var corner = el('th');
