@@ -201,7 +201,7 @@
   "html.navTracks": "Parcours",
   "html.navArticles": "Articles",
   "html.navHandouts": "Fiches",
-  "html.navPremium": "Premium",
+  "html.navPremium": "Prix",
   "html.exNav": "Exercices du parcours",
   "html.trackLabel": "Parcours d'apprentissage",
   "html.listHeading": "Exercices",
@@ -305,7 +305,10 @@
   "pwa.installText": "Excel-Drills s'ouvre alors comme une app, et les exercices gratuits fonctionnent aussi hors ligne.",
   "pwa.installBtn": "Installer",
   "pwa.iosText": "Dans Safari : Partager › Sur l'écran d'accueil. Excel-Drills s'ouvre ensuite comme une app, les exercices gratuits fonctionnent aussi hors ligne.",
-  "pwa.iosOk": "Compris"
+  "pwa.iosOk": "Compris",
+  "html.navAssessment": "Assessment",
+  "html.navUpload": "Vérifier un fichier",
+  "html.navCampaign": "Campagne"
  },
  "exercises": {
   "summe-1": {
