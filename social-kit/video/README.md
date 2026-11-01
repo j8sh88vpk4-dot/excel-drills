@@ -155,3 +155,49 @@ Hinweis: In der Sandbox von Claude Code startet headless Chrome nicht (ProcessSi
 > Lo stesso esercizio in tedesco, francese e italiano: con Excel-Drills ti alleni con SOMMA nella tua lingua – 18 esercizi gratuiti.
 
 (Domain `excel-drills.ch` ist wie bei Reel 1 final.)
+
+---
+
+## Reel 3: Serie «Formel des Tages» (FdT-1 bis FdT-26)
+
+Tägliche Reels für Instagram (und TikTok/Shorts): 13 s, 9:16, ohne Ton, Hook ab dem ersten Bild, Text-Overlay. Skripte, Captions und Threads-Texte: `formel-des-tages.md`. Termine: `../instagram-termine.md`.
+
+**Gibt es eine Render-Pipeline?** Ja, dieselbe wie bei Reel 1 und 2: headless Chrome rendert eine HTML-Animation Bild für Bild, `encode-mac.swift` (AVFoundation) baut die MP4. ffmpeg ist auf diesem Mac nicht installiert (`which ffmpeg` leer, Stand 1.11.2026); das Skript nimmt ffmpeg automatisch, sobald es da ist (`brew install ffmpeg`).
+
+| Datei | Inhalt |
+|---|---|
+| `formel-data.js` | Die 26 Skripte als Daten (Hook, 3 Zeilen, Formel, Ergebnis, Auflösung, Caption, Threads, Bio-Link) |
+| `formel.html` | Animation 1080×1920. `formel.html?n=3` Vorschau als Schleife, `formel.html?n=3&t=6500` Standbild bei 6.5 s |
+| `formel-render.sh` | Rendert Reels: Frames nach `frames-formel/<nr>/` (10 fps, auf 30 fps dupliziert), MP4 + Poster nach `reels/`, Frames danach gelöscht |
+| `reels/fdt-<nr>-9x16.mp4` | Fertige Reels (H.264, 30 fps, 13 s, ohne Tonspur). Gerendert: FdT-1 bis FdT-5 |
+| `reels/fdt-<nr>-poster.png` | Titelbild (Bild bei 9 s: Formel mit Häkchen) |
+
+### Ablauf (Storyboard, gilt für alle 26)
+
+| Zeit | Szene |
+|---|---|
+| 0–1.8 s | Wortmarke, Kicker «Formel des Tages #n» (bei Feature-Reels «Neu · …»), Hook gross. Sofort sichtbar, kein Einblenden |
+| 1.8 / 3.2 / 4.6 s | Drei Textzeilen blenden nacheinander ein |
+| 6.2–8.0 s | fx-Zeile erscheint, die Formel tippt sich |
+| 8.4 s | Ergebnis mit Häkchen, darunter die Auflösung in einem Satz |
+| 11.5–13 s | Endcard «Selbst tippen, sofort prüfen.», «Link in Bio», excel-drills.ch |
+
+Safe-Zones: oben 250 px und unten 320 px ohne wichtigen Text.
+
+### Rendern
+
+```bash
+cd ~/Documents/excel-drills/social-kit/video
+bash formel-render.sh 6 7 8 9 10     # bestimmte Nummern
+bash formel-render.sh                # ohne Argument: 1 bis 5
+FPS=15 bash formel-render.sh 6       # flüssigeres Tippen, 1.5× so lange
+KEEP=1 bash formel-render.sh 6       # Frames behalten
+```
+
+Dauer: ca. 130 Chrome-Aufrufe pro Reel, auf diesem Mac etwa 2 bis 3 Minuten pro Reel. Das Skript wartet, wenn die 5-Minuten-Last über 12 liegt (`MAXLOAD`). Wie bei den anderen Reels gilt: In der Sandbox von Claude Code startet Chrome nicht, im Terminal ausführen.
+
+Schnellster Weg für neue Folgen: Eintrag in `formel-data.js` kopieren, Texte anpassen (Hook max. ca. 40 Zeichen, Zeilen max. ca. 55 Zeichen, Formel max. ca. 50 Zeichen), im Browser `formel.html?n=<nr>&t=9500` prüfen, dann rendern.
+
+### Posten
+
+Reel in der Instagram-App hochladen, **Trending-Audio in der App wählen** (Business-Konto: nur freigegebene Titel), Caption aus `formel-des-tages.md`, Titelbild `reels/fdt-<nr>-poster.png`, dann «Diesen Beitrag planen» auf 18:30. In der Business Suite lassen sich die Reels ebenfalls terminieren, dort aber ohne Instagram-Musik.

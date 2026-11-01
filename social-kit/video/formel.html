@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<title>Excel-Drills Formel des Tages (?n=1..26&t=ms)</title>
+<!--
+  Reel-Vorlage «Formel des Tages», 1080×1920 (9:16), 13 s, ohne Ton. Daten: formel-data.js (window.FDT).
+  Aufruf: formel.html?n=1          Endlosschleife zur Vorschau
+          formel.html?n=1&t=6500   Standbild bei 6.5 s (so rendert formel-render.sh)
+  Ablauf: 0 s Hook (sofort sichtbar) · 1.8/3.2/4.6 s Textzeilen · 6.2 s Formel tippt sich · 8.4 s Auflösung · 11.5 s Endcard.
+  Safe-Zones: oben 250 px und unten 320 px ohne wichtigen Text.
+-->
+<style>
+  :root { --g:#107C41; --gd:#0B5A2E; --gl:#E7F2EB; --ink:#1B1F1D; --mut:#5A635E; --line:#D5DDD8; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { width:1080px; height:1920px; overflow:hidden; }
+  body { background:var(--g); color:#fff; font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .mono { font-family:"SF Mono", Menlo, Consolas, monospace; }
+  .wrap { position:relative; width:1080px; height:1920px; padding:250px 80px 320px; display:flex; flex-direction:column;
+    background-image:linear-gradient(rgba(255,255,255,.07) 2px, transparent 2px), linear-gradient(90deg, rgba(255,255,255,.07) 2px, transparent 2px);
+    background-size:120px 60px; }
+  .top { display:flex; align-items:center; justify-content:space-between; }
+  .brand { display:flex; align-items:center; gap:16px; font-weight:800; font-size:40px; }
+  .logo { width:64px; height:64px; border-radius:12px; background:#fff; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:4px; padding:12px; }
+  .logo i { background:var(--g); border-radius:3px; } .logo i:nth-child(4) { background:rgba(16,124,65,.4); }
+  .kick { font-size:30px; font-weight:800; letter-spacing:1px; text-transform:uppercase; background:rgba(255,255,255,.16); padding:12px 22px; border-radius:10px; }
+  h1 { margin-top:70px; font-weight:800; letter-spacing:-2px; line-height:1.05; transition:none; }
+  .lines { margin-top:56px; display:flex; flex-direction:column; gap:26px; }
+  .line { font-size:46px; line-height:1.28; font-weight:650; background:rgba(0,0,0,.16); border-radius:20px; padding:22px 30px; }
+  .sheet { margin-top:56px; background:#fff; color:var(--ink); border-radius:24px; overflow:hidden; box-shadow:0 30px 60px rgba(0,0,0,.25); }
+  .fx { display:flex; align-items:center; background:#F7F9F8; min-height:110px; }
+  .fx b { flex:none; width:100px; text-align:center; font-size:30px; color:var(--mut); border-right:2px solid var(--line); line-height:110px; }
+  .fx span { padding:24px; font-weight:600; line-height:1.3; overflow-wrap:anywhere; }
+  .wrap > * { flex:none; }
+  .caret { display:inline-block; width:4px; height:1.05em; background:var(--ink); vertical-align:-0.15em; margin-left:2px; }
+  .ok { display:flex; align-items:center; gap:20px; padding:28px 30px; font-size:44px; font-weight:800; color:var(--gd); background:var(--gl); border-top:2px solid var(--line); }
+  .ok .c { flex:none; width:60px; height:60px; border-radius:50%; background:var(--g); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:36px; }
+  .resolve { margin-top:36px; font-size:40px; line-height:1.35; font-weight:600; color:rgba(255,255,255,.95); }
+  .end { position:absolute; inset:0; background:var(--g); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:48px; text-align:center; padding:250px 80px 320px;
+    background-image:linear-gradient(rgba(255,255,255,.07) 2px, transparent 2px), linear-gradient(90deg, rgba(255,255,255,.07) 2px, transparent 2px); background-size:120px 60px; }
+  .end h2 { font-size:92px; line-height:1.05; letter-spacing:-2px; font-weight:800; }
+  .end h2 em { font-style:normal; color:#B9E5C9; }
+  .end .pill { background:#fff; color:var(--gd); font-size:54px; font-weight:800; padding:34px 64px; border-radius:999px; }
+  .end p { font-size:36px; color:rgba(255,255,255,.85); }
+  .hide { opacity:0; }
+</style>
+<script src="formel-data.js"></script>
+</head>
+<body>
+<div class="wrap" id="wrap"></div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var n = parseInt(q.get('n'), 10) || 1;
+  var d = (window.FDT || []).filter(function (x) { return x.n === n; })[0] || window.FDT[0];
+  var DUR = 13000, T_L = [1800, 3200, 4600], T_FX = 6200, T_TYPE = 1800, T_RES = 8400, T_END = 11500;
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function op(t, start) { return t < start ? 0 : Math.min(1, (t - start) / 300); }
+  function render(t) {
+    var hookSize = d.hook.length > 38 ? 84 : 100;
+    var len = d.formula.length, fs = len <= 28 ? 48 : len <= 36 ? 40 : 38;
+    var typed = t < T_FX ? 0 : Math.min(len, Math.ceil((t - T_FX) / T_TYPE * len));
+    var h = '<div class="top"><div class="brand"><div class="logo"><i></i><i></i><i></i><i></i></div>Excel-Drills</div>' +
+      '<div class="kick">' + (d.typ === 'Feature' ? 'Neu · ' : '') + 'Formel des Tages #' + d.n + '</div></div>' +
+      '<h1 style="font-size:' + hookSize + 'px">' + esc(d.hook) + '</h1>' +
+      '<div class="lines">' + d.lines.map(function (l, i) {
+        return '<div class="line" style="opacity:' + op(t, T_L[i]) + '">' + esc(l) + '</div>'; }).join('') + '</div>' +
+      '<div class="sheet" style="opacity:' + op(t, T_FX - 300) + '"><div class="fx"><b class="mono">fx</b><span class="mono" style="font-size:' + fs + 'px">' +
+        esc(d.formula.slice(0, typed)).replace(/;/g, ';<wbr>') + (t < T_RES ? '<i class="caret"></i>' : '') + '</span></div>' +
+        '<div class="ok" style="opacity:' + op(t, T_RES) + '"><span class="c">✓</span>' + esc(d.result) + '</div></div>' +
+      '<p class="resolve" style="opacity:' + op(t, T_RES + 300) + '">' + esc(d.resolve) + '</p>';
+    if (t >= T_END) h += '<div class="end" style="opacity:' + op(t, T_END) + '"><h2>Selbst <em>tippen</em>,<br>sofort prüfen.</h2>' +
+      '<div class="pill">Link in Bio</div><p>excel-drills.ch · Formel des Tages #' + d.n + '</p></div>';
+    document.getElementById('wrap').innerHTML = h;
+  }
+  var t = q.get('t');
+  if (t !== null) { render(parseInt(t, 10) || 0); }
+  else { var t0 = performance.now(); (function loop() { render((performance.now() - t0) % DUR); requestAnimationFrame(loop); })(); }
+  document.title = 'Formel des Tages ' + n;
+})();
+</script>
+</body>
+</html>

@@ -2,12 +2,15 @@
 <html lang="de-CH">
 <head>
 <meta charset="utf-8">
-<title>Excel-Drills Instagram-Karussell 1080x1350 (?c=1..7&s=1..n)</title>
+<title>Excel-Drills Instagram-Karussell 1080x1350 (?c=1..14&s=1..n)</title>
 <!--
-  Instagram-Karussells (Hochformat 4:5, 1080×1350), Konzepte aus ../instagram-tiktok.md (IG-K1 … IG-K7).
-  Aufruf: carousel.html?c=1&s=1   c = Karussell 1..7, s = Slide 1..n (ohne Parameter: c=1, s=1)
+  Instagram-Karussells (Hochformat 4:5, 1080×1350), Konzepte aus ../instagram-tiktok.md (IG-K1 … IG-K7),
+  ab IG-K8 aus ../instagram.md (Differenzierer, Stand 1.11.2026).
+  Aufruf: carousel.html?c=1&s=1   c = Karussell 1..14, s = Slide 1..n (ohne Parameter: c=1, s=1)
   1 SVERWEIS-Fehler (7) · 2 Übersetzungen (7) · 3 Einstellungstest (8) · 4 Monatsabschluss (7)
   5 Schweizer Eigenheiten (7) · 6 Warum Videos nicht reichen (7) · 7 Excel-Test, Teste dich selbst (7)
+  8 Datei hochladen, Fehler sehen (7) · 9 KI-Interview Frau Keller (8) · 10 Fehler-DNA (7) · 11 Zertifikate SIZ/MOS, ICDL-Stopp (8)
+  12 Zellbezüge per Klick, Ziehen, F4 (6) · 13 Kampagne Controlling Tag 1 (7) · 14 SQL-Drills Beta (6)
   Gerendert von render-instagram.sh nach png/instagram/c<nr>-s<nr>.png.
   Design wie linkedin-card.html: grüner Balken, Wortmarke, Zellraster, grosse Typo. Letzte Slide = CTA (grün).
   Formeln in code(): [[…]] = grün markiert, {{…}} = rot markiert.
@@ -123,6 +126,25 @@
   .facts { display:flex; flex-direction:column; gap:14px; font-size:calc(34px*var(--k)); font-weight:600; }
   .facts div::before { content:"✓"; display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; margin-right:18px; border-radius:50%; background:rgba(255,255,255,.18); font-size:24px; vertical-align:middle; }
   .indep { font-size:22px; color:rgba(255,255,255,.7); }
+
+  /* Ab K8: Chat (K9), Fehler-DNA-Balken (K10), Faktenliste (K11) */
+  .chat { display:flex; flex-direction:column; gap:calc(22px*var(--k)); }
+  .msg { max-width:88%; border-radius:26px; padding:calc(24px*var(--k)) 30px; font-size:calc(36px*var(--k)); line-height:1.36; box-shadow:0 8px 24px rgba(0,0,0,.06); }
+  .msg small { display:block; font-size:.6em; font-weight:800; letter-spacing:.6px; text-transform:uppercase; margin-bottom:8px; opacity:.75; }
+  .msg.ai { align-self:flex-start; background:#fff; border:2px solid var(--line); border-bottom-left-radius:6px; }
+  .msg.me { align-self:flex-end; background:var(--g); color:#fff; border-bottom-right-radius:6px; }
+  .msg .mono { font-size:.9em; }
+  .msg.me .mono { background:rgba(255,255,255,.18); border-radius:6px; padding:0 6px; }
+  .dna { display:flex; flex-direction:column; gap:calc(20px*var(--k)); background:#fff; border:2px solid var(--line); border-radius:18px; padding:28px 30px; }
+  .dna .r { display:grid; grid-template-columns:360px 1fr 80px; align-items:center; gap:18px; font-size:calc(28px*var(--k)); font-weight:650; }
+  .dna .r i { display:block; height:26px; border-radius:13px; background:var(--gl); overflow:hidden; }
+  .dna .r i b { display:block; height:100%; background:var(--g); }
+  .dna .r i b.w { background:var(--red); }
+  .dna .r span { text-align:right; color:var(--mut); font-variant-numeric:tabular-nums; }
+  .dna .demo { font-size:22px; color:var(--mut); text-align:right; }
+  .kv { display:grid; grid-template-columns:auto 1fr; gap:calc(16px*var(--k)) 26px; background:#fff; border:2px solid var(--line); border-radius:18px; padding:26px 30px; font-size:calc(32px*var(--k)); line-height:1.3; }
+  .kv b { color:var(--gd); font-weight:800; white-space:nowrap; }
+  .src { font-size:calc(24px*var(--k)); color:var(--mut); }
 </style>
 </head>
 <body>
@@ -423,6 +445,230 @@
       CTA({ kicker: 'Teste dich selbst', h: '15-Minuten-Assessment <em>gratis</em>.', sub: 'Consulting, Accounting, Investment Banking, Versicherung, KV-Lehrstelle.',
         pill: 'excel-drills.ch/assessment',
         facts: ['Zeigt, was du in diesen Aufgaben kannst', 'Läuft im Browser'] })
+    ],
+
+    /* IG-K8 «Excel-Datei hochladen, Fehler sehen» */
+    8: [
+      K('Neu: Datei prüfen') + H1('Lös die Aufgabe in deinem <em>echten Excel</em>.') +
+        P('Dann lädst du die Datei hoch und siehst sofort, wo es hakt.') +
+        C('bad', 'Sieht richtig aus', '=SVERWEIS(D2;A2:B5;2{{ }})'),
+      K('So geht es') + H2('In <em>3 Schritten</em>') +
+        STEPS(['Aufgabe als xlsx herunterladen<small>SVERWEIS, SUMMEWENN, $-Bezug, WENN, ZÄHLENWENN</small>',
+          'In deinem Excel lösen und speichern<small>Windows, Mac oder Excel im Web</small>',
+          'Datei hochladen<small>Die Fehlerkarte markiert die Zielzelle grün oder rot</small>']),
+      K('Fehlerkarte', true) + H2('Welche Zelle, welcher <em>Fehler</em>') +
+        SHEET('=SVERWEIS(D2;A2:B5;2)', [
+          ['A', 'B', 'C', 'D', 'E'],
+          [Hd('Art.-Nr.'), Hd('Preis'), '', Hd('Suche'), Hd('Preis')],
+          ['A-100', N('12.50'), '', 'A-300', E('8.90')],
+          ['A-200', N('8.90'), '', '', ''],
+          ['A-400', N('15.20'), '', '', ''],
+          ['A-300', N('24.00'), '', '', '']
+        ], { no: 'E2: FALSCH fehlt, SVERWEIS sucht nur ungefähr' }) +
+        P('Dazu ein Lerntipp und der Link zur passenden Übung.'),
+      K('Was geprüft wird') + H2('6 Fehler, die ein Quiz <em>nicht sieht</em>') +
+        CHECK(['Wert eingetippt statt Formel', 'Englischer Funktionsname', '$ fehlt beim festen Bezug', 'Bereich zu kurz', 'FALSCH fehlt im SVERWEIS', 'Text ohne Anführungszeichen']),
+      K('Gut zu wissen') + H2('Excel speichert Formeln <em>englisch</em>.') +
+        C('plain', 'So steht es in deiner Datei', '=SUMIF(A:A,"Zürich",B:B)') +
+        C('good', 'So prüfen wir es', '=SUMMEWENN(A:A;"Zürich";B:B)') +
+        P('Zurückübersetzt in die Schweizer Schreibweise und mit derselben Engine geprüft wie im Browser, auch mit anderen Zahlen.'),
+      K('Datenschutz') + H2('Deine Datei verlässt den <em>Browser</em> nicht.') +
+        P('Sie wird direkt auf deinem Gerät gelesen. Nichts wird hochgeladen oder gespeichert.') +
+        NOTE('Geprüft wird <b>.xlsx bis 5 MB</b>. Eine .csv speichert keine Formeln, .xls ist ein altes Format.'),
+      CTA({ kicker: 'Datei prüfen', h: 'Echtes Excel. <em>Echte Fehlerkarte.</em>', sub: '5 Aufgaben zum Herunterladen, ohne Anmeldung.',
+        pill: 'excel-drills.ch/upload',
+        facts: ['Formeln und Werte werden geprüft', 'Die Datei bleibt auf deinem Gerät'] })
+    ],
+
+    /* IG-K9 «KI-Interview: Frau Keller hat Rückfragen» (Beispieldialog, gekürzt) */
+    9: [
+      K('Neu · Premium') + H1('Frau Keller hat <em>Rückfragen</em> zu deinem Modell.') +
+        P('Eine KI-Interviewerin wie im Case-Interview. Hier ein Beispiel-Dialog, gekürzt.'),
+      K('Frage 1') + '<div class="chat">' +
+        '<div class="msg ai"><small>Frau Keller · Partnerin</small>Ihr Break-even liegt bei 1\'800 Stück. Wie sind Sie auf diese Zahl gekommen?</div>' +
+        '<div class="msg me"><small>Du</small>Fixkosten CHF 90\'000 geteilt durch den Deckungsbeitrag von CHF 50 pro Stück.</div>' +
+        '</div>',
+      K('Frage 2') + '<div class="chat">' +
+        '<div class="msg ai"><small>Frau Keller</small>Gut. Schreiben Sie das als Formel: Fixkosten in B2, Preis in B3, variable Kosten in B4.</div>' +
+        '<div class="msg me"><small>Du</small><span class="mono">=B2/(B3-B4)</span></div>' +
+        '</div>' + P('Die Klammer ist der Punkt: ohne sie rechnet Excel zuerst B2/B3.'),
+      K('Frage 3') + '<div class="chat">' +
+        '<div class="msg ai"><small>Frau Keller</small>Und wenn der Preis um 10 % sinkt?</div>' +
+        '<div class="msg me"><small>Du</small>Preis 108, Deckungsbeitrag 38. Break-even rund 2\'369 Stück.</div>' +
+        '</div>' + C('good', 'Auf ganze Stück aufrunden', '=AUFRUNDEN(B2/(B3*0.9-B4);0)'),
+      K('Frage 4') + '<div class="chat">' +
+        '<div class="msg ai"><small>Frau Keller</small>Wie sagen Sie das dem CEO in zwei Sätzen?</div>' +
+        '<div class="msg me"><small>Du</small>10 % tieferer Preis heisst fast ein Drittel mehr Stück bis zum Break-even. Ein Rabatt lohnt sich nur, wenn die Menge deutlich mitwächst.</div>' +
+        '</div>',
+      K('Die Bewertung') + H2('Vier <em>Kriterien</em>') +
+        '<div class="chips"><span class="chip f">Struktur</span><span class="chip">Zahlenverständnis</span><span class="chip">Annahmen</span><span class="chip">Kommunikation</span></div>' +
+        P('Nach höchstens 6 Fragen kommt ein Fazit mit Punkten pro Kriterium.') +
+        NOTE('Frau Keller verrät keine Lösungen. Sie fragt nach <b>deinem</b> Gedankengang.'),
+      K('Zwei Rollen') + H2('Consulting und <em>Accounting</em>') +
+        '<div class="kv"><b>Frau Keller</b><span>Partnerin, Strategieberatung</span><b>Herr Bianchi</b><span>Leiter Rechnungswesen</span></div>' +
+        P('Gesprochen wird in der Sie-Form, wie im echten Interview. Die Figuren sind fiktiv.'),
+      CTA({ kicker: 'Premium', h: 'Üb das Gespräch, <em>bevor es zählt</em>.', sub: 'Zuerst das Assessment lösen, dann mit Premium das Interview zu deinen Zahlen.',
+        facts: ['Assessment für 5 Rollen gratis', 'Interview mit Premium'] })
+    ],
+
+    /* IG-K10 «Fehler-DNA: Welche Fehler machst du immer wieder?» */
+    10: [
+      K('Neu im Profil') + H1('Welche Fehler machst <em>du</em> immer wieder?') +
+        P('Excel-Drills ordnet jeden Fehlversuch einer von 6 Kategorien zu. Daraus entsteht deine Fehler-DNA.'),
+      K('Deine Fehler-DNA') + H2('Fehlerquote pro <em>Kategorie</em>') +
+        '<div class="dna">' +
+          [['Bezüge und $-Zeichen', 42, 1], ['Runden', 30, 0], ['Nachschlagen, bedingte Summen', 25, 0], ['Formel-Syntax', 18, 0], ['Logik und Bedingungen', 10, 0], ['Modell und Rechenlogik', 8, 0]].map(function (r) {
+            return '<div class="r">' + r[0] + '<i><b class="' + (r[2] ? 'w' : '') + '" style="width:' + r[1] + '%"></b></i><span>' + r[1] + ' %</span></div>';
+          }).join('') +
+          '<div class="demo">Beispielansicht</div>' +
+        '</div>',
+      K('Schwächste Kategorie', true) + H2('Bezüge: <em>$ vergessen</em>') +
+        C('bad', 'Beim Runterziehen verrutscht der Satz', '=B2*{{C1}}') +
+        C('good', 'Satz fixiert', '=B2*[[$C$1]]') +
+        P('Dazu zeigt das Profil einen Tipp und die passende Gratis-Übung.'),
+      K('6 Kategorien') + H2('Was hinter einem <em>Fehler</em> steckt') +
+        '<div class="kv"><b>Bezüge</b><span>$ fehlt, falsche Zelle</span><b>Syntax</b><span>Komma statt Semikolon, Klammern</span><b>Logik</b><span>WENN-Teile, Anführungszeichen</span><b>Nachschlagen</b><span>SVERWEIS, SUMMEWENN</span><b>Runden</b><span>5 Rappen, zu früh gerundet</span><b>Modell</b><span>mal 100, fester Wert statt Bezug</span></div>',
+      K('Heute fällig') + H2('Wiederholen, <em>bevor</em> es weg ist') +
+        CHECK(['Preis nachschlagen (SVERWEIS)', 'MwSt mit festem Satz ($)', 'Auf 5 Rappen runden']) +
+        P('Was du falsch hattest, kommt nach ein paar Tagen wieder. Die App zeigt, was heute fällig ist.'),
+      K('Warum das wirkt') + H2('Abrufen mit <em>Abstand</em>') +
+        P('Die Lernforschung nennt das <b>Spaced Repetition</b>: wiederholen in wachsenden Abständen. Du übst dort, wo deine Fehler liegen, statt alles nochmals.'),
+      CTA({ kicker: 'Fehler-DNA', h: 'Lass deine Fehler <em>für dich arbeiten</em>.', sub: 'Fehlerprofil und fällige Übungen findest du im Profil der App.',
+        facts: ['Bleibt in deinem Browser', '18 Übungen gratis, ohne Anmeldung'] })
+    ],
+
+    /* IG-K11 «Excel-Zertifikat Schweiz: SIZ, MOS und der ICDL-Stopp» (Fakten Stand 1.11.2026, zertifikate/index.html) */
+    11: [
+      K('Excel-Zertifikat Schweiz') + H1('Welches Excel-Zertifikat <em>passt zu dir</em>?') +
+        P('Die 4 relevanten Zertifikate und ein wichtiger Hinweis zum ICDL.') +
+        '<div class="chips"><span class="chip f">SIZ AU4</span><span class="chip f">SIZ PU41</span><span class="chip">MOS MO-210</span><span class="chip">MOS MO-211</span></div>',
+      K('Achtung ICDL', true) + H2('Zurzeit <em>keine neuen</em> ICDL-Zeugnisse') +
+        P('Die Schweizer Lizenznehmerin meldet: Der Prüfungsbetrieb ist nach einer gerichtlichen Anordnung zur Marke vorübergehend unterbrochen.') +
+        NOTE('Empfehlung: aktuell auf <b>SIZ oder MOS</b> setzen. Der Inhalt des ICDL-Moduls Tabellenkalkulation deckt sich weitgehend mit SIZ AU4.') +
+        '<p class="src">Stand 1.11.2026, Quelle: xcdl.ch</p>',
+      K('SIZ · Advanced-User') + H2('AU4 <em>Tabellen</em>') +
+        P('Der Schweizer Standard für Excel im Büro.') +
+        '<div class="kv"><b>Kosten</b><span>CHF 110 (Partnerschule) bzw. CHF 132 (SIZ)</span><b>Vorbereitung</b><span>28 Lektionen empfohlen</span><b>Inhalt</b><span>Formatieren, SUMME bis XVERWEIS, Pivot, Diagramme, Import/Export</span></div>' +
+        '<p class="src">Quelle: siz.ch, Stand 1.11.2026</p>',
+      K('SIZ · Power-User') + H2('PU41 <em>Tabellen &amp; Daten</em>') +
+        P('Für Finanz- und Rechnungswesen und Datenprofis.') +
+        '<div class="kv"><b>Kosten</b><span>CHF 260 (Partnerschule) bzw. CHF 312 (SIZ)</span><b>Vorbereitung</b><span>40 Lektionen empfohlen</span><b>Inhalt</b><span>70 Prüfungsfunktionen, Power Query, Pivot, Power Pivot</span></div>' +
+        '<p class="src">Quelle: siz.ch, Stand 1.11.2026</p>',
+      K('Microsoft Office Specialist') + H2('MO-210 <em>Associate</em> und MO-211 <em>Expert</em>') +
+        '<div class="kv"><b>Prüfung</b><span>50 Minuten, praktisch in Excel, im Testcenter</span><b>Bestehen</b><span>MO-210: ab 700 von 1000 Punkten</span><b>Sprache</b><span>u. a. Deutsch, Französisch, Italienisch</span><b>MO-211</b><span>Expert-Stufe: erweiterte Formeln, Makros, Pivots</span></div>' +
+        '<p class="src">Quelle: learn.microsoft.com, Stand 1.11.2026</p>',
+      K('Ehrlich') + H2('Was wir abdecken, und <em>was nicht</em>') +
+        P('Excel-Drills trainiert den <b>Funktionsteil</b>: Formeln tippen, sofort prüfen, mit deutschen oder englischen Funktionsnamen.') +
+        NOTE('Pivot, Diagramme, Drucklayout, Power Query: Dafür gibt es pro Zertifikat eine Checkliste zum Üben in Excel selbst.'),
+      K('So bereitest du dich vor') + H2('In <em>3 Schritten</em>') +
+        STEPS(['Zertifikat wählen<small>Büro: AU4 · Finanz/Daten: PU41 · international: MOS</small>', 'Kampagne für den Funktionsteil<small>Tag 1 bis 3 gratis</small>', 'Checkliste in Excel abhaken<small>Formatieren, Pivot, Diagramme</small>']),
+      CTA({ kicker: 'Zertifikate', h: '4 Kampagnen. <em>Je 3 Tage gratis.</em>', sub: 'SIZ AU4, SIZ PU41, MOS MO-210 und MO-211.',
+        pill: 'excel-drills.ch/zertifikate',
+        facts: ['Funktionsnamen DE/EN umschaltbar', 'Ehrliche Checkliste für den Rest'] })
+    ],
+
+    /* IG-K12 «Klicken statt tippen: Zellbezüge wie in Excel» */
+    12: [
+      K('Neu in der App') + H1('Klicken statt tippen. <em>Wie in Excel.</em>') +
+        P('3 Tipps für Zellbezüge, die auch in deinem echten Excel funktionieren.'),
+      K('Tipp 1 von 3') + H2('Zelle <em>anklicken</em>') +
+        SHEET('=B3*[[C1]]', [
+          ['A', 'B', 'C'],
+          [Hd('MwSt-Satz'), '', S('8.1 %')],
+          [Hd('Artikel'), Hd('Netto CHF'), Hd('MwSt CHF')],
+          ['Velo', N("1'250.00"), { c: 'n', v: '' }]
+        ]) +
+        P('Während du die Formel schreibst: Zelle anklicken, der Bezug landet genau an der Cursorposition.'),
+      K('Tipp 2 von 3') + H2('Bereich <em>ziehen</em>') +
+        SHEET('=SUMME([[B2:B5]])', [
+          ['A', 'B'],
+          [Hd('Filiale'), Hd('Umsatz CHF')],
+          ['Zürich', S("12'500")],
+          ['Bern', S("8'300")],
+          ['Basel', S("9'100")],
+          ['Luzern', S("4'700")],
+          [Hd('Total'), N("34'600")]
+        ]) +
+        P('Shift-Klick geht auch. Klick auf den Spaltenkopf ergibt <span class="mono">B:B</span>.'),
+      K('Tipp 3 von 3') + H2('<em>F4</em> setzt die $-Zeichen') +
+        '<div class="refs">' +
+          '<span class="mono">B3</span><span>Start: wandert mit</span>' +
+          '<span class="mono on">$B$3</span><span>1× F4: ganz fix</span>' +
+          '<span class="mono">B$3</span><span>2× F4: Zeile fix</span>' +
+          '<span class="mono">$B3</span><span>3× F4: Spalte fix</span>' +
+        '</div>' +
+        P('Cursor in den Bezug, F4 drücken. Excel auf dem Mac: <b>Cmd+T</b>.'),
+      K('Warum das zählt') + H2('Weniger Tippfehler, <em>mehr Tempo</em>.') +
+        P('Im Einstellungstest zählt jede Minute. Wer Bezüge klickt, vertippt sich nicht bei Zeile oder Spalte.') +
+        NOTE('Der beste Shortcut ist der, den du schon beim Üben benutzt.'),
+      CTA({ kicker: 'Gleich ausprobieren', h: 'Klick, zieh, <em>F4</em>.', sub: 'Funktioniert in jeder Übung, auch in den Gratis-Übungen.',
+        facts: ['18 Übungen gratis, ohne Anmeldung', 'Deutsch, Semikolon, CHF'] })
+    ],
+
+    /* IG-K13 «Dein erster Tag als Controllerin» (Kampagne controlling-monat-1, Tag 1) */
+    13: [
+      K('Kampagne Controlling') + H1('Dein erster Tag als <em>Controllerin</em>.') +
+        P('Eine Mini-Aufgabe aus der Kampagne. Löst du sie, bevor du weiterwischst?'),
+      K('Tag 1 · Herr Steiner') + H2('Die erste <em>Aufgabe</em>') +
+        NOTE('«Willkommen bei der Alpina Logistik AG! Bevor wir den Januar abschliessen, will ich wissen, wie viele Lieferantenrechnungen noch offen sind.»') +
+        P('Die Alpina Logistik AG ist fiktiv, die Aufgabe kommt aus dem Alltag.'),
+      K('Die OP-Liste') + H2('8 Rechnungen, wie viele sind <em>offen</em>?') +
+        SHEET('', [
+          ['A', 'B', 'C', 'D'],
+          [Hd('Rechnung'), Hd('KST'), Hd('CHF'), Hd('Status')],
+          ['K-2601', 'Lager', N("1'840.50"), 'bezahlt'],
+          ['K-2602', 'Transport', N("3'215.80"), 'offen'],
+          ['K-2603', 'Verwaltung', N('412.35'), 'offen'],
+          ['K-2604', 'Transport', N("7'980.00"), 'bezahlt'],
+          ['K-2605', 'Lager', N('655.20'), 'offen'],
+          ['K-2606', 'Verwaltung', N("1'290.00"), 'bezahlt'],
+          ['K-2607', 'Transport', N("2'460.75"), 'offen'],
+          ['K-2608', 'Lager', N('918.40'), 'offen']
+        ]),
+      K('Deine Aufgabe') + H2('Welche Formel zählt die <em>offenen</em> Posten?') +
+        P('Status in <span class="mono">D2:D9</span>, das Kriterium «offen» steht in <span class="mono">F2</span>.') +
+        C('plain', 'A', '=ANZAHL(D2:D9)') +
+        C('plain', 'B', '=ZÄHLENWENN(D2:D9;F2)') +
+        C('plain', 'C', '=SUMMEWENN(D2:D9;"offen")') +
+        P('Antwort in die Kommentare, dann weiter.'),
+      K('Auflösung') + H2('<em>B</em>: ZÄHLENWENN') +
+        C('good', 'Bereich fixiert, Kriterium als Bezug', '=ZÄHLENWENN([[$D$2:$D$9]];F2)') +
+        SHEET('', [
+          ['F', 'G'],
+          [Hd('Status'), Hd('Anzahl')],
+          ['offen', S('5')]
+        ], { ok: '5 offene Posten' }),
+      K('Warum nicht A und C?', true) + H2('Zählen ist nicht <em>summieren</em>') +
+        P('<b>A:</b> ANZAHL zählt nur Zahlen. Der Status ist Text, Ergebnis 0.') +
+        P('<b>C:</b> SUMMEWENN summiert Beträge. Hier gibt es nichts zu summieren, Ergebnis 0.') +
+        NOTE('Tipp: Bezug auf F2 statt "offen" fest eintippen. Dann wechselst du auf «bezahlt», ohne die Formel anzufassen.'),
+      CTA({ kicker: 'Dein erster Monat als Controllerin', h: '8 Tage. <em>3 gratis.</em>', sub: 'Offene Posten, Kostenstellen, Budget/Ist, MwSt, 5 Rappen, Duplikate, Abgrenzung, Forecast.',
+        pill: 'excel-drills.ch/kampagne',
+        facts: ['Ein durchgehender Datensatz', 'Tag 1 bis 3 ohne Anmeldung'] })
+    ],
+
+    /* IG-K14 «SQL-Drills (Beta): SQL für Excel-Leute» */
+    14: [
+      K('Beta') + H1('Du kannst SUMMEWENN? Dann kannst du fast schon <em>SQL</em>.') +
+        P('3 Übersetzungen von Excel nach SQL. Und ein neues Schwesterprojekt zum Üben.'),
+      K('Übersetzung 1') + H2('Filtern und zählen: <em>WHERE</em>') +
+        C('plain', 'Excel', '=ZÄHLENWENN(A:A;"Zürich")') +
+        C('good', 'SQL', "SELECT COUNT(*) FROM filialen WHERE ort = 'Zürich'") +
+        P('WHERE ist dein Filter. Text in einfachen Anführungszeichen.'),
+      K('Übersetzung 2') + H2('Summe pro Gruppe: <em>GROUP BY</em>') +
+        C('plain', 'Excel, eine Formel pro Ort', '=SUMMEWENN(A:A;"Zürich";B:B)') +
+        C('good', 'SQL, alle Orte auf einmal', 'SELECT ort, SUM(umsatz) FROM verkauf GROUP BY ort') +
+        P('Wie eine Pivot-Tabelle, nur als eine Zeile Text.'),
+      K('Übersetzung 3') + H2('Nachschlagen: <em>JOIN</em>') +
+        C('plain', 'Excel', '=SVERWEIS(A2;Artikel!$A:$B;2;FALSCH)') +
+        C('good', 'SQL', 'SELECT b.nr, a.preis FROM bestellung b JOIN artikel a ON a.nr = b.nr') +
+        P('Der JOIN verbindet zwei Tabellen über eine gemeinsame Spalte, wie FALSCH: nur exakte Treffer.'),
+      K('Was SQL-Drills ist') + H2('SQL üben wie <em>Excel-Drills</em>') +
+        CHECK(['41 Übungen: SELECT, JOIN, GROUP BY', 'Läuft direkt im Browser', 'Gedacht für Leute, die Excel schon können']) +
+        NOTE('Noch <b>Beta</b>. Wenn etwas hakt, schreib es in die Kommentare.'),
+      CTA({ kicker: 'SQL-Drills (Beta)', h: 'Der nächste Schritt nach <em>Excel</em>.', sub: 'Für alle, die mit Daten arbeiten und mehr wollen als Formeln.',
+        pill: 'sql-drills.onrender.com',
+        facts: ['41 Übungen im Browser', 'Ein Projekt von Excel-Drills'] })
     ]
   };
 

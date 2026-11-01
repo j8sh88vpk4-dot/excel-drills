@@ -2,10 +2,11 @@
 <html lang="de-CH">
 <head>
 <meta charset="utf-8">
-<title>Excel-Drills Story 1080x1920 (?v=1..4)</title>
+<title>Excel-Drills Story 1080x1920 (?v=1..8)</title>
 <!-- Story / Reel-Endcard (Instagram, TikTok). Oben ~250 px und unten ~300 px bleiben frei von wichtigen Inhalten (UI-Overlays).
      Ohne Parameter: Reel-Endcard (png/story.png, wie bisher).
      ?v=1 Launch · ?v=2 Formelrätsel (Platz für Quiz-Sticker) · ?v=3 Streak/Meisterschaft · ?v=4 Für Berufsbildner
+     ?v=5 Datei prüfen (Upload) · ?v=6 KI-Interview Frau Keller · ?v=7 Zertifikate SIZ/MOS + ICDL-Hinweis · ?v=8 SQL-Drills Beta
      Gerendert von render-instagram.sh nach png/instagram/story-<v>.png. -->
 <style>
   :root { --g:#107C41; --gd:#0B5A2E; --gl:#E7F2EB; --ink:#1B1F1D; --mut:#5A635E; --line:#D5DDD8; }
@@ -63,6 +64,13 @@
   .rows div { display:flex; align-items:center; gap:26px; background:#fff; color:var(--ink); border-radius:22px; padding:30px 36px; text-align:left; font-size:44px; font-weight:700; line-height:1.2; box-shadow:0 18px 40px rgba(0,0,0,.18); }
   .rows div::before { content:"✓"; flex:none; width:60px; height:60px; border-radius:50%; background:var(--g); color:#fff; display:flex; align-items:center; justify-content:center; font-size:34px; }
   .mailhint { margin-top:auto; font-size:38px; line-height:1.35; font-weight:600; background:rgba(255,255,255,.16); padding:26px 36px; border-radius:22px; }
+  .chat { margin-top:56px; width:100%; display:flex; flex-direction:column; gap:24px; text-align:left; }
+  .msg { max-width:88%; border-radius:30px; padding:28px 34px; font-size:42px; line-height:1.32; font-weight:600; box-shadow:0 18px 40px rgba(0,0,0,.18); }
+  .msg small { display:block; font-size:26px; font-weight:800; letter-spacing:.6px; text-transform:uppercase; margin-bottom:8px; opacity:.7; }
+  .msg.ai { align-self:flex-start; background:#fff; color:var(--ink); border-bottom-left-radius:8px; }
+  .msg.me { align-self:flex-end; background:var(--gd); color:#fff; border-bottom-right-radius:8px; }
+  .note { margin-top:40px; font-size:32px; line-height:1.35; color:rgba(255,255,255,.85); }
+  .cta.sm { font-size:44px; padding:30px 50px; }
 </style>
 </head>
 <body>
@@ -119,7 +127,35 @@
       '<div class="kick">Klassen gratis</div>' +
       '<h1>Für <em>Berufsbildner</em> und Berufsschulen</h1>' +
       '<div class="rows"><div>Klassen üben gratis mit Premium-Zugang</div><div>Trainer-Handouts als PDF</div><div>Rechnung, MwSt, Rappenrundung, Semikolon</div></div>' +
-      '<p class="mailhint">Mail an <b>hallo@excel-drills.ch</b> mit Schule und Anzahl Lernende</p>'
+      '<p class="mailhint">Mail an <b>hallo@excel-drills.ch</b> mit Schule und Anzahl Lernende</p>',
+    5: brand +
+      '<div class="kick">Neu: Datei prüfen</div>' +
+      '<h1>Lös es in deinem <em>echten Excel</em>.</h1>' +
+      '<div class="rows"><div>Aufgabe als xlsx herunterladen</div><div>In Excel lösen und speichern</div><div>Hochladen, Fehlerkarte sehen</div></div>' +
+      '<p class="note">Deine Datei verlässt den Browser nicht.</p>' +
+      '<div class="cta sm">Datei prüfen · Link in Bio</div>',
+    6: brand +
+      '<div class="kick">Neu · Premium</div>' +
+      '<h1>Frau Keller hat <em>Rückfragen</em>.</h1>' +
+      '<div class="chat">' +
+        '<div class="msg ai"><small>Frau Keller · Partnerin</small>Ihr Break-even liegt bei 1\'800 Stück. Was passiert bei 10 % tieferem Preis?</div>' +
+        '<div class="msg me"><small>Du</small>Deckungsbeitrag 38 statt 50, also rund 2\'369 Stück.</div>' +
+      '</div>' +
+      '<p class="note">KI-Interviewerin nach dem Assessment. Beispiel-Dialog, gekürzt.</p>' +
+      '<div class="cta sm">Interview üben · Link in Bio</div>',
+    7: brand +
+      '<div class="kick">Excel-Zertifikat Schweiz</div>' +
+      '<h1>SIZ oder <em>MOS</em>?</h1>' +
+      '<div class="rows"><div>SIZ AU4 Tabellen</div><div>SIZ PU41 Power-User</div><div>MOS Excel Associate MO-210</div><div>MOS Excel Expert MO-211</div></div>' +
+      '<p class="note">ICDL: zurzeit keine neuen Zeugnisse in der Schweiz.<br>Stand 1.11.2026, Quelle: xcdl.ch</p>' +
+      '<div class="cta sm">Je 3 Tage gratis · Link in Bio</div>',
+    8: brand +
+      '<div class="kick">Beta · SQL-Drills</div>' +
+      '<h1>SQL üben <em>wie Excel</em>.</h1>' +
+      '<div class="sheet"><div class="fx"><b class="mono">fx</b><span class="mono" style="font-size:32px">=SUMMEWENN(A:A;"Zürich";B:B)</span></div>' +
+      '<div class="ok" style="font-size:34px"><span class="c">=</span><span class="mono">… GROUP BY ort</span></div></div>' +
+      '<div class="facts sm"><div>41 Übungen: SELECT, JOIN, GROUP BY</div><div>Direkt im Browser</div></div>' +
+      '<div class="cta sm">sql-drills.onrender.com</div>'
   };
   var v = parseInt(new URLSearchParams(location.search).get('v'), 10);
   if (V[v]) { document.getElementById('wrap').innerHTML = V[v]; document.title = 'Excel-Drills Story v' + v; }

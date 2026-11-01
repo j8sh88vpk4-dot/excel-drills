@@ -1,8 +1,8 @@
-# LinkedIn: 16 Posts
+# LinkedIn: 19 Posts
 
 Format: Hook in Zeile 1, kurze Absätze, max. ~1'300 Zeichen, 3–5 Hashtags, ein CTA mit dem fertigen UTM-Link.
 Link-Tipp: Den Link in den **ersten Kommentar** setzen und im Post «Link im ersten Kommentar» schreiben, wenn die Reichweite mit Link im Text sichtbar schlechter ist. Die Texte unten enthalten den fertigen Link direkt; je nach Variante in den ersten Kommentar verschieben.
-UTM-Links pro Post: eingesetzt, Referenz in `utm.md` (`li-01` … `li-16`).
+UTM-Links pro Post: eingesetzt, Referenz in `utm.md` (`li-01` … `li-19`).
 Bilder: `visuals/png/` (Angabe pro Post).
 
 ---
@@ -534,4 +534,89 @@ Probier es mit einer Aufgabe: https://excel-drills.ch/upload/?utm_source=linkedi
 Welche Fehlerart würdest du in deiner Datei am ehesten erwarten?
 
 #Excel #ExcelTipps #Weiterbildung #Lernen
+```
+
+---
+
+# Differenzierer-Posts (LI-17 bis LI-19)
+
+Stand 1.11.2026. Themen: Zertifikats-Vorbereitung mit ICDL-Hinweis, Datei-Prüfung für Ausbildner, KI-Interview. Termine sind Vorschläge (Kalender in `README.md`).
+
+---
+
+## LI-17 Zertifikate: ICDL ausgesetzt, was jetzt?
+**Termin:** Mo 9.11. (LinkedIn-Tag frei) · **Bild:** `visuals/png/instagram/c11-s2.png` (ICDL-Hinweis) oder keins · **Ziel:** Klicks auf `/zertifikate/` · **Hashtags:** #Excel #Weiterbildung #KV #Berufsbildung
+**Vor dem Posten:** ICDL-Status und Preise auf `zertifikate/index.html` gegenprüfen (Stand 1.11.2026, Quellen siz.ch, learn.microsoft.com, xcdl.ch).
+
+```
+Wer in der Schweiz Excel-Kenntnisse belegen wollte, hat lange das ICDL gemacht. Das geht zurzeit nicht.
+
+Die Schweizer Lizenznehmerin meldet, dass der Prüfungsbetrieb nach einer gerichtlichen Anordnung zur Marke vorübergehend unterbrochen ist. Neue ICDL-Zeugnisse werden nicht ausgestellt (Stand 1.11.2026, Quelle: xcdl.ch).
+
+Was bleibt, wenn man jetzt ein Excel-Zertifikat braucht:
+→ SIZ AU4 Tabellen: der Schweizer Büro-Standard, CHF 110 an einer Partnerschule
+→ SIZ PU41 Power-User: für Finanz- und Rechnungswesen, laut Kursanbietern Zulassungsvoraussetzung für den Fachausweis
+→ MOS Excel Associate (MO-210) und Expert (MO-211): international, 50 Minuten praktisch in Excel
+
+Ich habe für alle vier eine Vorbereitungsseite gebaut. Ehrlich abgegrenzt: Excel-Drills trainiert den Funktionsteil, mit deutschen oder englischen Funktionsnamen. Pivot, Diagramme, Drucklayout oder Power Query übt man in Excel selbst; dafür gibt es pro Zertifikat eine Checkliste.
+
+Pro Zertifikat eine Kampagne, Tag 1 bis 3 gratis: https://excel-drills.ch/zertifikate/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-17
+
+Welches Zertifikat verlangt ihr bei Bewerbungen, oder ist es euch egal?
+
+#Excel #Weiterbildung #KV #Berufsbildung
+```
+
+---
+
+## LI-18 Für Ausbildner: Lernende lösen in echtem Excel, die Fehlerkarte zeigt den Rest
+**Termin:** Mi 4.11. (LinkedIn-Tag frei; Woche 1 hat damit LI-01, LI-18, LI-02) · **Bild:** `visuals/png/instagram/c8-s3.png` (Fehlerkarte, Beispieldaten) · **Ziel:** Klicks auf `/upload/`, Klassenanfragen · **Hashtags:** #Berufsbildung #KV #Excel #Ausbildung
+**Abgrenzung zu LI-16:** LI-16 spricht Einzelpersonen an, LI-18 Berufsbildner und Lehrpersonen. Ein CTA: die Upload-Seite.
+
+```
+Wer Lernende in Excel ausbildet, kennt das: Die Formel stimmt im Übungsblatt. In der echten Datei des Betriebs nicht mehr.
+
+Darum gibt es bei Excel-Drills jetzt eine Prüfung für echte Excel-Dateien:
+1) Lernende laden eine Aufgabe als xlsx herunter
+2) Sie lösen sie in Excel, mit den Tasten und Gewohnheiten, die sie im Betrieb brauchen
+3) Sie laden die Datei hoch und sehen eine Fehlerkarte: welche Zelle, welcher Fehler, was fehlt
+
+Erkannt werden die Klassiker aus dem Lehralltag: Wert eingetippt statt Formel, englischer Funktionsname, $ fehlt beim festen Bezug, Bereich zu kurz, FALSCH fehlt im SVERWEIS, Text ohne Anführungszeichen. Zu jedem Fehler kommt ein Lerntipp und die passende Übung.
+
+Für den Datenschutz wichtig: Die Datei verlässt den Browser nicht. Sie wird auf dem Gerät gelesen, nichts wird hochgeladen oder gespeichert.
+
+Aktuell 5 Aufgaben: SVERWEIS, SUMMEWENN, MwSt mit $-Bezug, WENN, ZÄHLENWENN. Ich baue weiter aus und frage darum: Welche Aufgabe fehlt in eurem Unterricht?
+
+Ausprobieren: https://excel-drills.ch/upload/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-18
+
+#Berufsbildung #KV #Excel #Ausbildung
+```
+
+---
+
+## LI-19 KI-Interview: Frau Keller fragt nach dem Modell
+**Termin:** Mo 23.11. (Vorschlag; LI-10 Poll dafür auf Mo 30.11. verschieben oder streichen) · **Bild:** `visuals/png/instagram/c9-s4.png` (Dialog) · **Ziel:** Assessment-Starts, Premium · **Hashtags:** #Consulting #Bewerbung #Excel #CaseInterview
+**Vor dem Posten:** Interview-Box live prüfen (Premium-Regel, Rollen, Anzahl Runden). Keine Aussagen über Vorhersagekraft, kein «validiert».
+
+```
+«Ihr Break-even liegt bei 1'800 Stück. Was passiert, wenn der Preis um 10 % sinkt?»
+
+So fragt Frau Keller. Sie ist eine KI-Interviewerin und Teil von Excel-Drills.
+
+Die Idee kommt aus Case-Interviews: Die Formel richtig zu tippen ist das eine. Im Gespräch zählt, ob man das eigene Modell erklären kann. Warum diese Zahl? Was ändert sich bei einer anderen Annahme? Wie sagt man das einer Geschäftsleitung in zwei Sätzen?
+
+So läuft es:
+→ Zuerst das Excel-Assessment lösen (Consulting, Accounting und drei weitere Rollen, gratis)
+→ Danach stellt Frau Keller (Consulting) oder Herr Bianchi (Accounting) Rückfragen zu den eigenen Zahlen
+→ Höchstens 6 Fragen, dann ein Fazit zu Struktur, Zahlenverständnis, Annahmen und Kommunikation
+
+Die Interviewerin verrät keine Lösungen, sie fragt nach dem Gedankengang. Das Interview ist Teil von Premium, das Assessment davor bleibt gratis.
+
+Ehrlich gesagt: Das ist ein Übungsgespräch, keine Eignungsdiagnostik. Es zeigt, wo man beim Erklären noch hängt.
+
+Assessment starten: https://excel-drills.ch/assessment/?rolle=consulting&utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-19
+
+Welche Rückfrage hat dich in einem Interview schon mal kalt erwischt?
+
+#Consulting #Bewerbung #Excel #CaseInterview
 ```

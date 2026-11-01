@@ -1,6 +1,6 @@
 # Social-Media-Kit Excel-Drills: 4-Wochen-Launch
 
-Stand: 1.11.2026 (B2B-Erweiterung ergänzt) · Launch-Zeitraum: Mo 2.11. bis Fr 27.11.2026 (Go/No-Go-Entscheid gemäss `docs/TESTPLAN.md`)
+Stand: 1.11.2026 (B2B-Erweiterung, Differenzierer und Instagram-Tagesplan ergänzt) · Launch-Zeitraum: Mo 2.11. bis Fr 27.11.2026 (Go/No-Go-Entscheid gemäss `docs/TESTPLAN.md`)
 
 **Ziel des Tests:** 500 Gratisnutzer **oder** 20 zahlende Kunden bis 27.11.2026.
 Social Media ist dabei der Startmotor, bis die Funktions-Artikel (SEO) Traffic bringen. Jeder Post hat deshalb genau ein Ziel: Klick auf eine Gratis-Übung, Kommentar (Reichweite) oder Kauf/Teamanfrage.
@@ -13,17 +13,19 @@ Social Media ist dabei der Startmotor, bis die Funktions-Artikel (SEO) Traffic b
 
 | Datei | Inhalt | Anzahl |
 |---|---|---|
-| `linkedin.md` | Posts für Lucas Profil, fertig zum Kopieren (LI-13 bis LI-16 B2B) | 16 Posts |
+| `linkedin.md` | Posts für Lucas Profil, fertig zum Kopieren (LI-13 bis LI-16 B2B, LI-17 bis LI-19 Differenzierer) | 19 Posts |
 | `reddit.md` | Subreddit-Posts mit Regel-Hinweis und Antwortvorlagen | 5 Posts, 10 Antwortvorlagen |
 | `x-threads.md` | Threads und Einzel-Tweets (DE) | 3 Threads, 11 Tweets |
 | `instagram-tiktok.md` | Kurzvideo-Skripte und Karussell-Konzepte | 6 Skripte, 6 Karussells |
-| `instagram.md` | Fertige Instagram-Karussells (Captions, Hashtags), 4-Wochen-Reihenfolge, Bio, Story-Plan | 7 Captions (IG-K7 mit 7 Slides (c7)), 3 Stories + 3 Text-Stories |
+| `instagram.md` | Fertige Instagram-Karussells (Captions, Hashtags klein/mittel/gross), Bio, Story-Plan | 14 Captions (IG-K1 bis IG-K14), 8 Bild-Stories + Text-Stories |
+| `instagram-termine.md` | **Tagesplan Instagram Mo 2.11. bis Fr 27.11.**: 1 Reel pro Tag, Karussells, 3 Stories pro Tag, Threads, Kommentar-Routine, Collab; markiert, was in der Business Suite terminierbar ist und was Luca in der App macht | 26 Tage |
+| `video/formel-des-tages.md`, `video/formel-data.js`, `video/formel.html`, `video/formel-render.sh` | Reel-Serie «Formel des Tages»: 26 Skripte (Hook, 3 Zeilen, Formel, Auflösung, Caption, Threads), Animation und Render-Pipeline | 26 Skripte, 5 gerenderte MP4 (`video/reels/`) |
 | `b2b-onepager.md` | Inhalt für den B2B-Einseiter (A4), zum Rendern mit dem Handout-Generator | 1 Seite |
 | `email.md` | Netzwerk, HR/Teamleiter, Hochschulen/Berufsschulen, Recruiting-Pilot (EM-04, EM-05) | 5 Mails (+ Nachfass-Varianten) |
 | `utm.md` | UTM-Schema pro Kanal und fertige Links | – |
 | `visuals/*.html` | Bildvorlagen (OG, LinkedIn, Quadrat, Story), ohne externe Abhängigkeiten | 4 Vorlagen, 5 LinkedIn-Varianten |
 | `visuals/render.sh` | Rendert alle Vorlagen nach `visuals/png/` | – |
-| `visuals/carousel.html`, `visuals/render-instagram.sh` | Instagram-Karussells 1080×1350 (`?c=1..7&s=1..n`), Story-Varianten `story.html?v=1..4`; Rendern nach `visuals/png/instagram/` | 50 Slides + 4 Stories |
+| `visuals/carousel.html`, `visuals/render-instagram.sh` | Instagram-Karussells 1080×1350 (`?c=1..14&s=1..n`), Story-Varianten `story.html?v=1..8`; Rendern nach `visuals/png/instagram/` | 99 Slides + 8 Stories |
 | `visuals/png/` | Gerenderte PNGs: og-image, linkedin-1…5, square-quiz, story | 8 PNGs |
 
 ## Nutzung
@@ -99,6 +101,15 @@ Zusatz: LI-16 und IG-K7 sprechen Einzelpersonen an (Datei hochladen und prüfen 
 | Launch-Code | SVERWEIS20, 20 % auf Jahresabo und Lifetime, ab CHF 49, bis 15.11.2026 |
 | In Arbeit | Lernpfad Consulting |
 | Artikel | SVERWEIS, SUMMEWENN, WENN, ZÄHLENWENN, absolute Bezüge |
+| Rollen-Assessments | 5 Rollen: Consulting, Accounting, Investment Banking & Corporate Finance, Versicherung, KV-Lehrstelle; je 5 Aufgaben, 12 bis 15 Minuten, gratis; Diagnose und 7-Tage-Plan; Recruiter-Links für Firmen (`/assessment/`) |
+| Datei prüfen | xlsx herunterladen, in Excel lösen, hochladen, Fehlerkarte; 5 Aufgaben (SVERWEIS, SUMMEWENN, $-Bezug, WENN, ZÄHLENWENN); Datei verlässt den Browser nicht; nur .xlsx bis 5 MB (`/upload/`) |
+| KI-Interview | Frau Keller (Partnerin, Consulting) bzw. Herr Bianchi (Leiter Rechnungswesen, Accounting) stellen nach dem Assessment Rückfragen zum Modell; max. 6 Runden; Fazit zu Struktur, Zahlenverständnis, Annahmen, Kommunikation; nur Premium; Figuren fiktiv |
+| Kampagne | «Dein erster Monat als Controllerin» bei der fiktiven Alpina Logistik AG: 8 Aufgaben (Tag 1, 2, 3, 5, 8, 12, 16, 20), Tag 1 bis 3 gratis (`/kampagne/`) |
+| Fehler-DNA | Fehlversuche in 6 Kategorien (Bezüge und $, Syntax, Logik, Nachschlagen, Runden, Modell), Fehlerquote pro Kategorie, «Heute fällig» (Wiederholung); im Profil der App, gespeichert im Browser |
+| Zellbezüge | In jeder Übung: Zelle anklicken fügt Bezug ein, Ziehen/Shift-Klick für Bereiche, Spalten-/Zeilenkopf, F4 für $ |
+| Zertifikate | `/zertifikate/`: SIZ AU4 Tabellen (CHF 110/132, 28 Lektionen), SIZ PU41 (CHF 260/312, 40 Lektionen), MOS MO-210, MOS MO-211; je eine Kampagne, Tag 1 bis 3 gratis (`siz-au4` 10 Tage, `siz-pu41` 12, `mos-excel-associate` 8, `mos-excel-expert` 10); ICDL in der Schweiz zurzeit ausgesetzt (Stand 1.11.2026, Quelle xcdl.ch) |
+| DE/EN | Funktionsnamen Deutsch/Englisch umschaltbar (Assessment, Kampagnen, `?lang=en`) |
+| SQL-Drills | Schwesterprojekt, Beta: 41 Übungen zu SELECT, JOIN, GROUP BY im Browser, https://sql-drills.onrender.com |
 
 Beispiel-Übungen, die sich für Posts eignen: `sverweis-1` (Preis nachschlagen, gratis), `runden-1` (auf Rappen runden, gratis), `acc-abweichung-2` (Abweichung in %, gratis), `fin-zinseszins-1` (gratis), `acc-rundung-1` (5 Rappen, premium), `fin-rmz-1` (Leasingrate, premium), `fin-bw-1` (Barwert einer Rente, premium), `fin-zw-1` (Endwert Säule 3a, premium).
 
@@ -120,6 +131,10 @@ Pro Post 3–5 Hashtags, nie mehr. Ein Set wählen, nicht mischen.
 
 Rhythmus: LinkedIn 3× pro Woche (Di/Mi/Do 07:30–08:30 oder 12:00), X täglich wochentags, Reddit max. 1–2 pro Woche, Instagram/TikTok 3× pro Woche, Mails gestaffelt.
 
+**Instagram:** Die Instagram-Zeilen in den Wochentabellen unten sind der Stand vom 30.10. Massgeblich für Instagram ist seit 1.11. der Tagesplan `instagram-termine.md` (täglich Reel 18:30, Karussells IG-K1 bis IG-K14, 3 Stories pro Tag, Threads).
+
+**Neue LinkedIn-Posts (Vorschläge):** LI-18 Datei prüfen für Ausbildner am Mi 4.11., LI-17 Zertifikate/ICDL am Mo 9.11., LI-19 KI-Interview am Mo 23.11. (LI-10 Poll dafür auf Mo 30.11. verschieben oder streichen).
+
 ### Woche 1 (2.–6.11.): Launch, Netzwerk aktivieren
 
 | Tag | Kanal | Post-ID | Ziel |
@@ -129,6 +144,7 @@ Rhythmus: LinkedIn 3× pro Woche (Di/Mi/Do 07:30–08:30 oder 12:00), X täglich
 | Di 3.11. | LinkedIn | LI-01 Launch | Reichweite, Klicks auf Gratis-Übungen |
 | Di 3.11. | Instagram/TikTok | IG-V1 | Testen, ob Format trägt |
 | Mi 4.11. | X | X-01, X-02 | Klicks |
+| Mi 4.11. | LinkedIn | **LI-18 Datei prüfen für Ausbildner** (neu, Vorschlag) | Klicks Upload-Seite, Klassenanfragen |
 | Do 5.11. | LinkedIn | LI-02 SVERWEIS-Fehler (+ Bild linkedin-2) | Mehrwert, Saves, Klicks auf sverweis-1 |
 | Do 5.11. | Reddit | RD-01 r/de_EDV | Feedback + Nutzer |
 | Fr 6.11. | Instagram | IG-K1 Karussell SVERWEIS | Saves |
@@ -140,6 +156,7 @@ Rhythmus: LinkedIn 3× pro Woche (Di/Mi/Do 07:30–08:30 oder 12:00), X täglich
 | Tag | Kanal | Post-ID | Ziel |
 |---|---|---|---|
 | Mo 9.11. | X | X-T2 (SVERWEIS-Thread), X-03 | Klicks |
+| Mo 9.11. | LinkedIn | **LI-17 Zertifikate, ICDL ausgesetzt** (neu, Vorschlag) | Klicks Zertifikatsseite |
 | Mo 9.11. | Instagram | Text-Story «Auf dem Handy installieren» | Installationen |
 | Di 10.11. | LinkedIn | LI-03 Semikolon vs. Komma (+ linkedin-3) | Kommentare |
 | Di 10.11. | Instagram/TikTok | IG-V2, IG-V3 | Reichweite |
@@ -176,7 +193,7 @@ Rhythmus: LinkedIn 3× pro Woche (Di/Mi/Do 07:30–08:30 oder 12:00), X täglich
 
 | Tag | Kanal | Post-ID | Ziel |
 |---|---|---|---|
-| Mo 23.11. | LinkedIn | LI-10 Poll | Kommentare, Lernpräferenzen |
+| Mo 23.11. | LinkedIn | **LI-19 KI-Interview** (neu, Vorschlag; LI-10 Poll auf Mo 30.11. oder streichen) | Assessment-Starts, Premium |
 | Mo 23.11. | X | X-08, X-09 | – |
 | Di 24.11. | LinkedIn | LI-08 Build-in-Public (echte Zahlen), verschoben von Mi 18.11., Vorschlag, Text «Zwei Wochen» auf «Drei Wochen» anpassen | Vertrauen, Kommentare |
 | Di 24.11. | Reddit | RD-04 r/excel (EN) | Feedback zur Engine |
