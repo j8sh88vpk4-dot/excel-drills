@@ -1,0 +1,58 @@
+/* Excel-Drills: Zertifikatsseite (zertifikate/). Nutzt die Design-Tokens und Karten aus style.css. */
+
+.zt-intro { padding-top: 1.25rem; }
+.zt-intro h1 { margin-top: 0.6rem; }
+.zt-section { margin: 2.5rem 0 0; max-width: 1000px; }
+.zt-section .section-title { margin: 0 0 0.6rem; }
+.zt-provider { margin: 0; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent-strong); }
+.zt-cards { margin-top: 0.5rem; }
+.zt-card h3 { line-height: 1.3; }
+
+/* ICDL-Hinweis */
+.zt-notice { max-width: 1000px; margin: 2rem 0 0; padding: 1rem 1.2rem; border: 2px solid var(--target-border); border-left-width: 6px; border-radius: var(--radius); background: var(--target); }
+.zt-notice h2 { margin: 0 0 0.4rem; font-size: 1.15rem; }
+.zt-notice p { margin: 0.4rem 0; max-width: 80ch; }
+
+/* Zertifikats-Abschnitt */
+.zt-cert { max-width: 1000px; margin: 2.5rem 0 0; padding: 1.3rem 1.4rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; scroll-margin-top: 1rem; }
+.zt-cert h2 { margin: 0.2rem 0 0.9rem; font-size: 1.4rem; line-height: 1.25; }
+.zt-facts { display: grid; gap: 0.45rem; margin: 0 0 1.2rem; }
+.zt-facts > div { display: grid; grid-template-columns: 9.5rem 1fr; gap: 0.2rem 1rem; padding-bottom: 0.45rem; border-bottom: 1px solid var(--border); }
+.zt-facts > div:last-child { border-bottom: 0; padding-bottom: 0; }
+.zt-facts dt { font-weight: 700; color: var(--muted); }
+.zt-facts dd { margin: 0; }
+
+.zt-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 1rem; }
+.zt-cols > * { min-width: 0; }
+.zt-covers, .zt-todo { border-radius: var(--radius); padding: 1rem 1.1rem; }
+.zt-covers { background: var(--accent-soft); border: 2px solid var(--accent); }
+.zt-todo { background: var(--bg); border: 1px solid var(--border); }
+.zt-covers h3, .zt-todo h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+.zt-covers p { margin: 0.4rem 0; }
+.zt-covers .btn { margin-top: 0.3rem; }
+
+.zt-check { list-style: none; margin: 0; padding: 0; }
+.zt-check li + li { border-top: 1px solid var(--border); }
+.zt-check label { display: flex; gap: 0.55rem; align-items: flex-start; padding: 0.5rem 0; cursor: pointer; min-height: 44px; box-sizing: border-box; }
+.zt-check input { flex: none; width: 1.2rem; height: 1.2rem; margin: 0.15rem 0 0; accent-color: var(--accent); }
+.zt-check input:checked ~ .zt-lz, .zt-check label:has(input:checked) { color: var(--muted); }
+.zt-lz { flex: none; max-width: 45%; overflow-wrap: anywhere; white-space: normal; font-size: 0.78rem; font-weight: 700; padding: 0.05rem 0.5rem; border-radius: 6px; background: var(--grid-head); color: var(--text); margin-top: 0.1rem; }
+.zt-count { margin: 0.5rem 0 0; font-weight: 700; }
+.zt-source { margin: 0.9rem 0 0; font-size: 0.9rem; color: var(--muted); }
+
+.zt-table th[scope="row"] { min-width: 11rem; }
+.zt-table td { min-width: 8rem; }
+
+.zt-b2b-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+.zt-b2b-grid > div { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; }
+.zt-b2b-grid h3 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+.zt-b2b-grid p { margin: 0; }
+.zt-sources ul { padding-left: 1.2rem; }
+
+@media (max-width: 760px) {
+  .zt-cols { grid-template-columns: minmax(0, 1fr); }
+  .zt-cert { padding: 1rem; }
+  .zt-cert h2 { font-size: 1.2rem; }
+  .zt-facts > div { grid-template-columns: 1fr; }
+  .zt-covers .btn { display: block; text-align: center; }
+}

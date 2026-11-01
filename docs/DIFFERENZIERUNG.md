@@ -5,7 +5,7 @@ Coddy (24 Aufgaben), Lehrmittel (Wings, Easy4Me, zebis). Alle prüfen Einzelform
 Unsere Lücke bleibt Deutsch/Semikolon/CHF. Das reicht gegen eine Gratis-Plattform nicht auf Dauer.
 Ziel: Dinge bauen, die eine Formel-Quiz-Seite strukturell nicht nachbauen kann.
 
-## Die sechs Differenzierer (Reihenfolge = Priorität)
+## Die sieben Differenzierer (Reihenfolge = Priorität)
 
 | # | Differenzierer | Was es ist | Warum die Konkurrenz es nicht hat | Aufwand |
 |---|---|---|---|---|
@@ -15,8 +15,9 @@ Ziel: Dinge bauen, die eine Formel-Quiz-Seite strukturell nicht nachbauen kann.
 | 4 | **Fehler-DNA und Wiederholung** | Jeder Fehler wird kategorisiert (Bezug, Syntax, Logik, Lookup, Rundung, Tempo). Daraus: persönliches Fehlerprofil, Wiederholung nach Spaced Repetition («heute fällig: 3 Übungen»), Benachrichtigung per Mail (Login nötig). | Gamification haben andere; ein lernwissenschaftliches Profil, das die nächste Übung wählt, hat keiner. | 2 Tage, braucht Login (Branch `login`) |
 | 5 | **Kampagnen: «Dein erster Monat als …»** | Story-basierte Serien mit einem durchgehenden Datensatz: «Erster Monat als Controllerin bei der Helvetia-ähnlichen AG»: Tag 1 OP-Liste, Tag 5 Monatsabschluss, Tag 20 Forecast. Jede Übung baut auf der vorherigen auf. | Macht aus Einzelübungen ein Erlebnis mit Fortschritt und Identifikation. Content-Hebel, kein Technik-Hebel. | 1 Tag pro Kampagne |
 | 6 | **B2B: Recruiter- und Klassen-Links** | Firma oder Berufsschule erstellt einen Test-Link (Rolle, Zeitlimit, Sprache), Kandidaten lösen ohne Konto, Ergebnisse als Tabelle und PDF, Vergleich gegen Benchmark. Preis pro Test-Platz oder Teamlizenz. | Gratis-Plattformen haben keinen Grund, Recruiter zu bedienen. Lucas Netzwerk bei Versicherern ist der erste Kanal. | 2 Tage, braucht Supabase-Tabellen |
+| 7 | **Zertifikats-Vorbereitung** | Seite `zertifikate/` mit den vier in der Schweiz relevanten Excel-Zertifikaten (SIZ AU4 Tabellen, SIZ PU41 Tabellen & Daten, MOS MO-210, MOS MO-211) und Hinweis zum ICDL-Unterbruch: Fakten mit Quelle (Stand 1.11.2026), pro Zertifikat eine Kampagne für den Funktionsteil (Tag 1 bis 3 gratis, DE/EN umschaltbar) und eine Checkliste für das, was nur in Excel selbst geübt werden kann. Dazu SEO-Artikel `artikel/excel-zertifikat-schweiz.html`. | Plattformen wie LogicExcel bereiten generisch auf MO-200/MO-210 vor, aber nicht auf die Schweizer SIZ-Module, nicht mit deutschen Funktionsnamen und Semikolon und ohne ehrliche Abgrenzung, was online nicht prüfbar ist. Suchanfragen «Excel Zertifikat Schweiz», «SIZ AU4», «PU41» haben klare Kaufabsicht. | 1 Tag Seite und Artikel, Kampagnen-Inhalte separat |
 
-Bewusst nicht: Video-Kurse, Zertifikate à la MO-200, Office-Add-in (erst wenn 2 Umsatz trägt), englische Zielgruppe.
+Bewusst nicht: Video-Kurse, eigene Zertifikate à la MO-200 (wir bereiten auf bestehende Zertifikate vor, siehe 7, stellen aber keine aus), Office-Add-in (erst wenn 2 Umsatz trägt), englische Zielgruppe.
 
 ## Reihenfolge
 
@@ -58,3 +59,12 @@ Regeln:
 
 Neue Plausible-Events: `assessment_start` (rolle), `assessment_done` (rolle, punkte), `upload_check` (uebung, fehler), `interview_start`, `share_click`.
 Go/No-Go-Kriterien bleiben; zusätzlich: Anteil der Assessment-Starter, die danach eine Übung lösen.
+
+## Hebel 7: Zertifikats-Vorbereitung (Stand 1.11.2026)
+
+- Seite `zertifikate/index.html` (+ `assets/zertifikate.css`, `assets/zertifikate.js`), verlinkt in Navigation, Footer, Startseite (Bereich «Neu»), sitemap.xml. Liest `app/campaigns.json` nicht, Kampagnen-Links sind statisch.
+- Kampagnen-IDs: `siz-au4` (10 Tage), `siz-pu41` (12 Tage), `mos-excel-associate` (8 Tage), `mos-excel-expert` (10 Tage), jeweils Tag 1 bis 3 gratis; Aufruf `kampagne/?kampagne=<id>`. Die Inhalte kommen separat in `app/campaigns.json`; bis dahin zeigt `kampagne/` für diese IDs einen Hinweis und die Übersicht.
+- `kampagne/` übernimmt Titel, H1, Einleitung, Firma und Meta-Description aus der Kampagne (optional `summary`, `description`, `seoTitle`, `daysTitle`, `teaser`, `finish`), zeigt ohne Parameter alle Kampagnen als Karten und mit Parameter «Andere Kampagnen». Excel-Sprache DE/EN pro Kampagne umschaltbar (`?lang=en`).
+- Checklisten «Was du zusätzlich in Excel selbst üben musst» mit Häkchen im localStorage `excelDrillsCertChecklist`.
+- Messung: `cert_open` (Property `zertifikat`) beim Klick auf einen Kampagnen-Link der Zertifikatsseite, `campaign_open` (`kampagne`, `ort`) beim Wechsel zwischen Kampagnen.
+- Pflege: Fakten (Preise, Versionen der Modulidentifikationen, ICDL-Status) stehen in `zertifikate/index.html` und `scripts/artikel/a_zertifikate.py`; bei Änderungen beide nachführen.

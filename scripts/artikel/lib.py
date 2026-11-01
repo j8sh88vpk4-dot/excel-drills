@@ -13,6 +13,7 @@ ARTICLES = [
     ("excel-einstellungstest-ueben.html", "Excel-Einstellungstest üben", "Was im Excel-Test bei der Bewerbung typischerweise geprüft wird: 5 Aufgaben mit Lösung, 7-Tage-Lernplan, typische Fehler."),
     ("excel-uebungen-kv.html", "Excel-Übungen für die KV-Lehre", "Rechnung mit MwSt, Umsatzlisten, Offene Posten, Rappenrundung: 6 Übungen aus dem KV-Alltag mit Lösung, gratis für Berufsschulen."),
     ("vrunden-5-rappen.html", "Excel auf 5 Rappen runden: VRUNDEN", "=VRUNDEN(Betrag;0.05) erklärt: Beispiele, Alternativen, MwSt-Rechnung und die typischen Fehler bei der Rappenrundung."),
+    ("excel-zertifikat-schweiz.html", "Excel-Zertifikat Schweiz: SIZ, MOS oder ICDL? Vergleich und Vorbereitung", "SIZ AU4 und PU41, MOS MO-210 und MO-211, ICDL: Preise, Prüfungsform, Inhalte und wie du dich mit Kampagnen und Checklisten vorbereitest."),
     ("excel-ueben-online-vergleich.html", "Excel online üben: 6 Plattformen im Vergleich (Schweiz)", "LogicExcel, Coddy, Easy4Me, zebis, Wings und Excel-Drills: Was gratis ist, wo deutsche Funktionsnamen und Semikolon stimmen, was für KV, Controlling und Einstellungstest taugt."),
 ]
 
@@ -110,6 +111,7 @@ def header(prefix, current=None):
         <a href="{prefix}assessment/">Assessment</a>
         <a href="{prefix}upload/">Datei prüfen</a>
         <a href="{prefix}kampagne/">Kampagne</a>
+        <a href="{prefix}zertifikate/">Zertifikate</a>
         <a href="{prefix}artikel/"{art}>Artikel</a>
         <a href="{prefix}handouts/"{hnd}>Handouts</a>
         <a href="{prefix}premium.html">Preise</a>
@@ -121,7 +123,7 @@ def footer(prefix):
     return f'''  <footer class="site-footer">
     <div class="wrap">
       <span>&copy; 2026 Excel-Drills</span>
-      <span><a href="{prefix}artikel/">Artikel</a> &middot; <a href="{prefix}handouts/">Handouts</a> &middot; <a href="https://sql-drills.onrender.com?utm_source=excel-drills&amp;utm_medium=footer" rel="noopener">SQL-Drills (Beta)</a> &middot; <a href="{prefix}impressum.html">Impressum</a> &middot; <a href="{prefix}datenschutz.html">Datenschutz</a></span>
+      <span><a href="{prefix}artikel/">Artikel</a> &middot; <a href="{prefix}zertifikate/">Zertifikate</a> &middot; <a href="{prefix}handouts/">Handouts</a> &middot; <a href="https://sql-drills.onrender.com?utm_source=excel-drills&amp;utm_medium=footer" rel="noopener">SQL-Drills (Beta)</a> &middot; <a href="{prefix}impressum.html">Impressum</a> &middot; <a href="{prefix}datenschutz.html">Datenschutz</a></span>
     </div>
   </footer>'''
 

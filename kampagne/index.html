@@ -24,7 +24,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Excel-Drills">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="stylesheet" href="../assets/campaign.css">
+  <link rel="stylesheet" href="../assets/campaign.css?v=20261101d">
+  <script>
+    /* Andere Kampagne per ?kampagne=: statische Texte und Timeline der Controlling-Kampagne nicht kurz aufblitzen lassen */
+    try { var kpId = (new URLSearchParams(location.search).get('kampagne') || '').toLowerCase(); if (kpId && kpId !== 'controlling-monat-1') document.documentElement.className += ' kp-other'; } catch (e) {}
+  </script>
   <link rel="stylesheet" href="../assets/sheet-pick.css">
   <script defer src="../assets/analytics.js"></script>
   <script type="application/ld+json">
@@ -64,6 +68,7 @@
         <a href="../assessment/">Assessment</a>
         <a href="../upload/">Datei prüfen</a>
         <a href="../kampagne/" aria-current="page">Kampagne</a>
+        <a href="../zertifikate/">Zertifikate</a>
         <a href="../artikel/">Artikel</a>
         <a href="../handouts/">Handouts</a>
         <a href="../premium.html">Preise</a>
@@ -78,16 +83,34 @@
       <nav class="breadcrumb" aria-label="Brotkrümelnavigation">
         <ol>
           <li><a href="../">Startseite</a></li>
-          <li aria-current="page">Excel-Kampagne Controlling</li>
+          <li aria-current="page" id="kp-crumb">Excel-Kampagne Controlling</li>
         </ol>
       </nav>
       <h1 id="kp-h1">Dein erster Monat als Controllerin</h1>
       <div class="summary">
-        <p>8 Arbeitstage, ein durchgehender Datensatz, echte Aufgaben aus dem Controlling: Du lernst Excel so, wie du es im Job brauchst. Die ersten 3 Tage sind gratis.</p>
+        <p id="kp-lead">8 Arbeitstage, ein durchgehender Datensatz, echte Aufgaben aus dem Controlling: Du lernst Excel so, wie du es im Job brauchst. Die ersten 3 Tage sind gratis.</p>
       </div>
-      <p>Eine Kampagne ist eine Serie von Excel-Aufgaben, die zusammen eine Geschichte erzählen. Statt einzelner Übungen ohne Zusammenhang begleitest du die Alpina Logistik AG, ein fiktives Logistikunternehmen, durch deinen ersten Monat als Controllerin. Dein Chef Herr Steiner und deine Kollegin Nadine geben dir jeden Tag eine Aufgabe aus dem Alltag: offene Posten zählen, Kosten pro Kostenstelle summieren, Budget und Ist vergleichen, Netto aus Brutto rechnen, auf 5 Rappen runden, doppelte Belege finden, zum Monatsende abgrenzen und einen ersten Forecast bauen.</p>
-      <p>Warum Story statt Einzelübung? Weil du im Job nie eine Formel isoliert schreibst. Du arbeitest die ganze Kampagne mit denselben Kostenstellen (Lager, Transport, Verwaltung), denselben Monaten Januar bis März und Beträgen in CHF. So merkst du, wie die Funktionen zusammenspielen, und du behältst sie länger als nach zehn zufälligen Aufgaben.</p>
-      <p>Die Tage 1 bis 3 sind gratis und ohne Anmeldung, ab Tag 5 brauchst du Premium. Du schreibst jede Formel wie in Excel Schweiz: deutsche Funktionsnamen wie ZÄHLENWENN, SUMMEWENN und VRUNDEN, Semikolon als Trennzeichen und Dezimalpunkt. Du hast unbegrenzt Versuche und bekommst bei jedem Fehler einen konkreten Hinweis. Dein Fortschritt bleibt nur in diesem Browser gespeichert.</p>
+    </section>
+
+    <!-- Kampagnen-Übersicht: nur ohne ?kampagne=, app/campaign.js baut die Karten aus app/campaigns.json -->
+    <section class="kp-all" id="kp-all" aria-labelledby="kp-all-h" hidden>
+      <div class="section-head">
+        <h2 id="kp-all-h" class="section-title">Alle Kampagnen</h2>
+      </div>
+      <p class="section-intro">Jede Kampagne ist eine Serie von Aufgaben mit einem durchgehenden Datensatz. Die ersten Tage sind jeweils gratis.</p>
+      <ul class="track-cards track-cards-compact track-cards-fit" id="kp-all-list"></ul>
+    </section>
+
+    <section class="prose kp-text" aria-label="Über diese Kampagne">
+      <div id="kp-text-default">
+        <p>Eine Kampagne ist eine Serie von Excel-Aufgaben, die zusammen eine Geschichte erzählen. Statt einzelner Übungen ohne Zusammenhang begleitest du die Alpina Logistik AG, ein fiktives Logistikunternehmen, durch deinen ersten Monat als Controllerin. Dein Chef Herr Steiner und deine Kollegin Nadine geben dir jeden Tag eine Aufgabe aus dem Alltag: offene Posten zählen, Kosten pro Kostenstelle summieren, Budget und Ist vergleichen, Netto aus Brutto rechnen, auf 5 Rappen runden, doppelte Belege finden, zum Monatsende abgrenzen und einen ersten Forecast bauen.</p>
+        <p>Warum Story statt Einzelübung? Weil du im Job nie eine Formel isoliert schreibst. Du arbeitest die ganze Kampagne mit denselben Kostenstellen (Lager, Transport, Verwaltung), denselben Monaten Januar bis März und Beträgen in CHF. So merkst du, wie die Funktionen zusammenspielen, und du behältst sie länger als nach zehn zufälligen Aufgaben.</p>
+        <p>Die Tage 1 bis 3 sind gratis und ohne Anmeldung, ab Tag 5 brauchst du Premium. Du schreibst jede Formel wie in Excel Schweiz: deutsche Funktionsnamen wie ZÄHLENWENN, SUMMEWENN und VRUNDEN, Semikolon als Trennzeichen und Dezimalpunkt. Du hast unbegrenzt Versuche und bekommst bei jedem Fehler einen konkreten Hinweis. Dein Fortschritt bleibt nur in diesem Browser gespeichert.</p>
+      </div>
+      <div id="kp-text-generic" hidden>
+        <p id="kp-text-intro"></p>
+        <p id="kp-text-rules"></p>
+      </div>
     </section>
 
     <section class="kp-overview" aria-labelledby="kp-overview-h">
@@ -122,12 +145,21 @@
       </figure>
 
       <div class="notice kp-locked" id="kp-locked" hidden>
-        <p><strong>Dieser Tag gehört zu Premium.</strong> Mit Premium schaltest du die Tage 5 bis 20 der Kampagne frei, dazu alle Pfade und Premium-Übungen.</p>
+        <p><strong>Dieser Tag gehört zu Premium.</strong> <span id="kp-locked-text">Mit Premium schaltest du die Tage 5 bis 20 der Kampagne frei, dazu alle Pfade und Premium-Übungen.</span></p>
         <p><a class="btn" href="../premium.html">Premium ansehen</a></p>
         <p class="fine">Du hast schon einen Code? Löse ihn einmal in den <a href="../app/">Übungen</a> ein, dann ist er auch hier aktiv.</p>
       </div>
 
       <div id="kp-work">
+        <!-- Excel-Sprache: DE-CH (Standard) oder English (?lang=en), wie im Assessment -->
+        <div class="kp-lang" role="group" aria-labelledby="kp-lang-label">
+          <span class="kp-lang-label" id="kp-lang-label">Excel-Sprache</span>
+          <span class="kp-lang-switch">
+            <button type="button" id="kp-lang-de" data-lang="de" aria-pressed="true">Deutsch (DE-CH)</button>
+            <button type="button" id="kp-lang-en" data-lang="en" aria-pressed="false" lang="en">English</button>
+          </span>
+          <p class="fine kp-lang-note" id="kp-lang-note" hidden>Aufgabentexte auf Deutsch, Formeln auf Englisch mit Komma als Trennzeichen, z. B. =SUM(A1,A2).</p>
+        </div>
         <p class="task" id="kp-task"></p>
 
         <div class="grid-scroll" role="region" aria-label="Tabelle (horizontal scrollbar)" tabindex="0">
@@ -168,14 +200,19 @@
       <div class="actions kp-actions">
         <button class="btn" type="button" id="kp-next-btn" hidden>Weiter zu Tag 2 &rarr;</button>
       </div>
-      <p class="kp-finish" id="kp-finish" hidden>Gratuliere, du hast alle Tage der Kampagne gelöst. <a href="../assessment/?rolle=accounting">Teste dich jetzt im Assessment</a>.</p>
+      <p class="kp-finish" id="kp-finish" hidden>Gratuliere, du hast alle Tage der Kampagne gelöst. <a id="kp-finish-link" href="../assessment/?rolle=accounting">Teste dich jetzt im Assessment</a>.</p>
     </section>
+
+    <nav class="kp-others" id="kp-others" aria-labelledby="kp-others-h" hidden>
+      <h2 id="kp-others-h" class="kp-others-h">Andere Kampagnen</h2>
+      <ul class="kp-others-list" id="kp-others-list"></ul>
+    </nav>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
       <span>&copy; 2026 Excel-Drills</span>
-      <span><a href="../artikel/">Artikel</a> &middot; <a href="../handouts/">Handouts</a> &middot; <a href="https://sql-drills.onrender.com?utm_source=excel-drills&amp;utm_medium=footer" rel="noopener">SQL-Drills (Beta)</a> &middot; <a href="../impressum.html">Impressum</a> &middot; <a href="../datenschutz.html">Datenschutz</a></span>
+      <span><a href="../artikel/">Artikel</a> &middot; <a href="../zertifikate/">Zertifikate</a> &middot; <a href="../handouts/">Handouts</a> &middot; <a href="https://sql-drills.onrender.com?utm_source=excel-drills&amp;utm_medium=footer" rel="noopener">SQL-Drills (Beta)</a> &middot; <a href="../impressum.html">Impressum</a> &middot; <a href="../datenschutz.html">Datenschutz</a></span>
     </div>
   </footer>
 
@@ -187,6 +224,6 @@
   <script src="../app/keys.js" defer></script>
   <script src="../app/engine.js" defer></script>
   <script src="../app/sheet-pick.js" defer></script>
-  <script src="../app/campaign.js" defer></script>
+  <script src="../app/campaign.js?v=20261101d" defer></script>
 </body>
 </html>

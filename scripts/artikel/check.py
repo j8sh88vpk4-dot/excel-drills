@@ -4,6 +4,7 @@ ROOT = "/Users/lucamoser/Documents/excel-drills/"
 ids = {e["id"]: e["free"] for e in json.load(open(ROOT + "app/exercises.json"))["exercises"]}
 pages = ["index.html", "premium.html", "impressum.html", "datenschutz.html", "app/index.html"] + ["artikel/" + f for f in sorted(os.listdir(ROOT + "artikel"))]
 if os.path.isdir(ROOT + "pfad"): pages += ["pfad/" + f for f in sorted(os.listdir(ROOT + "pfad")) if f.endswith(".html")]
+if os.path.isfile(ROOT + "zertifikate/index.html"): pages += ["zertifikate/index.html"]
 if os.path.isdir(ROOT + "handouts"): pages += ["handouts/" + f for f in sorted(os.listdir(ROOT + "handouts")) if f.endswith(".html")]
 tracks = {t["id"] for t in json.load(open(ROOT + "app/exercises.json")).get("tracks", [])}
 class P(HTMLParser):

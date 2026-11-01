@@ -15,7 +15,7 @@
  */
 'use strict';
 
-const CACHE_VERSION = '2026-11-01.3';
+const CACHE_VERSION = '2026-11-01.4';
 const CACHE_PREFIX = 'excel-drills-';
 const CACHE = CACHE_PREFIX + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 4000; // Network-First: danach Cache, falls vorhanden (langsames Netz im Zug)

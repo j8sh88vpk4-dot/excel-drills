@@ -101,3 +101,15 @@ UTM-Parameter wertet Plausible automatisch aus; Schema in `social-kit/utm.md`.
 | `zellklick` | erster Zellbezug per Klick eingefügt (app/sheet-pick.js) | `ort` |
 
 Alle als Goals (Custom event) in Plausible angelegt (1.11.2026); Properties `rolle`, `sprache`, `art`, `typ`, `kampagne`, `tag`, `produkt`, `ort` noch unter Custom Properties freigeben.
+
+## Stand 1.11.2026 (Zertifikate): neue Ereignisse
+
+| Ereignis | Ausgelöst durch | Properties |
+|---|---|---|
+| `cert_open` | Klick auf einen Kampagnen-Link der Zertifikatsseite (assets/zertifikate.js, Links mit `data-zertifikat`) | `zertifikat` (`siz-au4`, `siz-pu41`, `mos-excel-associate`, `mos-excel-expert`) |
+| `campaign_open` | Klick auf eine andere Kampagne in der Übersicht oder unter «Andere Kampagnen» (app/campaign.js) | `kampagne`, `ort` (`uebersicht`, `andere`) |
+| `campaign_day_done` | wie bisher, neu zusätzlich mit Excel-Sprache | `kampagne`, `tag`, `sprache` (`de`/`en`) |
+
+In Plausible noch als Goals (Custom event) `cert_open` und `campaign_open` anlegen und die Properties `zertifikat`
+und `sprache` (falls noch nicht) unter «Custom Properties» freigeben. Trichter-Idee: Besuch `zertifikate/` → `cert_open` →
+`campaign_day_done` (gleiche `kampagne`) → `paywall_gezeigt`/`premium_klick`.

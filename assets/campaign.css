@@ -58,3 +58,36 @@
   .kp-day { padding: 1rem; }
   .kp-day .formula-row .btn { flex: 1 1 100%; }
 }
+
+/* Andere Kampagne per ?kampagne=: statische Controlling-Texte bis zum Laden ausblenden (Klasse aus dem Inline-Skript) */
+.kp-other #kp-h1, .kp-other #kp-lead, .kp-other #kp-crumb, .kp-other #kp-overview-h, .kp-other #kp-timeline { visibility: hidden; }
+.kp-other #kp-text-default { display: none; }
+
+/* Übersicht aller Kampagnen (ohne ?kampagne=), Karten wie auf der Startseite */
+.kp-all { max-width: 900px; margin: 0 0 1.75rem; }
+.kp-all .section-title { margin: 0 0 0.4rem; font-size: 1.35rem; }
+.kp-all .section-intro { margin-bottom: 0.9rem; }
+.kp-card .more { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.kp-card-state { font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+.kp-card.here .kp-card-state { color: var(--accent-strong); }
+.kp-text { margin-bottom: 0.5rem; }
+
+/* Excel-Sprache im Tagespanel (gleiches Muster wie .as-lang im Assessment) */
+.kp-lang { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.9rem; margin: 0 0 0.9rem; }
+.kp-lang-label { font-weight: 700; font-size: 0.95rem; }
+.kp-lang-switch { display: inline-flex; border: 2px solid var(--accent); border-radius: 999px; overflow: hidden; background: var(--surface); }
+.kp-lang-switch button {
+  font: inherit; font-size: 0.95rem; font-weight: 700; min-height: 44px; padding: 0.4rem 0.95rem;
+  border: 0; background: transparent; color: var(--accent-strong); cursor: pointer;
+}
+.kp-lang-switch button + button { border-left: 2px solid var(--accent); }
+.kp-lang-switch button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.kp-lang-switch button:focus-visible { outline: 3px solid var(--accent-strong); outline-offset: -3px; }
+.kp-lang-note { flex-basis: 100%; margin: 0; }
+
+/* «Andere Kampagnen» unter der Tagesansicht: eine Zeile, auf Mobile umbrechend */
+.kp-others { max-width: 900px; margin: 0 0 1rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 1rem; }
+.kp-others-h { margin: 0; font-size: 1rem; }
+.kp-others-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.3rem 1.1rem; }
+.kp-others-list a { font-weight: 700; }
+.kp-others-meta { color: var(--muted); font-size: 0.9rem; }

@@ -309,6 +309,7 @@
   "html.navAssessment": "Assessment",
   "html.navUpload": "Vérifier un fichier",
   "html.navCampaign": "Campagne",
+  "html.navCerts": "Certificats",
   "account.menuLabel": "Compte {email} : ouvrir le menu",
   "account.pfIntro": "Sauvegarde ta progression avec un compte : XP, médailles, série et Premium sont alors disponibles sur tous tes appareils. Facultatif et sans mot de passe.",
   "account.loginBtn": "Sauvegarder ma progression",
