@@ -80,7 +80,7 @@ um und die Anmeldung klappt nicht.
 <p><a href="{{ .ConfirmationURL }}">Jetzt anmelden</a></p>
 <p>Der Link gilt eine Stunde und funktioniert einmal. Danach kannst du in der App unter «Fortschritt sichern» jederzeit einen neuen anfordern.</p>
 <p>Du hast keinen Link angefordert? Dann kannst du diese Mail ignorieren.</p>
-<p>Excel-Drills · excel-drills.ch · Fragen: luca@familymoser.ch</p>
+<p>Excel-Drills · excel-drills.ch · Fragen: hallo@excel-drills.ch</p>
 ```
 
 *Confirm signup* (erste Anmeldung über «Fortschritt sichern»):
@@ -95,7 +95,7 @@ um und die Anmeldung klappt nicht.
 <p><a href="{{ .ConfirmationURL }}">E-Mail bestätigen und anmelden</a></p>
 <p>Der Link gilt eine Stunde. Ein Passwort gibt es nicht: Du meldest dich immer über einen Link per E-Mail an.</p>
 <p>Du hast dich nicht angemeldet? Dann kannst du diese Mail ignorieren, es wird nichts gespeichert, bis du den Link öffnest.</p>
-<p>Excel-Drills · excel-drills.ch · Fragen: luca@familymoser.ch</p>
+<p>Excel-Drills · excel-drills.ch · Fragen: hallo@excel-drills.ch</p>
 ```
 
 ## 4. Mailversand (SMTP): Pflicht vor dem Livegang
