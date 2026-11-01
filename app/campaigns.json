@@ -1,0 +1,340 @@
+{
+  "version": 1,
+  "campaigns": [
+    {
+      "id": "controlling-monat-1",
+      "title": "Dein erster Monat als Controllerin",
+      "firma": "Alpina Logistik AG",
+      "intro": "Du startest als Controllerin bei der Alpina Logistik AG, einem fiktiven Logistikunternehmen mit drei Kostenstellen: Lager, Transport und Verwaltung. Dein Chef Herr Steiner und deine Kollegin Nadine geben dir in den ersten 20 Arbeitstagen echte Aufgaben aus dem Quartalsabschluss Januar bis März. Jeder Tag ist eine Formel, alle Beträge sind in CHF.",
+      "days": [
+        {
+          "day": 1,
+          "free": true,
+          "from": "Herr Steiner",
+          "story": "Willkommen bei der Alpina Logistik AG! Bevor wir den Januar abschliessen, will ich wissen, wie viele Lieferantenrechnungen noch offen sind. Zähl mir bitte die offenen Posten in der OP-Liste.",
+          "learned": "ZÄHLENWENN zählt Zeilen, die ein Kriterium erfüllen: =ZÄHLENWENN(Bereich;Kriterium). Mit dem Bezug auf F2 statt dem fest eingetippten Text kannst du das Kriterium ändern (z. B. «bezahlt»), ohne die Formel anzufassen.",
+          "exercise": {
+            "id": "kmp-ctl-1",
+            "category": "lookup",
+            "topic": "ZÄHLENWENN",
+            "title": "Offene Posten zählen",
+            "task": "Zähle in G2, wie viele Rechnungen den Status aus F2 (offen) haben. Nutze ZÄHLENWENN und beziehe dich auf F2.",
+            "data": [
+              ["Rechnung", "Kostenstelle", "Betrag (CHF)", "Status", null, "Status", "Anzahl"],
+              ["K-2601", "Lager", 1840.5, "bezahlt", null, "offen", null],
+              ["K-2602", "Transport", 3215.8, "offen"],
+              ["K-2603", "Verwaltung", 412.35, "offen"],
+              ["K-2604", "Transport", 7980, "bezahlt"],
+              ["K-2605", "Lager", 655.2, "offen"],
+              ["K-2606", "Verwaltung", 1290, "bezahlt"],
+              ["K-2607", "Transport", 2460.75, "offen"],
+              ["K-2608", "Lager", 918.4, "offen"]
+            ],
+            "target": "G2",
+            "solution": "=ZÄHLENWENN($D$2:$D$9;F2)",
+            "mustUse": ["ZÄHLENWENN"],
+            "accept": ["=ZÄHLENWENN(D2:D9;F2)", "=ZÄHLENWENN(D2:D9;\"offen\")", "=ZÄHLENWENN(D:D;F2)"],
+            "alt": [
+              { "data": [
+                ["Rechnung", "Kostenstelle", "Betrag (CHF)", "Status", null, "Status", "Anzahl"],
+                ["K-2601", "Lager", 1840.5, "offen", null, "offen", null],
+                ["K-2602", "Transport", 3215.8, "bezahlt"],
+                ["K-2603", "Verwaltung", 412.35, "bezahlt"],
+                ["K-2604", "Transport", 7980, "bezahlt"],
+                ["K-2605", "Lager", 655.2, "offen"],
+                ["K-2606", "Verwaltung", 1290, "bezahlt"],
+                ["K-2607", "Transport", 2460.75, "bezahlt"],
+                ["K-2608", "Lager", 918.4, "offen"]
+              ] }
+            ],
+            "hints": {
+              "quotes": "Das Kriterium steht in F2. Wenn du Text eintippst, gehört er in Anführungszeichen, also \"offen\". Besser ist der Bezug auf F2.",
+              "generic": "Aufbau: =ZÄHLENWENN(Bereich mit dem Status;Kriterium), also =ZÄHLENWENN(D2:D9;F2)."
+            }
+          }
+        },
+        {
+          "day": 2,
+          "free": true,
+          "from": "Nadine",
+          "story": "Hoi, ich bin Nadine, wir teilen uns das Büro. Herr Steiner fragt jeden Monat zuerst nach den Kosten der Transport-Kostenstelle. Rechne bitte die Januar-Buchungen pro Kostenstelle zusammen, damit wir sie mit dem Budget vergleichen können.",
+          "learned": "SUMMEWENN summiert nur die Zeilen, die zum Kriterium passen: =SUMMEWENN(Prüfbereich;Kriterium;Summenbereich). Steht die Kostenstelle in einer Zelle (F2), tauschst du «Transport» gegen «Lager» und bekommst sofort die nächste Summe.",
+          "exercise": {
+            "id": "kmp-ctl-2",
+            "category": "lookup",
+            "topic": "SUMMEWENN",
+            "title": "Summe pro Kostenstelle",
+            "task": "Berechne in G2 die Summe der Januar-Buchungen für die Kostenstelle in F2 (Transport). Nutze SUMMEWENN und beziehe dich auf F2 statt den Namen fest einzutippen.",
+            "data": [
+              ["Beleg", "Kostenstelle", "Monat", "Betrag (CHF)", null, "Kostenstelle", "Summe (CHF)"],
+              ["B-101", "Transport", "Jan", 18450, null, "Transport", null],
+              ["B-102", "Lager", "Jan", 12300],
+              ["B-103", "Transport", "Jan", 22180],
+              ["B-104", "Verwaltung", "Jan", 9640],
+              ["B-105", "Lager", "Jan", 14725],
+              ["B-106", "Transport", "Jan", 17770],
+              ["B-107", "Verwaltung", "Jan", 12860],
+              ["B-108", "Lager", "Jan", 14825]
+            ],
+            "target": "G2",
+            "solution": "=SUMMEWENN($B$2:$B$9;F2;$D$2:$D$9)",
+            "mustUse": ["SUMMEWENN"],
+            "accept": ["=SUMMEWENN(B2:B9;F2;D2:D9)", "=SUMMEWENN(B:B;F2;D:D)"],
+            "alt": [
+              { "data": [
+                ["Beleg", "Kostenstelle", "Monat", "Betrag (CHF)", null, "Kostenstelle", "Summe (CHF)"],
+                ["B-101", "Transport", "Jan", 18450, null, "Lager", null],
+                ["B-102", "Lager", "Jan", 12300],
+                ["B-103", "Transport", "Jan", 22180],
+                ["B-104", "Verwaltung", "Jan", 9640],
+                ["B-105", "Lager", "Jan", 14725],
+                ["B-106", "Transport", "Jan", 17770],
+                ["B-107", "Verwaltung", "Jan", 12860],
+                ["B-108", "Lager", "Jan", 14825]
+              ] }
+            ],
+            "hints": {
+              "quotes": "Das Kriterium steht in F2. Beziehe dich auf F2, dann funktioniert die Formel auch für Lager und Verwaltung.",
+              "generic": "Aufbau: =SUMMEWENN(Bereich mit Kostenstellen;Kriterium;Bereich mit Beträgen), also =SUMMEWENN(B2:B9;F2;D2:D9)."
+            }
+          }
+        },
+        {
+          "day": 3,
+          "free": true,
+          "from": "Herr Steiner",
+          "story": "Das Lager liegt im Februar und März über dem Budget, das will ich genauer sehen. Nadine hat die Abweichung in CHF schon eingetragen, mir fehlt die Abweichung in Prozent. Bau die Formel so, dass du sie für alle drei Monate nach unten kopieren kannst.",
+          "learned": "Abweichung in CHF = Ist minus Budget, Abweichung in % = (Ist minus Budget) / Budget. Das Monatsbudget steht in einer einzigen Zelle, darum fixierst du sie mit $G$1. So zeigt jede kopierte Zeile auf dasselbe Budget.",
+          "exercise": {
+            "id": "kmp-ctl-3",
+            "category": "bezug",
+            "topic": "Absoluter Bezug",
+            "title": "Abweichung Budget und Ist",
+            "task": "Berechne in D2 die Abweichung des Lagers im Januar in Prozent: (Ist in B2 minus Budget in G1) geteilt durch das Budget. Die Formel soll nach unten kopierbar sein: Fixiere G1 mit $. Nicht mal 100 rechnen, das Prozentformat übernimmt die Zelle.",
+            "data": [
+              ["Monat", "Ist Lager (CHF)", "Abweichung (CHF)", "Abweichung %", null, "Budget pro Monat (CHF)", 42000],
+              ["Jan", 41850, -150, null],
+              ["Feb", 43120, 1120, null],
+              ["Mär", 44960, 2960, null]
+            ],
+            "target": "D2",
+            "solution": "=(B2-$G$1)/$G$1",
+            "mustContain": ["$G$1"],
+            "accept": ["=B2/$G$1-1", "=C2/$G$1"],
+            "fillDown": "D2:D4",
+            "alt": [
+              { "data": [
+                ["Monat", "Ist Lager (CHF)", "Abweichung (CHF)", "Abweichung %", null, "Budget pro Monat (CHF)", 40000],
+                ["Jan", 41850, 1850, null],
+                ["Feb", 43120, 3120, null],
+                ["Mär", 44960, 4960, null]
+              ] }
+            ],
+            "hints": {
+              "dollar": "Ohne $ verschiebt sich G1 beim Kopieren nach unten. Schreibe $G$1.",
+              "generic": "Aufbau: =(B2-$G$1)/$G$1. Die Klammer sorgt dafür, dass zuerst die Differenz gerechnet wird."
+            }
+          }
+        },
+        {
+          "day": 5,
+          "free": false,
+          "from": "Nadine",
+          "story": "Für die Kostenstellenrechnung brauchen wir die Transportkosten ohne Mehrwertsteuer. Die Rechnungen vom Februar sind aber alle brutto, inklusive 8.1 % MwSt. Rechne bitte den Nettobetrag aus, die erste Zeile reicht, den Rest ziehe ich nach unten.",
+          "learned": "Im Bruttobetrag steckt die MwSt schon drin. Darum teilst du durch (1 + Satz) und ziehst nicht einfach 8.1 % ab: =B2/(1+$F$1). Den MwSt-Satz fixierst du mit $, damit er beim Kopieren stehen bleibt.",
+          "exercise": {
+            "id": "kmp-ctl-5",
+            "category": "bezug",
+            "topic": "MwSt netto aus brutto",
+            "title": "Netto aus Brutto",
+            "task": "Die Transport-Rechnungen enthalten 8.1 % MwSt (Satz in F1). Berechne in C2 den Nettobetrag von B2. Die Formel soll nach unten kopierbar sein: Fixiere F1 mit $.",
+            "data": [
+              ["Position", "Brutto (CHF)", "Netto (CHF)", null, "MwSt-Satz", 0.081],
+              ["Tankkarte Februar", 12972, null],
+              ["Reifenwechsel Flotte", 2540.35, null],
+              ["Werkstatt Service", 1891.75, null]
+            ],
+            "target": "C2",
+            "solution": "=B2/(1+$F$1)",
+            "mustContain": ["$F$1"],
+            "accept": ["=B2/($F$1+1)", "=B2-B2*$F$1/(1+$F$1)"],
+            "fillDown": "C2:C4",
+            "alt": [
+              { "data": [
+                ["Position", "Brutto (CHF)", "Netto (CHF)", null, "MwSt-Satz", 0.026],
+                ["Tankkarte Februar", 5130, null],
+                ["Reifenwechsel Flotte", 2540.35, null],
+                ["Werkstatt Service", 1891.75, null]
+              ] }
+            ],
+            "hints": {
+              "dollar": "Ohne $ verschiebt sich F1 beim Kopieren nach unten. Schreibe $F$1.",
+              "generic": "Brutto enthält die MwSt schon: Netto = Brutto / (1 + Satz), also =B2/(1+$F$1)."
+            }
+          }
+        },
+        {
+          "day": 8,
+          "free": false,
+          "from": "Herr Steiner",
+          "story": "Ein Kunde mietet bei uns Palettenplätze, die Rechnung für den März muss heute raus. In der Schweiz runden wir Rechnungsbeträge auf 5 Rappen, sonst gibt es Rückfragen von der Buchhaltung des Kunden. Rechne mir den Endbetrag inklusive MwSt.",
+          "learned": "VRUNDEN(Wert;0.05) rundet auf das nächste Vielfache von 5 Rappen. Erst fertig rechnen (Menge × Preis × (1 + MwSt)), dann einmal am Schluss runden. Das Vielfache 0.05 schreibst du mit Punkt.",
+          "exercise": {
+            "id": "kmp-ctl-8",
+            "category": "rundung",
+            "topic": "VRUNDEN",
+            "title": "Auf 5 Rappen runden",
+            "task": "Berechne in B5 den Rechnungsbetrag für den Kunden: Palettenplätze (B2) × Preis pro Platz (B3), inklusive MwSt (B4), gerundet auf 5 Rappen. Nutze VRUNDEN.",
+            "data": [
+              ["Position", "Wert"],
+              ["Palettenplätze März", 137],
+              ["Preis pro Platz (CHF)", 18.35],
+              ["MwSt-Satz", 0.081],
+              ["Rechnungsbetrag auf 5 Rappen (CHF)", null]
+            ],
+            "target": "B5",
+            "solution": "=VRUNDEN(B2*B3*(1+B4);0.05)",
+            "mustUse": ["VRUNDEN"],
+            "accept": ["=VRUNDEN(B2*B3+B2*B3*B4;0.05)", "=VRUNDEN(B2*B3*(B4+1);0.05)"],
+            "alt": [
+              { "data": [
+                ["Position", "Wert"],
+                ["Palettenplätze März", 92],
+                ["Preis pro Platz (CHF)", 21.4],
+                ["MwSt-Satz", 0.081],
+                ["Rechnungsbetrag auf 5 Rappen (CHF)", null]
+              ] }
+            ],
+            "hints": {
+              "generic": "Erst den Bruttobetrag rechnen, dann runden: =VRUNDEN(B2*B3*(1+B4);0.05)."
+            }
+          }
+        },
+        {
+          "day": 12,
+          "free": false,
+          "from": "Nadine",
+          "story": "Mir ist aufgefallen, dass im März ein paar Belege doppelt erfasst wurden, das bläht unsere Kosten auf. Bevor Herr Steiner die Zahlen sieht, will ich jede Belegnummer prüfen. Kannst du eine Prüfspalte bauen, die «Doppelt» oder «OK» anzeigt?",
+          "learned": "ZÄHLENWENN zählt, wie oft eine Belegnummer in der ganzen Liste vorkommt. Ist das Ergebnis grösser als 1, ist der Beleg doppelt. WENN macht daraus einen lesbaren Text. Den Suchbereich fixierst du mit $A$2:$A$9, die Belegnummer A2 bleibt relativ.",
+          "exercise": {
+            "id": "kmp-ctl-12",
+            "category": "logik",
+            "topic": "ZÄHLENWENN und WENN",
+            "title": "Doppelte Belege finden",
+            "task": "Prüfe in D2, ob die Belegnummer in A2 mehr als einmal in A2:A9 vorkommt. Zeige dann \"Doppelt\", sonst \"OK\". Kombiniere WENN mit ZÄHLENWENN und fixiere den Bereich mit $, damit du die Formel nach unten kopieren kannst.",
+            "data": [
+              ["Beleg-Nr.", "Kostenstelle", "Betrag (CHF)", "Prüfung"],
+              ["V-3107", "Verwaltung", 486.2, null],
+              ["V-3108", "Lager", 1250, null],
+              ["V-3109", "Verwaltung", 318.9],
+              ["V-3107", "Verwaltung", 486.2],
+              ["V-3110", "Transport", 2145.6],
+              ["V-3111", "Verwaltung", 79.5],
+              ["V-3108", "Lager", 1250],
+              ["V-3112", "Transport", 640]
+            ],
+            "target": "D2",
+            "solution": "=WENN(ZÄHLENWENN($A$2:$A$9;A2)>1;\"Doppelt\";\"OK\")",
+            "mustUse": ["WENN", "ZÄHLENWENN"],
+            "mustContain": ["$A$2:$A$9"],
+            "accept": ["=WENN(ZÄHLENWENN($A$2:$A$9;A2)>=2;\"Doppelt\";\"OK\")", "=WENN(ZÄHLENWENN($A$2:$A$9;A2)=1;\"OK\";\"Doppelt\")"],
+            "fillDown": "D2:D9",
+            "alt": [
+              { "data": [
+                ["Beleg-Nr.", "Kostenstelle", "Betrag (CHF)", "Prüfung"],
+                ["V-3106", "Verwaltung", 486.2, null],
+                ["V-3108", "Lager", 1250, null],
+                ["V-3109", "Verwaltung", 318.9],
+                ["V-3107", "Verwaltung", 486.2],
+                ["V-3110", "Transport", 2145.6],
+                ["V-3111", "Verwaltung", 79.5],
+                ["V-3108", "Lager", 1250],
+                ["V-3112", "Transport", 640]
+              ] }
+            ],
+            "hints": {
+              "dollar": "Fixiere den Suchbereich mit $A$2:$A$9, sonst rutscht er beim Kopieren nach unten und du verpasst Doppelte.",
+              "quotes": "Text wie \"Doppelt\" und \"OK\" gehört in Anführungszeichen.",
+              "generic": "Aufbau: =WENN(ZÄHLENWENN($A$2:$A$9;A2)>1;\"Doppelt\";\"OK\")."
+            }
+          }
+        },
+        {
+          "day": 16,
+          "free": false,
+          "from": "Herr Steiner",
+          "story": "Morgen ist Monatsabschluss März. Leistungen, die wir im März bezogen haben, deren Rechnung aber erst im April kommt, müssen wir abgrenzen, sonst fehlen die Kosten im März. Markier mir bitte, welche Positionen eine Abgrenzung brauchen.",
+          "learned": "MONATSENDE(Datum;0) liefert den letzten Tag des Monats, in dem das Datum liegt. Liegt das Rechnungsdatum nach diesem Monatsende, gehört die Leistung trotzdem in den alten Monat und du grenzt sie ab: =WENN(C2>MONATSENDE(B2;0);\"Ja\";\"Nein\").",
+          "exercise": {
+            "id": "kmp-ctl-16",
+            "category": "logik",
+            "topic": "MONATSENDE",
+            "title": "Abgrenzung zum Monatsende",
+            "task": "Prüfe in D2, ob die Rechnung (Datum in C2) erst nach dem Monatsende der Leistung (Datum in B2) kommt. Zeige dann \"Ja\" (abgrenzen), sonst \"Nein\". Nutze MONATSENDE(B2;0) für das Monatsende.",
+            "data": [
+              ["Position", "Leistungsdatum", "Rechnungsdatum", "Abgrenzen?"],
+              ["Reinigung Lagerhalle", "24.03.2026", "08.04.2026", null],
+              ["Software-Lizenz", "02.03.2026", "15.03.2026"],
+              ["Treibstoff", "28.03.2026", "03.04.2026"],
+              ["Büromaterial", "11.03.2026", "31.03.2026"]
+            ],
+            "target": "D2",
+            "solution": "=WENN(C2>MONATSENDE(B2;0);\"Ja\";\"Nein\")",
+            "mustUse": ["WENN", "MONATSENDE"],
+            "accept": ["=WENN(MONATSENDE(B2;0)<C2;\"Ja\";\"Nein\")", "=WENN(C2<=MONATSENDE(B2;0);\"Nein\";\"Ja\")"],
+            "fillDown": "D2:D5",
+            "alt": [
+              { "data": [
+                ["Position", "Leistungsdatum", "Rechnungsdatum", "Abgrenzen?"],
+                ["Reinigung Lagerhalle", "05.03.2026", "20.03.2026", null],
+                ["Software-Lizenz", "02.03.2026", "15.03.2026"],
+                ["Treibstoff", "28.03.2026", "03.04.2026"],
+                ["Büromaterial", "11.03.2026", "31.03.2026"]
+              ] }
+            ],
+            "hints": {
+              "quotes": "Text wie \"Ja\" und \"Nein\" gehört in Anführungszeichen.",
+              "generic": "Vergleiche das Rechnungsdatum mit dem Monatsende der Leistung: =WENN(C2>MONATSENDE(B2;0);\"Ja\";\"Nein\")."
+            }
+          }
+        },
+        {
+          "day": 20,
+          "free": false,
+          "from": "Herr Steiner",
+          "story": "Zum Schluss deines ersten Monats brauche ich einen Ausblick: Die Transportkosten sind von Januar bis März um rund 4.5 % pro Monat gewachsen. Wenn das so weitergeht, wo stehen wir im Juni? Rechne mir das mit Zinseszins, nicht linear.",
+          "learned": "Wachstum mit Zinseszins: Endwert = Startwert × (1 + Rate)^Perioden. Linear (Startwert × (1 + Rate × Perioden)) unterschätzt das Wachstum. Die monatliche Rate selbst bekommst du mit der CAGR-Formel: =(Ende/Start)^(1/Perioden)-1. Gratuliere, dein erster Monat als Controllerin ist geschafft!",
+          "exercise": {
+            "id": "kmp-ctl-20",
+            "category": "modell",
+            "topic": "Wachstum und Zinseszins",
+            "title": "Mini-Forecast Transport",
+            "task": "Berechne in B5 den Forecast der Transportkosten für Juni: Ist März (B2) wächst B4 Monate lang um B3 pro Monat, mit Zinseszins. Nutze den Operator ^ (oder POTENZ).",
+            "data": [
+              ["Position", "Wert"],
+              ["Ist Transport März (CHF)", 63780],
+              ["Wachstum pro Monat", 0.045],
+              ["Monate bis Juni", 3],
+              ["Forecast Juni (CHF)", null]
+            ],
+            "target": "B5",
+            "solution": "=B2*(1+B3)^B4",
+            "accept": ["=B2*(B3+1)^B4", "=B2*POTENZ(1+B3;B4)"],
+            "alt": [
+              { "data": [
+                ["Position", "Wert"],
+                ["Ist Transport März (CHF)", 52000],
+                ["Wachstum pro Monat", 0.02],
+                ["Monate bis Juni", 6],
+                ["Forecast Juni (CHF)", null]
+              ] }
+            ],
+            "hints": {
+              "generic": "Zinseszins: =B2*(1+B3)^B4. Die Klammer um 1+B3 ist wichtig, sonst rechnet Excel zuerst B3^B4."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

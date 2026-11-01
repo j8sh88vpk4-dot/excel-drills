@@ -75,12 +75,20 @@
   }
 
   // POST mit Zeitlimit. Rückgabe Promise<{ ok, status, data }>, wirft nie.
+  // Publishable Key (öffentlich, siehe assets/leads-config.js): erfüllt die JWT-Prüfung des Gateways.
+  // Die eigentliche Zugangsprüfung macht die Function über den Premium-Code.
+  var PUBLISHABLE_KEY = 'sb_publishable_jtC1RxHTZq84yrxItckk8Q_iz_19kyU';
+  function authHeaders() {
+    var key = (root.ExcelDrillsLeads && root.ExcelDrillsLeads.key) || PUBLISHABLE_KEY;
+    return { 'content-type': 'application/json', 'apikey': key, 'Authorization': 'Bearer ' + key };
+  }
+
   function post(url, payload) {
     var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
     var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, TIMEOUT_MS) : null;
     return fetch(url, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: authHeaders(),
       body: JSON.stringify(payload),
       signal: ctrl ? ctrl.signal : undefined
     }).then(function (res) {

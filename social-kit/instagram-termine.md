@@ -21,6 +21,7 @@ Stories ausser der Launch-Story werden am Tag selbst in der App gepostet (Sticke
 | Fr 13.11. 12:00 | Karussell | `c4-s1…s7.png` | IG-K4 Monatsabschluss | Original |
 | Di 17.11. 07:30 | Karussell | `c5-s1…s7.png` | IG-K5 Schweizer Eigenheiten | Original |
 | Fr 20.11. 12:00 | Karussell | `c6-s1…s7.png` | IG-K6 Warum Videos nicht reichen | Original |
+| Mi 25.11. 12:00 | Karussell | `c7-s1…s7.png` | IG-K7 Excel-Test im Bewerbungsprozess (B2B/Assessment) | Original |
 
 Beim Hochladen in Instagram-Web: Zuschnitt-Symbol unten links → «Original», sonst schneidet Instagram
 auf 1:1 (Titel wird abgeschnitten). Reel-Titelbild: ein Frame aus der Mitte (Aufgabe sichtbar).
@@ -35,6 +36,7 @@ auf 1:1 (Titel wird abgeschnitten). Reel-Titelbild: ein Frame aus der Mitte (Auf
 | Sa 7.11. | `story-2.png` | Quiz-Sticker A/B/C, richtig **B**; Auflösung So 8.11. (`c5-s5.png`) |
 | Mo 9.11. | Text-Story grün #107C41 | «Excel-Drills als App aufs Handy …» + Link-Sticker |
 | Mi 11.11. | `story-3.png` | Link-Sticker App-Start |
+| Mi 18.11. 12:00 | `story-4.png` Für Berufsbildner | **terminiert (Business Suite)**; optional Link-Sticker auf premium.html in der App |
 | Fr 20.11. | Text-Story grün | Umfrage «Consulting-Pfad oder mehr Data & Reporting?» |
 | Fr 27.11. | `story-1.png` | Abschluss, Zahlen nur wenn gemessen |
 

@@ -24,17 +24,22 @@
    * «de-DE»: Deutsch, Dezimalkomma, Tausenderpunkt, EUR, Schreibweise mit ß.
    * «fr-CH» / «it-CH»: Excel in der Romandie bzw. im Tessin: französische bzw. italienische Funktionsnamen
    *   (HyperFormula-Sprachpakete frFR / itIT), Zahlen wie in DE-CH (Punkt, Hochkomma), CHF.
-   * Argumenttrenner in allen Varianten: «;». arrayColumnSeparator bleibt ',' (Array-Konstanten kommen nicht vor).
+   * «en-CH»: englisches Excel in der Schweiz (z. B. Konzernsprache Englisch): englische Funktionsnamen
+   *   (HyperFormula-Standardsprache enGB, kein Sprachpaket nötig), Komma als Argumenttrenner, Zahlen wie in DE-CH, CHF.
+   * Argumenttrenner in den deutschen, französischen und italienischen Varianten: «;», in en-CH «,».
+   * arrayColumnSeparator bleibt ',' (Array-Konstanten kommen nicht vor).
    * Die Übungen in exercises.json sind in DE-CH geschrieben; localize() erzeugt daraus die anderen Varianten.
    * Texte für FR/IT stehen in app/i18n/fr.json und it.json (registerI18n), nicht in exercises.json.
+   * en-CH: Texte bleiben deutsch, ausser die Übung hat Overrides in ex.locale.en (task, title, hints, ...).
    * Alte Werte bleiben gültig: «ch» → de-CH, «de» → de-DE (localStorage, ?land=).
    */
-  var LOCALES = ['de-CH', 'de-DE', 'fr-CH', 'it-CH'];
+  var LOCALES = ['de-CH', 'de-DE', 'fr-CH', 'it-CH', 'en-CH'];
   var LOCALE_INFO = {
-    'de-CH': { lang: 'de', hf: 'deDE', num: 'ch' },
-    'de-DE': { lang: 'de', hf: 'deDE', num: 'de' },
-    'fr-CH': { lang: 'fr', hf: 'frFR', num: 'ch' },
-    'it-CH': { lang: 'it', hf: 'itIT', num: 'ch' }
+    'de-CH': { lang: 'de', hf: 'deDE', num: 'ch', sep: ';' },
+    'de-DE': { lang: 'de', hf: 'deDE', num: 'de', sep: ';' },
+    'fr-CH': { lang: 'fr', hf: 'frFR', num: 'ch', sep: ';' },
+    'it-CH': { lang: 'it', hf: 'itIT', num: 'ch', sep: ';' },
+    'en-CH': { lang: 'en', hf: 'enGB', num: 'ch', sep: ',', currency: 'CHF' }
   };
   var HF_CONFIG_DE = {
     licenseKey: 'gpl-v3',
@@ -52,6 +57,8 @@
     if (s === 'de' || s === 'de-de' || s === 'dede') return 'de-DE';
     if (/^fr/.test(s)) return 'fr-CH';
     if (/^it/.test(s)) return 'it-CH';
+    // Englisch: en, en-CH, en-GB, en-US (alle mit Schweizer Zahlen und CHF)
+    if (/^en(-|$)/.test(s)) return 'en-CH';
     return 'de-CH';
   }
   function info(locale) { return LOCALE_INFO[normalizeLocale(locale || currentLocale)]; }
@@ -59,19 +66,22 @@
   // Zahlenschreibweise: 'de' (Dezimalkomma) nur für de-DE, sonst 'ch'
   function numStyle(locale) { return info(locale).num; }
   function numDe(locale) { return numStyle(locale) === 'de'; }
+  // Argumenttrenner der Variante: ';' (DE/FR/IT) oder ',' (en-CH)
+  function argSep(locale) { return info(locale).sep; }
   function setLocale(l) { currentLocale = normalizeLocale(l); return currentLocale; }
   function getLocale() { return currentLocale; }
   function configFor(locale) {
     var i = info(locale);
     if (i.num === 'de') return HF_CONFIG_DE;
     if (i.hf === 'deDE') return HF_CONFIG;
-    return { licenseKey: 'gpl-v3', language: i.hf, functionArgSeparator: ';', decimalSeparator: '.', thousandSeparator: '' };
+    return { licenseKey: 'gpl-v3', language: i.hf, functionArgSeparator: i.sep, decimalSeparator: '.', thousandSeparator: '' };
   }
 
   /* ---------- Übersetzungen (FR/IT) ---------- */
   function registerI18n(lang, json) { I18N[String(lang)] = json || {}; msgCache[lang] = null; return I18N[lang]; }
   function i18n(lang) { return I18N[lang] || null; }
-  function hasI18n(locale) { var l = langOf(locale); return l === 'de' || !!I18N[l]; }
+  // en-CH braucht keine Übersetzungsdatei (Meldungen in MSG_EN, Texte deutsch oder aus ex.locale.en)
+  function hasI18n(locale) { var l = langOf(locale); return l === 'de' || l === 'en' || !!I18N[l]; }
   // Platzhalter {name} ersetzen
   function fill(str, params) {
     if (typeof str !== 'string' || !params) return str;
@@ -88,13 +98,18 @@
    * frFR.functions.SUM = 'SOMME', itIT.functions.SUM = 'SOMMA'. Zusätzlich CONCAT (fehlt in HyperFormula):
    * DE «TEXTKETTE», FR/IT «CONCAT» (wird vor der Auswertung zu VERKETTEN/CONCATENER/CONCATENA, siehe ALIASES).
    */
-  var HF_LANG = { de: 'deDE', fr: 'frFR', it: 'itIT' };
-  var EXTRA_NAMES = { de: { CONCAT: 'TEXTKETTE' }, fr: { CONCAT: 'CONCAT' }, it: { CONCAT: 'CONCAT' } };
-  var BOOL_NAMES = { de: ['WAHR', 'FALSCH'], fr: ['VRAI', 'FAUX'], it: ['VERO', 'FALSO'] };
+  // en: enGB ist die Standardsprache von HyperFormula (immer registriert, functions.SUM = 'SUM').
+  var HF_LANG = { de: 'deDE', fr: 'frFR', it: 'itIT', en: 'enGB' };
+  var EXTRA_NAMES = { de: { CONCAT: 'TEXTKETTE' }, fr: { CONCAT: 'CONCAT' }, it: { CONCAT: 'CONCAT' }, en: { CONCAT: 'CONCAT' } };
+  var BOOL_NAMES = { de: ['WAHR', 'FALSCH'], fr: ['VRAI', 'FAUX'], it: ['VERO', 'FALSO'], en: ['TRUE', 'FALSE'] };
   var tableCache = {};
   function langPack(lang) {
     var H = HFREF || root.HyperFormula;
-    return H && H.languages ? H.languages[HF_LANG[lang]] || null : null;
+    if (!H) return null;
+    var pack = H.languages ? H.languages[HF_LANG[lang]] || null : null;
+    // enGB steckt im Bundle; falls languages es nicht führt, über getLanguage holen
+    if (!pack && lang === 'en' && typeof H.getLanguage === 'function') { try { pack = H.getLanguage('enGB'); } catch (e) { pack = null; } }
+    return pack;
   }
   function fnTables(lang) {
     if (tableCache[lang]) return tableCache[lang];
@@ -107,7 +122,7 @@
     tableCache[lang] = { fromKey: fromKey, toKey: toKey };
     return tableCache[lang];
   }
-  // Funktionsname von Sprache from nach to ('de' | 'fr' | 'it'). Unbekannte Namen bleiben unverändert.
+  // Funktionsname von Sprache from nach to ('de' | 'fr' | 'it' | 'en'). Unbekannte Namen bleiben unverändert.
   function translateFunctionName(name, from, to) {
     if (from === to) return name;
     var a = fnTables(from), b = fnTables(to);
@@ -123,6 +138,7 @@
   var enCache = {};
   function enMap(lang) {
     if (lang === 'de') return EN_TO_DE;
+    if (lang === 'en') return {}; // in en-CH sind englische Namen richtig
     if (enCache[lang]) return enCache[lang];
     var t = fnTables(lang);
     if (!t) return {};
@@ -167,7 +183,7 @@
   // der Auswertung in eine gleichwertige Funktion.
   // TEXTKETTE (CONCAT) fehlt in HyperFormula; VERKETTEN verhält sich dort gleich (inkl. Bereichen).
   // Zusätzlich werden die Konstanten WAHR/FALSCH zu WAHR()/FALSCH() (siehe applyAliases).
-  var ALIASES = { de: { 'TEXTKETTE': 'VERKETTEN' }, fr: { 'CONCAT': 'CONCATENER' }, it: { 'CONCAT': 'CONCATENA' } };
+  var ALIASES = { de: { 'TEXTKETTE': 'VERKETTEN' }, fr: { 'CONCAT': 'CONCATENER' }, it: { 'CONCAT': 'CONCATENA' }, en: { 'CONCAT': 'CONCATENATE' } };
 
   var MSG = {
     noEquals: 'Eine Formel beginnt immer mit =, zum Beispiel =SUMME(…).',
@@ -259,6 +275,29 @@
   MSG_DE.german = MSG.german;
   MSG_DE.germanConst = MSG.germanConst;
 
+  // Meldungen für en-CH (englisches Excel, Komma als Argumenttrenner, Dezimalpunkt). Gleiche Schlüssel wie MSG.
+  // german/germanConst: deutscher Name in einer englischen Formel (z. B. SUMME statt SUM).
+  var MSG_EN = {
+    noEquals: 'A formula always starts with =, for example =SUM(…).',
+    empty: 'Enter a formula first.',
+    comma: 'Use a comma (,) to separate arguments, not a semicolon (;).',
+    decimalComma: 'Write decimal numbers with a point, for example 0.5.',
+    english: function (en, name) { return 'The function is called ' + name + ' (not ' + en + ').'; },
+    englishConst: function (en, name) { return 'Write ' + name + ' instead of ' + en + '.'; },
+    unknownFn: function (name) { return 'Excel does not know the function ' + name + '. Check the spelling.'; },
+    quotesGeneric: 'Text in formulas goes in quotation marks, for example "OK".',
+    cycle: 'Circular reference: your formula refers to the target cell itself. Choose a range without the target cell.',
+    noRef: 'Use cell references instead of fixed numbers.',
+    mustUse: function (fn) { return 'Use the function ' + fn + ' in this exercise.'; },
+    mustContain: function (s) { return 'Your formula must contain ' + s + '.'; },
+    alt: 'Almost: your formula works for these numbers, but with other values in the table it would give a wrong result. Check your condition and do not type results in directly.',
+    wrong: 'Not quite right yet.',
+    genericFallback: 'Check the structure, ranges and separators of your formula.',
+    success: 'Correct! Your formula returns the right result.',
+    german: function (de, name) { return 'In English Excel the function is called ' + name + ' (not ' + de + ').'; },
+    germanConst: function (de, name) { return 'In English Excel you write ' + name + ' instead of ' + de + '.'; }
+  };
+
   // Meldungen FR/IT aus i18n/<lang>.json (ui: «msg.<Schlüssel>», Platzhalter {en}, {name}, {de}, {fn}, {s})
   var MSG_PARAMS = {
     english: ['en', 'name'], englishConst: ['en', 'name'], german: ['de', 'name'], germanConst: ['de', 'name'], unknownFn: ['name'], mustUse: ['fn'], mustContain: ['s']
@@ -285,6 +324,7 @@
   function msgs() {
     var l = langOf(currentLocale);
     if (l === 'fr' || l === 'it') return msgsFor(l);
+    if (l === 'en') return MSG_EN;
     return currentLocale === 'de-DE' ? MSG_DE : MSG;
   }
 
@@ -303,12 +343,20 @@
       projectNote: 'Gib die Zahlen ein, wie sie in deiner Pivot oder Abfrage stehen. Komma oder Punkt als Dezimaltrennzeichen, Tausenderpunkt und % sind optional.',
       switched: 'Deutschland: Dezimalkomma, Punkt für Tausender, Beträge in Euro.',
       lang: 'de-DE', name: 'Deutschland', close: 'Schließen'
+    },
+    en: {
+      formulaHelp: 'Press Enter to check. Separate arguments with a comma (,), decimal numbers with a point.',
+      miniHelp: 'Press Enter to check. Separate arguments with a comma (,).',
+      projectNote: 'Enter the numbers as they appear in your pivot table or query. Comma or point as decimal separator, apostrophe and % are optional.',
+      switched: 'English Excel (Switzerland): English function names, comma between arguments, decimal point, amounts in CHF.',
+      lang: 'en-CH', name: 'English', close: 'Close'
     }
   };
   var UI_TEXT_KEYS = ['formulaHelp', 'miniHelp', 'projectNote', 'switched', 'name', 'close'];
   function uiText(locale) {
     var loc = normalizeLocale(locale || currentLocale), l = langOf(loc);
     if (l === 'de') return UI_TEXT[loc === 'de-DE' ? 'de' : 'ch'];
+    if (l === 'en') return UI_TEXT.en;
     var out = { lang: loc };
     UI_TEXT_KEYS.forEach(function (k) { var v = uiString(l, 'locale.' + k); out[k] = v === null ? UI_TEXT.ch[k] : v; });
     return out;
@@ -346,13 +394,15 @@
   var L = 'A-Za-zÀ-ÖØ-öø-ÿ'; // Buchstaben in Funktionsnamen (inkl. Ä, Ö, Ü, É, Ù ...)
   function applyAliases(f) {
     var aliases = ALIASES[langOf(currentLocale)] || {};
+    var consts = 'WAHR|FALSCH|VRAI|FAUX|VERO|FALSO' + (langOf(currentLocale) === 'en' ? '|TRUE|FALSE' : '');
     return mapOutsideStrings(f, function (part) {
       Object.keys(aliases).forEach(function (from) {
         var re = new RegExp('(^|[^' + L + '0-9._])' + from + '(?=\\s*\\()', 'gi');
         part = part.replace(re, '$1' + aliases[from]);
       });
       // Excel kennt WAHR/FALSCH (VRAI/FAUX, VERO/FALSO) als Konstanten, HyperFormula nur als Funktionen WAHR() usw.
-      part = part.replace(new RegExp('(^|[^' + L + '0-9._])(WAHR|FALSCH|VRAI|FAUX|VERO|FALSO)(?![' + L + '0-9._]|\\s*\\()', 'gi'), '$1$2()');
+      // In en-CH zusätzlich TRUE/FALSE.
+      part = part.replace(new RegExp('(^|[^' + L + '0-9._])(' + consts + ')(?![' + L + '0-9._]|\\s*\\()', 'gi'), '$1$2()');
       return part;
     });
   }
@@ -370,6 +420,7 @@
   }
 
   // Englischer (oder in FR/IT deutscher) Funktionsname bzw. Wahrheitswert? Rückgabe: Hinweistext oder null.
+  // In en-CH umgekehrt: englische Namen sind richtig, deutsche Namen (SUMME, WAHR) werden gemeldet.
   function findEnglish(f) {
     var lang = langOf(currentLocale);
     var names = functionNames(f), en = enMap(lang), de = lang === 'de' ? {} : deMap(lang);
@@ -384,7 +435,7 @@
     while ((m = re.exec(masked))) {
       var c = m[2].toUpperCase();
       var idx = c === 'TRUE' || c === 'WAHR' ? 0 : 1;
-      if (c === 'TRUE' || c === 'FALSE') return msgs().englishConst(c, bools[idx]);
+      if (c === 'TRUE' || c === 'FALSE') { if (lang === 'en') continue; return msgs().englishConst(c, bools[idx]); }
       if (lang !== 'de') return msgs().germanConst(c, bools[idx]);
     }
     return null;
@@ -405,9 +456,22 @@
    * DE: Das Komma ist das Dezimalzeichen. Nur ein Komma, das nicht zwischen den Ziffern eines
    *     Zahlenliterals steht (z. B. «B2,B6»), ist ein falscher Argumenttrenner.
    */
+  /*
+   * en-CH: Das Komma ist der Argumenttrenner. 'separator' heisst dort: Semikolon statt Komma (Meldung MSG.comma).
+   *        'decimal': Komma zwischen Ziffern ausserhalb einer Klammer (=A2*1,5).
+   */
   function commaKind(f, locale) {
     var de = numDe(locale);
     var masked = maskStrings(f), depth = 0;
+    if (argSep(locale) === ',') {
+      if (masked.indexOf(';') !== -1) return 'separator';
+      for (var j = 0; j < masked.length; j++) {
+        if (masked[j] === '(') depth++;
+        else if (masked[j] === ')') depth--;
+        else if (masked[j] === ',' && depth <= 0 && /\d/.test(masked[j - 1] || '') && /\d/.test(masked[j + 1] || '')) return 'decimal';
+      }
+      return null;
+    }
     for (var i = 0; i < masked.length; i++) {
       var c = masked[i];
       if (c === '(') depth++;
@@ -453,8 +517,13 @@
     var fnRe = new RegExp('(^|[^' + L + '0-9._$])([' + L + '][' + L + '0-9._]*)(?=\\s*\\()', 'g');
     var boolRe = new RegExp('(^|[^' + L + '0-9._$])([' + L + ']+)(?![' + L + '0-9._(])', 'g');
     var bFrom = BOOL_NAMES[lFrom], bTo = BOOL_NAMES[lTo];
+    // Argumenttrenner (en-CH: «,»): zuerst «,» → «;», dann Dezimalzeichen umwandeln, zuletzt «;» → «,»,
+    // damit ein Dezimalkomma aus de-DE nie als Trenner gilt.
+    var sFrom = argSep(from), sTo = argSep(to);
     return mapOutsideStrings(formula, function (part) {
+      if (sFrom === ',' && sTo !== ',') part = part.replace(/,/g, ';');
       if (nFrom !== nTo) part = part.replace(re, '$1$2' + sep + '$3');
+      if (sTo === ',' && sFrom !== ',') part = part.replace(/;/g, ',');
       if (lFrom !== lTo) {
         part = part.replace(fnRe, function (m, pre, name) { return pre + translateFunctionName(name, lFrom, lTo); });
         part = part.replace(boolRe, function (m, pre, name) {
@@ -477,13 +546,14 @@
   }
 
   // Top-Level-Argumente eines Funktionsaufrufs ab Index der öffnenden Klammer.
+  // DE/FR/IT: «;» (in CH-Notation zählt auch ein falsches Komma), en-CH: nur «,».
   function callArgs(masked, openIdx) {
-    var depth = 0, args = [], start = openIdx + 1;
+    var depth = 0, args = [], start = openIdx + 1, en = argSep() === ',';
     for (var i = openIdx; i < masked.length; i++) {
       var c = masked[i];
       if (c === '(') depth++;
       else if (c === ')') { depth--; if (depth === 0) { args.push(masked.slice(start, i)); return args; } }
-      else if ((c === ';' || (c === ',' && !numDe())) && depth === 1) { args.push(masked.slice(start, i)); start = i + 1; }
+      else if ((en ? c === ',' : (c === ';' || (c === ',' && !numDe()))) && depth === 1) { args.push(masked.slice(start, i)); start = i + 1; }
     }
     args.push(masked.slice(start));
     return args;
@@ -492,8 +562,9 @@
   // Kriterium von SUMMEWENN/ZÄHLENWENN ohne Anführungszeichen (z. B. >3 oder Ost)?
   function hasUnquotedCriterion(f) {
     var masked = maskStrings(f), m;
-    // ZÄHLENWENN/SUMMEWENN in DE, NB.SI/SOMME.SI in FR, CONTA.SE/SOMMA.SE in IT (nicht die ...S-/.ENS-Varianten)
-    var re = new RegExp('(^|[^' + L + '0-9._])(ZÄHLENWENN|SUMMEWENN|NB\\.SI|SOMME\\.SI|CONTA\\.SE|SOMMA\\.SE)\\s*\\(', 'gi');
+    // ZÄHLENWENN/SUMMEWENN in DE, NB.SI/SOMME.SI in FR, CONTA.SE/SOMMA.SE in IT, COUNTIF/SUMIF in en-CH
+    // (nicht die ...S-/.ENS-Varianten). In DE/FR/IT meldet findEnglish COUNTIF/SUMIF schon vorher.
+    var re = new RegExp('(^|[^' + L + '0-9._])(ZÄHLENWENN|SUMMEWENN|NB\\.SI|SOMME\\.SI|CONTA\\.SE|SOMMA\\.SE|COUNTIF|SUMIF)\\s*\\(', 'gi');
     while ((m = re.exec(masked))) {
       var args = callArgs(masked, m.index + m[0].length - 1);
       var crit = (args[1] || '').trim();
@@ -682,6 +753,7 @@
   function localize(ex, locale) {
     locale = normalizeLocale(locale || currentLocale);
     if (!ex || locale === 'de-CH' || ex.localeApplied === locale) return ex;
+    if (langOf(locale) === 'en') return localizeEn(ex, locale);
     if (langOf(locale) !== 'de') return localizeLang(ex, locale);
     var copy = JSON.parse(JSON.stringify(ex));
     var ov = ex.locale && ex.locale.de;
@@ -769,6 +841,34 @@
     return copy;
   }
 
+  /*
+   * en-CH: englisches Excel mit Schweizer Zahlen. Texte bleiben deutsch, ausser ex.locale.en enthält Overrides
+   * (topic, title, task, intro, steps, hints, ...; hints werden zusammengeführt, alles andere ersetzt).
+   * Funktionsnamen in solution, accept, mustUse und mustContain: DE → EN (enGB-Namen aus HyperFormula),
+   * Argumenttrenner «;» → «,» ausserhalb von Strings. Daten, Zahlen, Zielzelle, IDs und Antworten bleiben gleich.
+   * Overrides in ex.locale.en für solution/accept sind wie exercises.json in DE-CH-Notation geschrieben.
+   * Projekt-Dateien bleiben die deutschen (es gibt kein files/en/).
+   */
+  function localizeEn(ex, locale) {
+    var copy = JSON.parse(JSON.stringify(ex));
+    var ov = ex.locale && ex.locale.en;
+    delete copy.locale;
+    if (ov) {
+      Object.keys(ov).forEach(function (k) {
+        var v = JSON.parse(JSON.stringify(ov[k]));
+        if (k === 'hints' && copy.hints && v && typeof v === 'object') Object.keys(v).forEach(function (h) { copy.hints[h] = v[h]; });
+        else copy[k] = v;
+      });
+    }
+    var formula = function (f) { return convertFormulaLocale(f, 'de-CH', locale); };
+    if (typeof copy.solution === 'string') copy.solution = formula(copy.solution);
+    if (Array.isArray(copy.accept)) copy.accept = copy.accept.map(formula);
+    if (Array.isArray(copy.mustUse)) copy.mustUse = copy.mustUse.map(function (n) { return fnName(n, locale); });
+    if (Array.isArray(copy.mustContain)) copy.mustContain = copy.mustContain.map(function (n) { return /^[A-ZÄÖÜ][A-ZÄÖÜ0-9.]*$/.test(n) ? fnName(n, locale) : n; });
+    copy.localeApplied = locale;
+    return copy;
+  }
+
   /* ---------- Projekt-Übungen (type "project") ----------
    * Nutzer bauen in Excel eine Pivot-Tabelle oder Power-Query-Abfrage und beantworten Kontrollfragen.
    * Geprüft werden nur Zahlen, ohne HyperFormula. Frage: { q, answer, tolerance?, unit?, hint }.
@@ -786,10 +886,19 @@
   var PROJECT_MSG_DE = {};
   Object.keys(PROJECT_MSG).forEach(function (k) { PROJECT_MSG_DE[k] = PROJECT_MSG[k]; });
   PROJECT_MSG_DE.invalid = 'Das ist keine Zahl. Schreib zum Beispiel 1234,50, 1.234,50 oder 12,5 %.';
+  var PROJECT_MSG_EN = {
+    empty: 'Enter a number here.',
+    invalid: 'That is not a number. Write for example 1234.50, 1\'234.50 or 12.5 %.',
+    wrong: 'Not quite right yet.',
+    right: 'Correct.',
+    allRight: 'All correct! Your report returns the right numbers.',
+    some: function (n, total) { return n + ' of ' + total + ' answers correct. Check the marked questions.'; }
+  };
   // FR/IT: ui «pmsg.<Schlüssel>», «pmsg.some» mit {n} und {total}
   function projectMsgs() {
     var l = langOf(currentLocale);
     if (l === 'de') return currentLocale === 'de-DE' ? PROJECT_MSG_DE : PROJECT_MSG_CH;
+    if (l === 'en') return PROJECT_MSG_EN;
     var out = {};
     Object.keys(PROJECT_MSG).forEach(function (k) {
       var tpl = uiString(l, 'pmsg.' + k);
@@ -905,7 +1014,7 @@
     fnName: fnName,
     enMap: enMap,
     deMap: deMap,
-    // Sprachpaket der Variante registriert? (FR/IT-Pakete werden separat geladen)
+    // Sprachpaket der Variante registriert? (FR/IT-Pakete werden separat geladen, enGB ist immer registriert)
     hasLanguage: function (locale) { var H = HFREF || root.HyperFormula; return !!H && H.getRegisteredLanguagesCodes().indexOf(info(locale).hf) !== -1; },
     setLocale: setLocale,
     getLocale: getLocale,
@@ -916,8 +1025,10 @@
     localize: localize,
     uiText: uiText,
     MSG_DE: MSG_DE,
+    MSG_EN: MSG_EN,
     EN_TO_DE: EN_TO_DE,
     MSG: MSG,
+    argSep: argSep,
     check: check,
     evaluate: evaluate,
     valuesEqual: valuesEqual,

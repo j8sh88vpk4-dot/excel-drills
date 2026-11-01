@@ -95,6 +95,7 @@ def header(prefix, current=None):
         <a href="{prefix}pfad/"{pfa}>Pfade</a>
         <a href="{prefix}assessment/">Assessment</a>
         <a href="{prefix}upload/">Datei prüfen</a>
+        <a href="{prefix}kampagne/">Kampagne</a>
         <a href="{prefix}artikel/"{art}>Artikel</a>
         <a href="{prefix}handouts/"{hnd}>Handouts</a>
         <a href="{prefix}premium.html">Preise</a>
@@ -106,7 +107,7 @@ def footer(prefix):
     return f'''  <footer class="site-footer">
     <div class="wrap">
       <span>&copy; 2026 Excel-Drills</span>
-      <span><a href="{prefix}artikel/">Artikel</a> &middot; <a href="{prefix}handouts/">Handouts</a> &middot; <a href="{prefix}impressum.html">Impressum</a> &middot; <a href="{prefix}datenschutz.html">Datenschutz</a></span>
+      <span><a href="{prefix}artikel/">Artikel</a> &middot; <a href="{prefix}handouts/">Handouts</a> &middot; <a href="https://sql-drills.onrender.com?utm_source=excel-drills&amp;utm_medium=footer" rel="noopener">SQL-Drills (Beta)</a> &middot; <a href="{prefix}impressum.html">Impressum</a> &middot; <a href="{prefix}datenschutz.html">Datenschutz</a></span>
     </div>
   </footer>'''
 

@@ -7,10 +7,10 @@ Konzepte und Kurzvideo-Skripte: `instagram-tiktok.md`. Diese Datei liefert die *
 
 | Was | Datei | Format |
 |---|---|---|
-| Karussell-Vorlage | `visuals/carousel.html?c=1..6&s=1..n` | 1080×1350 (4:5) |
-| Story-Vorlage | `visuals/story.html?v=1..3` (ohne `v` = Reel-Endcard `png/story.png`) | 1080×1920 |
+| Karussell-Vorlage | `visuals/carousel.html?c=1..7&s=1..n` | 1080×1350 (4:5) |
+| Story-Vorlage | `visuals/story.html?v=1..4` (ohne `v` = Reel-Endcard `png/story.png`) | 1080×1920 |
 | Rendern | `bash social-kit/visuals/render-instagram.sh` (alles) · `… 3` (nur Karussell 3) · `… story` | headless Chrome, nacheinander |
-| Fertige Bilder | `visuals/png/instagram/c<nr>-s<nr>.png`, `story-1.png` … `story-3.png` | 43 Slides + 3 Stories |
+| Fertige Bilder | `visuals/png/instagram/c<nr>-s<nr>.png` (inkl. `c7-s1.png` … `c7-s7.png`), `story-1.png` … `story-4.png` (`story-4.png` = Für Berufsbildner) | 50 Slides + 4 Stories |
 
 Beim Hochladen: Alle Slides eines Karussells in der Reihenfolge s1 → sN auswählen, Format **4:5** (nicht auf 1:1 zuschneiden lassen). Alt-Text pro Karussell: erste Zeile der Caption.
 
@@ -22,6 +22,7 @@ Beim Hochladen: Alle Slides eines Karussells in der Reihenfolge s1 → sN auswä
 | IG-K4 | Monatsabschluss: 5 Formeln fürs Controlling | 7 | Lernpfad Accounting |
 | IG-K5 | Schweizer Excel: 5 Eigenheiten | 7 | Übung `runden-1` |
 | IG-K6 | Warum Excel-Videos nicht reichen | 7 | App-Start |
+| IG-K7 | Excel-Test im Bewerbungsprozess: Teste dich selbst | 7 | Assessment-Seite |
 
 **Hinweis Hashtags:** `README.md` sagt «3–5 Hashtags pro Post». Für Instagram-Karussells sind hier bewusst 8–12 gesetzt (Instagram verteilt über Hashtags stärker als LinkedIn). Hashtags in die Caption, nicht in einen Kommentar. Keine Microsoft-/Marken-Hashtags.
 
@@ -121,7 +122,7 @@ Genau so ist Excel-Drills gebaut, mit Tagesziel, Streak und Gold pro Übung, wen
 #excel #excellernen #exceltipps #lernen #lerntipps #weiterbildung #retrievalpractice #bürojob #lernenmitspass #schweiz
 ```
 
-### IG-K7 «Excel-Test im Bewerbungsprozess: Teste dich selbst» · Di 24.11.
+### IG-K7 «Excel-Test im Bewerbungsprozess: Teste dich selbst» · Mi 25.11. 12:00
 
 ```
 Excel-Test im Bewerbungsprozess? Teste dich vorher selbst.
@@ -139,7 +140,7 @@ Rollen-Assessments für Consulting und Accounting und die Gratis-Übungen: Link 
 #excel #einstellungstest #bewerbung #excellernen #exceltipps #berufseinstieg #karriereschweiz #bürojob #lernen #schweiz
 ```
 
-**Hinweis:** Am Di 24.11. liegen schon IG-V5, IG-V6 und IG-K5. Zwei Karussells am selben Tag konkurrieren um Reichweite; alternativ IG-K7 auf Mi 25.11. legen. Link in Bio an diesem Tag auf die Assessment-Seite stellen (Hash/Pfad: `https://excel-drills.ch/assessment/?utm_source=instagram&utm_medium=bio&utm_campaign=launch`).
+**Hinweis:** IG-K7 liegt auf Mi 25.11. 12:00, weil am Di 24.11. schon IG-V5, IG-V6 und IG-K5 erscheinen (zwei Karussells am selben Tag konkurrieren um Reichweite). Link in Bio an diesem Tag auf die Assessment-Seite stellen (Hash/Pfad: `https://excel-drills.ch/assessment/?utm_source=instagram&utm_medium=bio&utm_campaign=launch`).
 
 Alle Captions: Du-Form, ss statt ß, keine erfundenen Zahlen, keine Erfolgsversprechen (Regeln aus `README.md`). Erster eigener Kommentar nach dem Posten (optional, für Reichweite): eine Frage, z. B. K1 «Welcher der drei ist dir schon passiert?».
 
@@ -165,7 +166,7 @@ Rhythmus Instagram: 3 Beiträge pro Woche (Karussell oder Reel) plus Stories an 
 | W3 | Fr 20.11. | – | Umfrage-Sticker «Was soll als Nächstes kommen: Consulting-Pfad oder mehr Data & Reporting?» | App-Start |
 | W4 | Mo 23.11. | – | `story-3` erneut (Streak-Erinnerung) | App-Start |
 | W4 | Di 24.11. | Reels IG-V5 + IG-V6 + **IG-K5** Schweizer Eigenheiten (7) | Karussell teilen | `runden-1` |
-| W4 | Di 24.11. | **IG-K7** Excel-Test im Bewerbungsprozess (zusätzlich zu IG-K5; IG-K5 07:30, IG-K7 12:00) | Karussell teilen | Assessment-Seite |
+| W4 | Mi 25.11. | **IG-K7** Excel-Test im Bewerbungsprozess (7), 12:00 | Karussell teilen | Assessment-Seite |
 | W4 | Do 26.11. | **IG-K6** Warum Videos nicht reichen (7) | Karussell teilen | App-Start |
 | W4 | Fr 27.11. | – | `story-1` als Abschluss, optional mit echten Zahlen (nur gemessen) | App-Start |
 
@@ -175,7 +176,7 @@ Nach dem Posten 30 Minuten präsent bleiben und Kommentare beantworten. Freitag:
 
 
 ### Story-Text «Für Berufsbildner: Klassen gratis»
-**Einsatz:** Mi 18.11. (parallel zu LI-14), grüner Hintergrund #107C41, weisser Text · **Link-Sticker:** `https://excel-drills.ch/premium.html?utm_source=instagram&utm_medium=social&utm_campaign=launch-2026-11&utm_content=ig-story-berufsbildner`
+**Einsatz:** Mi 18.11. (parallel zu LI-14), Bild `png/instagram/story-4.png`, grüner Hintergrund #107C41, weisser Text · **Link-Sticker:** `https://excel-drills.ch/premium.html?utm_source=instagram&utm_medium=social&utm_campaign=launch-2026-11&utm_content=ig-story-berufsbildner`
 
 ```
 Für Berufsbildner:
@@ -216,6 +217,7 @@ Highlights (Story-Archiv), Titel und Inhalt:
 | Formelrätsel | `png/instagram/story-2.png` | Mi 11.11. | Quiz-Sticker (A/B/C, richtig: **B**) in den freien Bereich unter dem Hinweis; Auflösung am Folgetag |
 | Streak | `png/instagram/story-3.png` | Mo 16.11., Mo 23.11. | Link-Sticker auf App-Start; optional Umfrage «Welches Tagesziel: 1, 2 oder 5?» |
 | Auf dem Handy installieren | Text-Story auf grünem Hintergrund #107C41 (noch zu erstellen; optional Screen-Record «Zum Home-Bildschirm») | Mo 9.11. | Text: «Excel-Drills als App aufs Handy: im Browser «Zum Home-Bildschirm» bzw. «App installieren». Die Gratis-Übungen laufen auch offline.» Link-Sticker auf App-Start |
+| Für Berufsbildner | `png/instagram/story-4.png` | Mi 18.11. (parallel zu LI-14) | Link-Sticker auf `premium.html` (UTM `ig-story-berufsbildner`, siehe Story-Text unten), unterhalb des Mail-Hinweises in den freien Bereich |
 | Karussell-Teaser | Slide 1 des Karussells teilen | an jedem Karussell-Tag | «Neuer Beitrag»-Sticker |
 | Frage/Umfrage | Text-Story, grüner Hintergrund #107C41 | Do 5.11., Fr 20.11. | Frage- bzw. Umfrage-Sticker |
 

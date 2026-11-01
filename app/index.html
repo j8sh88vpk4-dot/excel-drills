@@ -14,6 +14,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Excel-Drills">
   <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/sheet-pick.css">
   <script defer src="../assets/analytics.js"></script>
   <script defer src="../assets/pwa.js"></script>
 </head>
@@ -169,6 +170,12 @@
       </main>
 
       <nav class="exercise-nav" id="exercise-nav" aria-label="Übungen im Pfad" data-i18n-attr="aria-label:html.exNav" data-collapsed="true">
+        <!-- Wiederholung: von app.js gefüllt, ausgeblendet wenn nichts fällig ist -->
+        <section class="due-box" id="due-box" aria-labelledby="due-heading" hidden>
+          <h2 id="due-heading" data-i18n="html.dueHeading">Heute fällig</h2>
+          <p class="fine" data-i18n="html.dueNote">Wiederhole diese Übungen, damit sie sitzen.</p>
+          <ul class="due-list" id="due-list"></ul>
+        </section>
         <h2 id="list-heading" data-i18n="html.listHeading">Übungen</h2>
         <button class="btn btn-secondary list-toggle" type="button" id="list-toggle" aria-expanded="false" aria-controls="exercise-list" hidden>Alle Übungen anzeigen</button>
         <p class="visually-hidden" id="list-progress" aria-live="polite"></p>
@@ -233,6 +240,10 @@
       <h3 id="pf-stats-h" data-i18n="html.pfStats">Statistik</h3>
       <dl class="stats" id="pf-stats"></dl>
     </section>
+    <section class="pf-section" aria-labelledby="pf-dna-h">
+      <h3 id="pf-dna-h" data-i18n="html.pfDna">Deine Fehler-DNA</h3>
+      <div id="pf-dna"></div>
+    </section>
     <section class="pf-section" aria-labelledby="pf-badges-h">
       <h3 id="pf-badges-h" data-i18n="html.pfBadges">Abzeichen</h3>
       <ul class="badge-grid" id="pf-badges"></ul>
@@ -292,6 +303,8 @@
   <script src="engine.js" defer></script>
   <script src="gamification.js" defer></script>
   <script src="badges.js" defer></script>
+  <script src="errors.js" defer></script>
+  <script src="sheet-pick.js" defer></script>
   <script src="app.js" defer></script>
 </body>
 </html>

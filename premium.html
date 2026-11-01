@@ -36,6 +36,7 @@
         <a href="pfad/">Pfade</a>
         <a href="assessment/">Assessment</a>
         <a href="upload/">Datei prüfen</a>
+        <a href="kampagne/">Kampagne</a>
         <a href="artikel/">Artikel</a>
         <a href="handouts/">Handouts</a>
         <a href="premium.html">Preise</a>
@@ -95,6 +96,21 @@
 
     <p class="launch-note"><strong>Launch-Aktion bis 15. November:</strong> Mit dem Code <code>SVERWEIS20</code> im Stripe-Checkout gibt es 20&nbsp;% auf das Jahresabo und auf Lifetime.</p>
 
+    <aside class="bundle-note" aria-labelledby="bundle-heading">
+      <h2 id="bundle-heading">Bald: Drills-Bundle (Excel + SQL + Python)</h2>
+      <p>Geplant ist ein Login und ein Preis für alle Drills. Wer jetzt Premium hat, bekommt die Schwester-Produkte zum Start günstiger. Trag dich ein, dann erfährst du es als Erste oder Erster.</p>
+      <form class="waitlist-form" data-produkt="bundle" novalidate>
+        <div class="waitlist-row">
+          <label class="visually-hidden" for="wl-bundle">E-Mail-Adresse</label>
+          <input type="email" id="wl-bundle" name="email" autocomplete="email" placeholder="Deine E-Mail-Adresse" required>
+          <input class="waitlist-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit" class="btn btn-secondary">Auf die Warteliste</button>
+        </div>
+        <p class="waitlist-status" role="status" aria-live="polite"></p>
+        <p class="waitlist-privacy">Deine E-Mail-Adresse nutzen wir nur, um dich zum Start zu benachrichtigen. Gespeichert wird sie bei Supabase in Zürich. <a href="datenschutz.html">Datenschutz</a></p>
+      </form>
+    </aside>
+
     <div class="guarantee">
       <span class="guarantee-icon" aria-hidden="true">&#10003;</span>
       <p><strong>100&nbsp;% Geld-zurück-Garantie.</strong> Wenn dir Excel-Drills innert 14 Tagen nach dem Kauf nichts bringt, schreib uns eine kurze Mail und du bekommst den vollen Betrag zurück. Ohne Begründung, ohne Formular.</p>
@@ -122,14 +138,20 @@
         <summary>Wie werde ich nach dem Kauf freigeschaltet?</summary>
         <p>Nach der Zahlung leitet dich Stripe automatisch zurück zu den Übungen, und Premium ist in diesem Browser sofort aktiv. Deinen Zugangscode findest du in der App unter «Dein Fortschritt» (Level-Knopf oben). Auf einem weiteren Gerät gibst du ihn im Premium-Fenster unter «Hast du schon einen Code?» ein oder öffnest den Link, der dort steht.</p>
       </details>
+      <details>
+        <summary>Gilt Premium auch für SQL-Drills und Python-Drills?</summary>
+        <p>Heute nicht: Premium gilt nur für Excel-Drills. <a href="https://sql-drills.onrender.com?utm_source=excel-drills&amp;utm_medium=premium-faq" rel="noopener">SQL-Drills</a> läuft als Beta mit eigenem Zugang, Python-Drills ist erst geplant. Ein Bundle mit einem Login für alle Drills ist in Arbeit, Preis und Start stehen noch nicht fest. Premium-Kundinnen und -Kunden informieren wir zuerst und zu besseren Konditionen als für alle anderen. Konkrete Zusagen machen wir erst, wenn das Bundle steht.</p>
+      </details>
     </section>
     <p><a href="app/">&larr; Zurück zu den Übungen</a></p>
   </main>
   <footer class="site-footer">
     <div class="wrap">
       <span>&copy; 2026 Excel-Drills</span>
-      <span><a href="artikel/">Artikel</a> &middot; <a href="impressum.html">Impressum</a> &middot; <a href="datenschutz.html">Datenschutz</a></span>
+      <span><a href="artikel/">Artikel</a> &middot; <a href="https://sql-drills.onrender.com?utm_source=excel-drills&amp;utm_medium=footer" rel="noopener">SQL-Drills (Beta)</a> &middot; <a href="impressum.html">Impressum</a> &middot; <a href="datenschutz.html">Datenschutz</a></span>
     </div>
   </footer>
+  <script src="assets/leads-config.js" defer></script>
+  <script src="assets/waitlist.js" defer></script>
 </body>
 </html>

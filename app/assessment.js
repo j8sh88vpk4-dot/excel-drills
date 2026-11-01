@@ -1,6 +1,8 @@
 /* Excel-Drills – Rollen-Assessment (Vanilla JS). Ablauf: Start, Timer, 5 Aufgaben, Auswertung, 7-Tage-Plan, Share-Bild.
  * Prüflogik: app/engine.js (window.ExcelDrillsEngine), Fehlerkategorien: app/errors.js (window.ExcelDrillsErrors).
- * Inhalte: app/assessments.json, Übungen für den Plan: app/exercises.json. Sprache: DE-CH. */
+ * Inhalte: app/assessments.json, Übungen für den Plan: app/exercises.json.
+ * Excel-Sprache: DE-CH (Standard) oder English (en-CH, ?lang=en), wählbar auf dem Start-Screen vor dem Start.
+ * In EN bleiben Oberfläche und Aufgabentexte deutsch (ausser assessments.json hat locale.en), Formeln sind englisch. */
 (function () {
   'use strict';
 
@@ -18,6 +20,57 @@
 
   var assessments = [], exercises = {}, current = null;
   var state = null;   // { index, tasks: [{ attempts, ok, points, formula, result, diag, done }], endsAt, timer, finished }
+  var lang = 'de';    // Excel-Sprache: 'de' (DE-CH) oder 'en' (en-CH)
+  var runTasks = [];  // Aufgaben des laufenden Tests, in EN über E.localize(ex, 'en-CH') aufbereitet
+
+  /* ---------- Excel-Sprache (DE-CH | English) ---------- */
+
+  function langFromUrl() {
+    var p = new URLSearchParams(window.location.search);
+    return /^en/i.test(p.get('lang') || '') ? 'en' : 'de';
+  }
+  function isEn() { return lang === 'en'; }
+  function localeOf() { return isEn() ? 'en-CH' : 'de-CH'; }
+  // Query-String für Links und History: Rolle und (nur bei EN) die Sprache
+  function query(id) { return '?rolle=' + encodeURIComponent(id) + (isEn() ? '&lang=en' : ''); }
+  function tasksFor(as) {
+    if (!isEn()) return as.tasks;
+    return as.tasks.map(function (t) { return E.localize(t, 'en-CH'); });
+  }
+  // Hat das Assessment englische Aufgabentexte (locale.en in assessments.json)?
+  function hasEnTexts(as) {
+    return !!as && as.tasks.every(function (t) { return t.locale && t.locale.en && t.locale.en.task; });
+  }
+
+  // Schalter, Regeltext, Eingabe-Hinweis und Symbol-Leiste an die Sprache anpassen
+  function renderLang() {
+    if (els.langDe) els.langDe.setAttribute('aria-pressed', String(!isEn()));
+    if (els.langEn) els.langEn.setAttribute('aria-pressed', String(isEn()));
+    if (els.langNote) els.langNote.hidden = !isEn() || hasEnTexts(current);
+    if (els.ruleSyntax) {
+      els.ruleSyntax.textContent = isEn()
+        ? 'Schreib die Formel wie im englischen Excel: mit =, englischen Funktionsnamen (SUM, IF), Komma (,) als Trennzeichen und Dezimalpunkt, z. B. =SUM(A1,A2).'
+        : 'Schreib die Formel wie in Excel Schweiz: mit =, deutschen Funktionsnamen, Semikolon (;) und Dezimalpunkt.';
+    }
+    els.input.placeholder = isEn() ? '=SUM(A1,A2)' : '=…';
+    var sepBtn = els.symbols.querySelector('button[data-sep]') || els.symbols.querySelector('button[data-insert=";"]');
+    if (sepBtn) {
+      sepBtn.setAttribute('data-sep', '1');
+      sepBtn.setAttribute('data-insert', isEn() ? ',' : ';');
+      sepBtn.textContent = isEn() ? ',' : ';';
+    }
+  }
+
+  function setLang(next, opts) {
+    if (state && !state.finished) return; // nur vor dem Start wählbar
+    lang = next === 'en' ? 'en' : 'de';
+    E.setLocale(localeOf());
+    renderLang();
+    if (opts && opts.url && current) {
+      try { window.history.replaceState(null, '', query(current.id)); } catch (e) { /* ignorieren */ }
+    }
+  }
+  var linkCfg = null; // Recruiter-Link (app/recruiter.js) über configure(): { rolle, minuten, sprache, lockRole, unlock, onFinish }
 
   function $(id) { return document.getElementById(id); }
   var els = {};
@@ -76,6 +129,7 @@
   /* ---------- Rollenwahl ---------- */
 
   function roleFromUrl() {
+    if (linkCfg && linkCfg.lockRole) return linkCfg.rolle || ''; // Recruiter-Link: Rolle kommt aus dem Link, nicht aus ?rolle=
     var p = new URLSearchParams(window.location.search);
     return (p.get('rolle') || '').toLowerCase();
   }
@@ -90,8 +144,9 @@
     });
     if (!as) { els.app.hidden = true; return; }
     current = as;
+    if (linkCfg) applyLinkCfg(as);
     if (opts.push) {
-      try { window.history.pushState(null, '', '?rolle=' + encodeURIComponent(id)); } catch (e) { /* ignorieren */ }
+      try { window.history.pushState(null, '', query(id)); } catch (e) { /* ignorieren */ }
     }
     showStart();
     if (opts.scroll) els.start.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -124,12 +179,21 @@
     els.startLocked.hidden = !locked;
     els.startBtn.disabled = !HF;
     els.startBtnNote.hidden = !!HF;
+    E.setLocale(localeOf());
+    renderLang();
   }
 
   /* ---------- Ablauf ---------- */
 
   function startTest() {
     if (!current || !HF) return;
+    E.setLocale(localeOf());
+    try { runTasks = tasksFor(current); } catch (e) {
+      // Lokalisierung fehlgeschlagen: auf DE-CH zurückfallen, damit der Test trotzdem läuft
+      if (window.console) console.error(e);
+      setLang('de');
+      runTasks = current.tasks;
+    }
     state = {
       index: 0,
       finished: false,
@@ -140,7 +204,7 @@
     els.start.hidden = true;
     els.result.hidden = true;
     els.run.hidden = false;
-    track('assessment_start', { rolle: current.id });
+    track('assessment_start', { rolle: current.id, sprache: lang });
     startTimer();
     showTask(0);
     els.run.scrollIntoView({ block: 'start' });
@@ -166,7 +230,7 @@
     if (left <= 0) { els.timerSr.textContent = 'Die Zeit ist abgelaufen.'; finish(true); }
   }
 
-  function task() { return current.tasks[state.index]; }
+  function task() { return runTasks[state.index]; }
   function taskState() { return state.tasks[state.index]; }
 
   function showTask(i) {
@@ -233,6 +297,8 @@
     });
     table.appendChild(thead);
     table.appendChild(tbody);
+    // Zellbezüge per Klick (app/sheet-pick.js), Texte deutsch; bei jedem Neu-Rendern neu angebunden
+    if (window.ExcelDrillsSheetPick) window.ExcelDrillsSheetPick.attach({ table: table, input: els.input, locale: localeOf, ort: 'assessment' });
   }
 
   function setFeedback(kind, text, extra) {
@@ -314,7 +380,7 @@
     var level = levelOf(pct);
     state.points = points; state.pct = pct; state.level = level;
     saveResult(current.id, pct);
-    track('assessment_done', { rolle: current.id, punkte: points });
+    track('assessment_done', { rolle: current.id, punkte: points, sprache: lang });
 
     els.run.hidden = true;
     els.result.hidden = false;
@@ -328,6 +394,7 @@
     renderPlan();
     renderShare();
     mountInterview(points);
+    notifyFinish(timeUp);
     els.resTitle.focus({ preventScroll: true });
     els.result.scrollIntoView({ block: 'start' });
   }
@@ -352,11 +419,49 @@
   }
 
   function diagnoses() {
-    return current.tasks.map(function (ex, i) {
+    return runTasks.map(function (ex, i) {
       var ts = state.tasks[i];
-      var d = ERR.classify(ts.result && ts.attempts ? ts.result : null, ts.formula, ex);
+      var r = ts.result && ts.attempts ? ts.result : null;
+      var d = isEn() ? classifyEn(r, ts.formula, current.tasks[i]) : ERR.classify(r, ts.formula, ex);
       return { ex: ex, ts: ts, diag: d };
     });
+  }
+
+  /*
+   * Fehlerkategorie in EN: errors.js kennt nur deutsche Formeln und Meldungen. Deshalb wird die englische Formel
+   * nach DE-CH übersetzt (Namen, «,» → «;») und gegen die deutsche Aufgabe geprüft. Besteht sie dort, lag der Fehler
+   * nur in der Schreibweise (Semikolon, deutscher Name): Kategorie Syntax. Tipps mit deutscher Formel-Schreibweise
+   * werden durch Varianten mit englischen Namen und Komma ersetzt (TIPS_EN).
+   */
+  var TIPS_EN = {
+    syntax: 'Jede Formel beginnt mit =, Argumente trennst du im englischen Excel mit Komma, Dezimalzahlen mit Punkt. Setze Klammern, wenn ein Teil zuerst gerechnet werden muss.',
+    logik: 'Baue IF in drei Teilen: Bedingung, Wert wenn wahr, Wert wenn falsch. Text wie "Ja" steht in Anführungszeichen.',
+    lookup: 'SUMIF und COUNTIF brauchen zuerst den Prüfbereich, dann das Kriterium. Beziehe dich auf die Kriteriumszelle, statt Text fest einzutippen.',
+    rundung: 'MROUND(Betrag,0.05) rundet auf 5 Rappen, ROUND(Wert,2) auf 2 Stellen. Erst fertig rechnen, dann runden.',
+    comma: 'Im englischen Excel trennst du Argumente mit Komma (,), nicht mit Semikolon.',
+    english: 'Excel auf Englisch braucht englische Funktionsnamen: SUM, IF, SUMIF, ROUND.',
+    roundMissing: 'Die Aufgabe verlangt eine Rundung. Packe die ganze Rechnung in MROUND bzw. ROUND.',
+    ifMissing: 'Die Aufgabe verlangt eine Entscheidung. Nutze IF(Bedingung,"Wert1","Wert2").',
+    lookupMissing: 'Für bedingte Summen nimmst du SUMIF(Prüfbereich,Kriterium,Summenbereich).'
+  };
+  function enDiag(d) {
+    var tip = (d.cause && TIPS_EN[d.cause]) || (!d.cause || !ERR.CAUSE_TIPS[d.cause] ? TIPS_EN[d.category] : null);
+    if (tip) d.tip = tip;
+    return d;
+  }
+  function classifyEn(r, formula, base) {
+    if (!r || r.ok || !String(formula || '').trim()) return enDiag(ERR.classify(r, formula, base));
+    var f = String(formula).trim(), deF = f, r2 = null;
+    var notation = f.charAt(0) === '=' && (E.commaKind(f) === 'separator' ? 'comma' : E.findEnglish(f) ? 'english' : null);
+    try {
+      deF = E.convertFormulaLocale(f, 'en-CH', 'de-CH');
+      E.setLocale('de-CH');
+      r2 = E.check(HF, base, deF);
+    } catch (e) { r2 = null; } finally { E.setLocale('en-CH'); }
+    if (notation) return { category: 'syntax', label: ERR.label('syntax'), tip: TIPS_EN[notation], cause: notation };
+    if (!r2) return enDiag(ERR.classify(r, f, base));
+    if (r2.ok) return { category: 'syntax', label: ERR.label('syntax'), tip: TIPS_EN.syntax, cause: 'parse' };
+    return enDiag(ERR.classify(r2, deF, base));
   }
 
   function renderDiagnosis() {
@@ -459,7 +564,7 @@
     var last = el('li');
     last.appendChild(el('strong', null, 'Tag 7: '));
     var again = el('a', null, 'Assessment wiederholen');
-    again.href = '?rolle=' + encodeURIComponent(current.id);
+    again.href = query(current.id);
     last.appendChild(again);
     last.appendChild(document.createTextNode(' und das Ergebnis mit heute vergleichen.'));
     ol.appendChild(last);
@@ -469,7 +574,7 @@
   /* ---------- Teilen: Canvas 1080×1080 ---------- */
 
   function shareText() {
-    return current.title + ': ' + state.pct + ' % · ' + state.level + ' · ' + SITE;
+    return current.title + (isEn() ? ' (EN)' : '') + ': ' + state.pct + ' % · ' + state.level + ' · ' + SITE;
   }
 
   function cssVar(name, fallback) {
@@ -502,6 +607,17 @@
     ctx.fillStyle = soft;
     ctx.font = '600 52px ' + font;
     ctx.fillText('Excel-Assessment', 80, 330);
+    // Englisches Excel: Kennzeichen «EN» oben rechts
+    if (isEn()) {
+      ctx.font = '800 56px ' + font;
+      var bw = ctx.measureText('EN').width + 64;
+      ctx.fillStyle = '#ffffff';
+      roundRect(ctx, W - 80 - bw, 84, bw, 88, 44); ctx.fill();
+      ctx.fillStyle = green;
+      ctx.textAlign = 'center';
+      ctx.fillText('EN', W - 80 - bw / 2, 130);
+      ctx.textAlign = 'left';
+    }
     ctx.fillStyle = '#ffffff';
     ctx.font = '800 92px ' + font;
     ctx.fillText(current.role, 80, 430);
@@ -521,7 +637,7 @@
     ctx.textAlign = 'right';
     ctx.fillStyle = soft;
     ctx.font = '500 34px ' + font;
-    ctx.fillText('Excel üben, Schweizer Version', W - 80, H - 75);
+    ctx.fillText(isEn() ? 'Excel üben, englische Version' : 'Excel üben, Schweizer Version', W - 80, H - 75);
     return c;
   }
   function roundRect(ctx, x, y, w, h, r) {
@@ -562,7 +678,7 @@
 
   function onShare() {
     track('share_click', { rolle: current.id, art: 'share' });
-    var url = 'https://' + SITE + '/assessment/?rolle=' + encodeURIComponent(current.id);
+    var url = 'https://' + SITE + '/assessment/' + query(current.id);
     var text = shareText();
     toBlob(function (blob) {
       var data = { title: current.title, text: text, url: url };
@@ -596,11 +712,17 @@
       'start-locked', 'run', 'timer', 'timer-value', 'timer-sr', 'progress', 'progress-bar', 'task-tag', 'task-title', 'task-text', 'sheet',
       'form', 'input', 'check-btn', 'skip-btn', 'next-btn', 'attempts', 'feedback', 'symbols', 'result', 'res-title', 'res-time-up',
       'res-score', 'res-level', 'res-points', 'res-diag', 'res-plan', 'share-area', 'canvas', 'share-text', 'download-btn', 'share-btn',
-      'restart-btn', 'loading'].forEach(function (id) {
+      'restart-btn', 'loading', 'lang-de', 'lang-en', 'lang-note', 'rule-syntax'].forEach(function (id) {
       els[id.replace(/-(\w)/g, function (m, c) { return c.toUpperCase(); })] = $('as-' + id);
     });
     if (!E || !ERR) { notice('Das Assessment konnte nicht geladen werden. Lade die Seite neu.', true); return; }
-    E.setLocale('de-CH');
+    // Excel-Sprache aus ?lang=en vorbelegen (Schalter sofort im DOM, auch bevor die Aufgaben geladen sind)
+    lang = langFromUrl();
+    E.setLocale(localeOf());
+    renderLang();
+    [els.langDe, els.langEn].forEach(function (b) {
+      if (b) b.addEventListener('click', function () { setLang(b.getAttribute('data-lang'), { url: true }); });
+    });
 
     try {
       HF = window.HyperFormula || null;
@@ -620,13 +742,17 @@
     // Rollen-Karten: ohne Neuladen wechseln (Links funktionieren auch ohne JS)
     Array.prototype.forEach.call(document.querySelectorAll('a[data-rolle]'), function (a) {
       a.addEventListener('click', function (e) {
+        if (linkCfg && linkCfg.lockRole) { e.preventDefault(); return; } // Recruiter-Link: Rolle fest
         if (e.metaKey || e.ctrlKey || e.shiftKey || !assessments.length) return;
         if (state && !state.finished && !window.confirm('Der laufende Test wird abgebrochen. Trotzdem wechseln?')) { e.preventDefault(); return; }
         e.preventDefault();
         selectRole(a.getAttribute('data-rolle'), { push: true, scroll: true, focus: true });
       });
     });
-    window.addEventListener('popstate', function () { if (assessments.length) selectRole(roleFromUrl()); });
+    window.addEventListener('popstate', function () {
+      if (!state || state.finished) lang = langFromUrl();
+      if (assessments.length) selectRole(roleFromUrl());
+    });
     window.addEventListener('beforeunload', function (e) {
       if (state && !state.finished) { e.preventDefault(); e.returnValue = ''; }
     });
@@ -647,6 +773,53 @@
       notice('Die Aufgaben konnten nicht geladen werden. Lade die Seite neu.', true);
     });
   }
+
+  /* ---------- Hook für Recruiter-Links (app/recruiter.js) ---------- */
+
+  // Minuten und Premium-Sperre aus dem Link auf die gewählte Rolle anwenden (nur im Link-Modus, nur diese Seite)
+  function applyLinkCfg(as) {
+    if (linkCfg.minuten > 0) as.minutes = linkCfg.minuten;
+    if (linkCfg.unlock) as.free = true;
+    // Excel-Sprache aus dem Link (setLang aus dem DE/EN-Schalter; typeof schützt, falls es umbenannt wird)
+    if (linkCfg.sprache && typeof setLang === 'function') setLang(linkCfg.sprache);
+  }
+
+  // Nach finish(): Ergebnis an den Link-Modus melden. Keine Formeln, nur Status pro Aufgabe.
+  function notifyFinish(timeUp) {
+    if (!linkCfg || typeof linkCfg.onFinish !== 'function') return;
+    try {
+      var left = Math.max(0, (state.endsAt - Date.now()) / 1000);
+      linkCfg.onFinish({
+        rolle: current.id,
+        punkte: state.points,
+        prozent: state.pct,
+        stufe: state.level,
+        dauerSek: Math.max(0, Math.round(current.minutes * 60 - left)),
+        zeitAbgelaufen: !!timeUp,
+        sprache: linkCfg.sprache || null,
+        tasks: diagnoses().map(function (d) {
+          return { id: d.ex.id, kategorie: d.ex.category, ok: !!d.ts.ok, punkte: d.ts.points, versuche: d.ts.attempts,
+                   fehlerart: d.ts.ok ? null : d.diag.category };
+        })
+      });
+    } catch (e) { if (window.console) console.error(e); }
+  }
+
+  // configure({ rolle, minuten, sprache, lockRole, unlock, onFinish }): mehrfach aufrufbar, Werte werden ergänzt.
+  // Vor dem Laden der Aufgaben: wirkt beim ersten selectRole(). Danach: wählt die Rolle sofort (ausser ein Test läuft).
+  function configure(cfg) {
+    linkCfg = linkCfg || {};
+    Object.keys(cfg || {}).forEach(function (k) { linkCfg[k] = cfg[k]; });
+    if (linkCfg.rolle) linkCfg.rolle = String(linkCfg.rolle).toLowerCase();
+    if (!assessments.length || !linkCfg.rolle) return true;
+    if (!byId(linkCfg.rolle)) return false;
+    if (!state || state.finished) selectRole(linkCfg.rolle);
+    return true;
+  }
+
+  window.ExcelDrillsAssessment = window.ExcelDrillsAssessment || {};
+  window.ExcelDrillsAssessment.configure = configure;
+  window.ExcelDrillsAssessment.isReady = function () { return assessments.length > 0; };
 
   init();
 })();

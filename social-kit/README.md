@@ -17,13 +17,13 @@ Social Media ist dabei der Startmotor, bis die Funktions-Artikel (SEO) Traffic b
 | `reddit.md` | Subreddit-Posts mit Regel-Hinweis und Antwortvorlagen | 5 Posts, 10 Antwortvorlagen |
 | `x-threads.md` | Threads und Einzel-Tweets (DE) | 3 Threads, 11 Tweets |
 | `instagram-tiktok.md` | Kurzvideo-Skripte und Karussell-Konzepte | 6 Skripte, 6 Karussells |
-| `instagram.md` | Fertige Instagram-Karussells (Captions, Hashtags), 4-Wochen-Reihenfolge, Bio, Story-Plan | 7 Captions (IG-K7 nur Text, ohne Slides), 3 Stories + 3 Text-Stories |
+| `instagram.md` | Fertige Instagram-Karussells (Captions, Hashtags), 4-Wochen-Reihenfolge, Bio, Story-Plan | 7 Captions (IG-K7 mit 7 Slides (c7)), 3 Stories + 3 Text-Stories |
 | `b2b-onepager.md` | Inhalt für den B2B-Einseiter (A4), zum Rendern mit dem Handout-Generator | 1 Seite |
 | `email.md` | Netzwerk, HR/Teamleiter, Hochschulen/Berufsschulen, Recruiting-Pilot (EM-04, EM-05) | 5 Mails (+ Nachfass-Varianten) |
 | `utm.md` | UTM-Schema pro Kanal und fertige Links | – |
 | `visuals/*.html` | Bildvorlagen (OG, LinkedIn, Quadrat, Story), ohne externe Abhängigkeiten | 4 Vorlagen, 5 LinkedIn-Varianten |
 | `visuals/render.sh` | Rendert alle Vorlagen nach `visuals/png/` | – |
-| `visuals/carousel.html`, `visuals/render-instagram.sh` | Instagram-Karussells 1080×1350 (`?c=1..6&s=1..n`), Story-Varianten `story.html?v=1..3`; Rendern nach `visuals/png/instagram/` | 43 Slides + 3 Stories |
+| `visuals/carousel.html`, `visuals/render-instagram.sh` | Instagram-Karussells 1080×1350 (`?c=1..7&s=1..n`), Story-Varianten `story.html?v=1..4`; Rendern nach `visuals/png/instagram/` | 50 Slides + 4 Stories |
 | `visuals/png/` | Gerenderte PNGs: og-image, linkedin-1…5, square-quiz, story | 8 PNGs |
 
 ## Nutzung

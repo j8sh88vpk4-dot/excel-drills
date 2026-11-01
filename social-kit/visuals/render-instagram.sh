@@ -1,5 +1,5 @@
 #!/bin/bash
-# Rendert Instagram-Karussells (carousel.html, 1080×1350) und Story-Varianten (story.html?v=1..3, 1080×1920)
+# Rendert Instagram-Karussells (carousel.html, 1080×1350) und Story-Varianten (story.html?v=1..4, 1080×1920)
 # nach png/instagram/. Läuft nacheinander (ein Chrome nach dem anderen), um den Mac nicht zu überlasten.
 # Aufruf: bash social-kit/visuals/render-instagram.sh            alles
 #         bash social-kit/visuals/render-instagram.sh 3          nur Karussell 3
@@ -19,16 +19,16 @@ shot() { # size out url
   echo "$OUT/$2"
 }
 # Slides pro Karussell (muss zu carousel.html passen)
-SLIDES=(0 7 7 8 7 7 7)
+SLIDES=(0 7 7 8 7 7 7 7)
 ONLY="$1"
-for c in 1 2 3 4 5 6; do
+for c in 1 2 3 4 5 6 7; do
   [ -n "$ONLY" ] && [ "$ONLY" != "$c" ] && continue
   for ((s = 1; s <= ${SLIDES[$c]}; s++)); do
     shot 1080,1350 "c$c-s$s.png" "carousel.html?c=$c&s=$s"
   done
 done
 if [ -z "$ONLY" ] || [ "$ONLY" = "story" ]; then
-  for v in 1 2 3; do
+  for v in 1 2 3 4; do
     shot 1080,1920 "story-$v.png" "story.html?v=$v"
   done
 fi

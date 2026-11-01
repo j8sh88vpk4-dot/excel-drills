@@ -2,12 +2,12 @@
 <html lang="de-CH">
 <head>
 <meta charset="utf-8">
-<title>Excel-Drills Instagram-Karussell 1080x1350 (?c=1..6&s=1..n)</title>
+<title>Excel-Drills Instagram-Karussell 1080x1350 (?c=1..7&s=1..n)</title>
 <!--
-  Instagram-Karussells (Hochformat 4:5, 1080×1350), Konzepte aus ../instagram-tiktok.md (IG-K1 … IG-K6).
-  Aufruf: carousel.html?c=1&s=1   c = Karussell 1..6, s = Slide 1..n (ohne Parameter: c=1, s=1)
+  Instagram-Karussells (Hochformat 4:5, 1080×1350), Konzepte aus ../instagram-tiktok.md (IG-K1 … IG-K7).
+  Aufruf: carousel.html?c=1&s=1   c = Karussell 1..7, s = Slide 1..n (ohne Parameter: c=1, s=1)
   1 SVERWEIS-Fehler (7) · 2 Übersetzungen (7) · 3 Einstellungstest (8) · 4 Monatsabschluss (7)
-  5 Schweizer Eigenheiten (7) · 6 Warum Videos nicht reichen (7)
+  5 Schweizer Eigenheiten (7) · 6 Warum Videos nicht reichen (7) · 7 Excel-Test, Teste dich selbst (7)
   Gerendert von render-instagram.sh nach png/instagram/c<nr>-s<nr>.png.
   Design wie linkedin-card.html: grüner Balken, Wortmarke, Zellraster, grosse Typo. Letzte Slide = CTA (grün).
   Formeln in code(): [[…]] = grün markiert, {{…}} = rot markiert.
@@ -393,6 +393,36 @@
         NOTE('Gold gibt es erst, wenn du die Übung mehrmals richtig löst, auch mit anderen Zahlen. Genau das Wiederholen von Schritt 4.'),
       CTA({ kicker: 'Selbst tippen statt zuschauen', h: '18 Übungen <em>gratis</em>.', sub: 'Ohne Anmeldung, direkt im Browser. Dein Fortschritt bleibt lokal bei dir.',
         facts: ['42 Übungen in 4 Lernpfaden', 'Deutsch, Semikolon, CHF'] })
+    ],
+
+    /* IG-K7 «Excel-Test im Bewerbungsprozess: Teste dich selbst» */
+    7: [
+      K('Bewerbung') + H1('Excel-Test im Bewerbungs&shy;prozess? <em>Teste dich vorher selbst.</em>') +
+        P('5 Prüfpunkte. Kannst du sie ohne Nachschlagen tippen?'),
+      K('Prüfpunkt 1 von 5') + H2('SVERWEIS mit <em>FALSCH</em> und $') +
+        C('good', 'Exakte Suche, Matrix fixiert', '=SVERWEIS(D2;[[$A$2:$B$6]];2;[[FALSCH]])') +
+        P('Ohne FALSCH sucht er ungefähr, ohne $ verrutscht die Matrix beim Runterziehen.'),
+      K('Prüfpunkt 2 von 5') + H2('Auf 5 Rappen <em>runden</em>') +
+        C('good', 'Auf 0.05 runden', '=VRUNDEN(B2;0.05)') +
+        SHEET('', [
+          ['A', 'B', 'C'],
+          [Hd('Beleg'), Hd('Betrag'), Hd('Gerundet')],
+          ['Kasse 3', N('47.33'), S('47.35')]
+        ]) +
+        P('Zweites Argument: das Vielfache, auf das gerundet wird.'),
+      K('Prüfpunkt 3 von 5') + H2('Netto aus Brutto mit <em>$-Satz</em>') +
+        C('good', 'Satz in eigener Zelle, absolut', '=B2/(1+[[$C$1]])') +
+        P('Der MwSt-Satz steht in <span class="mono">C1</span>. Mit $ bleibt der Bezug beim Runterziehen stehen.'),
+      K('Prüfpunkt 4 von 5') + H2('SUMMEWENN nach <em>Kostenstelle</em>') +
+        C('good', 'Summe aller Zeilen einer Kostenstelle', '=SUMMEWENN(A:A;"KST 410";B:B)') +
+        P('Reihenfolge: wo suchen, was suchen, was summieren.'),
+      K('Prüfpunkt 5 von 5') + H2('Abweichung in % ohne <em>mal 100</em>') +
+        C('good', 'Richtig', '=(C2-B2)/B2') +
+        C('bad', 'Doppelt gerechnet', '=(C2-B2)/B2{{*100}}') +
+        P('Das Prozentformat multipliziert schon mit 100.'),
+      CTA({ kicker: 'Teste dich selbst', h: '15-Minuten-Assessment <em>gratis</em>.', sub: 'Consulting, Accounting, Investment Banking, Versicherung, KV-Lehrstelle.',
+        pill: 'excel-drills.ch/assessment',
+        facts: ['Zeigt, was du in diesen Aufgaben kannst', 'Läuft im Browser'] })
     ]
   };
 

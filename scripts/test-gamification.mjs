@@ -145,18 +145,95 @@ eq(Object.keys(s.met).length, 90, 'erreichte Tage: nur letzte 90 Tage');
 section('Migration');
 const old = { points: 30, solved: { b1: true, b2: true, a1: true } };
 s = G.migrate(JSON.stringify(old));
-eq([s.v, s.xp, Object.keys(s.solved).length], [2, 30, 3], 'alter Stand: Punkte → XP, gelöste bleiben');
+eq([s.v, s.xp, Object.keys(s.solved).length], [3, 30, 3], 'alter Stand: Punkte → XP, gelöste bleiben');
 eq([G.medalOf(s, byId.b1), G.medalOf(s, byId.b2), G.medalOf(s, byId.b3)], [1, 1, 0], 'gelöste Übungen erhalten Bronze');
 eq(s.goal, 2, 'Tagesziel Standard 2');
 const ser = JSON.parse(JSON.stringify(G.serialize(s)));
 eq([ser.points, ser.xp, ser.solved], [30, 30, old.solved], 'serialisiert: points = xp, solved unverändert');
 const again = G.migrate(ser);
-eq(JSON.stringify(G.serialize(again)), JSON.stringify(G.serialize(s)), 'v2 → v2 verlustfrei');
+eq(JSON.stringify(G.serialize(again)), JSON.stringify(G.serialize(s)), 'v3 → v3 verlustfrei');
 eq(G.migrate('kaputt{').xp, 0, 'ungültiges JSON: leerer Stand');
 eq(G.migrate(null).goal, 2, 'kein Stand: leerer Stand');
 eq(G.migrate({ points: 'x', solved: [] }).xp, 0, 'unsinnige Werte: 0 XP');
 r = G.recordSolve(s, byId.b1, 0, at(2026, 10, 30));
 eq([r.xp, r.medalAfter], [5, 2], 'migrierte Bronze + nochmal lösen: Silber');
+
+section('Migration v2 → v3');
+const v2 = {
+  v: 2, points: 25, xp: 25, solved: { b1: true }, mastery: { b1: { n: 2, sets: [0], last: 0, goldDay: null } },
+  days: { '2026-10-30': 1 }, met: { '2026-10-30': 1 }, today: { date: '2026-10-30', ids: ['b1'] },
+  streak: { count: 1, last: '2026-10-30' }, bestStreak: 4, goal: 1, badges: { 'erste-formel': 123 }, flags: { early: true, night: false }, levelSeen: 1
+};
+s = G.migrate(JSON.stringify(v2));
+eq([s.v, s.xp, s.mastery.b1.n, s.bestStreak, s.goal, s.badges['erste-formel'], s.flags.early], [3, 25, 2, 4, 1, 123, true], 'v2: alle Felder bleiben erhalten');
+eq([s.errorProfile, s.review], [{}, {}], 'v2: errorProfile und review starten leer');
+const ser3 = JSON.parse(JSON.stringify(G.serialize(s)));
+eq([ser3.v, ser3.points, ser3.errorProfile, ser3.review], [3, 25, {}, {}], 'serialisiert als v3');
+G.recordAttempt(s, 'b1', 'bezug', false, '2026-10-30');
+const back = G.migrate(JSON.parse(JSON.stringify(G.serialize(s))));
+eq([back.errorProfile, back.review], [{ bezug: { wrong: 1, right: 0, last: '2026-10-30' } }, { b1: { due: '2026-10-31', interval: 1, streak: 0 } }], 'v3 → v3: Fehler-DNA und Wiederholung bleiben');
+const bad = G.migrate({ v: 3, errorProfile: { bezug: 'x', logik: { wrong: -2, right: 'a', last: 'gestern' } }, review: { a: { due: 'morgen' }, b: { due: '2026-11-01', interval: 5 } } });
+eq([bad.errorProfile, bad.review], [{ logik: { wrong: 0, right: 0, last: '' } }, { b: { due: '2026-11-01', interval: 1, streak: 0 } }], 'v3 mit unsinnigen Werten: bereinigt');
+
+section('Wiederholung (recordAttempt)');
+s = G.emptyState();
+let ra = G.recordAttempt(s, 'b1', 'syntax', true, '2026-11-01');
+eq([ra.review, ra.advanced], [{ due: '2026-11-02', interval: 1, streak: 0 }, false], 'erstes Lösen: fällig morgen, Intervall 1');
+ra = G.recordAttempt(s, 'b1', 'syntax', true, '2026-11-01');
+eq(ra.review.due, '2026-11-02', 'nochmal lösen am selben Tag: Plan unverändert');
+const steps = [];
+let day = '2026-11-02';
+for (let i = 0; i < 6; i++) {
+  ra = G.recordAttempt(s, 'b1', 'syntax', true, day);
+  steps.push(ra.review.interval);
+  day = ra.review.due;
+}
+eq(steps, [3, 7, 14, 30, 30, 30], 'fällige Wiederholung korrekt: 1 → 3 → 7 → 14 → 30, dann bleibt 30');
+eq(s.review.b1.streak, 6, 'streak zählt bestandene Wiederholungen');
+ra = G.recordAttempt(s, 'b1', 'syntax', false, '2026-12-20');
+eq(ra.review, { due: '2026-12-21', interval: 1, streak: 0 }, 'Fehler: Intervall 1, fällig morgen, streak 0');
+ra = G.recordAttempt(s, 'b1', 'syntax', true, '2026-12-20');
+eq(ra.review.interval, 1, 'Fehler und sofort korrekt (noch nicht fällig): bleibt 1');
+ra = G.recordAttempt(s, 'b1', 'syntax', true, '2026-12-21');
+eq([ra.review.interval, ra.review.due, ra.advanced], [3, '2026-12-24', true], 'am Tag nach dem Fehler korrekt: Intervall 3');
+ra = G.recordAttempt(s, 'b1', 'syntax', true, '2026-12-30');
+eq([ra.review.interval, ra.review.due], [7, '2027-01-06'], 'verspätet wiederholt: Intervall ab heute');
+ra = G.recordAttempt(s, 'b2', 'bezug', false, '2026-11-01');
+eq(s.review.b2, { due: '2026-11-02', interval: 1, streak: 0 }, 'Fehler vor dem ersten Lösen: fällig morgen');
+eq([s.errorProfile.syntax.right, s.errorProfile.syntax.wrong, s.errorProfile.syntax.last, s.errorProfile.bezug.wrong], [11, 1, '2026-12-30', 1], 'Zähler pro Kategorie');
+G.recordAttempt(s, 'p1', null, true, '2026-11-01');
+eq([Object.keys(s.errorProfile).sort(), !!s.review.p1], [['bezug', 'syntax'], true], 'ohne Kategorie: nur Wiederholung');
+
+section('Heute fällig (dueToday)');
+s = G.emptyState();
+s.review = {
+  e: { due: '2026-11-01', interval: 1, streak: 0 }, a: { due: '2026-10-20', interval: 7, streak: 2 },
+  c: { due: '2026-10-28', interval: 3, streak: 1 }, b: { due: '2026-10-28', interval: 1, streak: 0 },
+  f: { due: '2026-11-02', interval: 1, streak: 0 }, g: { due: '2026-10-30', interval: 1, streak: 0 },
+  h: { due: '2026-10-31', interval: 1, streak: 0 }
+};
+eq(G.dueToday(s, '2026-11-01'), ['a', 'b', 'c', 'g', 'h'], 'älteste zuerst, gleiches Datum nach ID, höchstens 5');
+eq(G.dueToday(s, '2026-11-01', { limit: 10 }), ['a', 'b', 'c', 'g', 'h', 'e'], 'ohne Limit: alle bis heute, morgen nicht');
+eq(G.dueToday(s, '2026-11-01', { filter: (id) => id !== 'a' && id !== 'c' }), ['b', 'g', 'h', 'e'], 'Filter (z. B. gesperrte Übungen)');
+eq(G.dueToday(G.emptyState(), '2026-11-01'), [], 'leerer Stand: nichts fällig');
+G.recordAttempt(s, 'a', 'bezug', true, '2026-11-01');
+eq(G.dueToday(s, '2026-11-01').includes('a'), false, 'nach dem Lösen nicht mehr fällig');
+
+section('Schwächste Kategorien');
+s = G.emptyState();
+const tries = (cat, wrong, right) => {
+  for (let i = 0; i < wrong; i++) G.recordAttempt(s, 'x-' + cat, cat, false, '2026-11-01');
+  for (let i = 0; i < right; i++) G.recordAttempt(s, 'x-' + cat, cat, true, '2026-11-01');
+};
+tries('bezug', 2, 1); tries('logik', 1, 3); tries('rundung', 2, 0); tries('syntax', 0, 5); tries('lookup', 3, 3);
+eq(G.weakestCategories(s).map((x) => x.category), ['bezug', 'lookup', 'logik', 'syntax'], 'nach Fehlerquote, nur ab 3 Versuchen (rundung mit 2 fehlt)');
+eq(G.weakestCategories(s, 2).map((x) => [x.category, x.total, Math.round(x.rate * 100)]), [['bezug', 3, 67], ['lookup', 6, 50]], 'n = 2 mit Quote');
+let sum = G.profileSummary(s);
+eq([sum.attempts, sum.wrong, sum.weakest.category, sum.categories.length, sum.categories.filter((x) => !x.enough).map((x) => x.category)], [20, 8, 'bezug', 5, ['rundung']], 'profileSummary');
+eq(sum.categories[0].category, 'rundung', 'Anzeige: alle Kategorien, höchste Quote zuerst');
+s = G.emptyState(); tries('syntax', 0, 4);
+eq(G.profileSummary(s).weakest, null, 'keine Fehler: keine schwächste Kategorie');
+eq(G.profileSummary(G.emptyState()), { attempts: 0, wrong: 0, right: 0, categories: [], weakest: null, reviews: 0 }, 'ohne Daten: leer');
 
 section('Abzeichen');
 const bctx = (state, unlocked = false, today = '2026-10-30') => ({ state, exercises, tracks, unlocked, today });

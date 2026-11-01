@@ -1,0 +1,75 @@
+/* Excel-Drills – Zellbezüge per Klick (app/sheet-pick.js): farbige Rahmen wie in Excel, Hinweis, Rückmeldungen. */
+:root {
+  /* 6 gut unterscheidbare Farben für Bezüge (Reihenfolge wie Excel: blau, rot, violett, grün, orange, türkis) */
+  --ref-1: #1f6fd1;
+  --ref-2: #d13438;
+  --ref-3: #8a3ffc;
+  --ref-4: var(--accent, #107C41);
+  --ref-5: #c75b00;
+  --ref-6: #00838f;
+  --ref-w: 2px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ref-1: #6aa8ff;
+    --ref-2: #ff7b7f;
+    --ref-3: #b89bff;
+    --ref-4: var(--accent, #3fb878);
+    --ref-5: #ffa552;
+    --ref-6: #4dd0d9;
+  }
+}
+
+/* Wählbare Zellen und Köpfe */
+.sheet.sheet-pick td,
+.sheet.sheet-pick thead th[data-pick-col],
+.sheet.sheet-pick tbody th[data-pick-row] { cursor: cell; user-select: none; -webkit-user-select: none; }
+.sheet.sheet-pick td:hover { background-image: linear-gradient(var(--accent-soft), var(--accent-soft)); }
+.sheet.sheet-pick thead th[data-pick-col]:hover,
+.sheet.sheet-pick tbody th[data-pick-row]:hover { color: var(--text); }
+.sheet.sheet-pick td[data-pick-target] { cursor: not-allowed; }
+.sheet.sheet-pick td[data-pick-target]:hover { background-image: none; }
+.sheet.sheet-pick td:focus { outline: none; }
+
+/* Bezug-Rahmen: Farbe pro Bezug, Kanten pro Zelle (bei Bereichen nur der Aussenrahmen) */
+.sheet td.ref-1, .sheet th.ref-1 { --ref-c: var(--ref-1); }
+.sheet td.ref-2, .sheet th.ref-2 { --ref-c: var(--ref-2); }
+.sheet td.ref-3, .sheet th.ref-3 { --ref-c: var(--ref-3); }
+.sheet td.ref-4, .sheet th.ref-4 { --ref-c: var(--ref-4); }
+.sheet td.ref-5, .sheet th.ref-5 { --ref-c: var(--ref-5); }
+.sheet td.ref-6, .sheet th.ref-6 { --ref-c: var(--ref-6); }
+.sheet td.ref-t { --ref-t: var(--ref-w); }
+.sheet td.ref-b { --ref-b: var(--ref-w); }
+.sheet td.ref-l { --ref-l: var(--ref-w); }
+.sheet td.ref-r { --ref-r: var(--ref-w); }
+.sheet td.ref-in {
+  box-shadow:
+    inset 0 var(--ref-t, 0px) 0 0 var(--ref-c),
+    inset 0 calc(var(--ref-b, 0px) * -1) 0 0 var(--ref-c),
+    inset var(--ref-l, 0px) 0 0 0 var(--ref-c),
+    inset calc(var(--ref-r, 0px) * -1) 0 0 0 var(--ref-c);
+}
+/* Köpfe ganzer Spalten/Zeilen: Farbe als Text und Unterstrich */
+.sheet th.ref-in { color: var(--ref-c); box-shadow: inset 0 calc(var(--ref-w) * -1) 0 0 var(--ref-c); }
+
+/* Rückmeldung: Zielzelle angeklickt, Einfügen nicht möglich */
+@keyframes sheet-pick-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+.sheet td.pick-target-flash { animation: sheet-pick-pulse 0.3s ease-in-out 2; }
+.sheet td.pick-refused { box-shadow: inset 0 0 0 var(--ref-w) var(--danger, #b3261e); }
+.formula-input.pick-refused { border-color: var(--danger, #b3261e); box-shadow: 0 0 0 2px var(--err-bg); }
+@media (prefers-reduced-motion: reduce) {
+  .sheet td.pick-target-flash { animation: none; outline-style: dashed; }
+}
+
+/* Hinweis unter der Tabelle */
+.sheet-pick-tip {
+  display: flex; align-items: flex-start; gap: 0.5rem; margin: 0.4rem 0 0.6rem;
+  font-size: 0.85rem; color: var(--muted);
+}
+.sheet-pick-tip span { flex: 1; }
+.sheet-pick-tip-close {
+  flex: none; border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+  border-radius: var(--radius, 8px); width: 1.6rem; height: 1.6rem; line-height: 1; font-size: 1rem; cursor: pointer;
+}
+.sheet-pick-tip-close:hover { color: var(--text); }
+.sheet-pick-tip-close:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }

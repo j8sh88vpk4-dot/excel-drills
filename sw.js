@@ -15,7 +15,7 @@
  */
 'use strict';
 
-const CACHE_VERSION = '2026-10-31.2';
+const CACHE_VERSION = '2026-11-01.2';
 const CACHE_PREFIX = 'excel-drills-';
 const CACHE = CACHE_PREFIX + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 4000; // Network-First: danach Cache, falls vorhanden (langsames Netz im Zug)
@@ -26,9 +26,11 @@ const HF_BASE = 'https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/';
 const PRECACHE = [
   '/app/',
   '/app/app.js',
+  '/app/sheet-pick.js',
   '/app/engine.js',
   '/app/gamification.js',
   '/app/badges.js',
+  '/app/errors.js',
   '/app/access.js',
   '/app/keys.js',
   '/app/i18n/ui-de.js',
@@ -36,6 +38,7 @@ const PRECACHE = [
   '/app/i18n/it.json',
   '/app/exercises.json',
   '/assets/style.css',
+  '/assets/sheet-pick.css',
   '/assets/leads-config.js',
   '/assets/analytics.js',
   '/assets/pwa.js',

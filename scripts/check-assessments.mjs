@@ -145,5 +145,63 @@ for (const [id, f, want] of cases) {
   c.category === want ? ok(`${id}: ${f} → ${c.category}`) : fail(`${id}: ${f} → ${c.category} statt ${want} (${r.message})`);
 }
 
+// EN-Durchlauf (en-CH, Schalter «English» im Assessment): Aufgaben über E.localize(ex, 'en-CH'),
+// Musterlösung mit englischen Namen und Komma, gleiche Ergebnisse wie DE-CH.
+console.log('\nEnglisch (en-CH)');
+for (const as of list) {
+  for (const ex of as.tasks || []) {
+    E.setLocale('de-CH');
+    const want = E.evaluate(HF, ex.data, ex.target, ex.solution).value;
+    E.setLocale('en-CH');
+    const L = E.localize(ex, 'en-CH');
+    const label = `${ex.id} [EN]`;
+    if (/;/.test(L.solution.replace(/"[^"]*"/g, ''))) fail(`${label}: Semikolon in ${L.solution}`);
+    if (E.findEnglish(L.solution)) fail(`${label}: deutscher Name in ${L.solution}`);
+    if (L.task !== ((ex.locale && ex.locale.en && ex.locale.en.task) || ex.task)) fail(`${label}: Aufgabentext ohne locale.en geändert`);
+    E.datasets(L).forEach((d, i) => {
+      const v = E.variant(L, i);
+      const c = E.check(HF, v, L.solution);
+      if (!c.ok) fail(`${label}: ${L.solution} besteht check() nicht (Datensatz ${i}): ${c.message}`);
+    });
+    const r = E.evaluate(HF, L.data, L.target, L.solution);
+    r.error || !E.valuesEqual(r.value, want) ? fail(`${label}: ${L.solution} = ${JSON.stringify(r.value || r.error)} statt ${JSON.stringify(want)}`) : ok(`${label}: ${L.solution} = ${E.formatValue(r.value)}`);
+    for (const acc of L.accept || []) {
+      const c = E.check(HF, L, acc);
+      if (!c.ok) fail(`${label}: accept ${acc} besteht check() nicht: ${c.message}`);
+    }
+    if (typeof want === 'number' && E.check(HF, L, '=' + String(want)).ok) fail(`${label}: festgetipptes Ergebnis besteht`);
+    if (L.solution !== ex.solution && E.check(HF, L, ex.solution).ok) fail(`${label}: deutsche Lösung ${ex.solution} besteht`);
+    // Fehlerkategorie wie in assessment.js (classifyEn): englische Formel nach DE-CH übersetzen, dort prüfen
+    const good = ERR.classify(E.check(HF, L, L.solution), L.solution, ex);
+    if (good.category !== ex.category) fail(`${label}: classify(ok) liefert ${good.category}`);
+  }
+}
+const casesEn = [
+  ['as-con-1', '=B2*B3*B4', 'bezug'],
+  ['as-con-2', '=SUMIF(A2:A7,"Pendler",C2:C7)', 'lookup'],
+  ['as-con-3', '=B2/B3-B4', 'modell'],
+  ['as-con-4', '=IF(B5<B7,"Ja","Nein")', 'logik'],
+  ['as-acc-1', '=SUMIF(D2:D7,offen,C2:C7)', 'lookup'],
+  ['as-acc-3', '=B2*(1+B3)', 'rundung'],
+];
+for (const [id, f, want] of casesEn) {
+  const base = all[id];
+  if (!base) { fail(`Testfall EN: Aufgabe ${id} fehlt`); continue; }
+  E.setLocale('en-CH');
+  const L = E.localize(base, 'en-CH');
+  const r = E.check(HF, L, f);
+  if (r.ok) { fail(`${id} [EN]: Fehlformel ${f} besteht check()`); continue; }
+  const deF = E.convertFormulaLocale(f, 'en-CH', 'de-CH');
+  E.setLocale('de-CH');
+  const c = ERR.classify(E.check(HF, base, deF), deF, base);
+  c.category === want ? ok(`${id} [EN]: ${f} (${deF}) → ${c.category}`) : fail(`${id} [EN]: ${f} → ${c.category} statt ${want}`);
+}
+for (const [id, f] of [['as-con-2', '=SUMIF(A2:A7;E2;C2:C7)'], ['as-con-2', '=SUMMEWENN(A2:A7,E2,C2:C7)']]) {
+  E.setLocale('en-CH');
+  const r = E.check(HF, E.localize(all[id], 'en-CH'), f);
+  r.ok ? fail(`${id} [EN]: ${f} besteht`) : ok(`${id} [EN]: ${f} abgelehnt: ${r.message}`);
+}
+E.setLocale('de-CH');
+
 console.log(failures ? `\n${failures} Fehler` : '\nAlle Assessments in Ordnung.');
 process.exit(failures ? 1 : 0);

@@ -22,6 +22,22 @@
   var Badges = window.ExcelDrillsBadges;
   var Access = window.ExcelDrillsAccess;
   var Pwa = window.ExcelDrillsPwa;  // assets/pwa.js (optional: ohne Service Worker läuft die App wie bisher)
+  var ERR = window.ExcelDrillsErrors; // app/errors.js: Fehlerkategorie und Lerntipp (für die Fehler-DNA)
+  // Fehler-DNA: Kategorie pro Übung (exercises.json hat kein Feld «category»). Fehlt eine ID, gilt «modell».
+  var EX_CATEGORY = {
+    'summe-1': 'syntax', 'mittelwert-1': 'syntax', 'max-1': 'syntax', 'textkette-1': 'syntax',
+    'wenn-1': 'logik', 'wennfehler-1': 'logik', 'wenn-verschachtelt-1': 'logik', 'acc-duplikate-1': 'logik',
+    'acc-sollhaben-1': 'logik', 'acc-alterung-1': 'logik',
+    'zaehlenwenn-1': 'lookup', 'summewenn-1': 'lookup', 'summewenn-2': 'lookup', 'sverweis-1': 'lookup', 'sverweis-2': 'lookup',
+    'acc-summewenns-1': 'lookup', 'acc-abstimmung-1': 'lookup', 'fin-praemienstaffel-1': 'lookup',
+    'runden-1': 'rundung', 'acc-rundung-1': 'rundung', 'fin-breakeven-1': 'rundung',
+    'absolut-1': 'bezug', 'acc-anteil-1': 'bezug', 'acc-mwst-1': 'bezug'
+  };
+  // Passende Gratis-Übung zum Üben der schwächsten Kategorie
+  var CATEGORY_EXERCISE = {
+    bezug: 'absolut-1', syntax: 'summe-1', logik: 'wenn-1', lookup: 'summewenn-1', rundung: 'runden-1', modell: 'acc-abweichung-1'
+  };
+  var wrongCounted = false;        // Fehlversuch dieser Runde schon in der Fehler-DNA verbucht (zählt einmal pro Runde)
   var paywallExercise = null;      // gesperrte Übung, die den Paywall-Dialog ausgelöst hat
   var HF = null;
   var exercises = [];
@@ -77,7 +93,7 @@
     paywallLead: $('paywall-lead'), paywallList: $('paywall-list'), paywallMore: $('paywall-more'), gami: $('gami'),
     codeForm: $('paywall-code-form'), codeInput: $('paywall-code'), codeMsg: $('paywall-code-msg'),
     pfAccess: $('pf-access'), accessCode: $('access-code'), accessCopy: $('access-copy'), accessLink: $('access-link'),
-    accessLinkCopy: $('access-link-copy'), accessMsg: $('access-msg')
+    accessLinkCopy: $('access-link-copy'), accessMsg: $('access-msg'), dueBox: $('due-box'), dueList: $('due-list')
   };
 
   /* ---------- Speicher (localStorage, mit Fallback falls blockiert) ---------- */
@@ -91,12 +107,13 @@
   function storageRemove(key) {
     try { window.localStorage.removeItem(key); } catch (e) { /* ignorieren */ }
   }
-  // Schlüssel bleibt excelDrillsProgress. Alter Stand { points, solved } wird verlustfrei zu Version 2 migriert
+  // Schlüssel bleibt excelDrillsProgress. Alter Stand { points, solved } wird verlustfrei migriert
   // (Punkte = XP, gelöste Übungen = Bronze); «points» und «solved» bleiben im gespeicherten Objekt erhalten.
+  // v2 wird beim Laden zu v3 (Fehler-DNA und Wiederholung starten leer).
   function loadProgress() {
     var raw = null;
     try { raw = stored ? JSON.parse(stored) : null; } catch (e) { raw = null; }
-    migratedFromV1 = !!raw && raw.v !== 2;
+    migratedFromV1 = !!raw && raw.v !== 2 && raw.v !== 3;
     return G.migrate(raw);
   }
   function saveProgress() { storageSet(STORAGE_PROGRESS, JSON.stringify(G.serialize(progress))); }
@@ -427,8 +444,38 @@
     renderList();
   }
 
+  // «Heute fällig»: Wiederholungen aus allen Pfaden (höchstens 5, älteste zuerst). Leer: ausgeblendet.
+  function exerciseById(id) { return exercises.filter(function (e) { return e.id === id; })[0] || null; }
+  function renderDue() {
+    if (!els.dueBox || !els.dueList || !G.dueToday) return;
+    var ids = G.dueToday(progress, today(), {
+      filter: function (id) { var ex = exerciseById(id); return !!ex && !isLocked(ex) && !E.isProject(ex); }
+    });
+    els.dueList.innerHTML = '';
+    els.dueBox.hidden = !ids.length;
+    ids.forEach(function (id) {
+      var ex = exerciseById(id);
+      var lex = lx(ex);
+      var li = document.createElement('li');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'due-chip';
+      btn.dataset.id = id;
+      if (current && current.id === id) btn.setAttribute('aria-current', 'true');
+      btn.textContent = lex.title;
+      btn.setAttribute('aria-label', T('due.chipAria', { topic: lex.topic, title: lex.title }));
+      btn.addEventListener('click', function () {
+        track('review_open', { uebung: id });
+        openExercise(ex, isMobile() ? null : btn);
+      });
+      li.appendChild(btn);
+      els.dueList.appendChild(li);
+    });
+  }
+
   function renderList() {
     var tr = currentTrack;
+    renderDue();
     els.list.innerHTML = '';
     els.listHeading.textContent = T('list.heading', { track: tr.name });
     renderHeader();
@@ -560,6 +607,21 @@
     });
     table.append(thead, tbody);
     els.caption.textContent = T('sheet.caption', { title: ex.title, cell: ex.target });
+    attachSheetPick();
+  }
+
+  // Zellbezüge per Klick (app/sheet-pick.js): nach jedem Neu-Rendern neu anbinden, alte Listener fallen weg
+  function attachSheetPick() {
+    var SP = window.ExcelDrillsSheetPick;
+    if (!SP) return;
+    var texts = {};
+    ['tip', 'tipClose', 'target', 'targetPicked', 'refLabel', 'inserted', 'refused'].forEach(function (k) {
+      // Platzhalter ({cell}, {ref}, {content}) füllt sheet-pick.js selbst
+      var key = 'pick.' + k;
+      var v = uiDict && typeof uiDict[key] === 'string' ? uiDict[key] : UI_DE[key];
+      if (typeof v === 'string') texts[k] = v;
+    });
+    SP.attach({ table: els.sheet, input: els.input, locale: function () { return locale; }, ort: 'app', texts: texts });
   }
 
   /* ---------- Übung öffnen ---------- */
@@ -570,6 +632,7 @@
     current = ex;
     dataset = 0;
     attemptCounted = false;
+    wrongCounted = false;
     currentTrack = trackOf(ex);
     storageSet(STORAGE_TRACK, currentTrack.id);
     if (!opts.keepUrl) updateUrl(currentTrack.id, ex.id);
@@ -743,6 +806,7 @@
     var m = progress.mastery[current.id];
     dataset = G.pickDataset(current, m && typeof m.last === 'number' ? m.last : dataset);
     attemptCounted = false;
+    wrongCounted = false;
     els.input.value = '';
     if (E.isProject(current)) {
       clearTrackDone();
@@ -881,6 +945,7 @@
       if (window.console) console.error(e);
       return;
     }
+    recordDna(result, formula);
 
     if (result.ok) {
       var lines = [result.message];
@@ -897,6 +962,21 @@
       setFeedback('err', errLines);
       els.nextBtn.hidden = true;
     }
+  }
+
+  // Fehler-DNA und Wiederholung: Kategorie bestimmen (app/errors.js) und Versuch verbuchen.
+  // Pro Runde zählt höchstens ein Fehlversuch und eine korrekte Lösung, damit mehrfaches Prüfen nichts verzerrt.
+  function recordDna(result, formula) {
+    if (!current || !G.recordAttempt) return;
+    if (result.ok ? attemptCounted : wrongCounted) return;
+    if (!result.ok) wrongCounted = true;
+    var category = null;
+    try {
+      var info = ERR ? ERR.classify(result, formula, { category: EX_CATEGORY[current.id] || 'modell', mustUse: current.mustUse, mustContain: current.mustContain, hints: current.hints }) : null;
+      category = info ? info.category : null;
+    } catch (e) { if (window.console) console.error(e); }
+    G.recordAttempt(progress, current.id, category, !!result.ok, today());
+    saveProgress();
   }
 
   // Verbucht eine korrekte Lösung (einmal pro Runde) und ergänzt die erste Feedback-Zeile um Medaille/XP.
@@ -1331,8 +1411,69 @@
       '<div><dt>' + escapeHtml(T('profile.gold')) + '</dt><dd>' + gold + (silver ? ' <span>' + escapeHtml(T('profile.silver', { n: silver })) + '</span>' : '') + '</dd></div>' +
       '<div><dt>' + escapeHtml(T('profile.xp')) + '</dt><dd>' + progress.xp + '</dd></div>';
 
+    renderDna();
     renderBadges();
     renderAccess();
+  }
+
+  /* Fehler-DNA im Profil: Fehlerquote pro Kategorie, schwächste Kategorie mit Tipp und passender Gratis-Übung */
+  function dnaLabel(c) { var k = 'dna.cat.' + c; var v = T(k); return v === k ? (ERR ? ERR.label(c) : c) : v; }
+  // Deutsch: Tipp direkt aus app/errors.js; FR/IT: Übersetzung «dna.tip.<Kategorie>» aus fr.json/it.json
+  function dnaTip(c) { var k = 'dna.tip.' + c; var v = T(k); return v === k ? (ERR ? ERR.tip(c) : '') : v; }
+  function renderDna() {
+    if (!gx.pfDna || !G.profileSummary) return;
+    var sum = G.profileSummary(progress);
+    gx.pfDna.innerHTML = '';
+    if (!sum.attempts) {
+      var empty = document.createElement('p');
+      empty.className = 'fine';
+      empty.textContent = T('dna.empty');
+      gx.pfDna.appendChild(empty);
+      return;
+    }
+    var ul = document.createElement('ul');
+    ul.className = 'dna-bars';
+    sum.categories.forEach(function (x) {
+      var pct = Math.round(x.rate * 100);
+      var li = document.createElement('li');
+      li.className = 'dna-row' + (x.enough ? '' : ' dna-few');
+      li.innerHTML = '<span class="dna-label">' + escapeHtml(dnaLabel(x.category)) + '</span>' +
+        '<span class="dna-bar" role="img" aria-label="' + escapeHtml(T('dna.barAria', { pct: pct, wrong: x.wrong, total: x.total })) + '"><span style="width:' + pct + '%"></span></span>' +
+        '<span class="dna-pct" aria-hidden="true">' + pct + ' %</span>';
+      ul.appendChild(li);
+    });
+    gx.pfDna.appendChild(ul);
+    var note = document.createElement('p');
+    note.className = 'fine';
+    note.textContent = T('dna.note', { n: G.MIN_ATTEMPTS });
+    gx.pfDna.appendChild(note);
+
+    var weak = sum.weakest;
+    var box = document.createElement('div');
+    box.className = 'dna-weak';
+    if (!weak) {
+      box.innerHTML = '<p>' + escapeHtml(T('dna.noWeak', { n: G.MIN_ATTEMPTS })) + '</p>';
+      gx.pfDna.appendChild(box);
+      return;
+    }
+    box.innerHTML = '<p><strong>' + escapeHtml(T('dna.weakest', { category: dnaLabel(weak.category) })) + '</strong></p>' +
+      '<p>' + escapeHtml(dnaTip(weak.category)) + '</p>';
+    var ex = exerciseById(CATEGORY_EXERCISE[weak.category]);
+    if (ex && !isLocked(ex)) {
+      var p = document.createElement('p');
+      var a = document.createElement('a');
+      a.href = '?pfad=' + encodeURIComponent(trackOf(ex).id) + '#' + encodeURIComponent(ex.id);
+      a.textContent = T('dna.practice', { title: lx(ex).title });
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        gx.profile._returnFocus = null; // Fokus geht auf die Übung, nicht zurück auf den Level-Knopf
+        gx.profile.close();
+        openExercise(ex, null);
+      });
+      p.appendChild(a);
+      box.appendChild(p);
+    }
+    gx.pfDna.appendChild(box);
   }
 
   function renderBadges() {
@@ -1522,7 +1663,7 @@
       goalBtn: $('goal-btn'), goalMenu: $('goal-menu'), goalText: $('goal-text'), goalRing: $('goal-ring-fg'),
       levelBtn: $('level-btn'), levelNum: $('level-num'), levelName: $('level-name'), levelFill: $('level-fill'), levelSr: $('level-sr'),
       profile: $('profile'), profileClose: $('profile-close'), pfLevel: $('pf-level'), pfStreak: $('pf-streak'), pfWeek: $('pf-week'),
-      pfStats: $('pf-stats'), pfBadges: $('pf-badges'), shareArea: $('share-area'),
+      pfStats: $('pf-stats'), pfBadges: $('pf-badges'), shareArea: $('share-area'), pfDna: $('pf-dna'),
       resetBtn: $('reset-btn'), resetConfirm: $('reset-confirm'), resetYes: $('reset-yes'), resetNo: $('reset-no'),
       levelup: $('levelup'), levelupNum: $('levelup-num'), levelupTitle: $('levelup-title'), levelupText: $('levelup-text'), levelupOk: $('levelup-ok'),
       toasts: $('toasts')

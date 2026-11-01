@@ -151,3 +151,10 @@ Prompt-Grösse wenig und ist bewusst nicht eingebaut. Die tatsächlichen Werte z
   neutraler Meldung. Die Anfrage zählt trotzdem für das Tageslimit.
 - Gespeichert wird nur `key_hash`, Tag und Zähler, keine Gesprächsinhalte. Hinweis für die Datenschutzerklärung:
   Antworten werden zur Auswertung an Anthropic (USA) übermittelt.
+
+
+## Stand 1.11.2026 (von Claude ausgeführt)
+
+- Migration 002 ausgeführt, Function `interview` per Dashboard-Editor deployt (gebündelte Datei: Prompts und logic.js inline).
+- «Verify JWT» bleibt AN: `app/interview.js` sendet den Publishable Key als `apikey` und `Authorization: Bearer`, das genügt dem Gateway; die Function prüft zusätzlich den Premium-Code.
+- Noch offen (nur Luca, Secret-Store): Secrets `ANTHROPIC_API_KEY` und `PREMIUM_KEY_HASH` unter Edge Functions › Secrets setzen. Bis dahin antwortet die Function mit 500 «noch nicht eingerichtet», die Seite zeigt den Hinweis.

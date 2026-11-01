@@ -448,8 +448,103 @@ eq(E.hasLanguage('fr-CH') && E.hasLanguage('it-CH') && E.hasLanguage('de-DE'), t
 // 9) Französisch (FR-CH) und Italienisch (IT-CH)
 await checkLanguages();
 
+// 10) Englisch (EN-CH): jede Formel-Übung lokalisieren, übersetzte Musterlösung prüfen
+checkEnglish();
+
 console.log(failures ? `\n${failures} Fehler` : '\nAlle Prüfungen bestanden.');
 process.exit(failures ? 1 : 0);
+
+/* ---------- EN-CH ---------- */
+
+function checkEnglish() {
+  const loc = 'en-CH';
+  console.log('\nEnglisch (en-CH)\n');
+  for (const [inp, want] of [['en', loc], ['en-ch', loc], ['en-gb', loc], ['en-us', loc], ['EN_US', loc], ['en-CH', loc]]) {
+    eq(E.normalizeLocale(inp), want, `normalizeLocale(${JSON.stringify(inp)})`);
+  }
+  eq(E.hasLanguage(loc), true, 'hasLanguage(en-CH) (enGB ist Standard)');
+  eq(E.LOCALES.includes(loc), true, 'LOCALES enthält en-CH');
+  const cfg = E.configFor(loc);
+  eq(`${cfg.language} ${cfg.functionArgSeparator} ${cfg.decimalSeparator} "${cfg.thousandSeparator}"`, 'enGB , . ""', 'configFor(en-CH)');
+  eq(Object.keys(E.MSG_EN).filter((k) => !(k in E.MSG)).concat(Object.keys(E.MSG).filter((k) => !(k in E.MSG_EN))).join(','), '', 'MSG_EN hat dieselben Schlüssel wie MSG');
+  eq(E.uiText(loc).lang, loc, 'uiText(en-CH).lang');
+  eq(['formulaHelp', 'miniHelp', 'projectNote', 'switched', 'name', 'close'].every((k) => typeof E.uiText(loc)[k] === 'string' && /^[\x20-\x7E']+$/.test(E.uiText(loc)[k])), true, 'uiText(en-CH): alle Schlüssel englisch (ohne Umlaute)');
+  eq(E.convertFormulaLocale('=WENN(A1="a;b";SUMME(B1;0.5);FALSCH)', 'de-CH', loc), '=IF(A1="a;b",SUM(B1,0.5),FALSE)', 'convertFormulaLocale de-CH → en-CH (Text bleibt)');
+  eq(E.convertFormulaLocale('=IF(A1="a,b",SUM(B1,0.5),FALSE)', loc, 'de-DE'), '=WENN(A1="a,b";SUMME(B1;0,5);FALSCH)', 'convertFormulaLocale en-CH → de-DE');
+  eq(E.convertFormulaLocale('=SUMME(B1;0,5)', 'de-DE', loc), '=SUM(B1,0.5)', 'convertFormulaLocale de-DE → en-CH');
+
+  E.setLocale('de-CH');
+  const chValue = {};
+  for (const ex of exercises) if (!E.isProject(ex)) chValue[ex.id] = E.evaluate(HF, ex.data, ex.target, ex.solution).value;
+  E.setLocale(loc);
+  eq(E.getLocale(), loc, 'setLocale(en)');
+  let n = 0;
+  for (const ex of exercises) {
+    if (E.isProject(ex) || typeof ex.solution !== 'string') continue;
+    const L = E.localize(ex, loc);
+    n++;
+    const where = `[${loc}] ${ex.id}`;
+    if (L.id !== ex.id || L.target !== ex.target) fail(`${where}: id/target geändert`);
+    if (L.task !== ((ex.locale && ex.locale.en && ex.locale.en.task) || ex.task)) fail(`${where}: Aufgabentext geändert ohne locale.en`);
+    if (/;/.test(L.solution.replace(/"[^"]*"/g, ''))) fail(`${where}: Semikolon in der Musterlösung ${L.solution}`);
+    if (E.findEnglish(L.solution)) fail(`${where}: Musterlösung ${L.solution} enthält deutsche Namen: ${E.findEnglish(L.solution)}`);
+    const r = E.evaluate(HF, L.data, L.target, L.solution);
+    if (r.error) { fail(`${where}: ${L.solution} liefert ${r.error.value} ${r.error.message}`); continue; }
+    E.valuesEqual(r.value, chValue[ex.id]) ? ok(`${ex.id} [EN] ${L.solution} = ${JSON.stringify(r.value)}`) : fail(`${where}: ${JSON.stringify(r.value)} statt ${JSON.stringify(chValue[ex.id])}`);
+    const self = E.check(HF, L, L.solution);
+    if (!self.ok) fail(`${where}: solution besteht check() nicht: ${self.message}`);
+    for (const acc of L.accept || []) {
+      const c = E.check(HF, L, acc);
+      if (!c.ok) fail(`${where}: accept ${acc} besteht check() nicht: ${c.message}`);
+    }
+    (L.alt || []).forEach((a, i) => {
+      const v = E.check(HF, E.variant(L, i + 1), L.solution);
+      if (!v.ok) fail(`${where}: variant alt[${i}] besteht check() nicht: ${v.message}`);
+    });
+    // Die deutsche Musterlösung wird abgelehnt (deutscher Name oder Semikolon)
+    if (L.solution !== ex.solution) {
+      const d = E.check(HF, L, ex.solution);
+      if (d.ok) fail(`${where}: deutsche Lösung ${ex.solution} wurde akzeptiert`);
+    }
+  }
+  ok(`${n} Formel-Übungen in en-CH lokalisiert und geprüft`);
+
+  // Feedback-Regeln en-CH
+  console.log(`\nFeedback-Regeln (${loc})`);
+  const byLoc = Object.fromEntries(exercises.map((e) => [e.id, E.localize(e, loc)]));
+  const cases = [
+    ['summe-1', 'SUM(B2:B6)', false, 'always starts with ='],
+    ['summe-1', '=SUM(B2:B6)', true, ''],
+    ['summe-1', '=sum(b2:b6)', true, ''],
+    ['summe-1', '=SUM(B2,B3,B4,B5,B6)', true, ''],
+    ['summe-1', '=SUMME(B2:B6)', false, 'In English Excel the function is called SUM'],
+    ['summe-1', '=SUM(B2;B6)', false, 'Use a comma (,) to separate arguments'],
+    ['summe-1', '=SUMME(B2;B6)', false, 'is called SUM'],
+    ['summe-1', '=38500', false, 'cell references'],
+    ['runden-1', '=A2*1,5', false, 'decimal numbers with a point'],
+    ['sverweis-1', '=VLOOKUP(D2,A2:B6,2,FALSE)', true, ''],
+    ['sverweis-1', '=VLOOKUP(D2,A2:B6,2,0)', true, ''],
+    ['sverweis-1', '=VLOOKUP(D2,A2:B6,2,FALSCH)', false, 'you write FALSE instead of FALSCH'],
+    ['sverweis-1', '=SVERWEIS(D2,A2:B6,2,0)', false, 'is called VLOOKUP'],
+    ['textkette-1', '=CONCAT(A2," ",B2)', true, ''],
+    ['textkette-1', '=TEXTKETTE(A2," ",B2)', false, 'is called CONCAT'],
+    ['summewenn-2', '=SUMIF(A2:A7,">3",C2:C7)', true, ''],
+    ['acc-rundung-1', '=MROUND(B2,0.05)', true, ''],
+  ];
+  for (const [id, formula, expectOk, expectMsg] of cases) {
+    if (!byLoc[id]) { fail(`[${loc}] Testfall: Übung ${id} fehlt`); continue; }
+    const r = E.check(HF, byLoc[id], formula);
+    const good = r.ok === expectOk && (!expectMsg || r.message.includes(expectMsg));
+    good ? ok(`${id} ${formula} -> ${r.message}`) : fail(`[${loc}] ${id} ${formula} -> ok=${r.ok} "${r.message}" (erwartet ok=${expectOk}, "${expectMsg}")`);
+  }
+  eq(E.hasUnquotedCriterion('=COUNTIF(B2:B8,offen)'), true, 'hasUnquotedCriterion en-CH');
+  eq(E.hasUnquotedCriterion('=COUNTIF(B2:B8,D2)'), false, 'hasUnquotedCriterion en-CH mit Bezug');
+  eq(E.commaKind('=SUM(B2,B6)'), null, 'commaKind en-CH: Komma gültig');
+  eq(E.commaKind('=SUM(B2;B6)'), 'separator', 'commaKind en-CH: Semikolon gemeldet');
+  eq(E.formatValue(12500), "12'500", 'formatValue en-CH (Hochkomma)');
+  eq(E.formatValue(true), 'TRUE', 'formatValue(true) en-CH');
+  E.setLocale('de-CH');
+}
 
 /* ---------- FR-CH / IT-CH ---------- */
 

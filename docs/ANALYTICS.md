@@ -83,3 +83,19 @@ UTM-Parameter wertet Plausible automatisch aus; Schema in `social-kit/utm.md`.
 - Goals (Custom event) jetzt vollständig: `uebung_geloest`, `streak_3`, `premium_klick`, `kauf` (Revenue, CHF), `paywall_gezeigt`, `mini_geloest`, `handout_lead`, `pwa_install`, `land`.
 - Custom Properties freigegeben: `plan`, `uebung`, `pfad`, `land`, `ort`, `status`, `ergebnis`.
 - Offen: Funnel «Besuch → mini_geloest/uebung_geloest → paywall_gezeigt → premium_klick → kauf» (Settings → Funnels) und Wochenreport per E-Mail (Settings → Email reports). Hinweis von Plausible: Legacy-Snippet mit `data-domain`; funktioniert weiter, Umstieg auf das neue Script optional.
+
+## Stand 1.11.2026 (Differenzierung): neue Ereignisse
+
+| Ereignis | Ausgelöst durch | Properties |
+|---|---|---|
+| `assessment_start` / `assessment_done` | Rollen-Assessment gestartet / ausgewertet (app/assessment.js) | `rolle`, `sprache` (de/en), bei done `punkte` |
+| `share_click` | Teilen-Bild heruntergeladen oder geteilt | `rolle`, `art` |
+| `upload_check` / `upload_download` | Excel-Datei geprüft / Aufgabendatei geladen (app/upload.js) | `uebung`, `ergebnis`, `typ` |
+| `interview_start` / `interview_done` | KI-Interview (app/interview.js) | `rolle`, bei done `punkte` |
+| `campaign_day_done` | Kampagnen-Tag zum ersten Mal gelöst (app/campaign.js) | `kampagne`, `tag` |
+| `review_open` | fällige Wiederholung aus «Heute fällig» geöffnet (app/app.js) | `uebung` |
+| `recruiter_submit` | Ergebnis an Firma übermittelt (app/recruiter.js) | `rolle` |
+| `warteliste` | Warteliste SQL/Python/Bundle (assets/waitlist.js) | `produkt`, `status` |
+| `zellklick` | erster Zellbezug per Klick eingefügt (app/sheet-pick.js) | `ort` |
+
+Alle als Goals (Custom event) in Plausible angelegt (1.11.2026); Properties `rolle`, `sprache`, `art`, `typ`, `kampagne`, `tag`, `produkt`, `ort` noch unter Custom Properties freigeben.

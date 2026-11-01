@@ -115,3 +115,13 @@ Grauzone dazwischen: 4 weitere Wochen mit 10 zusätzlichen Übungen und Funktion
 - Vorbereitet, nicht live: KI-Interviewerin (supabase/functions/interview, app/interview.js, docs/INTERVIEW-SETUP.md). Braucht ANTHROPIC_API_KEY und PREMIUM_KEY_HASH als Supabase-Secrets, Migration 002, Deploy. Ohne Deploy zeigt die Ergebnisseite nur den Hinweis.
 - Social-Kit B2B: LI-13 bis LI-16, EM-04/05, IG-K7, b2b-onepager.md, Zielgruppen-Tabelle im README.
 - Offen: Plausible-Goals assessment_start/assessment_done/upload_check/upload_download/interview_start/interview_done/share_click; Search Console für /assessment/ und /upload/; echte Excel-Datei (Windows/Mac) gegen /upload/ testen; DE/EN-Schalter im Assessment (Engine-Erweiterung en-CH).
+
+## 1.11.2026 Nachmittag: Ausbau abgeschlossen
+
+- Assessment: 5 Rollen (Consulting, Accounting, IB/Corporate Finance, Versicherung, KV), DE/EN-Schalter (Engine-Locale en-CH), Recruiter-Links (?link=, assessment/ergebnisse.html, Migration 003; Run durch Luca).
+- Zellbezüge per Klick/Ziehen/F4 in App, Assessment und Kampagne (app/sheet-pick.js).
+- Fehler-DNA und Wiederholung (Spaced Repetition) lokal in der App (Speicherstand v3).
+- Kampagne «Dein erster Monat als Controllerin» unter /kampagne/ (3 Tage gratis).
+- Cross-Selling: Drills-Familie auf der Startseite, Warteliste SQL/Python/Bundle (leads-Tabelle, source warteliste-*), Footer-Link SQL-Drills Beta (sql-drills.onrender.com, Veröffentlichung durch Luca).
+- KI-Interview: Function deployt, Migration 002 ausgeführt; Secrets setzt Luca.
+- Instagram: IG-K7 (Mi 25.11. 12:00) und Story Berufsbildner (Mi 18.11. 12:00) terminiert; Business Suite hat damit 9 Feed-Posts und 2 Stories.

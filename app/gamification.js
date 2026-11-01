@@ -4,9 +4,9 @@
  * Läuft im Browser (window.ExcelDrillsGamification) und in Node (scripts/test-gamification.mjs
  * lädt diese Datei per vm-Kontext), wie app/engine.js.
  *
- * Gespeicherter Stand (localStorage «excelDrillsProgress», Version 2):
+ * Gespeicherter Stand (localStorage «excelDrillsProgress», Version 3; v2 wird beim Laden ergänzt):
  * {
- *   v: 2,
+ *   v: 3,
  *   points: <= xp, bleibt für ältere Stände/Code erhalten,
  *   xp, solved: { <id>: true },
  *   mastery: { <id>: { n: korrekte Lösungen, sets: [Datensatz-Indizes], last: Index, goldDay: 'YYYY-MM-DD' } },
@@ -14,7 +14,9 @@
  *   met: { 'YYYY-MM-DD': 1 }  Tage mit erreichtem Tagesziel (letzte 90 Tage),
  *   today: { date, ids: [] }  heute gelöste Übungen (für «verschiedene Übungen pro Tag»),
  *   streak: { count, last: 'YYYY-MM-DD' }, bestStreak,
- *   goal: 1 | 2 | 5, badges: { <id>: Zeitstempel }, flags: { early, night }, levelSeen
+ *   goal: 1 | 2 | 5, badges: { <id>: Zeitstempel }, flags: { early, night }, levelSeen,
+ *   errorProfile: { <Kategorie aus app/errors.js>: { wrong, right, last: 'YYYY-MM-DD' } }   (neu in v3, «Fehler-DNA»),
+ *   review: { <id>: { due: 'YYYY-MM-DD', interval: 1 | 3 | 7 | 14 | 30, streak } }       (neu in v3, Wiederholung)
  * }
  * Datensatz-Index 0 = Originaldaten (ex.data), 1..k = ex.alt[i-1].
  */
@@ -36,6 +38,10 @@
   var DEFAULT_GOAL = 2;
   var HISTORY_DAYS = 90;
   var MEDALS = ['', 'Bronze', 'Silber', 'Gold'];
+  var VERSION = 3;
+  var INTERVALS = [1, 3, 7, 14, 30];  // Wiederholungsabstände in Tagen
+  var DUE_LIMIT = 5;                  // höchstens so viele fällige Übungen pro Tag anzeigen
+  var MIN_ATTEMPTS = 3;               // Kategorie zählt für «schwächste Kategorie» erst ab 3 Versuchen
 
   /* ---------- Datum (lokale Zeit) ---------- */
 
@@ -58,15 +64,20 @@
 
   function emptyState() {
     return {
-      v: 2, xp: 0, solved: {}, mastery: {}, days: {}, met: {}, today: { date: '', ids: [] },
-      streak: { count: 0, last: '' }, bestStreak: 0, goal: DEFAULT_GOAL, badges: {}, flags: { early: false, night: false }, levelSeen: null
+      v: VERSION, xp: 0, solved: {}, mastery: {}, days: {}, met: {}, today: { date: '', ids: [] },
+      streak: { count: 0, last: '' }, bestStreak: 0, goal: DEFAULT_GOAL, badges: {}, flags: { early: false, night: false }, levelSeen: null,
+      errorProfile: {}, review: {}
     };
   }
 
   function isObj(o) { return !!o && typeof o === 'object' && !Array.isArray(o); }
   function num(n, fallback) { n = Number(n); return isFinite(n) && n >= 0 ? n : fallback; }
 
-  // Liest einen beliebigen gespeicherten Stand (alt: { points, solved } oder neu: v2) verlustfrei ein.
+  var DAY_RE = /^\d{4}-\d\d-\d\d$/;
+  function isDay(k) { return typeof k === 'string' && DAY_RE.test(k); }
+
+  // Liest einen beliebigen gespeicherten Stand (alt: { points, solved }, v2 oder v3) verlustfrei ein.
+  // v2 → v3: errorProfile und review starten leer, alles andere bleibt.
   function migrate(raw) {
     var s = emptyState();
     if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch (e) { raw = null; } }
@@ -75,7 +86,24 @@
     if (isObj(raw.solved)) {
       Object.keys(raw.solved).forEach(function (id) { if (raw.solved[id]) s.solved[id] = true; });
     }
-    if (raw.v === 2) {
+    if (raw.v === 3) {
+      if (isObj(raw.errorProfile)) {
+        Object.keys(raw.errorProfile).forEach(function (c) {
+          var e = raw.errorProfile[c];
+          if (!isObj(e)) return;
+          s.errorProfile[c] = { wrong: num(e.wrong, 0), right: num(e.right, 0), last: isDay(e.last) ? e.last : '' };
+        });
+      }
+      if (isObj(raw.review)) {
+        Object.keys(raw.review).forEach(function (id) {
+          var r = raw.review[id];
+          if (!isObj(r) || !isDay(r.due)) return;
+          var iv = Number(r.interval);
+          s.review[id] = { due: r.due, interval: INTERVALS.indexOf(iv) !== -1 ? iv : INTERVALS[0], streak: num(r.streak, 0) };
+        });
+      }
+    }
+    if (raw.v === 2 || raw.v === 3) {
       s.xp = num(raw.xp, num(raw.points, 0));
       if (isObj(raw.mastery)) {
         Object.keys(raw.mastery).forEach(function (id) {
@@ -114,9 +142,9 @@
   // Objekt für localStorage. «points» spiegelt die XP, damit ältere Leser den Stand verstehen.
   function serialize(s) {
     return {
-      v: 2, points: s.xp, xp: s.xp, solved: s.solved, mastery: s.mastery, days: s.days, met: s.met,
+      v: VERSION, points: s.xp, xp: s.xp, solved: s.solved, mastery: s.mastery, days: s.days, met: s.met,
       today: s.today, streak: s.streak, bestStreak: s.bestStreak, goal: s.goal, badges: s.badges,
-      flags: s.flags, levelSeen: s.levelSeen
+      flags: s.flags, levelSeen: s.levelSeen, errorProfile: s.errorProfile || {}, review: s.review || {}
     };
   }
 
@@ -291,6 +319,88 @@
     };
   }
 
+  /* ---------- Fehler-DNA und Wiederholung (v3) ---------- */
+
+  function nextInterval(iv) {
+    var i = INTERVALS.indexOf(iv);
+    return INTERVALS[Math.min(INTERVALS.length - 1, i + 1)];
+  }
+
+  /*
+   * Verbucht einen Prüfversuch. category: Kategorie aus ExcelDrillsErrors.classify (null = nur Wiederholung),
+   * ok: Formel korrekt, today: 'YYYY-MM-DD'.
+   * Fehler: Intervall zurück auf 1, fällig morgen. Korrekt ohne Eintrag (erstes Lösen): fällig morgen, Intervall 1.
+   * Korrekt bei fälliger Wiederholung (z. B. am Tag nach einem Fehler): nächstes Intervall 1 → 3 → 7 → 14 → 30.
+   * Korrekt, aber noch nicht fällig: Plan bleibt unverändert.
+   * Rückgabe: { category, review: { due, interval, streak }, advanced }
+   */
+  function recordAttempt(s, exId, category, ok, today) {
+    if (!isObj(s.errorProfile)) s.errorProfile = {};
+    if (!isObj(s.review)) s.review = {};
+    if (category) {
+      var e = s.errorProfile[category] || { wrong: 0, right: 0, last: '' };
+      if (ok) e.right += 1; else e.wrong += 1;
+      e.last = today;
+      s.errorProfile[category] = e;
+    }
+    var r = s.review[exId];
+    var advanced = false;
+    if (!ok) {
+      r = { due: addDays(today, 1), interval: INTERVALS[0], streak: 0 };
+    } else if (!r) {
+      r = { due: addDays(today, 1), interval: INTERVALS[0], streak: 0 };
+    } else if (r.due <= today) {
+      r.interval = nextInterval(r.interval);
+      r.due = addDays(today, r.interval);
+      r.streak = (r.streak || 0) + 1;
+      advanced = true;
+    }
+    s.review[exId] = r;
+    return { category: category || null, review: { due: r.due, interval: r.interval, streak: r.streak }, advanced: advanced };
+  }
+
+  // Heute (oder früher) fällige Übungen: älteste zuerst, bei gleichem Datum nach ID. opts: { limit, filter(id) }
+  function dueToday(s, today, opts) {
+    opts = opts || {};
+    var limit = typeof opts.limit === 'number' ? opts.limit : DUE_LIMIT;
+    var rv = s.review || {};
+    return Object.keys(rv)
+      .filter(function (id) { return rv[id].due <= today && (!opts.filter || opts.filter(id)); })
+      .sort(function (a, b) { return rv[a].due < rv[b].due ? -1 : rv[a].due > rv[b].due ? 1 : (a < b ? -1 : a > b ? 1 : 0); })
+      .slice(0, limit);
+  }
+
+  function categoryStats(s) {
+    var ep = s.errorProfile || {};
+    return Object.keys(ep).map(function (c) {
+      var e = ep[c];
+      var total = e.wrong + e.right;
+      return { category: c, wrong: e.wrong, right: e.right, total: total, rate: total ? e.wrong / total : 0, last: e.last };
+    }).filter(function (x) { return x.total > 0; });
+  }
+  function byRate(a, b) {
+    return b.rate - a.rate || b.wrong - a.wrong || (a.category < b.category ? -1 : a.category > b.category ? 1 : 0);
+  }
+
+  // Kategorien mit mindestens 3 Versuchen, höchste Fehlerquote zuerst. n: Anzahl (ohne Angabe alle).
+  function weakestCategories(s, n) {
+    var list = categoryStats(s).filter(function (x) { return x.total >= MIN_ATTEMPTS; }).sort(byRate);
+    return typeof n === 'number' ? list.slice(0, n) : list;
+  }
+
+  /*
+   * Für das Profil: { attempts, wrong, right, categories: [{ category, wrong, right, total, rate, enough }],
+   *   weakest: schwächste Kategorie mit mindestens 3 Versuchen und mindestens 1 Fehler oder null, reviews: Anzahl geplanter Wiederholungen }
+   */
+  function profileSummary(s) {
+    var cats = categoryStats(s).sort(byRate);
+    cats.forEach(function (x) { x.enough = x.total >= MIN_ATTEMPTS; });
+    var weak = weakestCategories(s).filter(function (x) { return x.wrong > 0; })[0] || null;
+    var wrong = 0, right = 0;
+    cats.forEach(function (x) { wrong += x.wrong; right += x.right; });
+    return { attempts: wrong + right, wrong: wrong, right: right, categories: cats, weakest: weak, reviews: Object.keys(s.review || {}).length };
+  }
+
   /* ---------- Auswertungen für Abzeichen und Anzeige ---------- */
 
   function isLocked(ex, unlocked) { return !ex.free && !unlocked; }
@@ -306,7 +416,8 @@
 
   var api = {
     LEVELS: LEVELS, FREE_LEVEL_CAP: FREE_LEVEL_CAP, XP: XP, GOALS: GOALS, DEFAULT_GOAL: DEFAULT_GOAL,
-    HISTORY_DAYS: HISTORY_DAYS, MEDALS: MEDALS,
+    HISTORY_DAYS: HISTORY_DAYS, MEDALS: MEDALS, VERSION: VERSION, INTERVALS: INTERVALS, DUE_LIMIT: DUE_LIMIT, MIN_ATTEMPTS: MIN_ATTEMPTS,
+    recordAttempt: recordAttempt, dueToday: dueToday, weakestCategories: weakestCategories, profileSummary: profileSummary,
     dayKey: dayKey, addDays: addDays, emptyState: emptyState, migrate: migrate, serialize: serialize, prune: prune,
     levelFor: levelFor, datasetCount: datasetCount, hasAlt: hasAlt, medal: medal, medalOf: medalOf,
     medalName: medalName, nextMedalText: nextMedalText, nextMedalInfo: nextMedalInfo, pickDataset: pickDataset, currentStreak: currentStreak,

@@ -98,6 +98,7 @@
         <a href="pfad/">Pfade</a>
         <a href="assessment/">Assessment</a>
         <a href="upload/">Datei prüfen</a>
+        <a href="kampagne/">Kampagne</a>
         <a href="artikel/">Artikel</a>
         <a href="handouts/">Handouts</a>
         <a href="premium.html">Preise</a>
@@ -267,12 +268,17 @@
           <li class="track-card">
             <h3><a href="assessment/">Excel-Assessment üben</a></h3>
             <p class="claim">15 Minuten, 5 Aufgaben als Mini-Modell, Einstufung, Diagnose und 7-Tage-Plan</p>
-            <p class="more"><span class="count-badge">Consulting · Accounting</span></p>
+            <p class="more"><span class="count-badge">5 Rollen · DE/EN</span></p>
           </li>
           <li class="track-card">
             <h3><a href="upload/">Excel-Datei prüfen lassen</a></h3>
             <p class="claim">Aufgabe herunterladen, in Excel lösen, hochladen: Fehlerkarte pro Zelle</p>
             <p class="more"><span class="count-badge">5 Aufgaben gratis</span></p>
+          </li>
+          <li class="track-card">
+            <h3><a href="kampagne/">Dein erster Monat als Controllerin</a></h3>
+            <p class="claim">8 Tage Story bei einer fiktiven Firma, jede Aufgabe baut auf der letzten auf</p>
+            <p class="more"><span class="count-badge">3 Tage gratis</span></p>
           </li>
           <li class="track-card">
             <h3><a href="assessment/?rolle=kv">Einstellungstest KV</a></h3>
@@ -350,6 +356,41 @@
             <span lang="it-CH">In Ticino? <a href="app/?lang=it">L'app è disponibile in italiano &rarr;</a></span></p>
           <p class="swiss-de">Auf dem Handy: als App installieren, die Gratis-Übungen laufen auch offline. In Safari über «Teilen &rsaquo; Zum Home-Bildschirm», in Chrome über «App installieren». <a href="app/">Übungen öffnen &rarr;</a></p>
         </div>
+      </div>
+    </section>
+
+    <!-- 7b. Drills-Familie -->
+    <section class="home-section tracks-section" aria-labelledby="familie-heading">
+      <div class="wrap">
+        <h2 id="familie-heading" class="section-title">Die Drills-Familie</h2>
+        <p class="section-intro">Gleiche Methode, andere Werkzeuge: Du schreibst die Lösung selbst und bekommst sofort Rückmeldung.</p>
+        <ul class="track-cards">
+          <li class="track-card here">
+            <h3>Excel-Drills</h3>
+            <p class="claim">Du bist hier: Formeln üben wie im Büro, direkt im Browser</p>
+            <p class="more"><span class="count-badge">Live</span></p>
+          </li>
+          <li class="track-card">
+            <h3><a href="https://sql-drills.onrender.com/?utm_source=excel-drills&amp;utm_medium=crosssell" rel="noopener">SQL-Drills</a></h3>
+            <p class="claim">SQL üben wie Excel: SELECT, JOIN, GROUP BY im Browser, 41 Übungen</p>
+            <p class="more"><span class="count-badge">Beta</span></p>
+          </li>
+          <li class="track-card soon">
+            <h3>Python-Drills</h3>
+            <p class="claim">In Planung. Trag dich ein, dann melden wir uns zum Start.</p>
+            <form class="waitlist-form" data-produkt="python" novalidate>
+              <div class="waitlist-row">
+                <label class="visually-hidden" for="wl-python">E-Mail-Adresse</label>
+                <input type="email" id="wl-python" name="email" autocomplete="email" placeholder="Deine E-Mail-Adresse" required>
+                <input class="waitlist-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <button type="submit" class="btn btn-secondary">Auf die Warteliste</button>
+              </div>
+              <p class="waitlist-status" role="status" aria-live="polite"></p>
+              <p class="waitlist-privacy">Deine E-Mail-Adresse nutzen wir nur, um dich zum Start zu benachrichtigen. Gespeichert wird sie bei Supabase in Zürich. <a href="datenschutz.html">Datenschutz</a></p>
+            </form>
+          </li>
+        </ul>
+        <p class="family-note">Ein Login, ein Preis für alle Drills ist geplant: Wer jetzt Premium hat, bekommt die Schwester-Produkte zum Start günstiger.</p>
       </div>
     </section>
 
@@ -484,7 +525,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <span>&copy; 2026 Excel-Drills</span>
-      <span><a href="artikel/">Artikel</a> &middot; <a href="handouts/">Handouts</a> &middot; <a href="fr/" hreflang="fr-CH" lang="fr-CH">Français</a> &middot; <a href="it/" hreflang="it-CH" lang="it-CH">Italiano</a> &middot; <a href="impressum.html">Impressum</a> &middot; <a href="datenschutz.html">Datenschutz</a></span>
+      <span><a href="artikel/">Artikel</a> &middot; <a href="handouts/">Handouts</a> &middot; <a href="https://sql-drills.onrender.com?utm_source=excel-drills&amp;utm_medium=footer" rel="noopener">SQL-Drills (Beta)</a> &middot; <a href="fr/" hreflang="fr-CH" lang="fr-CH">Français</a> &middot; <a href="it/" hreflang="it-CH" lang="it-CH">Italiano</a> &middot; <a href="impressum.html">Impressum</a> &middot; <a href="datenschutz.html">Datenschutz</a></span>
     </div>
   </footer>
 
@@ -492,5 +533,7 @@
        erst bei Fokus im Formelfeld oder nach 3 s Leerlauf (mit SRI, gleiche Hashes wie app/index.html). -->
   <script src="app/engine.js" defer></script>
   <script src="assets/mini-drill.js" defer></script>
+  <script src="assets/leads-config.js" defer></script>
+  <script src="assets/waitlist.js" defer></script>
 </body>
 </html>

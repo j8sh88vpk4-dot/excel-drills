@@ -20,6 +20,18 @@
 .as-start h2, .as-run h2, .as-result h2 { margin: 0.4rem 0 0.6rem; font-size: 1.5rem; }
 .as-start h3, .as-result h3 { margin-top: 1.6rem; }
 .as-meta { font-weight: 700; }
+/* Schalter Excel-Sprache (Deutsch | English) auf dem Start-Screen */
+.as-lang { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.9rem; margin: 0.9rem 0 0.4rem; }
+.as-lang-label { font-weight: 700; }
+.as-lang-switch { display: inline-flex; border: 2px solid var(--accent); border-radius: 999px; overflow: hidden; background: var(--surface); }
+.as-lang-switch button {
+  font: inherit; font-weight: 700; font-size: 0.95rem; padding: 0.4rem 0.95rem; min-height: 44px; border: 0; cursor: pointer;
+  background: transparent; color: var(--accent-strong);
+}
+.as-lang-switch button + button { border-left: 2px solid var(--accent); }
+.as-lang-switch button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.as-lang-switch button:focus-visible { outline: 3px solid var(--accent-strong); outline-offset: -3px; }
+.as-lang-note { flex-basis: 100%; margin: 0; }
 .as-rules { padding-left: 1.3rem; }
 .as-rules li { margin: 0.2rem 0; }
 

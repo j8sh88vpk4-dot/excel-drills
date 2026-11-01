@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ergebnisse Test-Link | Excel-Drills</title>
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Der admin-Token steht in der URL: nie als Referrer an andere Seiten weitergeben -->
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23107C41'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'%3EX%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#107C41">
+  <link rel="stylesheet" href="../assets/style.css">
+  <!-- Bewusst ohne assets/analytics.js: die URL enthält den admin-Token -->
+  <style>
+    .rr-meta { color: var(--muted); margin: 0.25rem 0 1rem; }
+    .rr-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; }
+    .rr-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+    .rr-table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+    .rr-table th, .rr-table td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; white-space: nowrap; }
+    .rr-table th { background: var(--accent-soft); font-weight: 700; }
+    .rr-table td.num, .rr-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .rr-table tbody tr:last-child td { border-bottom: 0; }
+    .rr-sort { font: inherit; font-weight: 700; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+    .rr-ok { color: var(--accent-strong); font-weight: 700; }
+    .rr-err { color: var(--err-text); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <span class="wordmark"><span class="mark" aria-hidden="true">X</span>Excel-Drills</span>
+    </div>
+  </header>
+
+  <main id="inhalt" class="wrap">
+    <h1 id="rr-title">Ergebnisse Ihres Test-Links</h1>
+    <p class="rr-meta" id="rr-meta"></p>
+    <div id="rr-notice" class="notice" role="status" hidden></div>
+    <p class="loading" id="rr-loading">Ergebnisse werden geladen&hellip;</p>
+
+    <div id="rr-content" hidden>
+      <div class="rr-actions">
+        <button class="btn" type="button" id="rr-csv">Als CSV exportieren</button>
+        <button class="btn btn-secondary" type="button" id="rr-reload">Aktualisieren</button>
+      </div>
+      <div class="rr-scroll" role="region" aria-label="Ergebnistabelle (horizontal scrollbar)" tabindex="0">
+        <table class="rr-table" id="rr-table"></table>
+      </div>
+      <p class="fine">Pro Kategorie: richtig gelöste Aufgaben von allen Aufgaben dieser Kategorie. Die Stufe richtet sich nach dem Gesamtprozent (ab 90 % Sehr sicher, ab 70 % Bereit, ab 40 % Fast bereit).</p>
+      <p class="fine">Diese Seite ist nur über den Link mit Ihrem persönlichen Code erreichbar. Bitte geben Sie den Link nicht weiter. Die Daten der Kandidatinnen und Kandidaten werden bei Supabase in Zürich gespeichert. Für Löschungen oder einen neuen Link schreiben Sie an <a href="mailto:hallo@excel-drills.ch">hallo@excel-drills.ch</a>.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; 2026 Excel-Drills</span>
+      <span><a href="../impressum.html">Impressum</a> &middot; <a href="../datenschutz.html">Datenschutz</a></span>
+    </div>
+  </footer>
+
+  <script src="../assets/leads-config.js" defer></script>
+  <script src="../app/errors.js" defer></script>
+  <script src="../app/recruiter-results.js" defer></script>
+</body>
+</html>

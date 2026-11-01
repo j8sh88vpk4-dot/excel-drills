@@ -385,6 +385,606 @@
         "rundung": { "exercises": ["runden-1"] },
         "modell": { "exercises": ["acc-abweichung-1", "acc-abweichung-2", "acc-anteil-1"] }
       }
+    },
+    {
+      "id": "ib",
+      "role": "Investment Banking / Corporate Finance",
+      "title": "Excel-Assessment Investment Banking",
+      "intro": "Du bewertest die Alpenwerk AG, einen Schweizer Industriezulieferer, für eine mögliche Übernahme: Umsatzwachstum, EBITDA-Marge, Enterprise Value per Multiple, Schuldendienst des Akquisitionsdarlehens und eine Sensitivität. Jede Aufgabe baut auf dem Ergebnis der vorherigen auf.",
+      "minutes": 15,
+      "free": true,
+      "nextTrack": "finance",
+      "tasks": [
+        {
+          "id": "as-ib-1",
+          "category": "syntax",
+          "points": 20,
+          "topic": "CAGR",
+          "title": "Umsatzwachstum pro Jahr (CAGR)",
+          "task": "Der Umsatz im Startjahr steht in B2, der Umsatz im Endjahr in B3, Start- und Endjahr in B4 und B5. Berechne in B6 die durchschnittliche jährliche Wachstumsrate (CAGR): (Ende/Start) hoch (1/Anzahl Jahre) minus 1. Die Anzahl Jahre rechnest du in der Formel aus B5 minus B4. Das Ergebnis ist ein Dezimalwert wie 0.1.",
+          "data": [
+            ["Kennzahl", "Wert"],
+            ["Umsatz Startjahr (CHF)", 42500000],
+            ["Umsatz Endjahr (CHF)", 56600000],
+            ["Startjahr", 2022],
+            ["Endjahr", 2025],
+            ["CAGR", null]
+          ],
+          "target": "B6",
+          "solution": "=(B3/B2)^(1/(B5-B4))-1",
+          "accept": ["=POTENZ(B3/B2;1/(B5-B4))-1", "=($B$3/$B$2)^(1/($B$5-$B$4))-1"],
+          "alt": [
+            { "data": [
+              ["Kennzahl", "Wert"],
+              ["Umsatz Startjahr (CHF)", 38200000],
+              ["Umsatz Endjahr (CHF)", 47900000],
+              ["Startjahr", 2021],
+              ["Endjahr", 2025],
+              ["CAGR", null]
+            ] }
+          ],
+          "hints": {
+            "generic": "Setze alle Teile in Klammern: =(B3/B2)^(1/(B5-B4))-1. Ohne Klammer um B5-B4 rechnet Excel zuerst 1/B5."
+          }
+        },
+        {
+          "id": "as-ib-2",
+          "category": "modell",
+          "points": 20,
+          "topic": "EBITDA-Marge",
+          "title": "EBITDA-Marge",
+          "task": "Der Umsatz aus Aufgabe 1 steht in B2, die CAGR in B8. Berechne in B6 die EBITDA-Marge: Umsatz minus Materialaufwand (B3), Personalaufwand (B4) und übriger Betriebsaufwand (B5), geteilt durch den Umsatz. Achte auf die Klammern, nicht mal 100 rechnen.",
+          "data": [
+            ["Position", "Wert"],
+            ["Umsatz 2025 (CHF)", 56600000],
+            ["Materialaufwand (CHF)", 21400000],
+            ["Personalaufwand (CHF)", 18900000],
+            ["Übriger Betriebsaufwand (CHF)", 6400000],
+            ["EBITDA-Marge", null],
+            [null, null],
+            ["CAGR Umsatz (Aufgabe 1)", 0.1002]
+          ],
+          "target": "B6",
+          "solution": "=(B2-B3-B4-B5)/B2",
+          "accept": ["=(B2-SUMME(B3:B5))/B2", "=1-(B3+B4+B5)/B2", "=1-SUMME(B3:B5)/B2"],
+          "alt": [
+            { "data": [
+              ["Position", "Wert"],
+              ["Umsatz 2025 (CHF)", 47900000],
+              ["Materialaufwand (CHF)", 18600000],
+              ["Personalaufwand (CHF)", 16200000],
+              ["Übriger Betriebsaufwand (CHF)", 5300000],
+              ["EBITDA-Marge", null],
+              [null, null],
+              ["CAGR Umsatz (Aufgabe 1)", 0.0582]
+            ] }
+          ],
+          "hints": {
+            "generic": "Erst das EBITDA in Klammern rechnen, dann teilen: =(B2-B3-B4-B5)/B2."
+          }
+        },
+        {
+          "id": "as-ib-3",
+          "category": "lookup",
+          "points": 20,
+          "topic": "SVERWEIS · Multiple",
+          "title": "Enterprise Value per Multiple",
+          "task": "Das EBITDA aus Aufgabe 2 (Umsatz mal Marge) steht in B2, die Branche der Alpenwerk AG in B3. Berechne in B4 den Enterprise Value: EBITDA mal EV/EBITDA-Multiple der Branche. Hol den Multiple mit SVERWEIS und exakter Suche (FALSCH) aus der Peer-Tabelle D2:E6 und beziehe dich auf B3.",
+          "data": [
+            ["Kennzahl", "Wert", null, "Branche", "EV/EBITDA"],
+            ["EBITDA 2025 (CHF)", 9900000, null, "Software", 14.5],
+            ["Branche", "Industrie", null, "Medtech", 12],
+            ["Enterprise Value (CHF)", null, null, "Industrie", 8.5],
+            [null, null, null, "Detailhandel", 7],
+            [null, null, null, "Bau", 6.5]
+          ],
+          "target": "B4",
+          "solution": "=B2*SVERWEIS(B3;$D$2:$E$6;2;FALSCH)",
+          "mustUse": ["SVERWEIS"],
+          "accept": ["=SVERWEIS(B3;$D$2:$E$6;2;FALSCH)*B2", "=B2*SVERWEIS(B3;D2:E6;2;FALSCH)", "=B2*SVERWEIS(B3;$D$2:$E$6;2;0)"],
+          "alt": [
+            { "data": [
+              ["Kennzahl", "Wert", null, "Branche", "EV/EBITDA"],
+              ["EBITDA 2025 (CHF)", 7800000, null, "Software", 14.5],
+              ["Branche", "Medtech", null, "Medtech", 12],
+              ["Enterprise Value (CHF)", null, null, "Industrie", 8.5],
+              [null, null, null, "Detailhandel", 7],
+              [null, null, null, "Bau", 6.5]
+            ] }
+          ],
+          "hints": {
+            "quotes": "Das Suchkriterium steht in B3. Beziehe dich auf B3, statt den Branchennamen einzutippen.",
+            "generic": "Aufbau: =B2*SVERWEIS(B3;$D$2:$E$6;2;FALSCH). Die 2 holt den Wert aus der zweiten Spalte der Peer-Tabelle."
+          }
+        },
+        {
+          "id": "as-ib-4",
+          "category": "bezug",
+          "points": 20,
+          "topic": "RMZ · Absoluter Bezug",
+          "title": "Schuldendienst mit RMZ",
+          "task": "Ein Teil der Übernahme wird mit einem Akquisitionsdarlehen (B3) finanziert. Berechne in B6 die jährliche Annuität (Zins und Amortisation) mit RMZ: Jahreszins B4, Laufzeit B5, Darlehen B3. Fixiere alle drei Bezüge mit $ ($B$3, $B$4, $B$5), damit du die Formel in eine Szenario-Tabelle kopieren kannst. Setze ein Minus vor das Darlehen, damit die Annuität positiv ist.",
+          "data": [
+            ["Finanzierung", "Wert"],
+            ["Enterprise Value aus Aufgabe 3 (CHF)", 84150000],
+            ["Akquisitionsdarlehen (CHF)", 42000000],
+            ["Jahreszins", 0.04],
+            ["Laufzeit (Jahre)", 5],
+            ["Annuität pro Jahr (CHF)", null]
+          ],
+          "target": "B6",
+          "solution": "=RMZ($B$4;$B$5;-$B$3)",
+          "mustUse": ["RMZ"],
+          "mustContain": ["$B$3", "$B$4", "$B$5"],
+          "accept": ["=-RMZ($B$4;$B$5;$B$3)", "=RMZ($B$4;$B$5;-$B$3;0)"],
+          "alt": [
+            { "data": [
+              ["Finanzierung", "Wert"],
+              ["Enterprise Value aus Aufgabe 3 (CHF)", 93600000],
+              ["Akquisitionsdarlehen (CHF)", 46800000],
+              ["Jahreszins", 0.035],
+              ["Laufzeit (Jahre)", 7],
+              ["Annuität pro Jahr (CHF)", null]
+            ] }
+          ],
+          "hints": {
+            "dollar": "Fixiere Zins, Laufzeit und Darlehen mit $, also $B$4, $B$5 und $B$3. Sonst verrutschen die Bezüge beim Kopieren.",
+            "generic": "Aufbau: =RMZ($B$4;$B$5;-$B$3). RMZ(Zins;Anzahl Perioden;Barwert) liefert die Rate pro Periode."
+          }
+        },
+        {
+          "id": "as-ib-5",
+          "category": "logik",
+          "points": 20,
+          "topic": "WENN · Sensitivität",
+          "title": "Sensitivität: Multiple minus 1",
+          "task": "Das EBITDA aus Aufgabe 2 steht in B2, der Multiple aus Aufgabe 3 in B3. Hält das Kaufpreisangebot auch bei einem tieferen Multiple? Gib in B7 «Ja» aus, wenn der Enterprise Value mit dem um B4 reduzierten Multiple (B3-B4) mindestens so hoch ist wie das Angebot in B5, sonst «Nein». Nutze WENN und rechne mit den Annahmenzellen.",
+          "data": [
+            ["Sensitivität", "Wert"],
+            ["EBITDA 2025 (CHF)", 9900000],
+            ["EV/EBITDA-Multiple", 8.5],
+            ["Sensitivität Multiple", 1],
+            ["Kaufpreisangebot (CHF)", 78000000],
+            ["Annuität aus Aufgabe 4 (CHF)", 9434338.77],
+            ["Angebot gedeckt bei Multiple minus 1?", null]
+          ],
+          "target": "B7",
+          "solution": "=WENN(B2*(B3-B4)>=B5;\"Ja\";\"Nein\")",
+          "mustUse": ["WENN"],
+          "accept": [
+            "=WENN(B5<=B2*(B3-B4);\"Ja\";\"Nein\")",
+            "=WENN(B2*B3-B2*B4>=B5;\"Ja\";\"Nein\")",
+            "=WENN(B2*(B3-B4)<B5;\"Nein\";\"Ja\")"
+          ],
+          "alt": [
+            { "data": [
+              ["Sensitivität", "Wert"],
+              ["EBITDA 2025 (CHF)", 7800000],
+              ["EV/EBITDA-Multiple", 12],
+              ["Sensitivität Multiple", 1],
+              ["Kaufpreisangebot (CHF)", 85000000],
+              ["Annuität aus Aufgabe 4 (CHF)", 7653882.31],
+              ["Angebot gedeckt bei Multiple minus 1?", null]
+            ] }
+          ],
+          "hints": {
+            "quotes": "Text wie Ja und Nein gehört in Anführungszeichen: \"Ja\".",
+            "generic": "Aufbau: =WENN(B2*(B3-B4)>=B5;\"Ja\";\"Nein\"). Rechne den Enterprise Value mit dem reduzierten Multiple neu."
+          }
+        }
+      ],
+      "categories": {
+        "bezug": { "exercises": ["absolut-1", "acc-anteil-1"] },
+        "syntax": { "exercises": ["fin-zinseszins-1", "summe-1", "mittelwert-1"] },
+        "logik": { "exercises": ["wenn-1", "zaehlenwenn-1"] },
+        "lookup": { "exercises": ["sverweis-1", "summewenn-1", "summewenn-2"] },
+        "rundung": { "exercises": ["runden-1"] },
+        "modell": { "exercises": ["fin-zins-1", "fin-cashflow-1", "acc-abweichung-2"] }
+      }
+    },
+    {
+      "id": "versicherung",
+      "role": "Versicherung",
+      "title": "Excel-Assessment Versicherung",
+      "intro": "Du analysierst die Sparte Motorfahrzeug einer Schweizer Versicherung: Schadenquote, Combined Ratio, Grossschäden, Tarifprämie nach Altersklasse und die Prämie mit Stempelsteuer auf 5 Rappen. Jede Aufgabe baut auf dem Ergebnis der vorherigen auf.",
+      "minutes": 15,
+      "free": true,
+      "nextTrack": "finance",
+      "tasks": [
+        {
+          "id": "as-ver-1",
+          "category": "modell",
+          "points": 20,
+          "topic": "Schadenquote",
+          "title": "Schadenquote",
+          "task": "Berechne in B5 die Schadenquote: Schadenaufwand (bezahlte Schäden B3 plus Veränderung der Schadenrückstellungen B4) geteilt durch die verdienten Prämien B2. Setze die Klammern richtig und rechne nicht mal 100. Das Ergebnis ist ein Dezimalwert wie 0.65.",
+          "data": [
+            ["Kennzahl", "Wert"],
+            ["Verdiente Prämien (CHF)", 128400000],
+            ["Bezahlte Schäden (CHF)", 71250000],
+            ["Veränderung Schadenrückstellungen (CHF)", 9830000],
+            ["Schadenquote", null]
+          ],
+          "target": "B5",
+          "solution": "=(B3+B4)/B2",
+          "accept": ["=SUMME(B3:B4)/B2", "=B3/B2+B4/B2", "=($B$3+$B$4)/$B$2"],
+          "alt": [
+            { "data": [
+              ["Kennzahl", "Wert"],
+              ["Verdiente Prämien (CHF)", 96500000],
+              ["Bezahlte Schäden (CHF)", 58700000],
+              ["Veränderung Schadenrückstellungen (CHF)", -2150000],
+              ["Schadenquote", null]
+            ] }
+          ],
+          "hints": {
+            "generic": "Erst den Schadenaufwand in Klammern rechnen, dann teilen: =(B3+B4)/B2."
+          }
+        },
+        {
+          "id": "as-ver-2",
+          "category": "syntax",
+          "points": 20,
+          "topic": "Combined Ratio",
+          "title": "Combined Ratio",
+          "task": "Die Schadenquote aus Aufgabe 1 steht gerundet in B3. Berechne in B5 die Combined Ratio: Schadenquote plus Kostenquote. Die Kostenquote ist der Betriebsaufwand (B4) geteilt durch die verdienten Prämien (B2). Denk an Punkt vor Strich.",
+          "data": [
+            ["Kennzahl", "Wert"],
+            ["Verdiente Prämien (CHF)", 128400000],
+            ["Schadenquote (Aufgabe 1)", 0.6315],
+            ["Betriebsaufwand (CHF)", 38520000],
+            ["Combined Ratio", null]
+          ],
+          "target": "B5",
+          "solution": "=B3+B4/B2",
+          "accept": ["=B3+(B4/B2)", "=B4/B2+B3", "=$B$3+$B$4/$B$2"],
+          "alt": [
+            { "data": [
+              ["Kennzahl", "Wert"],
+              ["Verdiente Prämien (CHF)", 96500000],
+              ["Schadenquote (Aufgabe 1)", 0.586],
+              ["Betriebsaufwand (CHF)", 31845000],
+              ["Combined Ratio", null]
+            ] }
+          ],
+          "hints": {
+            "generic": "Punkt vor Strich: =B3+B4/B2 rechnet zuerst die Kostenquote B4/B2 und zählt dann die Schadenquote dazu. =(B3+B4)/B2 wäre falsch."
+          }
+        },
+        {
+          "id": "as-ver-3",
+          "category": "logik",
+          "points": 20,
+          "topic": "ZÄHLENWENN",
+          "title": "Grossschäden zählen",
+          "task": "Die Combined Ratio aus Aufgabe 2 steht in E5. Zähle in E3, wie viele Schäden in B2:B11 über der Schwelle in E2 liegen. Nutze ZÄHLENWENN und beziehe dich auf E2, statt die Zahl fest einzutippen: Das Kriterium lautet \">\"&E2.",
+          "data": [
+            ["Schaden-Nr.", "Betrag (CHF)", null, "Grossschäden", "Wert"],
+            ["S-2401", 18450, null, "Schwelle (CHF)", 100000],
+            ["S-2402", 312800, null, "Anzahl Grossschäden", null],
+            ["S-2403", 7920.5],
+            ["S-2404", 145600, null, "Combined Ratio (Aufgabe 2)", 0.9315],
+            ["S-2405", 96300],
+            ["S-2406", 1250.5],
+            ["S-2407", 520000],
+            ["S-2408", 64780],
+            ["S-2409", 101250],
+            ["S-2410", 33400]
+          ],
+          "target": "E3",
+          "solution": "=ZÄHLENWENN(B2:B11;\">\"&E2)",
+          "mustUse": ["ZÄHLENWENN"],
+          "accept": ["=ZÄHLENWENN($B$2:$B$11;\">\"&$E$2)"],
+          "alt": [
+            { "data": [
+              ["Schaden-Nr.", "Betrag (CHF)", null, "Grossschäden", "Wert"],
+              ["S-2401", 18450, null, "Schwelle (CHF)", 150000],
+              ["S-2402", 312800, null, "Anzahl Grossschäden", null],
+              ["S-2403", 7920.5],
+              ["S-2404", 145600, null, "Combined Ratio (Aufgabe 2)", 0.916],
+              ["S-2405", 96300],
+              ["S-2406", 1250.5],
+              ["S-2407", 520000],
+              ["S-2408", 64780],
+              ["S-2409", 101250],
+              ["S-2410", 33400]
+            ] }
+          ],
+          "hints": {
+            "quotes": "Der Vergleich gehört in Anführungszeichen und wird mit & an die Zelle gehängt: \">\"&E2.",
+            "generic": "Aufbau: =ZÄHLENWENN(B2:B11;\">\"&E2)."
+          }
+        },
+        {
+          "id": "as-ver-4",
+          "category": "lookup",
+          "points": 20,
+          "topic": "SVERWEIS · WAHR",
+          "title": "Prämie nach Altersklasse",
+          "task": "Wegen der Grossschäden aus Aufgabe 3 (B6) gilt ein Tarifzuschlag (B3). Berechne in B4 die Jahresprämie für die Kundin mit dem Alter in B2: Grundprämie per SVERWEIS aus der Altersstaffel D2:E6, mal (1 plus Zuschlag). Die Staffel nennt nur das Alter ab, also brauchst du die ungefähre Suche mit WAHR.",
+          "data": [
+            ["Tarif", "Wert", null, "Alter ab", "Grundprämie (CHF)"],
+            ["Alter Kundin", 42, null, 18, 2480],
+            ["Tarifzuschlag", 0.04, null, 25, 1690],
+            ["Jahresprämie (CHF)", null, null, 35, 1385.5],
+            [null, null, null, 50, 1290],
+            ["Anzahl Grossschäden (Aufgabe 3)", 4, null, 65, 1545]
+          ],
+          "target": "B4",
+          "solution": "=SVERWEIS(B2;$D$2:$E$6;2;WAHR)*(1+B3)",
+          "mustUse": ["SVERWEIS"],
+          "accept": [
+            "=SVERWEIS(B2;D2:E6;2;WAHR)*(1+B3)",
+            "=(1+B3)*SVERWEIS(B2;$D$2:$E$6;2;WAHR)",
+            "=SVERWEIS(B2;$D$2:$E$6;2)*(1+B3)",
+            "=SVERWEIS(B2;$D$2:$E$6;2;1)*(1+B3)"
+          ],
+          "alt": [
+            { "data": [
+              ["Tarif", "Wert", null, "Alter ab", "Grundprämie (CHF)"],
+              ["Alter Kundin", 24, null, 18, 2480],
+              ["Tarifzuschlag", 0.03, null, 25, 1690],
+              ["Jahresprämie (CHF)", null, null, 35, 1385.5],
+              [null, null, null, 50, 1290],
+              ["Anzahl Grossschäden (Aufgabe 3)", 2, null, 65, 1545]
+            ] },
+            { "data": [
+              ["Tarif", "Wert", null, "Alter ab", "Grundprämie (CHF)"],
+              ["Alter Kundin", 67, null, 18, 2480],
+              ["Tarifzuschlag", 0.05, null, 25, 1690],
+              ["Jahresprämie (CHF)", null, null, 35, 1385.5],
+              [null, null, null, 50, 1290],
+              ["Anzahl Grossschäden (Aufgabe 3)", 5, null, 65, 1545]
+            ] }
+          ],
+          "hints": {
+            "generic": "Aufbau: =SVERWEIS(B2;$D$2:$E$6;2;WAHR)*(1+B3). Mit WAHR findet Excel die grösste Altersgrenze, die kleiner oder gleich dem Alter ist. Mit FALSCH gibt es #NV, weil das genaue Alter nicht in der Staffel steht."
+          }
+        },
+        {
+          "id": "as-ver-5",
+          "category": "rundung",
+          "points": 20,
+          "topic": "VRUNDEN",
+          "title": "Prämie mit Stempelsteuer",
+          "task": "Die Jahresprämie aus Aufgabe 4 steht in B2. Auf die Prämie kommt die eidgenössische Stempelsteuer (Satz in B3) dazu. Berechne in B4 die Prämie inklusive Stempelsteuer, gerundet auf 5 Rappen. Nutze VRUNDEN.",
+          "data": [
+            ["Prämie", "Wert"],
+            ["Jahresprämie (CHF)", 1440.92],
+            ["Stempelsteuer", 0.05],
+            ["Prämie inkl. Stempelsteuer, auf 5 Rappen (CHF)", null]
+          ],
+          "target": "B4",
+          "solution": "=VRUNDEN(B2*(1+B3);0.05)",
+          "mustUse": ["VRUNDEN"],
+          "accept": ["=VRUNDEN(B2+B2*B3;0.05)", "=VRUNDEN((1+B3)*B2;0.05)", "=VRUNDEN(B2*(1+$B$3);0.05)"],
+          "alt": [
+            { "data": [
+              ["Prämie", "Wert"],
+              ["Jahresprämie (CHF)", 2554.4],
+              ["Stempelsteuer", 0.05],
+              ["Prämie inkl. Stempelsteuer, auf 5 Rappen (CHF)", null]
+            ] },
+            { "data": [
+              ["Prämie", "Wert"],
+              ["Jahresprämie (CHF)", 1622.25],
+              ["Stempelsteuer", 0.025],
+              ["Prämie inkl. Stempelsteuer, auf 5 Rappen (CHF)", null]
+            ] }
+          ],
+          "hints": {
+            "generic": "Erst die Prämie mit Stempelsteuer rechnen, dann runden: =VRUNDEN(B2*(1+B3);0.05). Das Vielfache 0.05 schreibst du mit Punkt."
+          }
+        }
+      ],
+      "categories": {
+        "bezug": { "exercises": ["absolut-1", "acc-anteil-1"] },
+        "syntax": { "exercises": ["mittelwert-1", "summe-1"] },
+        "logik": { "exercises": ["zaehlenwenn-1", "wenn-1"] },
+        "lookup": { "exercises": ["sverweis-1", "summewenn-1"] },
+        "rundung": { "exercises": ["runden-1"] },
+        "modell": { "exercises": ["acc-abweichung-2", "acc-anteil-1", "fin-zins-1"] }
+      }
+    },
+    {
+      "id": "kv",
+      "role": "KV-Lehrstelle / Einstellungstest",
+      "title": "Excel-Test KV-Lehrstelle",
+      "intro": "Du arbeitest im Büro eines Velofachgeschäfts: Monatsumsätze summieren, den Durchschnitt rechnen, eine Rechnung mit 8.1 % MwSt erstellen, über einen Rabatt entscheiden und Preise nachschlagen. Jede Aufgabe baut auf dem Ergebnis der vorherigen auf.",
+      "minutes": 12,
+      "free": true,
+      "nextTrack": "basis",
+      "tasks": [
+        {
+          "id": "as-kv-1",
+          "category": "syntax",
+          "points": 20,
+          "topic": "SUMME",
+          "title": "Umsatz im Halbjahr",
+          "task": "In B2:B7 stehen die Umsätze von Januar bis Juni. Berechne in B8 das Total des ersten Halbjahres. Nutze SUMME mit einem Bereich.",
+          "data": [
+            ["Monat", "Umsatz (CHF)"],
+            ["Januar", 21340.5],
+            ["Februar", 19875.25],
+            ["März", 24110],
+            ["April", 22560.75],
+            ["Mai", 25980.4],
+            ["Juni", 23415.1],
+            ["Total 1. Halbjahr", null]
+          ],
+          "target": "B8",
+          "solution": "=SUMME(B2:B7)",
+          "mustUse": ["SUMME"],
+          "accept": ["=SUMME($B$2:$B$7)", "=SUMME(B2;B3;B4;B5;B6;B7)"],
+          "alt": [
+            { "data": [
+              ["Monat", "Umsatz (CHF)"],
+              ["Januar", 18920.4],
+              ["Februar", 20450],
+              ["März", 22315.75],
+              ["April", 19880.6],
+              ["Mai", 24105.3],
+              ["Juni", 21760.95],
+              ["Total 1. Halbjahr", null]
+            ] }
+          ],
+          "hints": {
+            "generic": "Aufbau: =SUMME(B2:B7). Der Doppelpunkt steht für «von B2 bis B7»."
+          }
+        },
+        {
+          "id": "as-kv-2",
+          "category": "modell",
+          "points": 20,
+          "topic": "MITTELWERT",
+          "title": "Durchschnitt pro Monat",
+          "task": "Das Total aus Aufgabe 1 steht in B8. Berechne in B9 den durchschnittlichen Monatsumsatz der sechs Monate mit MITTELWERT. Achtung: Die Total-Zeile gehört nicht in den Bereich.",
+          "data": [
+            ["Monat", "Umsatz (CHF)"],
+            ["Januar", 21340.5],
+            ["Februar", 19875.25],
+            ["März", 24110],
+            ["April", 22560.75],
+            ["Mai", 25980.4],
+            ["Juni", 23415.1],
+            ["Total 1. Halbjahr", 137282],
+            ["Durchschnitt pro Monat", null]
+          ],
+          "target": "B9",
+          "solution": "=MITTELWERT(B2:B7)",
+          "mustUse": ["MITTELWERT"],
+          "accept": ["=MITTELWERT($B$2:$B$7)"],
+          "alt": [
+            { "data": [
+              ["Monat", "Umsatz (CHF)"],
+              ["Januar", 18920.4],
+              ["Februar", 20450],
+              ["März", 22315.75],
+              ["April", 19880.6],
+              ["Mai", 24105.3],
+              ["Juni", 21760.95],
+              ["Total 1. Halbjahr", 127433],
+              ["Durchschnitt pro Monat", null]
+            ] }
+          ],
+          "hints": {
+            "generic": "Aufbau: =MITTELWERT(B2:B7). Nimmst du B8 mit, zählt das Total wie ein siebter Monat mit."
+          }
+        },
+        {
+          "id": "as-kv-3",
+          "category": "bezug",
+          "points": 20,
+          "topic": "Absoluter Bezug",
+          "title": "Rechnung mit MwSt",
+          "task": "Du erstellst eine Rechnung. Die Nettobeträge stehen in B2:B4, der MwSt-Satz von 8.1 % in F1 (der Durchschnitt aus Aufgabe 2 steht zur Info in F2). Berechne in C2 den Bruttobetrag von B2. Die Formel soll nach unten kopierbar sein: Fixiere F1 mit $.",
+          "data": [
+            ["Artikel", "Netto (CHF)", "Brutto (CHF)", null, "MwSt-Satz", 0.081],
+            ["Kinder-Velo", 1250.5, null, null, "Durchschnitt pro Monat (Aufgabe 2)", 22880.33],
+            ["Velohelme (4 Stück)", 384, null],
+            ["Veloschloss", 96.4, null]
+          ],
+          "target": "C2",
+          "solution": "=B2*(1+$F$1)",
+          "mustContain": ["$F$1"],
+          "accept": ["=B2+B2*$F$1", "=(1+$F$1)*B2", "=B2*($F$1+1)"],
+          "fillDown": "C2:C4",
+          "alt": [
+            { "data": [
+              ["Artikel", "Netto (CHF)", "Brutto (CHF)", null, "MwSt-Satz", 0.081],
+              ["Kinder-Velo", 980, null, null, "Durchschnitt pro Monat (Aufgabe 2)", 21238.83],
+              ["Velohelme (2 Stück)", 215.6, null],
+              ["Veloschloss", 44.9, null]
+            ] }
+          ],
+          "hints": {
+            "dollar": "Ohne $ verschiebt sich F1 beim Kopieren nach unten. Schreibe $F$1.",
+            "generic": "Brutto = Netto mal (1 plus Satz), also =B2*(1+$F$1)."
+          }
+        },
+        {
+          "id": "as-kv-4",
+          "category": "logik",
+          "points": 20,
+          "topic": "WENN",
+          "title": "Rabatt ja oder nein",
+          "task": "Das Rechnungstotal brutto aus Aufgabe 3 steht in B2. Ab einem Total von B3 gibt es den Rabattsatz in B4. Berechne in B5 den Rabatt in CHF mit WENN: Ist das Total mindestens so hoch wie die Grenze, dann Total mal Rabattsatz, sonst 0.",
+          "data": [
+            ["Rabatt", "Wert"],
+            ["Rechnungstotal brutto (CHF)", 1871.1],
+            ["Rabatt ab (CHF)", 1500],
+            ["Rabattsatz", 0.03],
+            ["Rabatt (CHF)", null]
+          ],
+          "target": "B5",
+          "solution": "=WENN(B2>=B3;B2*B4;0)",
+          "mustUse": ["WENN"],
+          "accept": ["=WENN(B3<=B2;B2*B4;0)", "=WENN(B2<B3;0;B2*B4)", "=WENN(B2>=B3;B4*B2;0)"],
+          "alt": [
+            { "data": [
+              ["Rabatt", "Wert"],
+              ["Rechnungstotal brutto (CHF)", 1280.45],
+              ["Rabatt ab (CHF)", 1500],
+              ["Rabattsatz", 0.03],
+              ["Rabatt (CHF)", null]
+            ] },
+            { "data": [
+              ["Rabatt", "Wert"],
+              ["Rechnungstotal brutto (CHF)", 2450.8],
+              ["Rabatt ab (CHF)", 2000],
+              ["Rabattsatz", 0.05],
+              ["Rabatt (CHF)", null]
+            ] }
+          ],
+          "hints": {
+            "generic": "Aufbau: =WENN(B2>=B3;B2*B4;0). Bedingung; Wert wenn wahr; Wert wenn falsch."
+          }
+        },
+        {
+          "id": "as-kv-5",
+          "category": "lookup",
+          "points": 20,
+          "topic": "SVERWEIS",
+          "title": "Preis nachschlagen",
+          "task": "Eine Kundin bestellt nach (der Rabatt aus Aufgabe 4 steht zur Info in B6). Schlage in B4 den Stückpreis des Artikels mit der Nummer in B2 in der Preisliste D2:F7 nach und multipliziere ihn mit der Menge in B3. Nutze SVERWEIS mit exakter Suche (FALSCH).",
+          "data": [
+            ["Bestellung", "Wert", null, "Artikel-Nr.", "Bezeichnung", "Preis (CHF)"],
+            ["Artikel-Nr.", "V-310", null, "V-120", "Veloschloss", 48.2],
+            ["Menge", 12, null, "V-310", "Velohelm", 96],
+            ["Betrag (CHF)", null, null, "V-205", "Kinder-Velo", 1250.5],
+            [null, null, null, "V-450", "Velopumpe", 34.9],
+            ["Rabatt (Aufgabe 4)", 56.13, null, "V-118", "Licht-Set", 59.8],
+            [null, null, null, "V-333", "Flickzeug", 12.5]
+          ],
+          "target": "B4",
+          "solution": "=SVERWEIS(B2;$D$2:$F$7;3;FALSCH)*B3",
+          "mustUse": ["SVERWEIS"],
+          "accept": ["=B3*SVERWEIS(B2;$D$2:$F$7;3;FALSCH)", "=SVERWEIS(B2;D2:F7;3;FALSCH)*B3", "=SVERWEIS(B2;$D$2:$F$7;3;0)*B3"],
+          "alt": [
+            { "data": [
+              ["Bestellung", "Wert", null, "Artikel-Nr.", "Bezeichnung", "Preis (CHF)"],
+              ["Artikel-Nr.", "V-450", null, "V-120", "Veloschloss", 48.2],
+              ["Menge", 8, null, "V-310", "Velohelm", 96],
+              ["Betrag (CHF)", null, null, "V-205", "Kinder-Velo", 1250.5],
+              [null, null, null, "V-450", "Velopumpe", 34.9],
+              ["Rabatt (Aufgabe 4)", 0, null, "V-118", "Licht-Set", 59.8],
+              [null, null, null, "V-333", "Flickzeug", 12.5]
+            ] }
+          ],
+          "hints": {
+            "quotes": "Die Artikelnummer steht in B2. Beziehe dich auf B2, statt die Nummer einzutippen.",
+            "generic": "Aufbau: =SVERWEIS(B2;$D$2:$F$7;3;FALSCH)*B3. Die 3 holt den Preis aus der dritten Spalte, FALSCH sucht die Nummer exakt."
+          }
+        }
+      ],
+      "categories": {
+        "bezug": { "exercises": ["absolut-1", "acc-anteil-1"] },
+        "syntax": { "exercises": ["summe-1", "mittelwert-1", "max-1"] },
+        "logik": { "exercises": ["wenn-1", "zaehlenwenn-1"] },
+        "lookup": { "exercises": ["sverweis-1", "summewenn-1"] },
+        "rundung": { "exercises": ["runden-1"] },
+        "modell": { "exercises": ["mittelwert-1", "acc-abweichung-1", "acc-anteil-1"] }
+      }
     }
   ]
 }

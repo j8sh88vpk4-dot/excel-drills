@@ -25,6 +25,7 @@
   <meta name="apple-mobile-web-app-title" content="Excel-Drills">
   <link rel="stylesheet" href="../assets/style.css">
   <link rel="stylesheet" href="../assets/assessment.css">
+  <link rel="stylesheet" href="../assets/sheet-pick.css">
   <link rel="stylesheet" href="../assets/interview.css">
   <script defer src="../assets/analytics.js"></script>
   <script type="application/ld+json">
@@ -63,6 +64,7 @@
         <a href="../pfad/">Pfade</a>
         <a href="../assessment/" aria-current="page">Assessment</a>
         <a href="../upload/">Datei prüfen</a>
+        <a href="../kampagne/">Kampagne</a>
         <a href="../artikel/">Artikel</a>
         <a href="../handouts/">Handouts</a>
         <a href="../premium.html">Preise</a>
@@ -82,10 +84,10 @@
       </nav>
       <h1 id="as-h1">Excel-Assessment üben</h1>
       <div class="summary">
-        <p>15 Minuten, 5 Aufgaben, ein kleines Modell: Teste dich wie im echten Bewerbungsverfahren und erhalte sofort eine Einstufung, eine Diagnose pro Fehlerart und einen 7-Tage-Plan.</p>
+        <p>12 bis 15 Minuten, 5 Aufgaben, ein kleines Modell: Teste dich wie im echten Bewerbungsverfahren und erhalte sofort eine Einstufung, eine Diagnose pro Fehlerart und einen 7-Tage-Plan.</p>
       </div>
       <p>Ein Excel-Assessment ist ein kurzer Praxistest, den Beratungen, Treuhandbüros, Banken und Versicherungen im Bewerbungsprozess einsetzen. Du bekommst eine Tabelle und eine Aufgabe, meist unter Zeitdruck, und sollst mit sauberen Formeln zum richtigen Ergebnis kommen. Geprüft wird selten Spezialwissen, sondern ob du Bezüge fixierst, Bedingungen richtig formulierst, sauber rundest und ein Modell Schritt für Schritt aufbaust.</p>
-      <p>Hier übst du das gratis und auf Schweizer Excel: deutsche Funktionsnamen wie SUMMEWENN und VRUNDEN, Semikolon als Trennzeichen, Beträge in CHF. Es gibt zwei Rollen. Im Test <strong>Consulting</strong> rechnest du einen Business Case durch, von der Marktgrösse über den Break-even bis zum Wachstum. Im Test <strong>Accounting</strong> prüfst du Debitoren, rechnest Netto aus Brutto, rundest auf 5 Rappen und stimmst Soll und Haben ab.</p>
+      <p>Hier übst du das gratis und auf Schweizer Excel: deutsche Funktionsnamen wie SUMMEWENN und VRUNDEN, Semikolon als Trennzeichen, Beträge in CHF. Es gibt fünf Rollen. Im Test <strong>Consulting</strong> rechnest du einen Business Case durch, von der Marktgrösse über den Break-even bis zum Wachstum. Im Test <strong>Accounting</strong> prüfst du Debitoren, rechnest Netto aus Brutto, rundest auf 5 Rappen und stimmst Soll und Haben ab. Im Test <strong>Investment Banking / Corporate Finance</strong> bewertest du eine Übernahme mit CAGR, EBITDA-Marge, EV/EBITDA-Multiple und dem Schuldendienst per RMZ. Im Test <strong>Versicherung</strong> rechnest du Schadenquote und Combined Ratio, zählst Grossschäden und bestimmst die Prämie mit Stempelsteuer. Der <strong>KV-Einstellungstest</strong> ist mit 12 Minuten etwas kürzer und prüft die Grundlagen für die KV-Lehrstelle: SUMME, MITTELWERT, MwSt, WENN und SVERWEIS.</p>
       <p>So läuft der Test ab: Du wählst deine Rolle und startest den Timer. Die fünf Aufgaben bauen aufeinander auf. Pro Aufgabe hast du zwei Versuche: Beim ersten Versuch gibt es 20 Punkte, beim zweiten noch 10. Du kannst eine Aufgabe auch überspringen. Am Ende siehst du dein Ergebnis in Prozent, die Musterlösungen und welche Gratis-Übungen deine Lücken schliessen. Dein Ergebnis bleibt nur in diesem Browser gespeichert.</p>
 
       <h2 class="as-cards-h">Wähle deine Rolle</h2>
@@ -104,6 +106,27 @@
             <span class="role-meta">5 Aufgaben · 15 Minuten · gratis</span>
           </a>
         </li>
+        <li>
+          <a class="role-card" href="?rolle=ib" data-rolle="ib">
+            <span class="role-name">Investment Banking / Corporate Finance</span>
+            <span class="role-desc">Übernahme-Bewertung: CAGR, EBITDA-Marge, EV per Multiple mit SVERWEIS, Annuität mit RMZ, Sensitivität mit WENN.</span>
+            <span class="role-meta">5 Aufgaben · 15 Minuten · gratis</span>
+          </a>
+        </li>
+        <li>
+          <a class="role-card" href="?rolle=versicherung" data-rolle="versicherung">
+            <span class="role-name">Versicherung</span>
+            <span class="role-desc">Sparte Motorfahrzeug: Schadenquote, Combined Ratio, Grossschäden mit ZÄHLENWENN, Prämienstaffel mit SVERWEIS, Stempelsteuer mit VRUNDEN.</span>
+            <span class="role-meta">5 Aufgaben · 15 Minuten · gratis</span>
+          </a>
+        </li>
+        <li>
+          <a class="role-card" href="?rolle=kv" data-rolle="kv">
+            <span class="role-name">KV-Lehrstelle / Einstellungstest</span>
+            <span class="role-desc">Velofachgeschäft: SUMME, MITTELWERT, Rechnung mit MwSt und $-Bezug, Rabatt mit WENN, Preis mit SVERWEIS.</span>
+            <span class="role-meta">5 Aufgaben · 12 Minuten · gratis</span>
+          </a>
+        </li>
       </ul>
       <p class="loading" id="as-loading">Aufgaben und Formel-Engine werden geladen&hellip;</p>
       <noscript><p class="notice err">Das Assessment braucht JavaScript, um deine Formeln zu prüfen.</p></noscript>
@@ -116,12 +139,21 @@
         <h2 id="as-start-title" tabindex="-1"></h2>
         <p id="as-start-intro"></p>
         <p class="as-meta" id="as-start-meta"></p>
+        <!-- Excel-Sprache: nur vor dem Start wählbar, ?lang=en belegt English vor (app/assessment.js) -->
+        <div class="as-lang" role="group" aria-labelledby="as-lang-label">
+          <span class="as-lang-label" id="as-lang-label">Excel-Sprache</span>
+          <span class="as-lang-switch">
+            <button type="button" id="as-lang-de" data-lang="de" aria-pressed="true">Deutsch (DE-CH)</button>
+            <button type="button" id="as-lang-en" data-lang="en" aria-pressed="false" lang="en">English</button>
+          </span>
+          <p class="fine as-lang-note" id="as-lang-note" hidden>Aufgabentexte auf Deutsch, Formeln auf Englisch.</p>
+        </div>
         <h3>Regeln</h3>
         <ul class="as-rules">
           <li>Der Timer läuft ab dem Start. Bei 0:00 wird automatisch ausgewertet.</li>
           <li>Pro Aufgabe hast du 2 Versuche: 20 Punkte beim ersten, 10 beim zweiten.</li>
           <li>Du kannst eine Aufgabe überspringen, sie zählt dann 0 Punkte.</li>
-          <li>Schreib die Formel wie in Excel Schweiz: mit =, deutschen Funktionsnamen, Semikolon (;) und Dezimalpunkt.</li>
+          <li id="as-rule-syntax">Schreib die Formel wie in Excel Schweiz: mit =, deutschen Funktionsnamen, Semikolon (;) und Dezimalpunkt.</li>
         </ul>
         <p class="fine" id="as-start-prev" hidden></p>
         <div class="actions">
@@ -190,6 +222,7 @@
           <span class="as-level" id="as-res-level"></span>
         </div>
         <p id="as-res-points"></p>
+        <div id="as-recruiter-status" role="status" aria-live="polite" hidden></div>
 
         <h3>Diagnose</h3>
         <ol class="diag-list" id="as-res-diag"></ol>
@@ -233,10 +266,13 @@
           integrity="sha384-J7i5jngggSLZ7jIxuRKLh1jM0ZzhEZOPdCX6KrBHZXyWn4WYxANOzzWioi+nEK7w" crossorigin="anonymous" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/hyperformula@3.0.0/dist/languages/deDE.js"
           integrity="sha384-jWD9rgGJKCeZXZfD9IcDj4ex7PkMA3oQZbqPtUPh8VB0iQdD3DmT84VMqb2UB0nO" crossorigin="anonymous" defer></script>
+  <script src="../assets/leads-config.js"></script>
   <script src="../app/keys.js" defer></script>
   <script src="../app/engine.js" defer></script>
   <script src="../app/errors.js" defer></script>
   <script src="../app/interview.js" defer></script>
+  <script src="../app/sheet-pick.js" defer></script>
   <script src="../app/assessment.js" defer></script>
+  <script src="../app/recruiter.js" defer></script>
 </body>
 </html>
