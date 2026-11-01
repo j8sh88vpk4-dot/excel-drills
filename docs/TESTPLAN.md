@@ -100,3 +100,11 @@ Grauzone dazwischen: 4 weitere Wochen mit 10 zusätzlichen Übungen und Funktion
 - Google-KI-Übersicht zu «excel übungen schweiz» listet LogicExcel (95 Gratis-Übungen im Browser, englisch gebaut, SUM/VLOOKUP), Coddy, Easy4Me, zebis, Wings. Excel-Drills fehlt (neu). Einziger direkter Konkurrent: LogicExcel; Differenzierung bleibt Deutsch/Semikolon/CHF/Berufspfade.
 - Massnahme: Vergleichsartikel `artikel/excel-ueben-online-vergleich.html` (Generator `scripts/artikel/a_vergleich.py`), transparent mit eigener Plattform; Ziel ist die Zitierung in der KI-Übersicht. Startseiten-Title/Description auf «Excel üben auf Deutsch … (Schweiz)» geschärft.
 - Werbung: Woche 1 keine; ab 9.11. Meta-Boost max. CHF 70 nur bei ≥30 % Mini-Übung-Quote und vorhandenen Premium-Klicks; Google Ads erst nach dem Go am 27.11.
+
+## 1.11.2026: SEO-Ausbau und SEA-Plan
+
+- Drei neue Artikel auf Nischen-Keywords: `excel-einstellungstest-ueben.html`, `excel-uebungen-kv.html`, `vrunden-5-rappen.html` (Generatoren `scripts/artikel/a_*.py`). Alle Artikel haben jetzt BreadcrumbList, Publisher mit Logo, image und mainEntityOfPage.
+- Startseite: H1 «Excel üben statt zuschauen: Übungen auf Deutsch, sofort geprüft», Title 62 / Description 157 Zeichen, Footer-Links auf /fr/ und /it/, H2 «Excel-Übungen für die Schweiz: Semikolon, CHF und Rappen», WebSite-JSON-LD mit Organization (Logo, Instagram).
+- Search Console: Property https://excel-drills.ch/ verifiziert (Meta-Tag + googlef20840efa829eb89.html, beide behalten), Sitemap eingereicht, Indexierung beantragt.
+- SEA: Plan in docs/SEA-PLAN.md (Phasen, Keywords, Anzeigentexte, Abbruchregeln). Keine Werbung vor dem 9.11.
+- Offen (Hosting): HSTS, Referrer-Policy, Cache-Control für /assets im Render-Dashboard setzen; render.yaml wird ignoriert.

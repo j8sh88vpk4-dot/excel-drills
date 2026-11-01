@@ -10,6 +10,9 @@ ARTICLES = [
     ("wenn-funktion.html", "WENN-Funktion in Excel", "Bedingungen prüfen und Entscheidungen abbilden: Budgetkontrolle, Selbstbehalt, UND/ODER und verschachtelte WENN."),
     ("zaehlenwenn.html", "ZÄHLENWENN in Excel", "Zählen, was eine Bedingung erfüllt: offene Pendenzen, Schäden über einer Schwelle, Duplikate finden."),
     ("absolute-bezuege.html", "Absolute Bezüge in Excel ($)", "Wann du das Dollarzeichen brauchst: MwSt mit festem Satz, Anteil am Total, gemischte Bezüge für Tabellen."),
+    ("excel-einstellungstest-ueben.html", "Excel-Einstellungstest üben", "Was im Excel-Test bei der Bewerbung typischerweise geprüft wird: 5 Aufgaben mit Lösung, 7-Tage-Lernplan, typische Fehler."),
+    ("excel-uebungen-kv.html", "Excel-Übungen für die KV-Lehre", "Rechnung mit MwSt, Umsatzlisten, Offene Posten, Rappenrundung: 6 Übungen aus dem KV-Alltag mit Lösung, gratis für Berufsschulen."),
+    ("vrunden-5-rappen.html", "Excel auf 5 Rappen runden: VRUNDEN", "=VRUNDEN(Betrag;0.05) erklärt: Beispiele, Alternativen, MwSt-Rechnung und die typischen Fehler bei der Rappenrundung."),
     ("excel-ueben-online-vergleich.html", "Excel online üben: 6 Plattformen im Vergleich (Schweiz)", "LogicExcel, Coddy, Easy4Me, zebis, Wings und Excel-Drills: Was gratis ist, wo deutsche Funktionsnamen und Semikolon stimmen, was für KV, Controlling und Einstellungstest taugt."),
 ]
 
@@ -131,14 +134,20 @@ def article_page(slug, title, desc, h1, summary, body, faq, practice, date_iso=N
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub(r'<[^>]+>', '', a).replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&').replace('&nbsp;', ' ')}} for q, a in faq]}
     art_ld = {"@context": "https://schema.org", "@type": "Article", "headline": h1, "description": desc,
               "inLanguage": "de-CH", "datePublished": date_iso, "dateModified": date_iso,
-              "author": {"@type": "Organization", "name": "Excel-Drills"},
-              "publisher": {"@type": "Organization", "name": "Excel-Drills"}}
+              "image": DOMAIN + "/assets/og-image.png", "mainEntityOfPage": DOMAIN + "/artikel/" + slug,
+              "author": {"@type": "Organization", "name": "Excel-Drills", "url": DOMAIN + "/"},
+              "publisher": {"@type": "Organization", "name": "Excel-Drills", "url": DOMAIN + "/",
+                            "logo": {"@type": "ImageObject", "url": DOMAIN + "/assets/icons/apple-touch-icon.png"}}}
+    bc_ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Startseite", "item": DOMAIN + "/"},
+        {"@type": "ListItem", "position": 2, "name": "Artikel", "item": DOMAIN + "/artikel/"},
+        {"@type": "ListItem", "position": 3, "name": h1, "item": DOMAIN + "/artikel/" + slug}]}
     faq_html = '\n'.join(f'''          <details>
             <summary>{q}</summary>
             <p>{a}</p>
           </details>''' for q, a in faq)
     others = '\n'.join(f'            <li><a href="{f}">{t}</a>: {d}</li>' for f, t, d in ARTICLES if f != slug)
-    return f'''{head(title, desc, "artikel/" + slug, "article", [art_ld, faq_ld])}
+    return f'''{head(title, desc, "artikel/" + slug, "article", [art_ld, faq_ld, bc_ld])}
 <body>
 {header("../", "artikel")}
 

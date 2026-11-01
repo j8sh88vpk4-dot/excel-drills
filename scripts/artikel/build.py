@@ -4,7 +4,8 @@ OUT = "/Users/lucamoser/Documents/excel-drills/artikel/"  # Aufruf: python3 scri
 import os; os.makedirs(OUT, exist_ok=True)
 for mod, fn in [("a_sverweis", "sverweis.html"), ("a_summewenn", "summewenn.html"), ("a_wenn", "wenn-funktion.html"),
                 ("a_zaehlenwenn", "zaehlenwenn.html"), ("a_absolut", "absolute-bezuege.html"),
-                ("a_vergleich", "excel-ueben-online-vergleich.html")]:
+                ("a_vergleich", "excel-ueben-online-vergleich.html"), ("a_einstellungstest", "excel-einstellungstest-ueben.html"),
+                ("a_kv", "excel-uebungen-kv.html"), ("a_vrunden", "vrunden-5-rappen.html")]:
     m = importlib.import_module(mod)
     open(OUT + fn, "w", encoding="utf-8").write(m.PAGE)
 
@@ -13,7 +14,8 @@ desc = "Excel-Funktionen verständlich erklärt: SVERWEIS, SUMMEWENN, WENN, ZÄH
 ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Excel-Funktionen erklärt", "description": desc, "inLanguage": "de-CH",
       "hasPart": [{"@type": "Article", "headline": t} for _, t, _ in ARTICLES]}
 exercise = {"sverweis.html": "sverweis-1", "summewenn.html": "summewenn-1", "wenn-funktion.html": "wenn-1",
-            "zaehlenwenn.html": "zaehlenwenn-1", "absolute-bezuege.html": "absolut-1", "excel-ueben-online-vergleich.html": "summe-1"}
+            "zaehlenwenn.html": "zaehlenwenn-1", "absolute-bezuege.html": "absolut-1", "excel-ueben-online-vergleich.html": "summe-1", "excel-einstellungstest-ueben.html": "sverweis-1",
+            "excel-uebungen-kv.html": "absolut-1", "vrunden-5-rappen.html": "runden-1"}
 items = '\n'.join(f'''          <li>
             <h2><a href="{f}">{t}</a></h2>
             <p>{d}</p>

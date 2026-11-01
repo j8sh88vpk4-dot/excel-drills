@@ -87,8 +87,8 @@ faq = [
 ]
 
 PAGE = article_page("excel-ueben-online-vergleich.html",
-    "Excel online üben: 6 Plattformen im Vergleich (Schweiz, 2026)",
-    "Excel-Übungen online: LogicExcel, Coddy, Easy4Me, zebis, Wings und Excel-Drills im Vergleich. Was gratis ist, wo deutsche Funktionsnamen und Semikolon stimmen, was für KV, Controlling und Einstellungstest passt.",
+    "Excel online üben: 6 Plattformen im Vergleich (Schweiz)",
+    "LogicExcel, Coddy, Easy4Me, zebis, Wings und Excel-Drills im Vergleich: Was gratis ist, wo deutsche Funktionsnamen und Semikolon stimmen, was für KV passt.",
     "Excel online üben: 6 Plattformen im Vergleich (Schweiz)",
     "Wer Excel üben will, findet online viele Angebote, aber nur wenige prüfen deine Formel im Browser, und noch weniger mit deutschen Funktionsnamen, Semikolon und Schweizer Formaten. Wir vergleichen LogicExcel, Coddy, Easy4Me, zebis, Wings und unsere eigene Plattform Excel-Drills nach Umfang, Sprache, Prüfung und Preis.",
     body, faq, practice, date_iso="2026-11-01", date_text="1. November 2026")
