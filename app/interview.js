@@ -143,11 +143,39 @@
 
       var key = readKey();
       if (!key) {
-        var hint = el('p', 'iv-premium');
-        hint.appendChild(document.createTextNode('Das Interview ist Teil von Premium. '));
-        var a = el('a', null, 'Premium ansehen');
+        // Kein gespeicherter Code: Eingabefeld direkt hier (gleicher Speicher wie die Übungs-App)
+        var hint = el('div', 'iv-premium');
+        hint.appendChild(el('p', null, 'Das Interview ist Teil von Premium. Hast du schon einen Code? Dann gib ihn hier ein.'));
+        var f = el('form', 'iv-keyform');
+        f.setAttribute('novalidate', '');
+        var lab = el('label', 'visually-hidden', 'Premium-Code');
+        lab.htmlFor = 'iv-key-input';
+        var inp = el('input');
+        inp.id = 'iv-key-input'; inp.type = 'text'; inp.autocomplete = 'off'; inp.spellcheck = false;
+        inp.placeholder = 'XD-XXXX-XXXX-XXXX'; inp.className = 'iv-key-input';
+        var go = button('Code prüfen', 'btn-secondary', null);
+        go.type = 'submit';
+        var msg = el('p', 'iv-key-msg');
+        msg.setAttribute('role', 'status');
+        f.appendChild(lab); f.appendChild(inp); f.appendChild(go);
+        hint.appendChild(f); hint.appendChild(msg);
+        var a = el('a', null, 'Noch kein Premium? Preise ansehen');
         a.href = PREMIUM_URL;
         hint.appendChild(a);
+        f.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var k = String(inp.value || '').trim().toUpperCase();
+          var Keys = root.ExcelDrillsKeys;
+          if (!k || (Keys && typeof Keys.isValid === 'function' && !Keys.isValid(k))) {
+            msg.textContent = 'Dieser Code ist nicht gültig. Er steht im Freischalt-Link deiner Kaufbestätigung (Format XD-XXXX-XXXX-XXXX).';
+            inp.setAttribute('aria-invalid', 'true');
+            inp.focus();
+            return;
+          }
+          try { root.localStorage.setItem(STORAGE_KEY, k); } catch (err) { /* privater Modus: dann nur für diese Sitzung */ }
+          msg.textContent = 'Code gespeichert.';
+          renderIntro();
+        });
         box.appendChild(hint);
         return;
       }
