@@ -76,3 +76,10 @@ UTM-Parameter wertet Plausible automatisch aus; Schema in `social-kit/utm.md`.
   Bei Bedarf `start_url` auf `/app/?utm_source=pwa` ändern (CACHE_VERSION in sw.js nicht nötig, nur Manifest).
 - Offline gelöste Übungen senden kein `uebung_geloest` (Plausible nicht erreichbar, die Warteschlange geht mit
   dem Schliessen der Seite verloren).
+
+## Stand 31.10.2026 (Launch): Plausible-Site angelegt
+
+- Site in Plausible von `excel-uebungen.ch` auf `excel-drills.ch` umbenannt (Settings → General → Change domain); passt zu `DOMAIN` in `assets/analytics.js`. Erste Pageviews laufen ein.
+- Goals (Custom event) jetzt vollständig: `uebung_geloest`, `streak_3`, `premium_klick`, `kauf` (Revenue, CHF), `paywall_gezeigt`, `mini_geloest`, `handout_lead`, `pwa_install`, `land`.
+- Custom Properties freigegeben: `plan`, `uebung`, `pfad`, `land`, `ort`, `status`, `ergebnis`.
+- Offen: Funnel «Besuch → mini_geloest/uebung_geloest → paywall_gezeigt → premium_klick → kauf» (Settings → Funnels) und Wochenreport per E-Mail (Settings → Email reports). Hinweis von Plausible: Legacy-Snippet mit `data-domain`; funktioniert weiter, Umstieg auf das neue Script optional.
