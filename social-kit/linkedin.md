@@ -1,8 +1,8 @@
-# LinkedIn: 12 Posts
+# LinkedIn: 16 Posts
 
 Format: Hook in Zeile 1, kurze Absätze, max. ~1'300 Zeichen, 3–5 Hashtags, ein CTA mit dem fertigen UTM-Link.
 Link-Tipp: Den Link in den **ersten Kommentar** setzen und im Post «Link im ersten Kommentar» schreiben, wenn die Reichweite mit Link im Text sichtbar schlechter ist. Die Texte unten enthalten den fertigen Link direkt; je nach Variante in den ersten Kommentar verschieben.
-UTM-Links pro Post: eingesetzt, Referenz in `utm.md` (`li-01` … `li-12`).
+UTM-Links pro Post: eingesetzt, Referenz in `utm.md` (`li-01` … `li-16`).
 Bilder: `visuals/png/` (Angabe pro Post).
 
 ---
@@ -400,4 +400,138 @@ Danke an alle, die geübt, kommentiert und Fehler gemeldet haben. Besonders an {
 Zur Site: https://excel-drills.ch/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-12
 
 #BuildInPublic #SideProject #Gründen #Excel
+```
+
+---
+
+# B2B-Posts (LI-13 bis LI-16)
+
+Zielgruppen: HR/Recruiting, Berufsbildner, Teamleiter Controlling/Finance, Produkt. Hashtags: pro Post 4, B2B-Posts haben eigene Zusammenstellung (LI-13 und LI-14) bzw. Set C / Set A (LI-15, LI-16).
+**Vor dem Posten prüfen:** Die Seiten `/assessment/` und `/upload/` müssen live sein (Assessments geplant ab ca. 8.11., siehe `docs/DIFFERENZIERUNG.md`). Sonst Termin verschieben, nicht auf eine tote Seite verlinken.
+
+---
+
+## LI-13 An HR/Recruiting: Excel im Lebenslauf
+**Termin:** Mo 16.11. · **Bild:** keins oder neue Karte «Excel: gut» vs. 15-Minuten-Assessment · **Ziel:** Pilot-Anfragen (Mail an hallo@) · **Hashtags:** #Recruiting #HR #Excel #Personalgewinnung
+
+```
+«Excel: gute Kenntnisse». Das steht in fast jedem Lebenslauf. Geprüft hat es noch niemand.
+
+Wer im Controlling oder Rechnungswesen einstellt, kennt die Lage: Im Gespräch klingt alles solide. Erst in der ersten Woche zeigt sich, ob jemand einen SVERWEIS sauber aufbaut oder auf 5 Rappen rundet.
+
+Ein Excel-Test im Prozess würde das klären. Die meisten Tests prüfen aber einzelne Funktionen, nicht die Rolle.
+
+Darum habe ich bei Excel-Drills Rollen-Assessments gebaut, bisher für Consulting und Accounting:
+→ rund 15 Minuten
+→ mehrere Aufgaben, die aufeinander aufbauen (kleines Modell statt Einzelformel)
+→ Auswertung nach Fehlerart: Bezug, Rundung, Lookup, Logik
+→ Kandidatinnen brauchen kein Konto
+
+Das Assessment zeigt, was jemand an diesem Tag in dieser Aufgabe kann. Es ersetzt kein Gespräch und sagt nichts darüber, wie jemand im Job abschneidet. Es ist eine zusätzliche Information.
+
+Angebot: Ich begleite einen Pilot mit 3 Firmen, gratis bis Ende November. Ihr bekommt die Ergebnisse als Tabelle, ich bekomme ehrliches Feedback.
+
+Interesse? Mail an hallo@excel-drills.ch oder erst ansehen: https://excel-drills.ch/assessment/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-13
+
+Wie prüft ihr Excel heute? Gar nicht, im Gespräch oder mit Test?
+
+#Recruiting #HR #Excel #Personalgewinnung
+```
+
+---
+
+## LI-14 An Berufsbildner und Berufsschulen
+**Termin:** Mi 18.11. · **Bild:** keins · **Ziel:** Klassenanfragen (Mail an hallo@), Backlinks · **Hashtags:** #Berufsbildung #KV #Excel #Rechnungswesen
+**Kalender-Hinweis:** LI-08 liegt am selben Tag, Verschiebung siehe `README.md`.
+
+```
+Wie lernen Lernende, eine Rechnung in Excel richtig aufzubauen? Meistens, indem man es ihnen zeigt. Besser ist: Sie tippen es selbst.
+
+Ich habe Excel-Drills für genau diesen Moment gebaut. Die Lernenden sehen eine kleine Tabelle, schreiben die Formel selbst und bekommen sofort Rückmeldung. Im Browser, auf Deutsch, mit Semikolon und CHF.
+
+Typische Aufgaben aus dem Büroalltag:
+• Rechnung: Netto, MwSt, Brutto
+• MwSt-Satz in eigener Zelle, mit absolutem Bezug
+• Rappenrundung auf 5 Rappen
+• SUMMEWENN und ZÄHLENWENN für Auswertungen
+• Abweichung Budget/Ist
+
+Die Prüfung rechnet das Ergebnis der Formel, bei vielen Übungen zusätzlich mit anderen Zahlen. Auswendig getippte Resultate fallen damit eher auf.
+
+Für Schulen und Berufsschulen gilt:
+→ Klassen sind gratis (Premium für alle Lernenden)
+→ Trainer-Handouts als PDF sind dabei
+→ Ein kurzes Mail genügt: Name der Schule und Anzahl Lernende an hallo@excel-drills.ch
+
+Wenn es dir gefällt, freue ich mich über eine Verlinkung auf der Modulseite. Eine Bedingung ist das nicht.
+
+Details: https://excel-drills.ch/premium.html?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-14
+
+Welche Excel-Aufgabe scheitert in eurem Unterricht am häufigsten?
+
+#Berufsbildung #KV #Excel #Rechnungswesen
+```
+
+---
+
+## LI-15 An Teamleiter Controlling/Finance
+**Termin:** Fr 20.11. · **Bild:** keins · **Ziel:** Teamanfragen (Mail an hallo@) · **Hashtags:** Set C
+
+```
+=SVERWEIS(D2;A2:B6;2) liefert eine Zahl. Im Monatsabschluss kann sie falsch sein, und niemand merkt es.
+
+Das fehlende FALSCH am Schluss sucht ungefähr statt genau. Ohne Fehlermeldung. Wer das einmal in einer Abstimmung erlebt hat, weiss, wie viel Zeit das kostet.
+
+Wie bringt man einem Team bei, solche Fehler zu vermeiden? Mit einem Video-Kurs bleibt wenig hängen. Mit einem Halbtagesworkshop fehlt danach die Übung.
+
+Excel-Drills setzt auf Fehler-Feedback statt Video:
+→ Mitarbeitende tippen die Formel selbst
+→ Die Prüfung sagt sofort, ob das Ergebnis stimmt, auch mit anderen Zahlen
+→ Aufgaben aus Controlling und Rechnungswesen: Abweichungen, Kostenstellen, offene Posten, Rundung auf 5 Rappen
+→ Läuft im Browser, ohne Installation
+
+Teampreis: ab 5 Personen CHF 39 pro Person und Jahr (statt CHF 49), eine Rechnung für alle, Trainer-Handouts inklusive. 14 Tage Geld-zurück-Garantie.
+
+Ich bin ehrlich: Das Produkt ist neu. Darum suche ich Teams, die es ausprobieren und mir sagen, was fehlt.
+
+Preise und Details: https://excel-drills.ch/premium.html?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-15
+Oder direkt: hallo@excel-drills.ch
+
+Welchen Excel-Fehler habt ihr im Team schon mal teuer gefunden?
+
+#Excel #Controlling #Buchhaltung #Rechnungswesen
+```
+
+---
+
+## LI-16 Produkt: Excel-Datei hochladen, Fehler sehen
+**Termin:** Do 12.11. · **Bild:** Screenshot der Fehlerkarte (Beispieldatei, ohne echte Daten) · **Ziel:** Klicks auf die Upload-Seite · **Hashtags:** Set A
+**Kalender-Hinweis:** LI-04 liegt am selben Tag, Verschiebung siehe `README.md`.
+**Vor dem Posten:** Funktion muss live sein; Screenshot nur aus einer Testdatei.
+
+```
+Die meisten Online-Übungen für Excel prüfen im eigenen Raster. Mit echtem Excel hat das wenig zu tun.
+
+Bei Excel-Drills geht es jetzt auch anders:
+
+1) Aufgabe als Excel-Datei herunterladen
+2) In deinem eigenen Excel lösen, mit deinen Shortcuts und deinen Gewohnheiten
+3) Die Datei hochladen
+4) Fehlerkarte ansehen: welche Zelle, welche Fehlerart, was fehlt
+
+Geprüft werden Formeln und Werte. Typische Treffer:
+• $ vergessen, die Formel verrutscht beim Runterziehen
+• FALSCH fehlt im SVERWEIS
+• Rundung stimmt nicht
+• Bezug auf die falsche Zelle
+
+Zum Datenschutz: Die Datei verlässt deinen Browser nicht. Sie wird lokal gelesen, nichts wird auf einen Server geladen.
+
+Das ist der Weg, den ich weiter ausbauen will, Richtung Pivot und komplexere Modelle. Dein Feedback entscheidet, was zuerst kommt.
+
+Probier es mit einer Aufgabe: https://excel-drills.ch/upload/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-16
+
+Welche Fehlerart würdest du in deiner Datei am ehesten erwarten?
+
+#Excel #ExcelTipps #Weiterbildung #Lernen
 ```

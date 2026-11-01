@@ -1,0 +1,71 @@
+/* Excel-Drills – Seite «Excel-Datei prüfen» (upload/index.html). Baut auf den Tokens in style.css auf. */
+
+.upload-page { max-width: 860px; padding-top: 1.25rem; }
+.upload-page h1 { font-size: clamp(1.75rem, 4.5vw, 2.4rem); letter-spacing: -0.015em; margin: 0.4rem 0 0.8rem; }
+.privacy-note { margin: 0 0 1.5rem; padding: 0.7rem 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); font-size: 0.95rem; }
+
+/* Drei Schritte */
+.upload-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.upload-step { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.4rem; min-width: 0; }
+.upload-step h2 { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 0.9rem; font-size: 1.2rem; }
+.step-num { display: inline-grid; place-items: center; flex: 0 0 auto; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--accent); color: #fff; font-size: 1rem; font-weight: 800; }
+@media (prefers-color-scheme: dark) { .step-num { color: #0b1a12; } }
+.upload-step p:last-child { margin-bottom: 0; }
+
+/* Übungsauswahl */
+.exercise-choice { border: 0; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 0.5rem; }
+.choice { display: grid; grid-template-columns: auto 1fr; gap: 0.1rem 0.55rem; align-items: start; padding: 0.7rem 0.85rem; border: 2px solid var(--border); border-radius: var(--radius); background: var(--bg); cursor: pointer; min-height: 44px; }
+.choice input { grid-row: span 2; margin: 0.2rem 0 0; width: 1.1rem; height: 1.1rem; accent-color: var(--accent); }
+.choice-title { font-weight: 700; }
+.choice-meta { grid-column: 2; color: var(--muted); font-size: 0.88rem; }
+.choice:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.choice:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+.task-preview { margin: 0.9rem 0 0; color: var(--muted); }
+.task-preview:empty { display: none; }
+
+/* Drag & Drop */
+.dropzone { position: relative; display: grid; gap: 0.35rem; place-items: center; text-align: center; padding: 1.75rem 1rem; border: 2px dashed var(--border); border-radius: 12px; background: var(--bg); cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.dropzone:hover, .dropzone.is-over { border-color: var(--accent); background: var(--accent-soft); }
+.dropzone:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+.dropzone-title { font-weight: 700; font-size: 1.08rem; }
+.dropzone-link { color: var(--accent-strong); text-decoration: underline; }
+.dropzone-meta { color: var(--muted); font-size: 0.9rem; max-width: 46ch; }
+.dropzone-input { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+
+.upload-status { margin: 0.9rem 0 0; padding: 0.75rem 1rem; border-radius: var(--radius); background: var(--grid-head); }
+.upload-status.err { background: var(--err-bg); color: var(--err-text); }
+.upload-status.info { background: var(--accent-soft); }
+
+/* Ergebnis und Fehlerkarte */
+.upload-result { margin-top: 1.5rem; background: var(--surface); border: 2px solid var(--border); border-radius: 12px; padding: 1.25rem 1.4rem; min-width: 0; }
+.upload-result:focus { outline: none; }
+.upload-result:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.upload-result.is-ok { border-color: var(--accent); }
+.upload-result.is-err { border-color: var(--err-text); }
+.result-verdict { margin: 0 0 0.75rem; font-size: 1.35rem; }
+.upload-result.is-ok .result-verdict { color: var(--ok-text); }
+.upload-result.is-err .result-verdict { color: var(--err-text); }
+.result-sub { margin: 0; font-size: 1rem; color: var(--muted); font-weight: 600; }
+.upload-sheet td.target.is-ok { background: var(--ok-bg); outline-color: var(--accent); color: var(--ok-text); }
+.upload-sheet td.target.is-err { background: var(--err-bg); outline-color: var(--err-text); color: var(--err-text); }
+.upload-sheet td.changed { background: var(--target); box-shadow: inset 0 0 0 2px var(--target-border); }
+
+.map-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.6rem; margin: -0.5rem 0 1rem; color: var(--muted); font-size: 0.88rem; }
+.legend-swatch { display: inline-block; width: 0.95rem; height: 0.95rem; border-radius: 3px; vertical-align: -0.12em; margin-left: 0.4rem; }
+.legend-swatch:first-child { margin-left: 0; }
+.legend-swatch.is-ok { background: var(--ok-bg); border: 2px solid var(--accent); }
+.legend-swatch.is-err { background: var(--err-bg); border: 2px solid var(--err-text); }
+.legend-swatch.is-changed { background: var(--target); border: 2px solid var(--target-border); }
+
+.result-facts { display: grid; grid-template-columns: minmax(9rem, 15rem) minmax(0, 1fr); gap: 0.55rem 1rem; margin: 0 0 0.5rem; }
+.result-facts dt { font-weight: 700; color: var(--muted); font-size: 0.93rem; }
+.result-facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.result-facts .formula { margin: 0; }
+
+.upload-seo { margin-top: 2.5rem; }
+
+@media (max-width: 600px) {
+  .upload-step, .upload-result { padding: 1rem; }
+  .result-facts { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
+  .result-facts dd { margin-bottom: 0.6rem; }
+}

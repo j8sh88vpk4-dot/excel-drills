@@ -9,13 +9,14 @@
 
 | Kanal | utm_source | utm_medium | utm_content (Beispiel) |
 |---|---|---|---|
-| LinkedIn Post | `linkedin` | `social` | `li-01` … `li-12` |
+| LinkedIn Post | `linkedin` | `social` | `li-01` … `li-16` |
 | LinkedIn Kommentar (Link im 1. Kommentar) | `linkedin` | `social` | `li-09-kommentar` |
 | Reddit | `reddit` | `social` | `de-edv`, `finanzen`, `schweiz`, `excel`, `buchhaltung` |
 | X | `x` | `social` | `x-t1`, `x-05` |
 | Instagram (Bio) | `instagram` | `bio` | – (Kampagne `launch`) |
+| Instagram (Story-Link-Sticker) | `instagram` | `social` | `ig-story-berufsbildner` (Bio-Link bei Karussells: `utm_medium=bio`, optional `utm_content=ig-k7`) |
 | TikTok (Profil) | `tiktok` | `social` | `bio` |
-| E-Mail | `email` | `email` | `em-01`, `em-02`, `em-03` |
+| E-Mail | `email` | `email` | `em-01` … `em-05` |
 | Foren/Gruppen | `<forumname>` | `referral` | `<thread-kurzname>` |
 
 **Zielseiten:**
@@ -24,6 +25,9 @@
 - Lernpfad: `https://excel-drills.ch/pfad/basis.html`, `/pfad/accounting.html`, `/pfad/finance.html`
 - Artikel: `https://excel-drills.ch/artikel/sverweis.html` usw.
 - Preise: `https://excel-drills.ch/premium.html`
+- Assessments (B2B-Pilot): `https://excel-drills.ch/assessment/` (Rolle optional `?rolle=consulting`, dann die UTM-Parameter mit `&` anhängen)
+- Datei hochladen und prüfen: `https://excel-drills.ch/upload/`
+- Hinweis: `/assessment/` und `/upload/` müssen live sein, bevor die B2B-Links verwendet werden
 
 ## Fertige Links
 
@@ -42,6 +46,10 @@
 | `{URL_LI_10}` | `https://excel-drills.ch/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-10-kommentar` |
 | `{URL_LI_11}` | `https://excel-drills.ch/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-11` |
 | `{URL_LI_12}` | `https://excel-drills.ch/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-12` |
+| `{URL_LI_13}` | `https://excel-drills.ch/assessment/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-13` |
+| `{URL_LI_14}` | `https://excel-drills.ch/premium.html?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-14` |
+| `{URL_LI_15}` | `https://excel-drills.ch/premium.html?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-15` |
+| `{URL_LI_16}` | `https://excel-drills.ch/upload/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-11&utm_content=li-16` |
 
 ### Reddit
 | Platzhalter | Link |
@@ -69,6 +77,8 @@ Kurzvariante, falls UTM in Reddit störend wirkt: `https://excel-drills.ch/?ref=
 |---|---|
 | `{URL_IG_BIO}` | `https://excel-drills.ch/?utm_source=instagram&utm_medium=bio&utm_campaign=launch` |
 | `{URL_TT_BIO}` | `https://excel-drills.ch/?utm_source=tiktok&utm_medium=social&utm_campaign=launch-2026-11&utm_content=bio` |
+| `{URL_IG_K7}` | `https://excel-drills.ch/assessment/?utm_source=instagram&utm_medium=bio&utm_campaign=launch&utm_content=ig-k7` (Link in Bio an diesem Tag) |
+| `{URL_IG_STORY_BB}` | `https://excel-drills.ch/premium.html?utm_source=instagram&utm_medium=social&utm_campaign=launch-2026-11&utm_content=ig-story-berufsbildner` |
 
 ### E-Mail
 | Platzhalter | Link |
@@ -76,6 +86,8 @@ Kurzvariante, falls UTM in Reddit störend wirkt: `https://excel-drills.ch/?ref=
 | `{URL_EM_01}` | `https://excel-drills.ch/app/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-01` |
 | `{URL_EM_02}` | `https://excel-drills.ch/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-02` |
 | `{URL_EM_03}` | `https://excel-drills.ch/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-03` |
+| `{URL_EM_04}` | `https://excel-drills.ch/assessment/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-04` |
+| `{URL_EM_05}` | `https://excel-drills.ch/assessment/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-05` |
 
 ## Hinweis zum Einsetzen
 

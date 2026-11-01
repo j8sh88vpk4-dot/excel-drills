@@ -108,3 +108,10 @@ Grauzone dazwischen: 4 weitere Wochen mit 10 zusätzlichen Übungen und Funktion
 - Search Console: Property https://excel-drills.ch/ verifiziert (Meta-Tag + googlef20840efa829eb89.html, beide behalten), Sitemap eingereicht, Indexierung beantragt.
 - SEA: Plan in docs/SEA-PLAN.md (Phasen, Keywords, Anzeigentexte, Abbruchregeln). Keine Werbung vor dem 9.11.
 - Offen (Hosting): HSTS, Referrer-Policy, Cache-Control für /assets im Render-Dashboard setzen; render.yaml wird ignoriert.
+
+## 1.11.2026: Differenzierung (Konzept in docs/DIFFERENZIERUNG.md)
+
+- Live: /assessment/ (Rollen-Tests Consulting und Accounting, 5 Aufgaben als Mini-Modell, 15 Minuten, Diagnose, 7-Tage-Plan, Teilen-Bild) und /upload/ (xlsx herunterladen, in Excel lösen, hochladen, Fehlerkarte; SheetJS 0.18.5 nur im Browser). Neue Checks in `npm run check`: check-assessments, test-upload, test-interview.
+- Vorbereitet, nicht live: KI-Interviewerin (supabase/functions/interview, app/interview.js, docs/INTERVIEW-SETUP.md). Braucht ANTHROPIC_API_KEY und PREMIUM_KEY_HASH als Supabase-Secrets, Migration 002, Deploy. Ohne Deploy zeigt die Ergebnisseite nur den Hinweis.
+- Social-Kit B2B: LI-13 bis LI-16, EM-04/05, IG-K7, b2b-onepager.md, Zielgruppen-Tabelle im README.
+- Offen: Plausible-Goals assessment_start/assessment_done/upload_check/upload_download/interview_start/interview_done/share_click; Search Console für /assessment/ und /upload/; echte Excel-Datei (Windows/Mac) gegen /upload/ testen; DE/EN-Schalter im Assessment (Engine-Erweiterung en-CH).

@@ -1,0 +1,390 @@
+{
+  "version": 1,
+  "assessments": [
+    {
+      "id": "consulting",
+      "role": "Consulting",
+      "title": "Excel-Assessment Consulting",
+      "intro": "Du baust ein kleines Business-Case-Modell für den Markteintritt eines Velo-Abos in der Schweiz: Marktgrösse, Umsatz pro Segment, Break-even, Sensitivität und Wachstum. Jede Aufgabe baut auf dem Ergebnis der vorherigen auf.",
+      "minutes": 15,
+      "free": true,
+      "nextTrack": "consulting",
+      "tasks": [
+        {
+          "id": "as-con-1",
+          "category": "bezug",
+          "points": 20,
+          "topic": "Marktgrösse",
+          "title": "Marktgrösse aus Annahmen",
+          "task": "Berechne in B5 die Marktgrösse in CHF: Bevölkerung (B2) × Anteil Zielgruppe (B3) × Ausgaben pro Kopf (B4). Die Annahmen sollen fixiert sein, damit du die Formel später in andere Szenarien kopieren kannst: Verwende absolute Bezüge ($B$2, $B$3, $B$4).",
+          "data": [
+            ["Annahme", "Wert"],
+            ["Bevölkerung Schweiz", 8900000],
+            ["Anteil Zielgruppe", 0.12],
+            ["Ausgaben pro Kopf und Jahr (CHF)", 85],
+            ["Marktgrösse (CHF)", null]
+          ],
+          "target": "B5",
+          "solution": "=$B$2*$B$3*$B$4",
+          "mustContain": ["$B$2", "$B$3", "$B$4"],
+          "accept": ["=$B$4*$B$3*$B$2", "=$B$2*$B$4*$B$3"],
+          "alt": [
+            { "data": [
+              ["Annahme", "Wert"],
+              ["Bevölkerung Schweiz", 8700000],
+              ["Anteil Zielgruppe", 0.09],
+              ["Ausgaben pro Kopf und Jahr (CHF)", 120],
+              ["Marktgrösse (CHF)", null]
+            ] }
+          ],
+          "hints": {
+            "dollar": "Fixiere die Annahmenzellen mit $, also $B$2, $B$3 und $B$4. Sonst verrutschen die Bezüge beim Kopieren.",
+            "generic": "Multipliziere die drei Annahmen: =$B$2*$B$3*$B$4."
+          }
+        },
+        {
+          "id": "as-con-2",
+          "category": "lookup",
+          "points": 20,
+          "topic": "SUMMEWENN",
+          "title": "Umsatz pro Segment",
+          "task": "Die Marktgrösse aus Aufgabe 1 steht in F4. Berechne in F2 den geplanten Umsatz im ersten Jahr für das Segment in E2 (Pendler). Nutze SUMMEWENN und beziehe dich auf E2 statt den Text fest einzutippen.",
+          "data": [
+            ["Segment", "Kanal", "Umsatz Jahr 1 (CHF)", null, "Segment", "Umsatz"],
+            ["Pendler", "Online", 420000, null, "Pendler", null],
+            ["Familien", "Filiale", 310000],
+            ["Pendler", "Filiale", 265000, null, "Marktgrösse (CHF)", 90780000],
+            ["Sport", "Online", 180000],
+            ["Familien", "Online", 145000],
+            ["Pendler", "Firmenkunden", 90000]
+          ],
+          "target": "F2",
+          "solution": "=SUMMEWENN($A$2:$A$7;E2;$C$2:$C$7)",
+          "mustUse": ["SUMMEWENN"],
+          "accept": ["=SUMMEWENN(A2:A7;E2;C2:C7)", "=SUMMEWENN(A:A;E2;C:C)"],
+          "alt": [
+            { "data": [
+              ["Segment", "Kanal", "Umsatz Jahr 1 (CHF)", null, "Segment", "Umsatz"],
+              ["Familien", "Online", 380000, null, "Familien", null],
+              ["Pendler", "Filiale", 210000],
+              ["Sport", "Filiale", 155000, null, "Marktgrösse (CHF)", 93960000],
+              ["Familien", "Filiale", 240000],
+              ["Pendler", "Online", 330000],
+              ["Familien", "Firmenkunden", 60000]
+            ] }
+          ],
+          "hints": {
+            "quotes": "Das Kriterium steht in E2. Wenn du Text eintippst, gehört er in Anführungszeichen, besser ist aber der Bezug auf E2.",
+            "generic": "Aufbau: =SUMMEWENN(Bereich mit Segmenten;Kriterium;Bereich mit Umsätzen)."
+          }
+        },
+        {
+          "id": "as-con-3",
+          "category": "modell",
+          "points": 20,
+          "topic": "Break-even",
+          "title": "Break-even-Menge",
+          "task": "Wie viele Abos braucht es pro Jahr, damit die Fixkosten gedeckt sind? Berechne in B5 die Break-even-Menge: Fixkosten (B2) geteilt durch den Deckungsbeitrag pro Abo (Preis B3 minus variable Kosten B4). Achte auf die Klammern.",
+          "data": [
+            ["Annahme", "Wert"],
+            ["Fixkosten pro Jahr (CHF)", 1240000],
+            ["Preis pro Abo und Jahr (CHF)", 240],
+            ["Variable Kosten pro Abo (CHF)", 85],
+            ["Break-even-Menge (Abos)", null],
+            [null, null],
+            ["Umsatz Pendler Jahr 1 (CHF)", 775000]
+          ],
+          "target": "B5",
+          "solution": "=B2/(B3-B4)",
+          "accept": ["=$B$2/($B$3-$B$4)"],
+          "alt": [
+            { "data": [
+              ["Annahme", "Wert"],
+              ["Fixkosten pro Jahr (CHF)", 930000],
+              ["Preis pro Abo und Jahr (CHF)", 220],
+              ["Variable Kosten pro Abo (CHF)", 75],
+              ["Break-even-Menge (Abos)", null],
+              [null, null],
+              ["Umsatz Pendler Jahr 1 (CHF)", 540000]
+            ] }
+          ],
+          "hints": {
+            "generic": "Erst den Deckungsbeitrag in Klammern rechnen: =B2/(B3-B4)."
+          }
+        },
+        {
+          "id": "as-con-4",
+          "category": "logik",
+          "points": 20,
+          "topic": "WENN · Sensitivität",
+          "title": "Sensitivität: 10 % tieferer Preis",
+          "task": "Die Break-even-Menge aus Aufgabe 3 steht in B5. Lohnt sich der Eintritt auch, wenn der Preis um B6 (10 %) sinkt? Gib in B8 «Ja» aus, wenn die Break-even-Menge mit dem reduzierten Preis B3*(1-B6) kleiner ist als die geplanten Abos in B7, sonst «Nein». Nutze WENN.",
+          "data": [
+            ["Annahme", "Wert"],
+            ["Fixkosten pro Jahr (CHF)", 1240000],
+            ["Preis pro Abo und Jahr (CHF)", 240],
+            ["Variable Kosten pro Abo (CHF)", 85],
+            ["Break-even-Menge (Abos)", 8000],
+            ["Preisreduktion", 0.1],
+            ["Geplante Abos Jahr 1", 10500],
+            ["Lohnt sich der Eintritt bei -10 %?", null]
+          ],
+          "target": "B8",
+          "solution": "=WENN(B2/(B3*(1-B6)-B4)<B7;\"Ja\";\"Nein\")",
+          "mustUse": ["WENN"],
+          "accept": [
+            "=WENN(B7>B2/(B3*(1-B6)-B4);\"Ja\";\"Nein\")",
+            "=WENN($B$2/($B$3*(1-$B$6)-$B$4)<$B$7;\"Ja\";\"Nein\")"
+          ],
+          "alt": [
+            { "data": [
+              ["Annahme", "Wert"],
+              ["Fixkosten pro Jahr (CHF)", 1240000],
+              ["Preis pro Abo und Jahr (CHF)", 240],
+              ["Variable Kosten pro Abo (CHF)", 85],
+              ["Break-even-Menge (Abos)", 8000],
+              ["Preisreduktion", 0.1],
+              ["Geplante Abos Jahr 1", 9000],
+              ["Lohnt sich der Eintritt bei -10 %?", null]
+            ] },
+            { "data": [
+              ["Annahme", "Wert"],
+              ["Fixkosten pro Jahr (CHF)", 600000],
+              ["Preis pro Abo und Jahr (CHF)", 200],
+              ["Variable Kosten pro Abo (CHF)", 80],
+              ["Break-even-Menge (Abos)", 5000],
+              ["Preisreduktion", 0.2],
+              ["Geplante Abos Jahr 1", 7000],
+              ["Lohnt sich der Eintritt bei -10 %?", null]
+            ] }
+          ],
+          "hints": {
+            "quotes": "Text wie Ja und Nein gehört in Anführungszeichen: \"Ja\".",
+            "generic": "Aufbau: =WENN(B2/(B3*(1-B6)-B4)<B7;\"Ja\";\"Nein\"). Rechne die Break-even-Menge mit dem reduzierten Preis neu, B5 allein reicht nicht."
+          }
+        },
+        {
+          "id": "as-con-5",
+          "category": "syntax",
+          "points": 20,
+          "topic": "CAGR",
+          "title": "Wachstum pro Jahr (CAGR)",
+          "task": "Der Umsatz im Jahr 1 (Summe aller Segmente aus Aufgabe 2) steht in B2, der Plan für Jahr 5 in B3, die Anzahl Wachstumsjahre in B4. Berechne in B5 die durchschnittliche jährliche Wachstumsrate (CAGR): (Ende/Start) hoch (1/Jahre) minus 1. Das Ergebnis ist ein Dezimalwert wie 0.2.",
+          "data": [
+            ["Kennzahl", "Wert"],
+            ["Umsatz Jahr 1 (CHF)", 1410000],
+            ["Umsatz Jahr 5, Plan (CHF)", 3200000],
+            ["Anzahl Jahre", 4],
+            ["CAGR", null]
+          ],
+          "target": "B5",
+          "solution": "=(B3/B2)^(1/B4)-1",
+          "accept": ["=POTENZ(B3/B2;1/B4)-1", "=($B$3/$B$2)^(1/$B$4)-1"],
+          "alt": [
+            { "data": [
+              ["Kennzahl", "Wert"],
+              ["Umsatz Jahr 1 (CHF)", 1165000],
+              ["Umsatz Jahr 5, Plan (CHF)", 2100000],
+              ["Anzahl Jahre", 4],
+              ["CAGR", null]
+            ] }
+          ],
+          "hints": {
+            "generic": "Setze beide Teile in Klammern: =(B3/B2)^(1/B4)-1. Ohne Klammern rechnet Excel zuerst die Potenz."
+          }
+        }
+      ],
+      "categories": {
+        "bezug": { "exercises": ["absolut-1", "acc-anteil-1"] },
+        "syntax": { "exercises": ["summe-1", "fin-zinseszins-1", "mittelwert-1"] },
+        "logik": { "exercises": ["wenn-1", "zaehlenwenn-1"] },
+        "lookup": { "exercises": ["summewenn-1", "summewenn-2", "sverweis-1"] },
+        "rundung": { "exercises": ["runden-1"] },
+        "modell": { "exercises": ["fin-zins-1", "fin-cashflow-1", "acc-abweichung-1"] }
+      }
+    },
+    {
+      "id": "accounting",
+      "role": "Accounting",
+      "title": "Excel-Assessment Accounting",
+      "intro": "Du prüfst die Debitoren eines KMU: offene Posten summieren, Netto aus Brutto rechnen, auf 5 Rappen runden, die Abweichung zum Budget bestimmen und Soll und Haben abstimmen. Jede Aufgabe baut auf dem Ergebnis der vorherigen auf.",
+      "minutes": 15,
+      "free": true,
+      "nextTrack": "accounting",
+      "tasks": [
+        {
+          "id": "as-acc-1",
+          "category": "lookup",
+          "points": 20,
+          "topic": "SUMMEWENN",
+          "title": "Offene Posten summieren",
+          "task": "Berechne in G2 die Summe aller Rechnungen mit dem Status «offen» (Spalte D). Die Anzahl offener Rechnungen steht schon in G1. Nutze SUMMEWENN.",
+          "data": [
+            ["Rechnung", "Kunde", "Betrag brutto (CHF)", "Status", null, "Anzahl offen", 3],
+            ["R-101", "Muster AG", 1296.8, "bezahlt", null, "Summe offen (CHF)", null],
+            ["R-102", "Berger GmbH", 2486.25, "offen"],
+            ["R-103", "Keller & Co", 540.4, "offen"],
+            ["R-104", "Aebi AG", 3780, "bezahlt"],
+            ["R-105", "Frei Treuhand", 918.7, "offen"],
+            ["R-106", "Lüthi Bau", 1620.45, "bezahlt"]
+          ],
+          "target": "G2",
+          "solution": "=SUMMEWENN(D2:D7;\"offen\";C2:C7)",
+          "mustUse": ["SUMMEWENN"],
+          "accept": ["=SUMMEWENN($D$2:$D$7;\"offen\";$C$2:$C$7)", "=SUMMEWENN(D:D;\"offen\";C:C)"],
+          "alt": [
+            { "data": [
+              ["Rechnung", "Kunde", "Betrag brutto (CHF)", "Status", null, "Anzahl offen", 2],
+              ["R-101", "Muster AG", 1296.8, "offen", null, "Summe offen (CHF)", null],
+              ["R-102", "Berger GmbH", 2486.25, "bezahlt"],
+              ["R-103", "Keller & Co", 540.4, "bezahlt"],
+              ["R-104", "Aebi AG", 3780, "offen"],
+              ["R-105", "Frei Treuhand", 918.7, "bezahlt"],
+              ["R-106", "Lüthi Bau", 1620.45, "bezahlt"]
+            ] }
+          ],
+          "hints": {
+            "quotes": "Text als Kriterium gehört in Anführungszeichen: \"offen\".",
+            "generic": "Aufbau: =SUMMEWENN(D2:D7;\"offen\";C2:C7)."
+          }
+        },
+        {
+          "id": "as-acc-2",
+          "category": "bezug",
+          "points": 20,
+          "topic": "Absoluter Bezug",
+          "title": "Netto aus Brutto (MwSt 8.1 %)",
+          "task": "Die offenen Rechnungen aus Aufgabe 1 enthalten 8.1 % MwSt (Satz in F1). Berechne in C2 den Nettobetrag von B2. Die Formel soll nach unten kopierbar sein: Fixiere F1 mit $.",
+          "data": [
+            ["Rechnung", "Brutto (CHF)", "Netto (CHF)", null, "MwSt-Satz", 0.081],
+            ["R-102", 2486.25, null],
+            ["R-103", 540.4, null],
+            ["R-105", 918.7, null],
+            ["Total offen", 3945.35, null]
+          ],
+          "target": "C2",
+          "solution": "=B2/(1+$F$1)",
+          "mustContain": ["$F$1"],
+          "accept": ["=B2/($F$1+1)"],
+          "fillDown": "C2:C4",
+          "alt": [
+            { "data": [
+              ["Rechnung", "Brutto (CHF)", "Netto (CHF)", null, "MwSt-Satz", 0.026],
+              ["R-102", 1539, null],
+              ["R-103", 412.3, null],
+              ["R-105", 87.55, null],
+              ["Total offen", 2038.85, null]
+            ] }
+          ],
+          "hints": {
+            "dollar": "Ohne $ verschiebt sich F1 beim Kopieren nach unten. Schreibe $F$1.",
+            "generic": "Brutto enthält die MwSt schon: Netto = Brutto / (1 + Satz), also =B2/(1+$F$1)."
+          }
+        },
+        {
+          "id": "as-acc-3",
+          "category": "rundung",
+          "points": 20,
+          "topic": "VRUNDEN",
+          "title": "Auf 5 Rappen runden",
+          "task": "Der Nettobetrag von R-102 aus Aufgabe 2 steht in B2, der MwSt-Satz in B3. Berechne in B4 den Rechnungsbetrag inklusive MwSt, gerundet auf 5 Rappen. Nutze VRUNDEN.",
+          "data": [
+            ["Position", "Wert"],
+            ["Netto R-102 (CHF)", 2299.95],
+            ["MwSt-Satz", 0.081],
+            ["Brutto auf 5 Rappen (CHF)", null]
+          ],
+          "target": "B4",
+          "solution": "=VRUNDEN(B2*(1+B3);0.05)",
+          "mustUse": ["VRUNDEN"],
+          "accept": ["=VRUNDEN(B2+B2*B3;0.05)", "=VRUNDEN(B2*(1+$B$3);0.05)"],
+          "alt": [
+            { "data": [
+              ["Position", "Wert"],
+              ["Netto R-102 (CHF)", 1234.56],
+              ["MwSt-Satz", 0.081],
+              ["Brutto auf 5 Rappen (CHF)", null]
+            ] }
+          ],
+          "hints": {
+            "generic": "Erst Brutto rechnen, dann runden: =VRUNDEN(B2*(1+B3);0.05). Das Vielfache 0.05 schreibst du mit Punkt."
+          }
+        },
+        {
+          "id": "as-acc-4",
+          "category": "modell",
+          "points": 20,
+          "topic": "Abweichung in %",
+          "title": "Abweichung zum Budget",
+          "task": "Budget und Ist der Debitoren stehen in B2 und C2 (Ist = Summe offen aus Aufgabe 1). Berechne in D2 die Abweichung in Prozent: (Ist minus Budget) geteilt durch Budget. Nicht mal 100 rechnen, das Prozentformat übernimmt die Zelle.",
+          "data": [
+            ["Konto", "Budget (CHF)", "Ist (CHF)", "Abweichung %"],
+            ["Debitoren", 3500, 3945.35, null],
+            ["Bank", 18000, 16840.6, null],
+            ["Kasse", 1200, 1088.15, null]
+          ],
+          "target": "D2",
+          "solution": "=(C2-B2)/B2",
+          "accept": ["=C2/B2-1"],
+          "fillDown": "D2:D4",
+          "alt": [
+            { "data": [
+              ["Konto", "Budget (CHF)", "Ist (CHF)", "Abweichung %"],
+              ["Debitoren", 4200, 3780.5, null],
+              ["Bank", 18000, 16840.6, null],
+              ["Kasse", 1200, 1088.15, null]
+            ] }
+          ],
+          "hints": {
+            "generic": "Aufbau: =(C2-B2)/B2. Die Klammer sorgt dafür, dass zuerst die Differenz gerechnet wird."
+          }
+        },
+        {
+          "id": "as-acc-5",
+          "category": "logik",
+          "points": 20,
+          "topic": "WENN · RUNDEN",
+          "title": "Soll = Haben prüfen",
+          "task": "Die Buchung zu R-102 (Aufgaben 2 und 3) ist erfasst. Prüfe in B6, ob die Summe Soll (B2:B4) gleich der Summe Haben (C2:C4) ist. Runde beide Summen mit RUNDEN auf 2 Stellen, damit Rundungsreste nicht stören. Gib «OK» aus, sonst «Differenz».",
+          "data": [
+            ["Konto", "Soll (CHF)", "Haben (CHF)"],
+            ["1100 Debitoren", 2486.25, null],
+            ["3200 Ertrag Dienstleistungen", null, 2299.95],
+            ["2200 Geschuldete MwSt", null, 186.3],
+            [null, null, null],
+            ["Prüfung Soll = Haben", null]
+          ],
+          "target": "B6",
+          "solution": "=WENN(RUNDEN(SUMME(B2:B4);2)=RUNDEN(SUMME(C2:C4);2);\"OK\";\"Differenz\")",
+          "mustUse": ["WENN", "RUNDEN"],
+          "accept": [
+            "=WENN(RUNDEN(SUMME(B2:B4)-SUMME(C2:C4);2)=0;\"OK\";\"Differenz\")",
+            "=WENN(RUNDEN(SUMME(C2:C4);2)=RUNDEN(SUMME(B2:B4);2);\"OK\";\"Differenz\")"
+          ],
+          "alt": [
+            { "data": [
+              ["Konto", "Soll (CHF)", "Haben (CHF)"],
+              ["1100 Debitoren", 2486.25, null],
+              ["3200 Ertrag Dienstleistungen", null, 2299.95],
+              ["2200 Geschuldete MwSt", null, 183.3],
+              [null, null, null],
+              ["Prüfung Soll = Haben", null]
+            ] }
+          ],
+          "hints": {
+            "quotes": "Text wie OK gehört in Anführungszeichen: \"OK\".",
+            "generic": "Aufbau: =WENN(RUNDEN(SUMME(B2:B4);2)=RUNDEN(SUMME(C2:C4);2);\"OK\";\"Differenz\")."
+          }
+        }
+      ],
+      "categories": {
+        "bezug": { "exercises": ["absolut-1", "acc-anteil-1"] },
+        "syntax": { "exercises": ["summe-1", "mittelwert-1"] },
+        "logik": { "exercises": ["wenn-1", "zaehlenwenn-1"] },
+        "lookup": { "exercises": ["summewenn-1", "summewenn-2", "sverweis-1"] },
+        "rundung": { "exercises": ["runden-1"] },
+        "modell": { "exercises": ["acc-abweichung-1", "acc-abweichung-2", "acc-anteil-1"] }
+      }
+    }
+  ]
+}

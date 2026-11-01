@@ -129,3 +129,61 @@ Luca Moser
 ```
 
 **Adressliste aufbauen (Vorschlag, nicht recherchiert):** Modulseiten FH (Wirtschaft, Wirtschaftsinformatik), höhere Fachschulen Wirtschaft, KV-Berufsfachschulen, Anbieter Vorbereitung Fachausweis Finanz- und Rechnungswesen / Treuhand. Pro Kontakt: Name, Schule, Modul, Quelle der Adresse, Versanddatum, Antwort.
+
+---
+
+# B2B-Pilot (EM-04, EM-05)
+
+**Vor Versand prüfen:** Das Pilotangebot (3 Firmen, gratis bis Ende November) ist eine bewusste Zusage. Vor dem ersten Versand klären: Wie bekommen die Firmen den Test-Link und die Ergebnistabelle (die automatischen Recruiter-Links sind laut `docs/DIFFERENZIERUNG.md` erst nach dem 27.11. geplant; im Pilot allenfalls manuell)? Der Datenschutz-Satz muss zur tatsächlichen Umsetzung passen. Keine Aussagen über Vorhersagekraft für den Berufserfolg.
+
+---
+
+## EM-04 Pilot: Excel-Assessment im Recruiting
+**Versand:** Mi 11.11. (vor LI-13, damit der Post als Bestätigung wirkt) · **Empfänger:** 10–15 Personen in HR-Leitung, Recruiting, Talent Acquisition aus dem Netzwerk (Treuhand, Versicherung, Beratung, Banken) · **Ziel:** 3 Pilotfirmen
+**Hinweis:** Nur Personen mit klarem Bezug, einzeln versenden. Nicht an den eigenen Arbeitgeber über offizielle Kanäle.
+
+**Betreff (Varianten):**
+- `Pilot: Excel-Assessment im Recruiting (gratis bis Ende November)`
+- `Excel-Kenntnisse im Lebenslauf: eine Möglichkeit, sie zu prüfen`
+
+**Text (Sie-Form, ca. 150 Wörter):**
+```
+Guten Tag {Anrede} {Nachname}
+
+{Bezug, z. B. «Wir haben uns bei … kennengelernt.»}
+
+«Gute Excel-Kenntnisse» steht in fast jedem Lebenslauf, geprüft wird es selten. Ich habe dafür ein kurzes Rollen-Assessment gebaut (Excel-Drills): rund 15 Minuten, aufeinander aufbauende Aufgaben, bisher für Consulting und Accounting.
+
+Ich suche drei Firmen für einen Pilot, kostenlos bis Ende November:
+- Sie wählen die Rolle, ich stelle den Link bereit.
+- Kandidatinnen und Kandidaten brauchen kein Konto.
+- Sie erhalten die Ergebnisse als Tabelle, mit den Fehlerarten pro Person (z. B. Bezug, Rundung, Lookup).
+- Datenschutz: Die Lösungen werden im Browser gerechnet, gespeichert werden nur die Resultate.
+
+Das Assessment ist eine zusätzliche Information neben dem Gespräch. Eine Aussage darüber, wie jemand im Job abschneidet, macht es nicht.
+
+Als Gegenleistung wünsche ich mir ehrliches Feedback. Passt ein kurzes Gespräch von 15 Minuten? Oder sehen Sie es sich vorab an: https://excel-drills.ch/assessment/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-04
+
+Freundliche Grüsse
+Luca Moser
+{Telefon} · hallo@excel-drills.ch
+```
+
+---
+
+## EM-05 Nachfass-Mail zu EM-04
+**Versand:** 7 Tage nach EM-04 (Mi 18.11.), nur einmal · **Empfänger:** alle, die nicht geantwortet haben
+
+**Betreff:** `Re: Pilot: Excel-Assessment im Recruiting`
+
+**Text (Sie-Form, ca. 65 Wörter):**
+```
+Guten Tag {Anrede} {Nachname}
+
+Kurz nachgefragt zu meiner Mail von letzter Woche: Für den kostenlosen Pilot des Excel-Assessments (15 Minuten, Ergebnisse als Tabelle, bis Ende November) sind noch Plätze frei.
+
+Wenn es bei Ihnen gerade keine passende Stelle gibt, ist das kein Problem. Eine kurze Rückmeldung genügt, dann frage ich nicht weiter nach. Falls Sie es vorab ansehen möchten: https://excel-drills.ch/assessment/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-05
+
+Freundliche Grüsse
+Luca Moser
+```

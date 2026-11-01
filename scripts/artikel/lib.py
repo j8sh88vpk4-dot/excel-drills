@@ -21,6 +21,18 @@ CARDS = {"sverweis.html": ("sverweis", "SVERWEIS"), "summewenn.html": ("summewen
          "wenn-funktion.html": ("wenn", "WENN"), "zaehlenwenn.html": ("zaehlenwenn", "ZÄHLENWENN"),
          "absolute-bezuege.html": ("absolute-bezuege", "absolute Bezüge")}
 
+UPLOAD = {"sverweis.html": "sverweis-1", "summewenn.html": "summewenn-1", "wenn-funktion.html": "wenn-1",
+          "zaehlenwenn.html": "zaehlenwenn-1", "absolute-bezuege.html": "absolut-1"}
+
+def upload_box(slug):
+    if slug not in UPLOAD:
+        return ''
+    return f'''      <aside class="practice-box" aria-labelledby="upload-heading">
+        <h2 id="upload-heading">In echtem Excel üben</h2>
+        <p>Lade die Aufgabe als Excel-Datei herunter, löse sie in deinem Excel und lade sie wieder hoch. Excel-Drills liest deine Formel aus der Datei und zeigt dir pro Zelle, was fehlt. Die Datei bleibt in deinem Browser.</p>
+        <p><a class="btn btn-secondary" href="../upload/#{UPLOAD[slug]}">Excel-Datei prüfen lassen</a></p>
+      </aside>'''
+
 def card_box(slug):
     if slug not in CARDS:
         return '''      <aside class="practice-box handout-box" aria-labelledby="card-heading">
@@ -81,6 +93,8 @@ def header(prefix, current=None):
       <nav class="site-nav" aria-label="Hauptnavigation">
         <a href="{prefix}app/">Übungen</a>
         <a href="{prefix}pfad/"{pfa}>Pfade</a>
+        <a href="{prefix}assessment/">Assessment</a>
+        <a href="{prefix}upload/">Datei prüfen</a>
         <a href="{prefix}artikel/"{art}>Artikel</a>
         <a href="{prefix}handouts/"{hnd}>Handouts</a>
         <a href="{prefix}premium.html">Preise</a>
@@ -178,6 +192,7 @@ def article_page(slug, title, desc, h1, summary, body, faq, practice, date_iso=N
 {faq_html}
       </section>
 
+{upload_box(slug)}
 {card_box(slug)}
 
       <nav class="read-more" aria-labelledby="read-more-heading">

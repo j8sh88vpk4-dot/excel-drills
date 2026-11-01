@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "preview": "python3 -m http.server 8787",
-    "check": "node scripts/check-exercises.mjs && node scripts/data/generate-projects.mjs --check && node scripts/test-gamification.mjs",
+    "check": "node scripts/check-exercises.mjs && node scripts/data/generate-projects.mjs --check && node scripts/test-gamification.mjs && node scripts/check-assessments.mjs && node scripts/upload/generate-upload-files.mjs --check && node scripts/upload/test-upload.mjs && node scripts/test-interview.mjs",
     "test:gamification": "node scripts/test-gamification.mjs",
     "data:projects": "node scripts/data/generate-projects.mjs"
   },

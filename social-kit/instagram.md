@@ -121,6 +121,26 @@ Genau so ist Excel-Drills gebaut, mit Tagesziel, Streak und Gold pro Übung, wen
 #excel #excellernen #exceltipps #lernen #lerntipps #weiterbildung #retrievalpractice #bürojob #lernenmitspass #schweiz
 ```
 
+### IG-K7 «Excel-Test im Bewerbungsprozess: Teste dich selbst» · Di 24.11.
+
+```
+Excel-Test im Bewerbungsprozess? Teste dich vorher selbst.
+
+Frag dich ehrlich: Kannst du das ohne Nachschlagen tippen?
+1. SVERWEIS mit FALSCH und fixierter Matrix
+2. Auf 5 Rappen runden: =VRUNDEN(B2;0.05)
+3. Netto aus Brutto mit MwSt-Satz in einer eigenen Zelle
+4. SUMMEWENN nach Kostenstelle
+5. Abweichung in % ohne mal 100
+Wenn eine Zeile wackelt, genau dort lohnt sich Üben mit Sofort-Prüfung.
+
+Rollen-Assessments für Consulting und Accounting und die Gratis-Übungen: Link in Bio.
+
+#excel #einstellungstest #bewerbung #excellernen #exceltipps #berufseinstieg #karriereschweiz #bürojob #lernen #schweiz
+```
+
+**Hinweis:** Am Di 24.11. liegen schon IG-V5, IG-V6 und IG-K5. Zwei Karussells am selben Tag konkurrieren um Reichweite; alternativ IG-K7 auf Mi 25.11. legen. Link in Bio an diesem Tag auf die Assessment-Seite stellen (Hash/Pfad: `https://excel-drills.ch/assessment/?utm_source=instagram&utm_medium=bio&utm_campaign=launch`).
+
 Alle Captions: Du-Form, ss statt ß, keine erfundenen Zahlen, keine Erfolgsversprechen (Regeln aus `README.md`). Erster eigener Kommentar nach dem Posten (optional, für Reichweite): eine Frage, z. B. K1 «Welcher der drei ist dir schon passiert?».
 
 ---
@@ -145,12 +165,26 @@ Rhythmus Instagram: 3 Beiträge pro Woche (Karussell oder Reel) plus Stories an 
 | W3 | Fr 20.11. | – | Umfrage-Sticker «Was soll als Nächstes kommen: Consulting-Pfad oder mehr Data & Reporting?» | App-Start |
 | W4 | Mo 23.11. | – | `story-3` erneut (Streak-Erinnerung) | App-Start |
 | W4 | Di 24.11. | Reels IG-V5 + IG-V6 + **IG-K5** Schweizer Eigenheiten (7) | Karussell teilen | `runden-1` |
+| W4 | Di 24.11. | **IG-K7** Excel-Test im Bewerbungsprozess (zusätzlich zu IG-K5; IG-K5 07:30, IG-K7 12:00) | Karussell teilen | Assessment-Seite |
 | W4 | Do 26.11. | **IG-K6** Warum Videos nicht reichen (7) | Karussell teilen | App-Start |
 | W4 | Fr 27.11. | – | `story-1` als Abschluss, optional mit echten Zahlen (nur gemessen) | App-Start |
 
 Nach dem Posten 30 Minuten präsent bleiben und Kommentare beantworten. Freitag: Saves, Shares und Link-Klicks (UTM `utm_source=instagram`) in die Messtabelle im `README.md` übertragen. **Saves** sind bei Karussells das wichtigste Signal, nicht Likes.
 
 **Link in Bio:** Instagram erlaubt mehrere Bio-Links. Ersten Link je nach aktuellem Post wechseln (Spalte oben), Basis-Link: `https://excel-drills.ch/?utm_source=instagram&utm_medium=bio&utm_campaign=launch` (aus `utm.md`; Hash für Übung anhängen, z. B. `#sverweis-1`).
+
+
+### Story-Text «Für Berufsbildner: Klassen gratis»
+**Einsatz:** Mi 18.11. (parallel zu LI-14), grüner Hintergrund #107C41, weisser Text · **Link-Sticker:** `https://excel-drills.ch/premium.html?utm_source=instagram&utm_medium=social&utm_campaign=launch-2026-11&utm_content=ig-story-berufsbildner`
+
+```
+Für Berufsbildner:
+Klassen gratis.
+
+Schulen und Berufsschulen erhalten Excel-Drills Premium für ihre Lernenden kostenlos. Trainer-Handouts sind dabei.
+
+Mail an hallo@excel-drills.ch mit Schule und Anzahl Lernende.
+```
 
 ---
 

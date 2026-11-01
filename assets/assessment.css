@@ -1,0 +1,81 @@
+/* Excel-Drills – Rollen-Assessment (assessment/). Nutzt die Design-Tokens aus style.css. */
+
+.as-intro h1 { margin-top: 0.6rem; }
+.as-cards-h { margin-top: 2rem; }
+
+/* Rollen-Karten */
+.role-cards { list-style: none; padding: 0 !important; margin: 1rem 0 1.5rem; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.role-card {
+  display: grid; gap: 0.35rem; height: 100%; padding: 1.1rem 1.25rem; text-decoration: none; color: var(--text);
+  background: var(--surface); border: 2px solid var(--border); border-radius: 12px;
+}
+.role-card:hover { border-color: var(--accent); background: var(--accent-soft); }
+.role-card[aria-current="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.role-name { font-size: 1.3rem; font-weight: 800; color: var(--accent-strong); }
+.role-desc { font-size: 0.98rem; }
+.role-meta { font-size: 0.88rem; color: var(--muted); font-weight: 600; }
+
+.as-app { max-width: 900px; margin: 0 auto; scroll-margin-top: 1rem; }
+.as-app .panel { scroll-margin-top: 1rem; }
+.as-start h2, .as-run h2, .as-result h2 { margin: 0.4rem 0 0.6rem; font-size: 1.5rem; }
+.as-start h3, .as-result h3 { margin-top: 1.6rem; }
+.as-meta { font-weight: 700; }
+.as-rules { padding-left: 1.3rem; }
+.as-rules li { margin: 0.2rem 0; }
+
+/* Leiste mit Fortschritt und Timer: bleibt beim Scrollen oben sichtbar */
+.as-bar {
+  position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  margin: -1.5rem -1.5rem 1rem; padding: 0.75rem 1.5rem; background: var(--surface);
+  border-bottom: 1px solid var(--border); border-radius: 12px 12px 0 0;
+}
+.as-progress { display: grid; gap: 0.3rem; flex: 1; min-width: 0; font-weight: 700; font-size: 0.95rem; }
+.as-progress-track { display: block; height: 6px; border-radius: 999px; background: var(--grid-head); overflow: hidden; }
+.as-progress-fill { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.3s ease; }
+.as-timer {
+  display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.35rem 0.9rem; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent-strong); border: 2px solid var(--accent);
+  font-family: var(--mono); font-size: 1.6rem; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.2;
+}
+.as-timer svg { width: 1.1em; height: 1.1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.as-timer.warn { background: var(--target); color: var(--text); border-color: var(--target-border); }
+.as-timer.alarm { background: var(--err-bg); color: var(--err-text); border-color: currentColor; }
+@media (prefers-reduced-motion: no-preference) {
+  .as-timer.alarm { animation: as-pulse 1s ease-in-out infinite; }
+  @keyframes as-pulse { 50% { transform: scale(1.05); } }
+}
+
+.as-run .formula-input { flex: 1 1 14rem; min-width: 0; }
+
+/* Ergebnis */
+.as-score { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem 1.25rem; margin: 0.5rem 0; }
+.as-score-num { font-size: clamp(3rem, 12vw, 4.5rem); font-weight: 800; line-height: 1; color: var(--accent-strong); font-variant-numeric: tabular-nums; }
+.as-level { display: inline-block; padding: 0.35rem 1rem; border-radius: 999px; font-weight: 800; font-size: 1.15rem; background: var(--accent-soft); color: var(--accent-strong); border: 2px solid var(--accent); }
+.as-level[data-level="Grundlagen festigen"] { background: var(--err-bg); color: var(--err-text); border-color: currentColor; }
+.as-level[data-level="Fast bereit"] { background: var(--target); color: var(--text); border-color: var(--target-border); }
+
+.diag-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+.diag-item { border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius); padding: 0.7rem 0.9rem; background: var(--surface); }
+.diag-item.is-err { border-left-color: var(--err-text); }
+.diag-item p { margin: 0.15rem 0; }
+.diag-head { font-weight: 700; }
+.diag-status { display: inline-block; font-size: 0.8rem; padding: 0.05rem 0.55rem; border-radius: 999px; margin-right: 0.3rem; background: var(--ok-bg); color: var(--ok-text); vertical-align: 0.1em; }
+.is-err .diag-status { background: var(--err-bg); color: var(--err-text); }
+.diag-meta { color: var(--muted); font-size: 0.92rem; }
+.diag-formula code { overflow-wrap: anywhere; }
+
+.plan-days { padding-left: 0; list-style: none; display: grid; gap: 0.4rem; }
+.plan-days li { padding: 0.5rem 0.75rem; background: var(--grid-head); border-radius: var(--radius); }
+
+.as-share { margin-top: 1.5rem; }
+.as-canvas { display: block; width: 100%; max-width: 360px; height: auto; aspect-ratio: 1 / 1; border-radius: 12px; border: 1px solid var(--border); }
+.as-restart { margin-top: 2rem; }
+
+/* Schmale Bildschirme */
+@media (max-width: 600px) {
+  .as-app .panel { padding: 1rem; }
+  .as-bar { margin: -1rem -1rem 0.9rem; padding: 0.6rem 1rem; }
+  .as-timer { font-size: 1.35rem; padding: 0.3rem 0.7rem; }
+  .as-run .formula-row .btn { flex: 1 1 100%; }
+  .as-canvas { max-width: 100%; }
+}
