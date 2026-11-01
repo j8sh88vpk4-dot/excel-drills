@@ -323,7 +323,7 @@
     initSymbolBar();
     window.addEventListener('hashchange', function () {
       var d = campaign && dayFromHash();
-      if (d && d !== current) openDay(d, { focus: true });
+      if (d && d !== current) openDay(d, { focus: true, scroll: true });
     });
 
     fetch(BASE + 'campaigns.json', { cache: 'no-cache' })
@@ -334,7 +334,8 @@
         campaign = list.filter(function (c) { return c.id === wanted; })[0] || list[0] || null;
         els.loading.hidden = true;
         if (!campaign || !campaign.days || !campaign.days.length) { notice('Diese Kampagne gibt es (noch) nicht.', true); return; }
-        openDay(initialDay(), { focus: !!dayFromHash() });
+        // Mit Anker (#tag-5) direkt zum Tag scrollen; der Tag steht unter Einleitung und Timeline
+        openDay(initialDay(), { focus: !!dayFromHash(), scroll: !!dayFromHash() });
       })
       .catch(function (e) {
         if (window.console) console.error(e);

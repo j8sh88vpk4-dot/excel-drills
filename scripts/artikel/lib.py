@@ -33,6 +33,20 @@ def upload_box(slug):
         <p><a class="btn btn-secondary" href="../upload/#{UPLOAD[slug]}">Excel-Datei prüfen lassen</a></p>
       </aside>'''
 
+# Artikel rund um den Excel-Test im Bewerbungsverfahren: Verweis aufs Rollen-Assessment
+ASSESSMENT = {"excel-einstellungstest-ueben.html": ("", "Excel-Assessment starten"),
+              "excel-uebungen-kv.html": ("?rolle=kv", "KV-Einstellungstest starten")}
+
+def assessment_box(slug):
+    if slug not in ASSESSMENT:
+        return ''
+    query, label = ASSESSMENT[slug]
+    return f'''      <aside class="practice-box" aria-labelledby="assessment-heading">
+        <h2 id="assessment-heading">Teste dich wie im Bewerbungsverfahren</h2>
+        <p>Im Excel-Assessment löst du 5 zusammenhängende Aufgaben mit Timer, wie im echten Test. Am Ende siehst du deine Einstufung, die Musterlösungen und einen 7-Tage-Plan für deine Lücken. Gratis, ohne Anmeldung.</p>
+        <p><a class="btn btn-secondary" href="../assessment/{query}">{label}</a></p>
+      </aside>'''
+
 def card_box(slug):
     if slug not in CARDS:
         return '''      <aside class="practice-box handout-box" aria-labelledby="card-heading">
@@ -193,7 +207,7 @@ def article_page(slug, title, desc, h1, summary, body, faq, practice, date_iso=N
 {faq_html}
       </section>
 
-{upload_box(slug)}
+{assessment_box(slug)}{upload_box(slug)}
 {card_box(slug)}
 
       <nav class="read-more" aria-labelledby="read-more-heading">

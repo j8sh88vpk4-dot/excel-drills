@@ -403,6 +403,10 @@
   function mountInterview(points) {
     var box = document.getElementById('as-interview-mount');
     var IV = window.ExcelDrillsInterview;
+    // Case-Interview mit einer Partnerin aus der Strategieberatung passt nicht zur KV-Lehrstelle: dort ausblenden
+    var section = document.getElementById('as-interview');
+    if (section) section.hidden = current.id === 'kv';
+    if (current.id === 'kv') return;
     if (!box || !IV || typeof IV.mount !== 'function') return;
     while (box.firstChild) box.removeChild(box.firstChild);
     try {
@@ -470,7 +474,8 @@
     diagnoses().forEach(function (item, i) {
       var li = el('li', 'diag-item ' + (item.ts.ok ? 'is-ok' : 'is-err'));
       var head = el('p', 'diag-head');
-      head.appendChild(el('span', 'diag-status', item.ts.ok ? 'Richtig' : 'Falsch'));
+      // Ohne Formel (übersprungen oder Zeit abgelaufen) nicht «Falsch» anzeigen
+      head.appendChild(el('span', 'diag-status', item.ts.ok ? 'Richtig' : (item.ts.formula ? 'Falsch' : 'Nicht gelöst')));
       head.appendChild(document.createTextNode(' Aufgabe ' + (i + 1) + ': ' + item.ex.title));
       li.appendChild(head);
       var meta = el('p', 'diag-meta', 'Kategorie: ' + ERR.label(item.ex.category) + ' · ' + item.ts.points + ' Punkte');
@@ -554,7 +559,8 @@
         for (var k = 0; k < perDay; k++) {
           var idx = d * perDay + k;
           var again = idx >= items.length;
-          if (again && perDay > 1) break;
+          // Zweite Übung des Tages nur, wenn noch eine neue übrig ist; ein Tag bleibt aber nie leer (sonst stand bei 10 bis 11 Übungen «Tag 6:» ohne Inhalt)
+          if (again && perDay > 1 && k > 0) break;
           if (k) li.appendChild(document.createTextNode(' · '));
           li.appendChild(exLink(items[idx % items.length], again));
         }
@@ -619,8 +625,24 @@
       ctx.textAlign = 'left';
     }
     ctx.fillStyle = '#ffffff';
-    ctx.font = '800 92px ' + font;
-    ctx.fillText(current.role, 80, 430);
+    // Lange Rollennamen («KV-Lehrstelle / Einstellungstest») verkleinern, damit nichts abgeschnitten wird
+    // oder an « / » auf zwei Zeilen umbrechen («Investment Banking / Corporate Finance»).
+    var roleLines = [current.role], roleSize = 92, maxW = W - 160;
+    var widest = function () { return Math.max.apply(null, roleLines.map(function (t) { return ctx.measureText(t).width; })); };
+    ctx.font = '800 ' + roleSize + 'px ' + font;
+    if (widest() > maxW && current.role.indexOf(' / ') > 0) {
+      roleLines = [current.role.split(' / ')[0] + ' /', current.role.split(' / ').slice(1).join(' / ')];
+      roleSize = 52; // zwei Zeilen zwischen «Excel-Assessment» (y 330) und der Prozentzahl
+      ctx.font = '800 ' + roleSize + 'px ' + font;
+    }
+    while (roleSize > 40 && widest() > maxW) {
+      roleSize -= 4;
+      ctx.font = '800 ' + roleSize + 'px ' + font;
+    }
+    if (roleLines.length > 1) {
+      ctx.fillText(roleLines[0], 80, 392);
+      ctx.fillText(roleLines[1], 80, 446);
+    } else ctx.fillText(current.role, 80, 430);
     // Ergebnis
     ctx.font = '800 260px ' + font;
     ctx.fillText(state.pct + ' %', 70, 650);
@@ -765,8 +787,9 @@
       (res[1].exercises || []).forEach(function (ex) { exercises[ex.id] = ex; });
       els.loading.hidden = true;
       var role = roleFromUrl();
-      if (role && !byId(role)) notice('Diese Rolle gibt es (noch) nicht. Wähle Consulting oder Accounting.', true);
-      selectRole(role);
+      if (role && !byId(role)) notice('Diese Rolle gibt es (noch) nicht. Wähle unten eine der Rollen.', true);
+      // Direktlink mit ?rolle= (Startseite, Artikel, Werbung): gleich zum Start-Screen springen, nicht bei der Rollenwahl stehen bleiben
+      selectRole(role, { scroll: !!(role && byId(role) && !(linkCfg && linkCfg.lockRole)) });
     }).catch(function (e) {
       if (window.console) console.error(e);
       els.loading.hidden = true;

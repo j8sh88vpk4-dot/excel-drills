@@ -22,11 +22,11 @@
   var PERSONAS = {
     consulting: {
       name: 'Frau Keller', title: 'Partnerin, Strategieberatung', initials: 'FK',
-      intro: 'Frau Keller stellt Ihnen Rückfragen zu Ihrem Modell: Warum diese Zahl? Was passiert, wenn der Preis sinkt? Wie sagen Sie das dem CEO?'
+      intro: 'Frau Keller stellt dir Rückfragen zu deinem Modell: Warum diese Zahl? Was passiert, wenn der Preis sinkt? Wie sagst du das dem CEO?'
     },
     accounting: {
       name: 'Herr Bianchi', title: 'Leiter Rechnungswesen', initials: 'HB',
-      intro: 'Herr Bianchi stellt Ihnen Rückfragen zu Ihrer Auswertung: Warum dieser Betrag? Was ändert sich beim Stichtag? Wie erklären Sie das der Geschäftsleitung?'
+      intro: 'Herr Bianchi stellt dir Rückfragen zu deiner Auswertung: Warum dieser Betrag? Was ändert sich beim Stichtag? Wie erklärst du das der Geschäftsleitung?'
     }
   };
 
@@ -38,11 +38,11 @@
   ];
 
   var ERRORS = {
-    network: 'Die Verbindung hat nicht geklappt. Prüfen Sie Ihr Internet und versuchen Sie es nochmals.',
-    timeout: 'Die Antwort dauert zu lange. Bitte versuchen Sie es nochmals.',
-    401: 'Ihr Premium-Code wurde nicht akzeptiert. Öffnen Sie den Freischalt-Link aus Ihrer Kaufbestätigung nochmals.',
-    429: 'Sie haben heute das Tageslimit für Interviews erreicht. Morgen geht es weiter.',
-    generic: 'Die Interviewerin ist gerade nicht erreichbar. Bitte versuchen Sie es in einer Minute nochmals.'
+    network: 'Die Verbindung hat nicht geklappt. Prüf dein Internet und versuch es nochmals.',
+    timeout: 'Die Antwort dauert zu lange. Bitte versuch es nochmals.',
+    401: 'Dein Premium-Code wurde nicht akzeptiert. Öffne den Freischalt-Link aus deiner Kaufbestätigung nochmals.',
+    429: 'Du hast heute das Tageslimit für Interviews erreicht. Morgen geht es weiter.',
+    generic: 'Die Interviewerin ist gerade nicht erreichbar. Bitte versuch es in einer Minute nochmals.'
   };
 
   function track(name, props) {
@@ -137,7 +137,7 @@
       box.appendChild(el('p', null, persona.intro));
       var facts = el('ul', 'iv-facts');
       facts.appendChild(el('li', null, 'Dauer ca. 5 Minuten, höchstens ' + MAX_ROUNDS + ' Fragen'));
-      facts.appendChild(el('li', null, 'Antworten Sie frei, wie im echten Interview. Mit «fertig» beenden Sie früher.'));
+      facts.appendChild(el('li', null, 'Antworte frei, wie im echten Interview (dort wirst du gesiezt). Mit «fertig» beendest du früher.'));
       facts.appendChild(el('li', null, 'Am Schluss: Bewertung in 4 Kriterien und 2 konkrete Verbesserungen'));
       box.appendChild(facts);
 
@@ -151,7 +151,7 @@
         box.appendChild(hint);
         return;
       }
-      box.appendChild(el('p', 'iv-muted iv-small', 'Premium-Funktion. Ihre Antworten werden zur Auswertung an die KI (Anthropic Claude) gesendet und nicht gespeichert.'));
+      box.appendChild(el('p', 'iv-muted iv-small', 'Premium-Funktion. Deine Antworten werden zur Auswertung an die KI (Anthropic Claude) gesendet und nicht gespeichert.'));
       var start = button('Interview starten', 'btn-large', function () { startInterview(key); });
       box.appendChild(start);
     }
@@ -185,8 +185,8 @@
       input = el('textarea', 'iv-input');
       input.rows = 3;
       input.maxLength = MAX_INPUT;
-      input.placeholder = 'Ihre Antwort …';
-      input.setAttribute('aria-label', 'Ihre Antwort');
+      input.placeholder = 'Deine Antwort …';
+      input.setAttribute('aria-label', 'Deine Antwort');
       input.addEventListener('keydown', function (ev) {
         // Enter sendet, Shift+Enter macht eine neue Zeile
         if (ev.key === 'Enter' && !ev.shiftKey && !ev.isComposing) { ev.preventDefault(); submit(); }
@@ -203,7 +203,7 @@
     function addBubble(who, text) {
       var b = el('div', 'iv-msg iv-msg-' + who);
       if (who === 'interviewer') b.appendChild(el('span', 'iv-sr', persona.name + ': '));
-      else b.appendChild(el('span', 'iv-sr', 'Sie: '));
+      else b.appendChild(el('span', 'iv-sr', 'Du: '));
       String(text).split(/\n{2,}/).forEach(function (para) { b.appendChild(el('p', null, para)); });
       log.appendChild(b);
       log.scrollTop = log.scrollHeight;
@@ -313,7 +313,7 @@
       updateProgress();
       if (form) form.hidden = true;
       var card = el('div', 'iv-result');
-      card.appendChild(el('h3', 'iv-title', 'Ihre Bewertung'));
+      card.appendChild(el('h3', 'iv-title', 'Deine Bewertung'));
       if (note && note.scores) {
         var total = 0;
         var list = el('dl', 'iv-scores');

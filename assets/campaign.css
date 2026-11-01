@@ -1,9 +1,10 @@
 /* Excel-Drills: Story-Kampagnen (kampagne/). Nutzt die Design-Tokens aus style.css. */
 
+.kp-intro { padding-top: 1.25rem; }
 .kp-intro h1 { margin-top: 0.6rem; }
 
-/* Übersicht mit Fortschritt */
-.kp-overview { max-width: 900px; margin: 2rem auto 1.5rem; }
+/* Übersicht mit Fortschritt (linksbündig wie der Einleitungstext) */
+.kp-overview { max-width: 900px; margin: 2rem 0 1.5rem; }
 .kp-overview-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1rem; }
 .kp-overview-head h2 { margin: 0; font-size: 1.35rem; }
 .kp-progress { margin: 0; font-weight: 700; color: var(--muted); font-size: 0.95rem; }
@@ -13,7 +14,7 @@
 /* Timeline: auf breiten Bildschirmen als Raster, auf schmalen als senkrechte Liste */
 .kp-timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
 .kp-step-link {
-  position: relative; display: grid; gap: 0.2rem; height: 100%; padding: 0.75rem 0.9rem 0.75rem 1.1rem;
+  position: relative; display: grid; gap: 0.2rem; align-content: start; height: 100%; padding: 0.75rem 0.9rem 0.75rem 1.1rem;
   text-decoration: none; color: var(--text); background: var(--surface);
   border: 2px solid var(--border); border-left-width: 6px; border-radius: 10px;
 }
@@ -30,9 +31,11 @@
 .kp-step.is-locked .kp-step-link { border-left-color: var(--border); }
 .kp-step.is-locked .kp-step-title { color: var(--muted); }
 .kp-step.is-locked .kp-step-status { background: var(--target); color: var(--text); }
+/* Aktueller Tag: ein grüner Rahmen statt gelbem Streifen plus grüner Innenlinie */
+.kp-step .kp-step-link[aria-current="step"] { border-left-color: var(--accent); }
 
 /* Tagesansicht */
-.kp-day { max-width: 900px; margin: 0 auto 2rem; scroll-margin-top: 1rem; }
+.kp-day { max-width: 900px; margin: 0 0 2rem; scroll-margin-top: 1rem; }
 .kp-day h2 { margin: 0.4rem 0 0.8rem; font-size: 1.5rem; }
 .kp-day-meta { margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 

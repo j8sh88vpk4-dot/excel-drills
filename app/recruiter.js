@@ -120,6 +120,7 @@
       invalid: 'Dieser Test-Link ist ungültig. Prüfe den Link aus der Einladung oder frage bei der Firma nach.',
       inactive: function (f) { return 'Dieser Test-Link von ' + f + ' ist nicht mehr aktiv. Frag bei der Firma nach einem neuen Link.'; },
       loadErr: 'Der Test-Link konnte gerade nicht geladen werden. Prüfe deine Internetverbindung und lade die Seite neu.',
+      serverErr: 'Der Test-Link kann gerade nicht geprüft werden. Versuch es in ein paar Minuten nochmals oder frag bei der Firma nach.',
       roleErr: 'Die Rolle in diesem Link gibt es auf Excel-Drills (noch) nicht. Frag bei der Firma nach.',
       sending: function (f) { return 'Dein Ergebnis wird an ' + f + ' übermittelt …'; },
       sent: function (f) { return 'Ergebnis an ' + f + ' übermittelt. Du kannst das Fenster schliessen oder dir die Diagnose unten anschauen.'; },
@@ -153,6 +154,7 @@
       invalid: 'This test link is not valid. Check the link in your invitation or ask the company.',
       inactive: function (f) { return 'This test link from ' + f + ' is no longer active. Ask the company for a new link.'; },
       loadErr: 'The test link could not be loaded. Check your connection and reload the page.',
+      serverErr: 'The test link cannot be checked right now. Try again in a few minutes or ask the company.',
       roleErr: 'The role in this link does not exist on Excel-Drills (yet). Please ask the company.',
       sending: function (f) { return 'Sending your result to ' + f + ' …'; },
       sent: function (f) { return 'Result sent to ' + f + '. You can close this window or look at the diagnosis below.'; },
@@ -402,7 +404,8 @@
   if (!A || typeof A.configure !== 'function') { ui.title.textContent = T.loadErr; return; }
 
   rpc('link_info', { p_token: token }).then(function (r) {
-    if (!r.ok) { ui.title.textContent = T.loadErr; return; }
+    // status 0: keine Verbindung; sonst hat der Server geantwortet, dann hilft der Hinweis aufs Internet nicht
+    if (!r.ok) { ui.title.textContent = r.status ? T.serverErr : T.loadErr; return; }
     var d = r.data;
     if (!d || typeof d !== 'object' || !d.firma) { ui.title.textContent = T.invalid; return; }
     info = { firma: String(d.firma), rolle: String(d.rolle || '').toLowerCase(), sprache: d.sprache === 'en' ? 'en' : 'de',
