@@ -125,3 +125,7 @@ Grauzone dazwischen: 4 weitere Wochen mit 10 zusätzlichen Übungen und Funktion
 - Cross-Selling: Drills-Familie auf der Startseite, Warteliste SQL/Python/Bundle (leads-Tabelle, source warteliste-*), Footer-Link SQL-Drills Beta (sql-drills.onrender.com, Veröffentlichung durch Luca).
 - KI-Interview: Function deployt, Migration 002 ausgeführt; Secrets setzt Luca.
 - Instagram: IG-K7 (Mi 25.11. 12:00) und Story Berufsbildner (Mi 18.11. 12:00) terminiert; Business Suite hat damit 9 Feed-Posts und 2 Stories.
+
+## 1.11.2026 Mittag: UX-Review 2 (docs/UX-REVIEW-2026-11-01.md)
+
+30 Befunde mit Screenshots (Desktop 1280, Mobil 390 per DevTools-Emulation, Dark Mode), 25 behoben. Offen: Recruiter-Migration 003 ausführen (Luca), Punktabzug bei Formel ohne «=» im Assessment (Entscheid), Prozentfarbe nach Stufe, Leerraum in der Drills-Familie, rohe Kategorie-Schlüssel bei altem Speicherstand.
