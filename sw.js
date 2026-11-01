@@ -15,7 +15,7 @@
  */
 'use strict';
 
-const CACHE_VERSION = '2026-11-01.2';
+const CACHE_VERSION = '2026-11-01.3';
 const CACHE_PREFIX = 'excel-drills-';
 const CACHE = CACHE_PREFIX + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 4000; // Network-First: danach Cache, falls vorhanden (langsames Netz im Zug)
@@ -32,6 +32,8 @@ const PRECACHE = [
   '/app/badges.js',
   '/app/errors.js',
   '/app/access.js',
+  '/app/config.js',
+  '/app/account.js',
   '/app/keys.js',
   '/app/i18n/ui-de.js',
   '/app/i18n/fr.json',

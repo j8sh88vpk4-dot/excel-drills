@@ -62,6 +62,11 @@
 - Live-fertig (31.10.): keine Platzhalter mehr; Handout-Formular speichert in Supabase-Tabelle leads (anon insert only);
   echte QR-Codes auf Formelkarten; OG-Tags überall; Stripe: Zahlungsbeschreibung EXCEL-DRILLS.CH, Produkttext angepasst.
 
+- Konto (31.10.): freiwilliges Konto «Fortschritt sichern» (Supabase, Magic-Link, kein Passwort) vorbereitet:
+  app/account.js, app/config.js (leer = aus), supabase/migrations/001_init.sql, Edge Function supabase/functions/stripe-webhook
+  (Stripe-Käufe -> Lizenzen, Kündigung/Zahlungsausfall). Tests: `npm run test:account` (103). Einrichtung durch Luca:
+  docs/LOGIN-SETUP.md. Code-Mechanismus (?key=) bleibt als Übergang.
+
 ## Technische Restpunkte vor Livegang
 - Erledigt 30.10.: Key als SHA-256-Hash in app/keys.js hinterlegt (Klartext nur in den Stripe-Weiterleitungen). Mechanismus ist clientseitig,
   für den Test ausreichend; bei Go später Stripe-Webhook + serverseitige Prüfung.

@@ -38,6 +38,9 @@
     bezug: 'absolut-1', syntax: 'summe-1', logik: 'wenn-1', lookup: 'summewenn-1', rundung: 'runden-1', modell: 'acc-abweichung-1'
   };
   var wrongCounted = false;        // Fehlversuch dieser Runde schon in der Fehler-DNA verbucht (zählt einmal pro Runde)
+  var AccountMod = window.ExcelDrillsAccount;   // freiwilliges Konto (app/account.js), nur aktiv mit app/config.js
+  var account = null;              // Rückgabe von AccountMod.boot, null ohne Konto-Funktion
+  var accountPremium = false;      // Premium aus einer Lizenz im Konto (zusätzlich zum lokalen Code)
   var paywallExercise = null;      // gesperrte Übung, die den Paywall-Dialog ausgelöst hat
   var HF = null;
   var exercises = [];
@@ -116,7 +119,10 @@
     migratedFromV1 = !!raw && raw.v !== 2 && raw.v !== 3;
     return G.migrate(raw);
   }
-  function saveProgress() { storageSet(STORAGE_PROGRESS, JSON.stringify(G.serialize(progress))); }
+  function saveProgress() {
+    storageSet(STORAGE_PROGRESS, JSON.stringify(G.serialize(progress)));
+    if (account) account.notifyChange();   // Konto: Abgleich mit 2 s Verzögerung
+  }
 
   /* ---------- Freischaltung (MVP) ----------
    * Bewusst einfacher MVP-Mechanismus: Der Code kommt per ?key=... (Weiterleitung von Stripe
@@ -154,7 +160,9 @@
       }
       showNotice(T('notice.invalidKey'), true);
     }
-    return Keys.isValid(storageGet(STORAGE_KEY));
+    // Konto: zwischengespeicherte Lizenz gilt sofort (der Server-Check folgt in app/account.js)
+    accountPremium = !!(AccountMod && AccountMod.enabled() && AccountMod.cachedPremium());
+    return Keys.isValid(storageGet(STORAGE_KEY)) || accountPremium;
   }
 
   /* ---------- Sprache und Land (DE-CH / FR-CH / IT-CH / DE-DE) ----------
@@ -1414,6 +1422,7 @@
     renderDna();
     renderBadges();
     renderAccess();
+    if (account) account.render();
   }
 
   /* Fehler-DNA im Profil: Fehlerquote pro Kategorie, schwächste Kategorie mit Tipp und passender Gratis-Übung */
@@ -1502,13 +1511,58 @@
     });
   }
 
-  function openProfile() {
+  function openProfile(scrollTo) {
     gx.resetConfirm.hidden = true;
     gx.resetBtn.hidden = false;
     gx.shareArea.hidden = true;
     els.accessMsg.textContent = '';
     renderProfile();
     openDialog(gx.profile, gx.profileClose);
+    if (scrollTo && scrollTo.scrollIntoView) scrollTo.scrollIntoView({ block: 'start' });
+  }
+
+  /* ---------- Konto (app/account.js) ---------- */
+
+  // Stand vom Server (bzw. vereinigt) übernehmen und alles neu zeichnen, ohne Toasts
+  function applyRemoteState(state) {
+    progress = G.migrate(state);
+    if (!exercises.length) { saveProgress(); renderHeader(); return; }   // Übungen noch nicht geladen: init zeichnet später
+    settleProgress(true);
+    if (currentTrack) renderAll();
+    if (current) renderMastery();
+    if (gx.profile.open) renderProfile();   // Fehler-DNA und Medaillen im offenen Profil nachführen
+  }
+
+  // Lizenz aus dem Konto: decision von licenseDecision (oder null = abgemeldet / unbekannt)
+  function setAccountPremium(decision) {
+    accountPremium = !!(decision && decision.source === 'license');
+    var next = Keys.isValid(storageGet(STORAGE_KEY)) || accountPremium;
+    if (next !== unlocked) {
+      unlocked = next;
+      if (exercises.length) settleProgress(true);
+      if (current) renderExerciseText(current);
+      if (currentTrack) renderAll();
+      if (unlocked && els.paywall.open && paywallExercise) {
+        var ex = paywallExercise;
+        paywallExercise = null;
+        lastTrigger = null;
+        closePaywall();
+        openExercise(ex, null);
+      }
+    }
+    if (gx.profile.open) renderProfile();
+  }
+
+  function initAccount() {
+    if (!AccountMod || !AccountMod.enabled()) return;
+    account = AccountMod.boot({
+      T: T, escapeHtml: escapeHtml, toast: toast, notice: showNotice, track: track,
+      openDialog: openDialog, wireDialog: wireDialog, openProfile: openProfile,
+      getState: function () { return G.serialize(progress); },
+      setState: applyRemoteState,
+      setPremium: setAccountPremium,
+      localCodeValid: function () { return Keys.isValid(storageGet(STORAGE_KEY)); }
+    });
   }
 
   function resetProgress() {
@@ -1670,7 +1724,7 @@
     };
     wireDialog(gx.profile);
     wireDialog(gx.levelup);
-    gx.levelBtn.addEventListener('click', openProfile);
+    gx.levelBtn.addEventListener('click', function () { openProfile(null); });
     gx.profileClose.addEventListener('click', function () { gx.profile.close(); });
     gx.levelupOk.addEventListener('click', function () { gx.levelup.close(); });
 
@@ -1790,6 +1844,7 @@
     });
     initSymbolBar();
     initGamification();
+    initAccount();
     els.paywall.addEventListener('close', function () { if (lastTrigger && lastTrigger.focus) lastTrigger.focus(); });
     els.paywall.addEventListener('click', function (e) { if (e.target === els.paywall) closePaywall(); });
 

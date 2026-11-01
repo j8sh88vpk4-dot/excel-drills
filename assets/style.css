@@ -790,3 +790,32 @@ dialog.levelup p { margin: 0 0 1.1rem; color: var(--muted); }
 .bundle-note { margin: 1.5rem 0; padding: 1.1rem 1.3rem; background: var(--surface); border: 1px dashed var(--border); border-radius: 12px; }
 .bundle-note h2 { margin: 0 0 0.3rem; font-size: 1.15rem; }
 .bundle-note p { margin: 0 0 0.5rem; }
+
+/* Konto (freiwillig, app/account.js): Header-Knopf, Menü, Login-Dialog */
+.account { position: relative; display: flex; align-items: center; }
+.account-wrap { position: relative; }
+.account-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; padding: 0.2rem 0.7rem 0.2rem 0.25rem;
+  border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  font: inherit; font-size: 0.9rem; font-weight: 700; cursor: pointer; white-space: nowrap;
+}
+.account-btn:hover { border-color: var(--accent); }
+.account-avatar { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 0.9rem; }
+@media (prefers-color-scheme: dark) { .account-avatar { color: #0b1a12; } }
+.account-btn.syncing .account-avatar { opacity: 0.6; }
+.account-name { max-width: 8rem; overflow: hidden; text-overflow: ellipsis; }
+.account-menu {
+  position: absolute; top: calc(100% + 6px); right: 0; z-index: 30; min-width: 220px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); padding: 0.4rem;
+}
+.account-menu-email { margin: 0.3rem 0.6rem 0.4rem; font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
+.account-menu button { display: block; width: 100%; min-height: 44px; padding: 0.4rem 0.6rem; border: 0; border-radius: 6px; background: transparent; color: var(--text); font: inherit; font-weight: 600; text-align: left; cursor: pointer; }
+.account-menu button:hover, .account-menu button:focus-visible { background: var(--accent-soft); }
+.account-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+dialog.login { width: min(480px, calc(100% - 1.5rem)); }
+dialog.login .login-form { margin-top: 0.5rem; }
+dialog.login .login-form label { display: block; font-weight: 700; margin-bottom: 0.35rem; }
+.login-optional { margin-top: 1.25rem; }
+/* Platz im Kopf: Name nur auf breiten Bildschirmen, sonst nur der Kreis mit dem Anfangsbuchstaben */
+@media (max-width: 1400px) { .account-name { display: none; } .account-btn { padding-right: 0.25rem; } }
