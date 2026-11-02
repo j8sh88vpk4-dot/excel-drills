@@ -4,7 +4,7 @@
    result (Ergebnis-Chip), resolve (Auflösung, 1 Satz), caption, threads, link (Bio-Link-Ziel). */
 window.FDT = [
   { n: 1, datum: 'Mo 2.11.', typ: 'FdT', titel: 'Auf 5 Rappen runden',
-    hook: 'CHF 47.33 an der Kasse?',
+    hook: 'CHF 47.33? Gibt es in der Schweiz nicht.',
     lines: ['In der Schweiz gibt es keine 1-Rappen-Münze.', 'Also rundest du auf 5 Rappen.', 'Eine Funktion reicht.'],
     formula: '=VRUNDEN(B2;0.05)', result: '47.35',
     resolve: 'VRUNDEN rundet auf das nächste Vielfache von 0.05.',

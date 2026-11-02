@@ -42,7 +42,7 @@ Quelle der Texte: `formel-data.js` (dieselben Daten rendert `formel.html`). Änd
 
 ## FdT-1 Auf 5 Rappen runden · Mo 2.11.
 
-- **Hook (Sekunde 0 bis 2):** CHF 47.33 an der Kasse?
+- **Hook (Sekunde 0 bis 2):** CHF 47.33? Gibt es in der Schweiz nicht.
 - **Textzeilen:** 1) In der Schweiz gibt es keine 1-Rappen-Münze. 2) Also rundest du auf 5 Rappen. 3) Eine Funktion reicht.
 - **Formel:** `=VRUNDEN(B2;0.05)`
 - **Auflösung:** 47.35. VRUNDEN rundet auf das nächste Vielfache von 0.05.

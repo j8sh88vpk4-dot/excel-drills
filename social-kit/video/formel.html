@@ -7,7 +7,7 @@
   Reel-Vorlage «Formel des Tages», 1080×1920 (9:16), 13 s, ohne Ton. Daten: formel-data.js (window.FDT).
   Aufruf: formel.html?n=1          Endlosschleife zur Vorschau
           formel.html?n=1&t=6500   Standbild bei 6.5 s (so rendert formel-render.sh)
-  Ablauf: 0 s Hook (sofort sichtbar) · 1.8/3.2/4.6 s Textzeilen · 6.2 s Formel tippt sich · 8.4 s Auflösung · 11.5 s Endcard.
+  Ablauf: 0 bis 1.4 s Kaltstart (nur Hook, bildschirmfüllend), dann Hook im Layout · 1.8/3.2/4.6 s Textzeilen · 6.2 s Formel tippt sich · 8.4 s Auflösung · 11.5 s Endcard.
   Safe-Zones: oben 250 px und unten 320 px ohne wichtigen Text.
 -->
 <style>
@@ -43,6 +43,9 @@
   .end .pill { background:#fff; color:var(--gd); font-size:54px; font-weight:800; padding:34px 64px; border-radius:999px; }
   .end p { font-size:36px; color:rgba(255,255,255,.85); }
   .hide { opacity:0; }
+  .cold { position:absolute; inset:0; background:var(--gd); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:40px; text-align:center; padding:200px 80px; }
+  .cold h1 { margin:0; font-size:132px; line-height:1.0; letter-spacing:-4px; }
+  .cold p { font-size:40px; font-weight:700; color:#B9E5C9; letter-spacing:1px; text-transform:uppercase; }
 </style>
 <script src="formel-data.js"></script>
 </head>
@@ -53,7 +56,7 @@
   var q = new URLSearchParams(location.search);
   var n = parseInt(q.get('n'), 10) || 1;
   var d = (window.FDT || []).filter(function (x) { return x.n === n; })[0] || window.FDT[0];
-  var DUR = 13000, T_L = [1800, 3200, 4600], T_FX = 6200, T_TYPE = 1800, T_RES = 8400, T_END = 11500;
+  var DUR = 13000, T_COLD = 1400, T_L = [1800, 3200, 4600], T_FX = 6200, T_TYPE = 1800, T_RES = 8400, T_END = 11500;
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function op(t, start) { return t < start ? 0 : Math.min(1, (t - start) / 300); }
   function render(t) {
@@ -69,6 +72,8 @@
         esc(d.formula.slice(0, typed)).replace(/;/g, ';<wbr>') + (t < T_RES ? '<i class="caret"></i>' : '') + '</span></div>' +
         '<div class="ok" style="opacity:' + op(t, T_RES) + '"><span class="c">✓</span>' + esc(d.result) + '</div></div>' +
       '<p class="resolve" style="opacity:' + op(t, T_RES + 300) + '">' + esc(d.resolve) + '</p>';
+    // Kaltstart: die erste Sekunde nur der Hook, bildschirmfüllend, ohne Logo und Label
+    if (t < T_COLD) { var cs = d.hook.length > 38 ? 104 : 132; h += '<div class="cold" style="opacity:' + (t < T_COLD - 300 ? 1 : (T_COLD - t) / 300) + '"><h1 style="font-size:' + cs + 'px">' + esc(d.hook) + '</h1><p>Excel-Tipp in 10 Sekunden</p></div>'; }
     if (t >= T_END) h += '<div class="end" style="opacity:' + op(t, T_END) + '"><h2>Selbst <em>tippen</em>,<br>sofort prüfen.</h2>' +
       '<div class="pill">Link in Bio</div><p>excel-drills.ch · Formel des Tages #' + d.n + '</p></div>';
     document.getElementById('wrap').innerHTML = h;
