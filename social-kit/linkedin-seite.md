@@ -2,6 +2,9 @@
 
 Alle Posts erscheinen auf der Unternehmensseite, nicht auf Lucas Profil. Texte in der Wir-Stimme, ohne persönliche Anekdoten aus Lucas Job. Reihenfolge und Termine wie im Terminplan (je 07:30 Uhr). UTM-Links unverändert aus `linkedin.md` übernommen, Referenz in `utm.md`. Launch-Code SVERWEIS20 nur in LI-01. Bilder liegen in `visuals/png/`.
 
+
+**Status 2.11.2026, 10:30:** Unternehmensseite «Excel-Drills» angelegt (linkedin.com/company/146924221, Logo, Banner, Slogan, Beschreibung, Gründungsjahr 2026, Spezialgebiet Excel-Training). Alle 16 Posts unten sind über die Seite terminiert (07:30, Reihenfolge wie hier). Noch von Hand: erster Kommentar mit Link nach jedem Post, Repost von Lucas Profil, Standort Emmenbrücke und E-Mail-Domain in den Seiteneinstellungen, LI-08/LI-10/LI-12 erst mit echten Zahlen.
+
 ## Posten über die Unternehmensseite
 
 1. Als Admin einloggen und die Seite «Excel-Drills» öffnen (Admin-Ansicht, nicht das persönliche Profil).
