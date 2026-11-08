@@ -106,6 +106,7 @@ Kurzvariante, falls UTM in Reddit störend wirkt: `https://excel-drills.ch/?ref=
 | `{URL_EM_01}` | `https://excel-drills.ch/app/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-01` |
 | `{URL_EM_02}` | `https://excel-drills.ch/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-02` |
 | `{URL_EM_03}` | `https://excel-drills.ch/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-03` |
+| `{URL_EM_03_SCHULEN}` | `https://excel-drills.ch/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-03-schulen` (Schul-Outreach ab 10.11., siehe `schulen-outreach.md`) |
 | `{URL_EM_04}` | `https://excel-drills.ch/assessment/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-04` |
 | `{URL_EM_05}` | `https://excel-drills.ch/assessment/?utm_source=email&utm_medium=email&utm_campaign=launch-2026-11&utm_content=em-05` |
 

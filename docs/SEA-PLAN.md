@@ -74,4 +74,24 @@ Alle Final-URLs mit `?utm_source=google&utm_medium=cpc&utm_campaign=excel-ueben-
 
 | Woche | Kanal | Ausgaben CHF | Klicks | CPC | Besucher Plausible | mini_geloest % | premium_klick | kauf | CPA |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | organisch | 0 | | | | | | | |
+| 1 | organisch (1.–7.11.) | 0 | 0 | – | 3 | n/a (zu wenig Daten) | 0 | 0 | – |
+
+
+## 8.11.2026: Ads-Check nach Woche 1
+
+**Ausgangslage.** 3 Besucher in 7 Tagen (Plausible verifiziert), 2 Instagram-Follower, 743 Profilaufrufe, Reels 73–168 Aufrufe. Die Bedingung für Phase 1 (≥ 30 % Mini-Übung-Quote, ≥ 1 Premium-Klick) ist mit 3 Besuchern weder erfüllt noch widerlegt: Es gibt keine Baseline. Organisch entsteht sie auch in den nächsten zwei Wochen nicht (3 Besucher pro Woche, Google-Indexierung dauert 2–6 Wochen). Damit wäre der Go/No-Go am 27.11. ein Entscheid ohne Funnel-Zahlen.
+
+**Meta-Boost (Phase 1 wie geplant): Nein.**
+- Ein Reel-Boost optimiert auf Aufrufe, nicht auf Website-Klicks; für Link-Klicks braucht es einen Feed-Beitrag mit Link-Ziel. Instagram-Nutzer suchen keine Excel-Übungen, die Kaufabsicht ist die tiefste aller Kanäle.
+- Rechnung: CHF 70 bei CHF 0.50–1.50 pro Link-Klick (CH, Deutsch, Interessen Excel/Buchhaltung) ergibt 45–140 Klicks. Bei 1 % Kaufquote sind das 0–1 Käufe à CHF 9–49. Das ist kein Verkaufskanal, und als Lernkanal liefert es die falschen Besucher (kalt, mobil, ohne Suchabsicht): Eine tiefe Mini-Übung-Quote würde dann über die Zielgruppe aussagen, nicht über die Site.
+- Die CHF 70 bleiben im Budget. Neu prüfen, wenn ein Beitrag organisch über 500 Aufrufe und Saves hat (dann Feed-Post mit Link boosten, nicht das Reel).
+
+**Google Search, kleiner Test: Ja, ab Mo 10.11. (vorgezogen aus Phase 2).**
+- Grund: Suchende mit «excel übungen» oder «excel üben» haben genau die Absicht, die die Site bedient. 25–60 Klicks liefern in 10 Tagen die Funnel-Zahlen, die organisch Monate brauchen. Es geht um Messen, nicht um Verkaufen.
+- Setup: Kampagne «Excel üben CH» aus Phase 2, aber nur die Anzeigengruppen «Excel üben» und «KV und Lehre», Phrase Match, Standort Schweiz, Sprache Deutsch, nur Suchnetzwerk ohne Partner und Display, Gebot «Klicks maximieren» mit CPC-Limit CHF 1.20, Budget CHF 5 pro Tag, Laufzeit 10 Tage (10.–19.11.), maximal CHF 50. Anzeigentexte, Ausschluss-Keywords, UTM und Sitelinks wie oben.
+- Erwartung: 25–60 Klicks, CPC CHF 0.80–2.00. Käufe: 0 bis 1. Gemessen wird in Plausible mit Filter utm_source=google: Mini-Übung-Quote, paywall_gezeigt, premium_klick.
+- Abbruch: CPC über CHF 1.50 nach CHF 25, oder Mini-Übung-Quote unter 15 % nach 30 Klicks (dann ist die Landingpage das Problem, nicht der Kanal). Pausieren, nicht löschen.
+- Entscheid am 20.11.: Mini-Übung-Quote ≥ 30 % und mindestens ein premium_klick → Phase 2 nach dem Go wie geplant; darunter zuerst Startseite über dem Falz ändern (Mini-Übung direkt im ersten Bildschirm), dann nochmals CHF 50.
+- Konto, Zahlungsmittel und Start der Kampagne richtet Luca selbst ein (Konto und Zahlungsdaten gibt Claude nicht ein). Claude liefert die Kampagne als Google-Ads-Editor-CSV, sobald Luca das Konto hat; alle Texte stehen oben.
+
+**Kostenlos und wirksamer als beides:** Schul-Outreach (`social-kit/schulen-outreach.md`), eine Klasse bringt 20–25 Lernende, die mehrmals wiederkommen, plus Backlinks von .ch-Bildungsdomains. Startet Mo 10.11. parallel zum Google-Test.

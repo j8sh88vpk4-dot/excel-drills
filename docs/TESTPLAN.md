@@ -134,3 +134,9 @@ Grauzone dazwischen: 4 weitere Wochen mit 10 zusätzlichen Übungen und Funktion
 ## 1.11.2026 Mittag: UX-Review 2 (docs/UX-REVIEW-2026-11-01.md)
 
 30 Befunde mit Screenshots (Desktop 1280, Mobil 390 per DevTools-Emulation, Dark Mode), 25 behoben. Offen: Recruiter-Migration 003 ausführen (Luca), Punktabzug bei Formel ohne «=» im Assessment (Entscheid), Prozentfarbe nach Stufe, Leerraum in der Drills-Familie, rohe Kategorie-Schlüssel bei altem Speicherstand.
+
+## 8.11.2026: Woche-1-Zahlen und Entscheide
+
+- Plausible verifiziert (Skript live, Event-Endpunkt antwortet 202). Woche 1: 3 Besucher, 0 Premium-Klicks, 0 Käufe; eine Seitenansicht auf /__check ist ein Test-Ping. Instagram: 2 Follower, 743 Profilaufrufe in 30 Tagen, Reels 73–168 Aufrufe. Engpass ist der Klick von Instagram auf die Site, nicht die Messung.
+- Entscheid Ads: kein Meta-Boost (falsche Absicht, Reel-Boost bringt Aufrufe statt Klicks). Dafür vorgezogener Google-Search-Test CHF 5/Tag, 10.–19.11., max. CHF 50, nur zum Messen der Funnel-Quoten. Details und Abbruchregeln in `docs/SEA-PLAN.md`, Abschnitt 8.11.2026.
+- Schul-Outreach vorbereitet: drei Mailvarianten (Berufsfachschule, HFW, Weiterbildung) und Zielliste in `social-kit/schulen-outreach.md`, UTM `em-03-schulen`. Versand ab Mo 10.11. durch Luca, max. 5 pro Tag. Vorher Klassencode-Mechanik festlegen.
