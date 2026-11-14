@@ -2,3 +2,8 @@ node_modules/
 .DS_Store
 social-kit/video/frames/
 social-kit/video/frames-switch/
+social-kit/schulen-mails.html
+# Interne Unterlagen: nicht ausliefern (Render publiziert das ganze Repo)
+social-kit/
+docs/
+scripts/schulmails.py
